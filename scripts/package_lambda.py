@@ -20,16 +20,18 @@ def main():
     if target.exists():
         shutil.rmtree(target)  # Fixed build directory, never a caller-supplied path.
     target.mkdir(parents=True)
+    # Keep pip's command and arguments fixed. Select the trusted interpreter
+    # explicitly and resolve relative paths from the repository, without a shell.
     subprocess.run(
         [
-            sys.executable,
+            "python",
             "-m",
             "pip",
             "install",
             "--requirement",
-            str(ROOT / "requirements.txt"),
+            "requirements.txt",
             "--target",
-            str(target),
+            "build/package",
             "--platform",
             "manylinux2014_x86_64",
             "--python-version",
@@ -41,6 +43,9 @@ def main():
             "--only-binary=:all:",
             "--no-compile",
         ],
+        executable=sys.executable,
+        cwd=ROOT,
+        shell=False,
         check=True,
     )
     shutil.copytree(ROOT / "app", target / "app", ignore=shutil.ignore_patterns("__pycache__"))
