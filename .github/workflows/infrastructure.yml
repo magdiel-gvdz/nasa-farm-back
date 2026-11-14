@@ -139,10 +139,11 @@ jobs:
       TF_VAR_environment: pr-${{ github.event.pull_request.number }}
       TF_VAR_runtime_permissions_boundary_arn: ${{ vars.RUNTIME_PERMISSIONS_BOUNDARY_ARN }}
     steps:
-      # Cleanup uses trusted base code; it never executes the PR's head on close.
+      # A merged setup PR may introduce Terraform itself; use its merged commit.
+      # Unmerged closures keep using trusted base code, never the PR head.
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.base.sha }}
+          ref: ${{ github.event.pull_request.merged && github.event.pull_request.merge_commit_sha || github.event.pull_request.base.sha }}
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: '1.14.0'
