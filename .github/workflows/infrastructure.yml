@@ -1,0 +1,166 @@
+name: API infrastructure
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, closed, ready_for_review]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A close event waits for an in-flight apply. Never interrupt Terraform mid-apply.
+concurrency:
+  group: api-infra-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'dev' }}
+  cancel-in-progress: false
+
+jobs:
+  checks:
+    if: github.event.action != 'closed'
+    uses: ./.github/workflows/check.yml
+
+  deploy:
+    needs: checks
+    if: >-
+      vars.INFRA_ENABLED == 'true' &&
+      (github.event_name == 'push' ||
+       (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+       (github.event_name == 'pull_request' &&
+        github.event.pull_request.head.repo.full_name == github.repository &&
+        !github.event.pull_request.draft))
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      pull-requests: read
+      id-token: write
+    env:
+      AWS_REGION: ${{ vars.AWS_REGION || 'us-east-1' }}
+      TF_IN_AUTOMATION: 'true'
+      TF_INPUT: 'false'
+      TF_VAR_project: ${{ vars.TF_PROJECT || 'nasa-farm' }}
+      TF_VAR_github_repository: ${{ github.repository }}
+      TF_VAR_aws_region: ${{ vars.AWS_REGION || 'us-east-1' }}
+      TF_VAR_environment: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'dev' }}
+      TF_VAR_runtime_permissions_boundary_arn: ${{ vars.RUNTIME_PERMISSIONS_BOUNDARY_ARN }}
+      TF_VAR_cors_origins: ${{ vars.API_CORS_ORIGINS || '["http://localhost:5173"]' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skip stale or closed PR runs
+        id: current
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [ -n "$PR_NUMBER" ]; then
+            gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" > /tmp/pr.json
+            python - <<'PY'
+          import json, os
+          with open('/tmp/pr.json') as handle:
+              pr = json.load(handle)
+          current = pr['state'] == 'open' and pr['head']['sha'] == os.environ['EXPECTED_HEAD']
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as handle:
+              handle.write(f"deploy={str(current).lower()}\n")
+          PY
+          else
+            echo 'deploy=true' >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-python@v5
+        if: steps.current.outputs.deploy == 'true'
+        with:
+          python-version: '3.13'
+      - uses: hashicorp/setup-terraform@v3
+        if: steps.current.outputs.deploy == 'true'
+        with:
+          terraform_version: '1.14.0'
+      - name: Package API
+        if: steps.current.outputs.deploy == 'true'
+        run: python scripts/package_lambda.py
+      - uses: aws-actions/configure-aws-credentials@v4
+        if: steps.current.outputs.deploy == 'true'
+        with:
+          role-to-assume: ${{ github.event_name == 'pull_request' && vars.AWS_PREVIEW_ROLE_ARN || vars.AWS_DEV_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          role-session-name: github-${{ github.run_id }}
+      - name: Terraform init, plan and apply
+        if: steps.current.outputs.deploy == 'true'
+        env:
+          TF_STATE_BUCKET: ${{ vars.TF_STATE_BUCKET }}
+        run: |
+          terraform -chdir=infra/environment init -input=false -lockfile=readonly \
+            -backend-config="bucket=$TF_STATE_BUCKET" \
+            -backend-config="key=environments/$TF_VAR_environment/terraform.tfstate" \
+            -backend-config="region=$AWS_REGION" \
+            -backend-config=encrypt=true -backend-config=use_lockfile=true
+          terraform -chdir=infra/environment plan -lock-timeout=5m -out=deploy.tfplan
+          terraform -chdir=infra/environment apply -lock-timeout=5m deploy.tfplan
+      - name: Smoke test and deployment links
+        if: steps.current.outputs.deploy == 'true'
+        run: |
+          api_url=$(terraform -chdir=infra/environment output -raw api_url)
+          lake=$(terraform -chdir=infra/environment output -raw data_lake_bucket)
+          curl --fail --silent --show-error --retry 6 --retry-all-errors --retry-delay 5 \
+            "${api_url%/}/health" > /tmp/health.json
+          python - <<'PY'
+          import json, os
+          with open('/tmp/health.json') as handle:
+              health = json.load(handle)
+          assert health['status'] == 'ok'
+          assert health['environment'] == os.environ['TF_VAR_environment']
+          PY
+          {
+            echo "### $TF_VAR_environment"
+            echo "API: ${api_url%/}"
+            echo "OpenAPI: ${api_url%/}/docs"
+            echo "Data lake: s3://$lake"
+            echo 'Readiness requires a valid, published data manifest.'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  destroy-preview:
+    if: >-
+      github.event_name == 'pull_request' && github.event.action == 'closed' &&
+      vars.INFRA_ENABLED == 'true' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      AWS_REGION: ${{ vars.AWS_REGION || 'us-east-1' }}
+      TF_IN_AUTOMATION: 'true'
+      TF_INPUT: 'false'
+      TF_VAR_project: ${{ vars.TF_PROJECT || 'nasa-farm' }}
+      TF_VAR_github_repository: ${{ github.repository }}
+      TF_VAR_aws_region: ${{ vars.AWS_REGION || 'us-east-1' }}
+      TF_VAR_environment: pr-${{ github.event.pull_request.number }}
+      TF_VAR_runtime_permissions_boundary_arn: ${{ vars.RUNTIME_PERMISSIONS_BOUNDARY_ARN }}
+    steps:
+      # Cleanup uses trusted base code; it never executes the PR's head on close.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.14.0'
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_PREVIEW_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          role-session-name: cleanup-${{ github.run_id }}
+      - name: Destroy this PR only
+        env:
+          TF_STATE_BUCKET: ${{ vars.TF_STATE_BUCKET }}
+        run: |
+          [[ "$TF_VAR_environment" =~ ^pr-[1-9][0-9]*$ ]]
+          terraform -chdir=infra/environment init -input=false -lockfile=readonly \
+            -backend-config="bucket=$TF_STATE_BUCKET" \
+            -backend-config="key=environments/$TF_VAR_environment/terraform.tfstate" \
+            -backend-config="region=$AWS_REGION" \
+            -backend-config=encrypt=true -backend-config=use_lockfile=true
+          terraform -chdir=infra/environment plan -destroy -lock-timeout=5m -out=destroy.tfplan
+          terraform -chdir=infra/environment apply -lock-timeout=5m destroy.tfplan
+          echo "Destroyed $TF_VAR_environment (including its data lake)." >> "$GITHUB_STEP_SUMMARY"
