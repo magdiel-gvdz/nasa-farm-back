@@ -36,3 +36,22 @@ run "reuse_an_existing_oidc_provider" {
     error_message = "Do not attempt to create an OIDC provider that already exists."
   }
 }
+
+run "immutable_subjects_match_only_the_repository_and_allowed_contexts" {
+  command = plan
+  variables {
+    existing_github_oidc_provider_arn = "arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com"
+    github_oidc_subject_prefix        = "repo:magdiel-gvdz@124541175/nasa-farm-back@1457978584"
+  }
+  assert {
+    condition     = jsondecode(aws_iam_role.deploy["dev"].assume_role_policy).Statement[0].Condition.StringEquals["token.actions.githubusercontent.com:sub"] == ["repo:magdiel-gvdz@124541175/nasa-farm-back@1457978584:ref:refs/heads/main"]
+    error_message = "Dev must accept the immutable repository identity only on main."
+  }
+  assert {
+    condition = jsondecode(aws_iam_role.deploy["preview"].assume_role_policy).Statement[0].Condition.StringEquals["token.actions.githubusercontent.com:sub"] == [
+      "repo:magdiel-gvdz@124541175/nasa-farm-back@1457978584:pull_request",
+      "repo:magdiel-gvdz@124541175/nasa-farm-back@1457978584:ref:refs/heads/main"
+    ]
+    error_message = "Preview must accept the exact immutable PR identity and main cleanup context."
+  }
+}

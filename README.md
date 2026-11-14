@@ -49,7 +49,7 @@ Variables runtime: `ENVIRONMENT`, `DATA_LAKE_BUCKET`, `DATA_MANIFEST_KEY` (por d
 ## Arranque inicial de AWS
 
 1. Selecciona una cuenta AWS para el proyecto y una región, por defecto `us-east-1`. Exporta `AWS_PROFILE` si usas un perfil local y confirma la cuenta con `aws sts get-caller-identity`.
-2. Copia `infra/bootstrap/bootstrap.example.tfvars` a `infra/bootstrap/bootstrap.tfvars` y ajusta proyecto, región y repositorio. Si la cuenta ya tiene un proveedor OIDC de GitHub, configura `existing_github_oidc_provider_arn` para reutilizarlo.
+2. Copia `infra/bootstrap/bootstrap.example.tfvars` a `infra/bootstrap/bootstrap.tfvars` y ajusta proyecto, región y repositorio. Consulta `gh api repos/OWNER/REPO/actions/oidc/customization/sub --jq .sub_claim_prefix` y guarda ese valor exacto en `github_oidc_subject_prefix`. GitHub puede incluir los IDs inmutables del propietario y del repositorio en el identificador; el rol de AWS debe aceptar el mismo formato. Si la cuenta ya tiene un proveedor OIDC de GitHub, configura `existing_github_oidc_provider_arn` para reutilizarlo.
 3. Crea el bucket de estado y los roles. Este primer apply usa estado local:
 
 ```powershell

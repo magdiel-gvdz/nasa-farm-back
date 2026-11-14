@@ -2,19 +2,20 @@ data "aws_caller_identity" "current" {}
 data "aws_partition" "current" {}
 
 locals {
-  account_id = data.aws_caller_identity.current.account_id
-  partition  = data.aws_partition.current.partition
-  oidc_arn   = var.existing_github_oidc_provider_arn != null ? var.existing_github_oidc_provider_arn : aws_iam_openid_connect_provider.github[0].arn
+  account_id          = data.aws_caller_identity.current.account_id
+  partition           = data.aws_partition.current.partition
+  oidc_arn            = var.existing_github_oidc_provider_arn != null ? var.existing_github_oidc_provider_arn : aws_iam_openid_connect_provider.github[0].arn
+  oidc_subject_prefix = coalesce(var.github_oidc_subject_prefix, "repo:${var.github_repository}")
   deployments = {
     dev = {
       name_pattern = "${var.project}-dev"
       state_prefix = "environments/dev"
-      subject      = "repo:${var.github_repository}:ref:refs/heads/main"
+      subject      = "${local.oidc_subject_prefix}:ref:refs/heads/main"
     }
     preview = {
       name_pattern = "${var.project}-pr-*"
       state_prefix = "environments/pr-*"
-      subject      = "repo:${var.github_repository}:pull_request"
+      subject      = "${local.oidc_subject_prefix}:pull_request"
     }
   }
 }
@@ -107,7 +108,7 @@ resource "aws_iam_role" "deploy" {
       Condition = {
         StringEquals = {
           "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
-          "token.actions.githubusercontent.com:sub" = each.key == "preview" ? [each.value.subject, "repo:${var.github_repository}:ref:refs/heads/main"] : [each.value.subject]
+          "token.actions.githubusercontent.com:sub" = each.key == "preview" ? [each.value.subject, local.deployments.dev.subject] : [each.value.subject]
         }
       }
     }]

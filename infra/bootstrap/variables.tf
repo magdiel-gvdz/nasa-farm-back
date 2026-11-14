@@ -26,3 +26,13 @@ variable "existing_github_oidc_provider_arn" {
   default     = null
   description = "Reuse the account's GitHub OIDC provider if it already exists."
 }
+
+variable "github_oidc_subject_prefix" {
+  type        = string
+  default     = null
+  description = "Exact sub_claim_prefix returned by GitHub's repository OIDC customization API. Null uses the legacy name-only format."
+  validation {
+    condition     = var.github_oidc_subject_prefix == null ? true : can(regex("^repo:[A-Za-z0-9_.-]+(@[0-9]+)?/[A-Za-z0-9_.-]+(@[0-9]+)?$", var.github_oidc_subject_prefix))
+    error_message = "Use the exact repo:owner/repository or repo:owner@owner_id/repository@repository_id prefix."
+  }
+}
