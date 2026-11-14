@@ -156,8 +156,8 @@ resource "aws_iam_role_policy" "deploy" {
         Sid    = "OwnFunctions"
         Effect = "Allow"
         Action = [
-          "lambda:CreateFunction", "lambda:DeleteFunction", "lambda:GetFunction",
-          "lambda:GetFunctionConfiguration", "lambda:UpdateFunctionCode",
+          "lambda:CreateFunction", "lambda:DeleteFunction", "lambda:GetFunction*",
+          "lambda:GetRuntimeManagementConfig", "lambda:UpdateFunctionCode",
           "lambda:UpdateFunctionConfiguration", "lambda:ListVersionsByFunction",
           "lambda:GetPolicy", "lambda:AddPermission", "lambda:RemovePermission",
           "lambda:TagResource", "lambda:UntagResource", "lambda:ListTags"
@@ -191,7 +191,10 @@ resource "aws_iam_role_policy" "deploy" {
       {
         Sid    = "HttpApiControlPlane"
         Effect = "Allow"
-        Action = ["apigateway:GET", "apigateway:POST", "apigateway:PUT", "apigateway:PATCH", "apigateway:DELETE"]
+        Action = [
+          "apigateway:GET", "apigateway:POST", "apigateway:PUT", "apigateway:PATCH", "apigateway:DELETE",
+          "apigateway:TagResource", "apigateway:UntagResource"
+        ]
         Resource = [
           "arn:${local.partition}:apigateway:${var.aws_region}::/apis",
           "arn:${local.partition}:apigateway:${var.aws_region}::/apis/*",
