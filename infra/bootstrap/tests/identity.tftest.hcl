@@ -1,4 +1,5 @@
 mock_provider "aws" {
+  override_during = plan
   mock_data "aws_caller_identity" {
     defaults = { account_id = "123456789012" }
   }
@@ -23,6 +24,42 @@ run "protect_state_and_limit_oidc_subjects" {
   assert {
     condition     = !strcontains(jsonencode(local.deployments.preview), "environments/dev")
     error_message = "Preview state access must not include dev."
+  }
+  assert {
+    condition     = aws_ecr_repository.api.image_tag_mutability == "IMMUTABLE" && aws_ecr_repository.api.image_scanning_configuration[0].scan_on_push && jsondecode(aws_ecr_lifecycle_policy.api.policy).rules[0].selection.countNumber == 30
+    error_message = "ECR debe conservar 30 imágenes, escanearlas y rechazar etiquetas repetidas."
+  }
+  assert {
+    condition     = length([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s if try(s.Sid, "") == "OwnFunctions" || try(s.Sid, "") == "HttpApiControlPlane"]) == 2
+    error_message = "Los permisos heredados deben mantenerse durante la migración."
+  }
+  assert {
+    condition     = one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Resource if try(s.Sid, "") == "OwnAppTable"])[0] == "arn:aws:dynamodb:us-east-1:123456789012:table/nasa-farm-pr-*-app"
+    error_message = "Preview no debe administrar la tabla de dev."
+  }
+  assert {
+    condition     = one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Condition.StringEquals["iam:PermissionsBoundary"] if try(s.Sid, "") == "CreateBoundedExecutionRoles"]) == aws_iam_policy.runtime_boundary.arn
+    error_message = "CI no puede crear el rol de tarea sin límite."
+  }
+  assert {
+    condition     = alltrue([for s in jsondecode(aws_iam_policy.runtime_boundary.policy).Statement : alltrue([for action in s.Action : !startswith(action, "iam:")])])
+    error_message = "La API no puede administrar IAM."
+  }
+  assert {
+    condition     = one([for s in jsondecode(aws_iam_policy.runtime_boundary.policy).Statement : s.Action if try(s.Sid, "") == "ReadGold"]) == ["s3:GetObject"]
+    error_message = "El lake de DATA debe ser de solo lectura."
+  }
+  assert {
+    condition     = one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Condition.ArnEquals["iam:PolicyARN"] if try(s.Sid, "") == "ExecutionManagedPolicy"]) == "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+    error_message = "El rol de ejecución no puede recibir políticas arbitrarias."
+  }
+  assert {
+    condition     = one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Resource if try(s.Sid, "") == "OwnExpressService"]) == ["arn:aws:ecs:us-east-1:123456789012:service/default/nasa-farm-pr-*-api"]
+    error_message = "Preview no debe administrar servicios de dev."
+  }
+  assert {
+    condition     = length(aws_iam_role_policy.deploy["preview"].policy) <= 10240 && length(aws_iam_policy.runtime_boundary.policy) <= 6144
+    error_message = "Las políticas deben caber en los límites de IAM."
   }
 }
 

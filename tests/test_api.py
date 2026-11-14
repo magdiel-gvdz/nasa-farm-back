@@ -5,7 +5,6 @@ from unittest.mock import Mock
 import pytest
 from botocore.exceptions import ClientError
 from fastapi.testclient import TestClient
-from mangum import Mangum
 
 from app.config import Settings
 from app.main import create_app
@@ -77,22 +76,3 @@ def test_cors_allows_only_configured_origins(client):
         headers={"Origin": "https://untrusted.example", "Access-Control-Request-Method": "GET"},
     )
     assert "access-control-allow-origin" not in response.headers
-
-
-def test_api_gateway_v2_event_reaches_fastapi():
-    handler = Mangum(create_app(Settings(environment="dev")), lifespan="off")
-    event = {
-        "version": "2.0",
-        "routeKey": "$default",
-        "rawPath": "/health",
-        "rawQueryString": "",
-        "headers": {"host": "api.example.com"},
-        "requestContext": {
-            "http": {"method": "GET", "path": "/health", "sourceIp": "127.0.0.1"},
-            "stage": "$default",
-        },
-        "isBase64Encoded": False,
-    }
-    response = handler(event, {})
-    assert response["statusCode"] == 200
-    assert json.loads(response["body"])["environment"] == "dev"

@@ -2,9 +2,11 @@ data "aws_caller_identity" "current" {}
 data "aws_partition" "current" {}
 
 locals {
-  name       = "${var.project}-${var.environment}"
-  is_preview = startswith(var.environment, "pr-")
-  retention  = local.is_preview ? 3 : 30
+  data_lake_bucket      = coalesce(var.data_lake_bucket, "fieldshift-lake-${data.aws_caller_identity.current.account_id}")
+  athena_results_bucket = coalesce(var.athena_results_bucket, "fieldshift-athena-results-${data.aws_caller_identity.current.account_id}")
+  name                  = "${var.project}-${var.environment}"
+  is_preview            = startswith(var.environment, "pr-")
+  retention             = local.is_preview ? 3 : 30
 }
 
 resource "aws_s3_bucket" "data_lake" {
@@ -89,123 +91,236 @@ resource "aws_s3_bucket_policy" "data_lake" {
   })
 }
 
+
 resource "aws_iam_role" "api" {
   name                 = "${local.name}-api"
   permissions_boundary = var.runtime_permissions_boundary_arn
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [{
-      Effect    = "Allow"
-      Action    = "sts:AssumeRole"
-      Principal = { Service = "lambda.amazonaws.com" }
-    }]
-  })
+  assume_role_policy = jsonencode({ Version = "2012-10-17", Statement = [{
+    Effect = "Allow", Action = "sts:AssumeRole", Principal = { Service = "ecs-tasks.amazonaws.com" }
+  }] })
+}
+resource "aws_dynamodb_table" "app" {
+  name                        = "${local.name}-app"
+  billing_mode                = "PAY_PER_REQUEST"
+  hash_key                    = "client_id"
+  range_key                   = "sk"
+  deletion_protection_enabled = !local.is_preview
+  attribute {
+    name = "client_id"
+    type = "S"
+  }
+  attribute {
+    name = "sk"
+    type = "S"
+  }
+}
+resource "aws_cloudwatch_log_group" "api" {
+  name              = "/ecs/${local.name}-api"
+  retention_in_days = local.retention
 }
 
 resource "aws_iam_role_policy" "api" {
   name = "runtime"
   role = aws_iam_role.api.id
   policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
+    "Version" : "2012-10-17",
+    "Statement" : [
       {
-        Effect   = "Allow"
-        Action   = ["logs:CreateLogStream", "logs:PutLogEvents"]
-        Resource = "${aws_cloudwatch_log_group.api.arn}:*"
+        "Sid" : "ReadGold",
+        "Effect" : "Allow",
+        "Action" : [
+          "s3:GetObject"
+        ],
+        "Resource" : [
+          "arn:${data.aws_partition.current.partition}:s3:::${local.data_lake_bucket}/gold/*"
+        ]
       },
       {
-        Effect = "Allow"
-        Action = ["s3:GetObject"]
-        Resource = [
-          "${aws_s3_bucket.data_lake.arn}/curated/*",
-          "${aws_s3_bucket.data_lake.arn}/manifests/*"
+        "Sid" : "ListGold",
+        "Effect" : "Allow",
+        "Action" : [
+          "s3:ListBucket"
+        ],
+        "Resource" : [
+          "arn:${data.aws_partition.current.partition}:s3:::${local.data_lake_bucket}"
+        ],
+        "Condition" : {
+          "StringLike" : {
+            "s3:prefix" : [
+              "gold",
+              "gold/*"
+            ]
+          }
+        }
+      },
+      {
+        "Sid" : "AthenaQueries",
+        "Effect" : "Allow",
+        "Action" : [
+          "athena:StartQueryExecution",
+          "athena:GetQueryExecution",
+          "athena:GetQueryResults",
+          "athena:StopQueryExecution",
+          "athena:GetWorkGroup"
+        ],
+        "Resource" : [
+          "arn:${data.aws_partition.current.partition}:athena:${var.data_region}:${data.aws_caller_identity.current.account_id}:workgroup/${var.athena_workgroup}"
+        ]
+      },
+      {
+        "Sid" : "AthenaResults",
+        "Effect" : "Allow",
+        "Action" : [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:AbortMultipartUpload"
+        ],
+        "Resource" : [
+          "arn:${data.aws_partition.current.partition}:s3:::${local.athena_results_bucket}/*"
+        ]
+      },
+      {
+        "Sid" : "AthenaResultsBucket",
+        "Effect" : "Allow",
+        "Action" : [
+          "s3:GetBucketLocation",
+          "s3:ListBucket"
+        ],
+        "Resource" : [
+          "arn:${data.aws_partition.current.partition}:s3:::${local.athena_results_bucket}"
+        ]
+      },
+      {
+        "Sid" : "ReadCatalog",
+        "Effect" : "Allow",
+        "Action" : [
+          "glue:GetDatabase",
+          "glue:GetTable",
+          "glue:GetTables",
+          "glue:GetPartition",
+          "glue:GetPartitions",
+          "glue:BatchGetPartition"
+        ],
+        "Resource" : [
+          "arn:${data.aws_partition.current.partition}:glue:${var.data_region}:${data.aws_caller_identity.current.account_id}:catalog",
+          "arn:${data.aws_partition.current.partition}:glue:${var.data_region}:${data.aws_caller_identity.current.account_id}:database/${var.athena_database}",
+          "arn:${data.aws_partition.current.partition}:glue:${var.data_region}:${data.aws_caller_identity.current.account_id}:table/${var.athena_database}/*"
+        ]
+      },
+      {
+        "Sid" : "ReadDataVersion",
+        "Effect" : "Allow",
+        "Action" : [
+          "ssm:GetParameter"
+        ],
+        "Resource" : [
+          "arn:${data.aws_partition.current.partition}:ssm:${var.data_region}:${data.aws_caller_identity.current.account_id}:parameter${var.data_version_parameter}"
+        ]
+      },
+      {
+        "Sid" : "InvokeAnthropic",
+        "Effect" : "Allow",
+        "Action" : [
+          "bedrock:InvokeModel",
+          "bedrock:InvokeModelWithResponseStream"
+        ],
+        "Resource" : [
+          "arn:${data.aws_partition.current.partition}:bedrock:${var.aws_region}::foundation-model/anthropic.*"
+        ]
+      },
+      {
+        "Sid" : "OwnAppTable",
+        "Effect" : "Allow",
+        "Action" : [
+          "dynamodb:GetItem",
+          "dynamodb:PutItem",
+          "dynamodb:UpdateItem",
+          "dynamodb:DeleteItem",
+          "dynamodb:Query",
+          "dynamodb:BatchGetItem",
+          "dynamodb:BatchWriteItem",
+          "dynamodb:DescribeTable"
+        ],
+        "Resource" : [
+          "${aws_dynamodb_table.app.arn}"
+        ]
+      },
+      {
+        "Sid" : "OwnAppObjects",
+        "Effect" : "Allow",
+        "Action" : [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject"
+        ],
+        "Resource" : [
+          "${aws_s3_bucket.data_lake.arn}/uploads/*",
+          "${aws_s3_bucket.data_lake.arn}/cache/*"
         ]
       }
     ]
   })
 }
 
-resource "aws_cloudwatch_log_group" "api" {
-  name              = "/aws/lambda/${local.name}-api"
-  retention_in_days = local.retention
-}
-
-resource "aws_cloudwatch_log_group" "gateway" {
-  name              = "/aws/apigateway/${local.name}"
-  retention_in_days = local.retention
-}
-
-resource "aws_lambda_function" "api" {
-  function_name    = "${local.name}-api"
-  role             = aws_iam_role.api.arn
-  handler          = "app.main.handler"
-  runtime          = "python3.13"
-  architectures    = ["x86_64"]
-  filename         = var.lambda_zip_path
-  source_code_hash = fileexists(var.lambda_zip_path) ? filebase64sha256(var.lambda_zip_path) : null
-  memory_size      = 512
-  timeout          = 28
-  logging_config {
-    log_format            = "JSON"
-    application_log_level = "INFO"
-    system_log_level      = "WARN"
-    log_group             = aws_cloudwatch_log_group.api.name
+locals {
+  platform_roles = {
+    exec  = { principal = "ecs-tasks.amazonaws.com", policy = "AmazonECSTaskExecutionRolePolicy" }
+    infra = { principal = "ecs.amazonaws.com", policy = "AmazonECSInfrastructureRoleforExpressGatewayServices" }
   }
-  environment {
-    variables = {
-      ENVIRONMENT       = var.environment
-      DATA_LAKE_BUCKET  = aws_s3_bucket.data_lake.id
-      DATA_MANIFEST_KEY = "manifests/manifest.json"
-      CORS_ORIGINS      = jsonencode(var.cors_origins)
+  container_environment = {
+    ENVIRONMENT            = var.environment
+    CORS_ORIGINS           = jsonencode(var.cors_origins)
+    APP_TABLE              = aws_dynamodb_table.app.name
+    APP_BUCKET             = aws_s3_bucket.data_lake.id
+    DATA_PROVIDER          = var.data_provider
+    DATA_REGION            = var.data_region
+    DATA_LAKE_BUCKET       = local.data_lake_bucket
+    ATHENA_RESULTS_BUCKET  = local.athena_results_bucket
+    ATHENA_WORKGROUP       = var.athena_workgroup
+    ATHENA_DATABASE        = var.athena_database
+    DATA_VERSION_PARAMETER = var.data_version_parameter
+    BEDROCK_MODEL_ID       = var.bedrock_model_id
+    CHAT_ENABLED           = tostring(var.chat_enabled)
+  }
+}
+resource "aws_iam_role" "platform" {
+  for_each = local.platform_roles
+  name     = "${local.name}-api-${each.key}"
+  assume_role_policy = jsonencode({ Version = "2012-10-17", Statement = [{
+    Effect = "Allow", Action = "sts:AssumeRole", Principal = { Service = each.value.principal }
+  }] })
+}
+resource "aws_iam_role_policy_attachment" "platform" {
+  for_each   = local.platform_roles
+  role       = aws_iam_role.platform[each.key].name
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/${each.value.policy}"
+}
+resource "aws_ecs_express_gateway_service" "api" {
+  service_name            = "${local.name}-api"
+  execution_role_arn      = aws_iam_role.platform["exec"].arn
+  infrastructure_role_arn = aws_iam_role.platform["infra"].arn
+  task_role_arn           = aws_iam_role.api.arn
+  cpu                     = "1024"
+  memory                  = "2048"
+  health_check_path       = "/health"
+  wait_for_steady_state   = true
+  primary_container {
+    image          = "${var.ecr_repository_url}:${var.image_tag}"
+    container_port = 8080
+    aws_logs_configuration {
+      log_group = aws_cloudwatch_log_group.api.name
+    }
+    dynamic "environment" {
+      for_each = local.container_environment
+      content {
+        name  = environment.key
+        value = environment.value
+      }
     }
   }
-  depends_on = [aws_cloudwatch_log_group.api, aws_iam_role_policy.api]
-}
-
-resource "aws_apigatewayv2_api" "api" {
-  name          = "${local.name}-api"
-  protocol_type = "HTTP"
-}
-
-resource "aws_apigatewayv2_integration" "api" {
-  api_id                 = aws_apigatewayv2_api.api.id
-  integration_type       = "AWS_PROXY"
-  integration_uri        = aws_lambda_function.api.invoke_arn
-  payload_format_version = "2.0"
-  timeout_milliseconds   = 30000
-}
-
-resource "aws_apigatewayv2_route" "api" {
-  api_id    = aws_apigatewayv2_api.api.id
-  route_key = "$default"
-  target    = "integrations/${aws_apigatewayv2_integration.api.id}"
-}
-
-resource "aws_apigatewayv2_stage" "api" {
-  api_id      = aws_apigatewayv2_api.api.id
-  name        = "$default"
-  auto_deploy = true
-  default_route_settings {
-    throttling_burst_limit = local.is_preview ? 5 : 20
-    throttling_rate_limit  = local.is_preview ? 2 : 10
+  scaling_target {
+    min_task_count = 1
+    max_task_count = local.is_preview ? 1 : 2
   }
-  access_log_settings {
-    destination_arn = aws_cloudwatch_log_group.gateway.arn
-    format = jsonencode({
-      requestId        = "$context.requestId"
-      routeKey         = "$context.routeKey"
-      status           = "$context.status"
-      responseLength   = "$context.responseLength"
-      integrationError = "$context.integrationErrorMessage"
-    })
-  }
-}
-
-resource "aws_lambda_permission" "gateway" {
-  statement_id   = "AllowHttpApi"
-  action         = "lambda:InvokeFunction"
-  function_name  = aws_lambda_function.api.function_name
-  principal      = "apigateway.amazonaws.com"
-  source_arn     = "${aws_apigatewayv2_api.api.execution_arn}/*/*"
-  source_account = data.aws_caller_identity.current.account_id
+  depends_on = [aws_iam_role_policy.api, aws_iam_role_policy_attachment.platform]
 }

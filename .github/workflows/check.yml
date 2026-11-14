@@ -38,5 +38,23 @@ jobs:
           terraform -chdir=infra/environment init -backend=false -input=false -lockfile=readonly
           terraform -chdir=infra/environment validate
           terraform -chdir=infra/environment test
-      - name: Build Lambda with Linux Python 3.13 wheels
-        run: python scripts/package_lambda.py
+      - name: Build and verify container
+        run: |
+          docker build -t fieldshift-api .
+          container=$(docker run -d -p 127.0.0.1:8080:8080 -e ENVIRONMENT=pr-7 fieldshift-api)
+          trap 'docker logs "$container"; docker rm -f "$container"' EXIT
+          curl --fail --silent --show-error --retry 9 --retry-connrefused --retry-delay 1 --max-time 2 \
+            http://localhost:8080/health > /tmp/container-health.json
+          python - <<'PY'
+          import json
+          with open('/tmp/container-health.json') as handle:
+              health = json.load(handle)
+          assert health['status'] == 'ok'
+          assert health['environment'] == 'pr-7'
+          PY
+          test "$(docker exec "$container" id -u)" != 0
+          docker exec "$container" python -c 'from pathlib import Path; assert not any(Path("/app", p).exists() for p in [".git", ".venv", ".tools", "infra", "tests", "docs", "openspec", "build"]); assert not list(Path("/app").glob(".env*"))'
+          started=$(date +%s)
+          docker stop --time 10 "$container"
+          test "$(( $(date +%s) - started ))" -lt 10
+          test "$(docker inspect --format '{{.State.ExitCode}}' "$container")" = 0

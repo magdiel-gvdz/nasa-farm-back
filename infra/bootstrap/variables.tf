@@ -36,3 +36,33 @@ variable "github_oidc_subject_prefix" {
     error_message = "Use the exact repo:owner/repository or repo:owner@owner_id/repository@repository_id prefix."
   }
 }
+
+variable "data_region" {
+  type    = string
+  default = "us-west-2"
+}
+
+variable "data_lake_bucket" {
+  type    = string
+  default = null
+}
+
+variable "athena_results_bucket" {
+  type    = string
+  default = null
+}
+
+variable "athena_workgroup" {
+  type    = string
+  default = "fieldshift"
+}
+
+variable "glue_database" {
+  type    = string
+  default = "fieldshift_gold"
+}
+
+variable "data_version_parameter_prefix" {
+  type    = string
+  default = "/fieldshift/"
+}

@@ -3,7 +3,6 @@ import logging
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from mangum import Mangum
 
 from app.config import Settings
 from app.data import DataUnavailableError, EvidenceSource, load_manifest
@@ -50,4 +49,3 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
 
 app = create_app()
-handler = Mangum(app, lifespan="off")
