@@ -752,6 +752,7 @@ Para cada cultivo del catálogo (ECOCROP más ajustes del agrónomo; meta: ~30 c
 - SDK oficial `anthropic` de Python con el cliente de Bedrock:
   ```python
   from anthropic import AnthropicBedrockMantle
+
   client = AnthropicBedrockMantle(aws_region="us-east-1")
   MODEL = "anthropic.claude-opus-5-5"
   ```
