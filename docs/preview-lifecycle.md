@@ -1,6 +1,9 @@
 # Prueba del ciclo de vida de previews
 
-Para comprobar el flujo completo, abrir un PR con un cambio pequeño y verificar:
+Requisitos: usar un PR interno del mismo repositorio, fuera de borrador,
+con la variable `INFRA_ENABLED` configurada en `true`.
+
+Para comprobar el flujo completo, abrir ese PR con un cambio pequeño y verificar:
 
 1. Los checks y el despliegue de `pr-N` terminan correctamente.
 2. `/health` responde con `environment` igual a `pr-N`.
