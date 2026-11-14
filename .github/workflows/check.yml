@@ -1,0 +1,42 @@
+name: Checks
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.14.0'
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Lint and test API
+        run: |
+          ruff check .
+          ruff format --check .
+          pytest -q
+      - name: Check Terraform formatting
+        run: terraform fmt -check -recursive infra
+      - name: Validate bootstrap
+        run: |
+          terraform -chdir=infra/bootstrap init -backend=false -input=false -lockfile=readonly
+          terraform -chdir=infra/bootstrap validate
+          terraform -chdir=infra/bootstrap test
+      - name: Validate and test environment plans without AWS credentials
+        run: |
+          terraform -chdir=infra/environment init -backend=false -input=false -lockfile=readonly
+          terraform -chdir=infra/environment validate
+          terraform -chdir=infra/environment test
+      - name: Build Lambda with Linux Python 3.13 wheels
+        run: python scripts/package_lambda.py
