@@ -1,5 +1,16 @@
 # Field Shift API
 
+## OpenSpec
+
+El proyecto usa OpenSpec 2.0.0 para especificar cambios antes de implementarlos.
+Instala el CLI con `npm install -g @fission-ai/openspec@2.0.0` (Node.js >= 22.12.0).
+La configuración del backend está en `openspec/config.yaml` y las skills de Codex
+están versionadas en `.agents/skills/`. En Codex, inicia un cambio con
+`$openspec-propose "descripción del cambio"` y aplica sus tareas con
+`$openspec-apply-change`. Usa `openspec list` para consultar los cambios y
+`openspec validate --all --strict` para validar los artefactos existentes.
+Los artefactos se redactan en español y se integran mediante PR.
+
 Backend de Field Shift para NASA Space Apps. API en Python 3.13 con FastAPI y Mangum sobre AWS Lambda, API Gateway HTTP y data lake privado en S3. Terraform administra los recursos; GitHub Actions despliega con OIDC, sin llaves AWS guardadas en GitHub.
 
 Este setup incluye infraestructura y la base de la API. La descarga de datos NASA, el motor agronómico y sus endpoints se implementan después.
