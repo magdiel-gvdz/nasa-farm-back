@@ -172,7 +172,9 @@ resource "aws_iam_role_policy" "deploy" {
           "logs:DeleteRetentionPolicy", "logs:ListTagsForResource", "logs:TagResource", "logs:UntagResource"
         ]
         Resource = [
+          "arn:${local.partition}:logs:${var.aws_region}:${local.account_id}:log-group:/aws/lambda/${each.value.name_pattern}-api",
           "arn:${local.partition}:logs:${var.aws_region}:${local.account_id}:log-group:/aws/lambda/${each.value.name_pattern}-api:*",
+          "arn:${local.partition}:logs:${var.aws_region}:${local.account_id}:log-group:/aws/apigateway/${each.value.name_pattern}",
           "arn:${local.partition}:logs:${var.aws_region}:${local.account_id}:log-group:/aws/apigateway/${each.value.name_pattern}:*"
         ]
       },
