@@ -54,7 +54,7 @@ Variables runtime: `ENVIRONMENT`, `DATA_LAKE_BUCKET`, `DATA_MANIFEST_KEY` (por d
 
 ```powershell
 terraform -chdir=infra/bootstrap init
-terraform -chdir=infra/bootstrap plan -var-file=bootstrap.tfvars -out=bootstrap.tfplan
+terraform -chdir=infra/bootstrap plan '-var-file=bootstrap.tfvars' '-out=bootstrap.tfplan'
 terraform -chdir=infra/bootstrap apply bootstrap.tfplan
 ```
 
@@ -129,7 +129,7 @@ terraform -chdir=infra/environment test
 .\.venv\Scripts\python.exe scripts/package_lambda.py
 ```
 
-Las pruebas Terraform usan un proveedor simulado, sin credenciales ni recursos reales. El empaquetador descarga wheels Linux x86_64 para Python 3.13 incluso si se ejecuta desde Windows; el ZIP queda en `build/api.zip`. Actualiza los locks de Python deliberadamente y prueba tanto la API como el empaquetado. Para actualizar AWS, usa `terraform init -upgrade` en ambos stacks y versiona sus locks.
+Las pruebas Terraform usan un proveedor simulado, sin credenciales ni recursos reales. El empaquetador descarga wheels Linux x86_64 para Python 3.13 incluso si se ejecuta desde Windows; el ZIP queda en `build/api.zip`. Actualiza los locks de Python deliberadamente y prueba tanto la API como el empaquetado. Para actualizar AWS, usa `terraform init -upgrade` en ambos stacks, ejecuta `terraform providers lock -platform=windows_amd64 -platform=linux_amd64` en cada uno y versiona sus locks. Los checksums de ambas plataformas permiten validar los mismos paquetes desde Windows y los runners Linux con `-lockfile=readonly`.
 
 ## Recuperación de previews y límites
 
