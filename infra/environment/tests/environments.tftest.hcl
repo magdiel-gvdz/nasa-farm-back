@@ -90,6 +90,10 @@ run "preview_is_isolated_and_disposable" {
     error_message = "El apply debe esperar un servicio sano."
   }
   assert {
+    condition     = length(trimspace(aws_ecs_express_gateway_service.api.primary_container[0].aws_logs_configuration[0].log_stream_prefix)) > 0
+    error_message = "El SDK de ECS exige un prefijo no vacío para los streams de logs."
+  }
+  assert {
     condition     = aws_ecs_express_gateway_service.api.cpu == "1024" && aws_ecs_express_gateway_service.api.memory == "2048" && aws_ecs_express_gateway_service.api.scaling_target[0].min_task_count == 1 && aws_ecs_express_gateway_service.api.scaling_target[0].max_task_count == 1
     error_message = "El preview ejecuta una tarea con 1 vCPU y 2 GiB."
   }

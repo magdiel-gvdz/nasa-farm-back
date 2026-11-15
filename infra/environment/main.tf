@@ -315,7 +315,8 @@ resource "aws_ecs_express_gateway_service" "api" {
     image          = "${var.ecr_repository_url}:${var.image_tag}"
     container_port = 8080
     aws_logs_configuration {
-      log_group = aws_cloudwatch_log_group.api.name
+      log_group         = aws_cloudwatch_log_group.api.name
+      log_stream_prefix = "api"
     }
     dynamic "environment" {
       for_each = local.container_environment

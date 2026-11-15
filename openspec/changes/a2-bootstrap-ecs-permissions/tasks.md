@@ -19,6 +19,6 @@
 
 ## 4. Aplicación
 
-- [ ] 4.1 Con credenciales de administrador, ejecutar `plan` y `apply` del bootstrap contra el estado remoto; verificar que el plan no destruye el bucket de estado ni el proveedor OIDC y que `terraform output ecr_repository_url` devuelve un valor
-- [ ] 4.2 Registrar la variable de repositorio `ECR_REPOSITORY_URL` en GitHub; verificar con `gh variable list`
+- [x] 4.1 Con credenciales de administrador, ejecutar `plan` y `apply` del bootstrap contra el estado remoto; verificar que el plan no destruye el bucket de estado ni el proveedor OIDC y que `terraform output ecr_repository_url` devuelve un valor
+- [x] 4.2 Registrar la variable de repositorio `ECR_REPOSITORY_URL` en GitHub; verificar con `gh variable list`
 - [x] 4.3 Documentar en `README.md` las variables nuevas del bootstrap y la variable de GitHub; verificar que la tabla de variables del README coincide con `variables.tf`

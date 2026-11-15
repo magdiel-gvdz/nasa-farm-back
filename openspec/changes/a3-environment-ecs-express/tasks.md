@@ -9,7 +9,7 @@
 
 - [x] 2.1 Eliminar de `main.tf` Lambda, API Gateway, su permiso y sus grupos de registros; verificar que `terraform validate` pasa y que el plan de prueba no contiene esos tipos de recurso
 - [x] 2.2 Cambiar el principal de confianza del rol `-api` a `ecs-tasks.amazonaws.com` conservando nombre y límite de permisos, y reescribir su política: tabla propia, `uploads/*` y `cache/*` del bucket, y lectura de DATA (lake `gold/*`, Athena, resultados, Glue, SSM) y Bedrock; verificar con aserciones en `tests/environments.tftest.hcl`
-- [ ] 2.3 Crear los roles `-api-exec` y `-api-infra` con las políticas administradas confirmadas en `a2-bootstrap-ecs-permissions`; verificar con aserción que no tienen políticas en línea
+- [x] 2.3 Crear los roles `-api-exec` y `-api-infra` con las políticas administradas confirmadas en `a2-bootstrap-ecs-permissions`; verificar con aserción que no tienen políticas en línea
 - [x] 2.4 Crear `aws_ecs_express_gateway_service` con nombre `${local.name}-api`, imagen `${ecr_repository_url}:${image_tag}`, puerto 8080, `health_check_path = "/health"`, 1 vCPU, 2 GB, escalado mínimo 1 y máximo 1 (preview) o 2 (dev), `wait_for_steady_state = true` y las variables de entorno listadas en el diseño; verificar con aserciones del test sobre imagen, puerto y variables
 
 ## 3. Estado
