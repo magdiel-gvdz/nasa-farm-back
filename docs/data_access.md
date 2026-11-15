@@ -1,6 +1,11 @@
 # Acceso a los datos — guía para el backend
 
-La API lee **solo** las vistas `v_*` de Athena. El contrato de columnas está en `docs/data_contract.md`.
+El proveedor Athena de la API deberá leer **solo** las vistas `v_*`. El contrato de columnas está en
+`docs/data_contract.md`.
+
+Esta entrega documenta los datos publicados; no implementa todavía el proveedor Athena ni configura
+su acceso en la Lambda. La API actual sigue leyendo el manifiesto de su bucket S3. Las variables y el
+ejemplo de permisos de esta guía son requisitos para esa integración posterior.
 
 ## Variables de entorno
 
@@ -17,7 +22,8 @@ deben crearse con `region_name = DATA_REGION`.
 
 ## Permisos
 
-DATA publica una política IAM administrada de solo lectura. Basta adjuntarla al rol de la tarea de la API:
+DATA publica una política IAM administrada de solo lectura. La integración debe adjuntarla al rol de
+ejecución de la Lambda de la API:
 
 ```hcl
 resource "aws_iam_role_policy_attachment" "api_gold_read" {
@@ -25,6 +31,18 @@ resource "aws_iam_role_policy_attachment" "api_gold_read" {
   policy_arn = "arn:aws:iam::<ACCOUNT_ID>:policy/fieldshift-gold-read"
 }
 ```
+
+Además, el rol de la API tiene una **permissions boundary** (`nasa-farm-runtime-boundary`) definida en
+`infra/bootstrap/main.tf`. Actualmente solo permite logs y lecturas de `curated/` y `manifests/` del
+bucket de la API. Adjuntar `fieldshift-gold-read` por sí solo no habilita Athena: el acceso efectivo es
+la intersección entre las políticas del rol y su boundary.
+
+Antes de habilitar el proveedor, se deben ampliar los permisos de la boundary para las acciones y
+recursos de `fieldshift-gold-read` (Athena, Glue y SSM en `us-west-2`, lectura de `gold/` y lectura/escritura
+de resultados), conservando los permisos existentes. Ese cambio requiere actualizar el bootstrap;
+el despliegue de `infra/environment` no modifica la boundary. Después se adjunta la política al rol y se
+configuran las variables de entorno de la Lambda. `infra/data/` es una referencia y no se aplica desde
+el CI de este repositorio.
 
 Qué permite: ejecutar consultas en el workgroup `fieldshift`, leer el catálogo de `fieldshift_gold`, leer
 `s3://fieldshift-lake-<ACCOUNT_ID>/gold/*`, leer y escribir resultados en
@@ -55,10 +73,12 @@ boto3_session=session, ctas_approach=False)`.
 ## Publicaciones
 
 Cada publicación de DATA crea una partición nueva, recrea las vistas y actualiza
-`/fieldshift/data_version`. La API detecta el cambio leyendo ese parámetro. Publicaciones previstas:
+`/fieldshift/data_version`. El proveedor Athena deberá detectar el cambio leyendo ese parámetro. Publicaciones previstas:
 integración de SMAP (humedad) y de NDVI (suelo descubierto); no cambian nombres de columnas.
 
 ## Sin AWS
 
 `docs/data_sample/` trae una muestra real de las siete vistas para dos celdas, con las mismas columnas y
-tipos que devuelve Athena, para pruebas locales y para el proveedor `fixture`.
+tipos que devuelve Athena, para pruebas locales y para el futuro proveedor `fixture`. Los valores
+numéricos están redondeados a seis decimales; al comparar agregados de la muestra, usar una tolerancia
+absoluta de `0.0001` para cantidades continuas. Los conteos enteros deben coincidir exactamente.
