@@ -7,7 +7,7 @@ ORDER BY year;
 
 -- API: suelo de una celda (3 profundidades).
 SELECT depth_cm, clay_pct, sand_pct, silt_pct, texture_class, ph, ph_p05, ph_p95, om_pct_est,
-       nitrogen_g_kg, cec_cmol_kg, bdod_kg_dm3, valid_pixel_pct, low_coverage
+       nitrogen_g_kg, cec_cmol_kg, bdod_kg_dm3, awc_mm_per_m, k_factor, valid_pixel_pct, low_coverage
 FROM fieldshift_gold.v_cell_soil
 WHERE cell_id = ?
 ORDER BY depth_top_cm;
