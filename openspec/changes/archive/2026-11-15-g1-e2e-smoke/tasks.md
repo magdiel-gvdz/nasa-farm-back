@@ -10,5 +10,5 @@
 
 ## 2. Uso
 
-- [ ] 2.1 Añadir el script como paso posterior a la prueba de humo en `infrastructure.yml`, sin `--require-real`; verificar con `actionlint` y en la ejecución de un PR
+- [x] 2.1 Añadir el script como paso posterior a la prueba de humo en `infrastructure.yml`, sin `--require-real`; verificar con `actionlint` y en la ejecución de un PR
 - [x] 2.2 Escribir `docs/smoke.md` con los comandos para preview y `dev` y la lista de comprobación tras cada publicación de DATA (versión en `/ready`, script con `--require-real` en ambas zonas); verificar que los comandos funcionan tal como están escritos

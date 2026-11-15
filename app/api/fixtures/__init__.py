@@ -14,12 +14,7 @@ from fastapi import Response
 from app.i18n import DEFAULT_LANGUAGE
 
 MOCK_HEADER = "X-Fieldshift-Mock"
-FIXTURE_NAMES = (
-    "profile",
-    "suitability_detail",
-    "suitability_matrix",
-    "rotations",
-)
+FIXTURE_NAMES = ("rotations",)
 
 
 @cache

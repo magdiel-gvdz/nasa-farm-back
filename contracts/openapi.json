@@ -837,6 +837,11 @@
             "title": "Computed At",
             "type": "string"
           },
+          "data_version": {
+            "description": "Versión de los datos de DATA con la que se calculó",
+            "title": "Data Version",
+            "type": "string"
+          },
           "field_id": {
             "title": "Field Id",
             "type": "string"
@@ -928,6 +933,7 @@
           "resolution_m",
           "computed_at",
           "pipeline_version",
+          "data_version",
           "climate",
           "soil",
           "terrain",
@@ -1492,6 +1498,14 @@
             "title": "Hottest Month",
             "type": "integer"
           },
+          "thresholds_c": {
+            "description": "Umbrales de Tmax con los que se cuentan días",
+            "items": {
+              "type": "number"
+            },
+            "title": "Thresholds C",
+            "type": "array"
+          },
           "trend_c_per_decade": {
             "anyOf": [
               {
@@ -1506,6 +1520,7 @@
           }
         },
         "required": [
+          "thresholds_c",
           "annual_mean_c",
           "trend_c_per_decade",
           "hottest_month",
@@ -1527,6 +1542,17 @@
               }
             ],
             "title": "Mean Days Over 30C"
+          },
+          "mean_days_over_32c": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mean Days Over 32C"
           },
           "mean_days_over_35c": {
             "anyOf": [
@@ -2111,6 +2137,32 @@
             ],
             "title": "P Frost Severe"
           },
+          "p_heat_30c": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "P Heat 30C"
+          },
+          "p_heat_32c": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "P Heat 32C"
+          },
           "p_heat_35c": {
             "anyOf": [
               {
@@ -2124,6 +2176,19 @@
             ],
             "title": "P Heat 35C"
           },
+          "p_heat_38c": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "P Heat 38C"
+          },
           "p_heavy_rain": {
             "anyOf": [
               {
@@ -2136,6 +2201,19 @@
               }
             ],
             "title": "P Heavy Rain"
+          },
+          "p_strong_wind": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "P Strong Wind"
           },
           "p_water_stress": {
             "anyOf": [
@@ -2595,6 +2673,14 @@
               }
             ],
             "title": "Soc G Kg"
+          },
+          "uncertainty": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/UncertaintyRange"
+            },
+            "description": "Rango P05-P95 por propiedad",
+            "title": "Uncertainty",
+            "type": "object"
           }
         },
         "required": [
@@ -2667,6 +2753,39 @@
             "minimum": 1.0,
             "title": "Month",
             "type": "integer"
+          },
+          "percentile_p10": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percentile P10"
+          },
+          "percentile_p50": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percentile P50"
+          },
+          "percentile_p90": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percentile P90"
           }
         },
         "required": [
@@ -3070,7 +3189,8 @@
             "enum": [
               "ok",
               "warn",
-              "bad"
+              "bad",
+              "unknown"
             ],
             "title": "Status",
             "type": "string"
@@ -3137,6 +3257,25 @@
           "cold_air_pooling_share"
         ],
         "title": "Terrain",
+        "type": "object"
+      },
+      "UncertaintyRange": {
+        "description": "Capas Q0.05 y Q0.95 de SoilGrids: incertidumbre del modelo, no variación en la celda.",
+        "properties": {
+          "p05": {
+            "title": "P05",
+            "type": "number"
+          },
+          "p95": {
+            "title": "P95",
+            "type": "number"
+          }
+        },
+        "required": [
+          "p05",
+          "p95"
+        ],
+        "title": "UncertaintyRange",
         "type": "object"
       },
       "Vegetation": {
@@ -3884,6 +4023,16 @@
               }
             },
             "description": "Unprocessable Content"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
           }
         },
         "summary": "Perfil de la zona (celda de 9 km), en una sola llamada",
@@ -4157,6 +4306,16 @@
               }
             },
             "description": "Unprocessable Content"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
           }
         },
         "summary": "Matriz cultivo × mes, o el detalle si se envían crop_id y planting_month",

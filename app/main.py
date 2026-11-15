@@ -12,8 +12,10 @@ from app.api.schemas.common import ErrorResponse
 from app.catalog.loader import Catalog, load_catalog
 from app.config import Settings
 from app.data import DataProvider, DataUnavailableError, create_provider
+from app.engines.config import EngineConfig, load_config
 from app.geo.locate import GridLocator, Locator
 from app.geo.zones import BBoxCellCatalog
+from app.profile.builder import ProfileService
 from app.store.base import MemoryRepository, Repository
 from app.store.dynamodb import DynamoRepository
 
@@ -41,6 +43,7 @@ def create_app(
     locator: Locator | None = None,
     data_provider: DataProvider | None = None,
     catalog: Catalog | None = None,
+    engine_config: EngineConfig | None = None,
 ) -> FastAPI:
     config = settings or Settings()
     api = FastAPI(title="Field Shift API", version=API_VERSION)
@@ -50,8 +53,10 @@ def create_app(
     api.state.locator = locator or GridLocator(BBoxCellCatalog())
     provider = data_provider or create_provider(config.data_provider)
     api.state.data_provider = provider
+    api.state.profiles = ProfileService(provider)
     # Un catálogo inválido impide arrancar: el error nombra el cultivo y el campo.
     api.state.catalog = catalog or load_catalog()
+    api.state.engine_config = engine_config or load_config()
 
     api.add_middleware(
         CORSMiddleware,

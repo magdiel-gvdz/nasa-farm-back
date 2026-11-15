@@ -15,8 +15,8 @@
 | `POST`, `GET`, `PATCH`, `DELETE /fields` | Real |
 | `GET /sources` | Real: fuentes del proveedor de datos activo |
 | `GET /crops` | Real: catálogo de `data/crops.yaml` (ver [crop-catalog.md](crop-catalog.md)) |
-| `GET /fields/{id}/profile` | Respuesta fija |
-| `GET /fields/{id}/suitability` | Respuesta fija |
+| `GET /fields/{id}/profile` | Real: se calcula con los datos del proveedor activo |
+| `GET /fields/{id}/suitability` | Real: motor de aptitud (ver [engines.md](engines.md)); `delta_t_c` y `delta_p_pct` aún no cambian el resultado |
 | `POST /fields/{id}/rotations` | Respuesta fija |
 
 ## Diferencias respecto a `backend-handoff.md` §6
@@ -28,6 +28,49 @@
 5. **Error `out_of_region`.** Solo hay datos para cuatro zonas de Coahuila. Fuera de ellas `POST /fields` y `PATCH /fields/{id}` responden `422`. La geocerca devuelve además `cell_id`, `zone_id` y `cell_assignment`.
 
 Otros ajustes menores: los umbrales de helada son 0 °C y −2 °C (`threshold_c`, `severe_threshold_c`), los días de calor se cuentan sobre 30, 35 y 38 °C, `Source` trae `id`, `name`, `organization`, `product`, `url`, `resolution`, `period`, `license` y `data_class` (`observation`, `model`, `derived`, `estimate` o `synthetic`; esta última marca datos de prueba, que es lo que sirve la API mientras `DATA_PROVIDER` sea `fixture`) y cada cultivo incluye `heat_critical_c`. Cada cultivo trae además lo que usa el motor de rotaciones (`n_balance_kg_ha`, `residue`, `root_depth`, `equipment`, `margin_index`, que puede ser `null`) y su procedencia (`source_id`, `reviewed`); mientras `reviewed` sea `false` los valores son iniciales y no están revisados por el rol científico.
+
+## Perfil de la zona
+
+`GET /fields/{id}/profile` describe la celda de 9 km asignada a la geocerca. Trae `data_version`
+(la versión de DATA con la que se calculó; `fixture` con datos sintéticos) y `computed_at`. Si los
+datos activos no incluyen la celda de la geocerca responde `503 data_unavailable`.
+
+**Probabilidad mensual.** En `climate.frost.by_month`, `prob_any_frost` es la fracción de años con
+al menos una helada en cualquiera de las decenas del mes. Si en 4 de 10 años heló en marzo, vale
+`0.4`, aunque en esos años helara en varias decenas. No se obtiene sumando ni promediando las
+probabilidades por decena de `climate.risk_calendar`, que responden a otra pregunta: la fracción de
+años con el evento en esa decena concreta.
+
+**Umbrales.** `climate.frost.threshold_c` (0 °C), `severe_threshold_c` (−2 °C),
+`climate.heat.thresholds_c` (30, 32, 35 y 38 °C) y `climate.rain.heavy_rain_threshold_mm` (25 mm) son
+los valores con los que DATA cuenta los eventos. El calendario trae `p_heat_30c`, `p_heat_32c`,
+`p_heat_35c` y `p_heat_38c`.
+
+**Suelo y humedad.** Cada capa de `soil.layers` trae en `uncertainty` el rango P05-P95 de cada
+propiedad: es la incertidumbre del modelo SoilGrids, no la variación dentro de la zona.
+`water.soil_moisture.by_month` da percentiles (`percentile_p10`, `p50`, `p90`, de 0 a 100) y su
+`source_id` es la fuente efectivamente usada.
+
+**Vacíos (`gaps`).** Lo que los datos no permiten afirmar. Los códigos son estables:
+
+| Código | Severidad | Cuándo aparece |
+|---|---|---|
+| `zonal_resolution_9km` | medium | Siempre: los datos son de la zona, no de la parcela |
+| `no_lab_analysis` | low | Siempre: el suelo es una estimación, no un análisis de laboratorio |
+| `synthetic_data` | high | El entorno sirve datos sintéticos de prueba |
+| `shared_climate_series` | medium | Varias celdas comparten la misma serie de clima |
+| `elevation_mismatch` | medium | La elevación de la celda difiere más de 300 m de la del cuadro climático |
+| `soil_moisture_from_model` | low | La humedad viene de un modelo y no de SMAP |
+| `ndvi_not_available` | medium | Sin NDVI: `vegetation` es `null` |
+| `no_soil_data` | high | Sin suelo: `soil` es `null` |
+| `no_elevation_data` | low | Sin elevación: `terrain` es `null` |
+| `no_wind_data` | low | Sin viento: `climate.wind` es `null` |
+| `no_daily_series` | low | Sin serie diaria: no hay récords ni fechas de helada |
+| `no_slope_data` | low | Siempre: `terrain.slope_pct` es `null` |
+| `no_groundwater_source` | medium | Siempre: `water.groundwater` es `null` |
+| `no_light_data` | low | Siempre: `climate.light` es `null` |
+| `no_land_use_history` | low | Siempre: `land_use` es `null` |
+| `no_hail_product` | medium | Siempre: `hazards.hail` es `null` |
 
 ## Encabezados
 
@@ -64,6 +107,7 @@ Todo error, también los de validación, usa el mismo sobre:
 |---|---|---|---|
 | `validation_error` | 422 | El cuerpo o los parámetros no cumplen el esquema | `fields`: lista de `{field, type, message}`; `field` es la ruta, p. ej. `body.geometry` |
 | `invalid_geometry` | 422 | La geometría no es un polígono válido (ver [Geometría](#geometría-y-celda)) | `reason` y datos del límite incumplido |
+| `crop_not_found` | 404 | `crop_id` no existe en el catálogo de cultivos | `crop_id` |
 | `out_of_region` | 422 | La celda de la geocerca no pertenece a ninguna zona publicada | `cell_id` y `zones`: lista de `{zone_id, name, bbox}` |
 | `missing_client_id` | 400 | Falta `X-Client-Id` en una ruta de `/fields` | — |
 | `invalid_client_id` | 400 | `X-Client-Id` no es un UUID | — |

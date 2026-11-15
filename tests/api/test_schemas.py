@@ -11,7 +11,13 @@ from app.api.schemas.profile import FieldProfile
 from app.api.schemas.rotations import RotationRequest, RotationResponse
 from app.api.schemas.suitability import SuitabilityDetail, SuitabilityMatrix
 from app.catalog.loader import load_catalog
-from tests.helpers import field_payload, square
+from tests.helpers import (
+    field_payload,
+    reference_profile,
+    reference_suitability_detail,
+    reference_suitability_matrix,
+    square,
+)
 
 SOURCE = {
     "id": "nasa_power",
@@ -129,7 +135,7 @@ def test_crop_validates():
 
 
 def _profile_with_calendar(mutate) -> dict:
-    profile = copy.deepcopy(load_fixture("profile"))
+    profile = reference_profile()
     mutate(profile["climate"]["risk_calendar"])
     return profile
 
@@ -149,7 +155,7 @@ def test_profile_rejects_a_calendar_without_36_unique_decades(mutate):
 
 
 def test_profile_allows_missing_sections_as_null():
-    profile = copy.deepcopy(load_fixture("profile"))
+    profile = reference_profile()
     for section in ("soil", "terrain", "vegetation", "land_use"):
         profile[section] = None
     profile["water"]["soil_moisture"] = None
@@ -157,18 +163,18 @@ def test_profile_allows_missing_sections_as_null():
 
 
 def test_profile_rejects_incomplete_monthly_series():
-    profile = copy.deepcopy(load_fixture("profile"))
+    profile = reference_profile()
     profile["climate"]["rain"]["by_month"].pop()
     with pytest.raises(ValidationError):
         FieldProfile.model_validate(profile)
 
 
 def test_suitability_models_validate():
-    detail = load_fixture("suitability_detail")
-    assert SuitabilityDetail.model_validate(detail).harvest_window.from_ == "08-10"
+    detail = reference_suitability_detail()
+    assert SuitabilityDetail.model_validate(detail).harvest_window.from_ == "07-10"
     with pytest.raises(ValidationError):
         SuitabilityDetail.model_validate({**detail, "score": 140})
-    matrix = load_fixture("suitability_matrix")
+    matrix = reference_suitability_matrix()
     assert len(SuitabilityMatrix.model_validate(matrix).crops) == 5
     matrix["crops"][0]["scores"] = matrix["crops"][0]["scores"][:11]
     with pytest.raises(ValidationError):
