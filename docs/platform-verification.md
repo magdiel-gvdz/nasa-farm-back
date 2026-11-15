@@ -33,10 +33,14 @@ La tarea terminó correctamente y no queda ejecutándose.
 La URL se obtiene de `ingress_paths.endpoint` filtrando `access_type=PUBLIC`.
 Express Mode está disponible: no aplica el respaldo Fargate + ALB manual.
 
-El preview Lambda `pr-6` se retiró con un plan limitado a sus 16 recursos.
-Su bucket estaba vacío. El PR #6 sigue abierto; deberá incorporar la nueva
-base antes de volver a desplegar, pues su rama todavía usa el pipeline antiguo.
+El PR #6 (API b1-b4) se fusionó en `main` el 14 de noviembre y su preview
+Lambda `pr-6` se destruyó al cerrarse. Esta rama incorpora ese código sobre el
+contenedor: se retiran Mangum y el empaquetador de Lambda, y `pyproj`,
+`shapely` y `numpy` quedan en el bloqueo de ejecución de la imagen.
 
-El esquema de manifiesto y su lector se conservan porque la aplicación actual
-todavía los utiliza. Su sustitución pertenece a B/C. Las referencias a Lambdas
-de ingesta en `infra/data` corresponden a DATA y siguen vigentes.
+El lector del manifiesto de S3, sus pruebas y
+`contracts/data-manifest.schema.json` se eliminaron: `/ready` ya no consulta el
+manifiesto y nada más los usaba. Las referencias a Lambdas de ingesta en
+`infra/data` corresponden a DATA y siguen vigentes. Los permisos heredados de
+Lambda y API Gateway del bootstrap se retiran en `a5-migrate-dev` 2.2, cuando
+`dev` ya no los necesite.
