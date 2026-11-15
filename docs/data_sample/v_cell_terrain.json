@@ -1,0 +1,30 @@
+[
+ {
+  "cell_id": "E9_r0461_c0822",
+  "zone_id": "coah-laguna",
+  "elev_mean_m": 1131.633049,
+  "elev_min_m": 1104.155273,
+  "elev_max_m": 1506.179077,
+  "elev_std_m": 64.176255,
+  "slope_mean_pct": 5.586351,
+  "slope_p90_pct": 25.71611,
+  "aspect_dominant": "SO",
+  "aspect_dominant_share": 0.19863,
+  "cold_air_pooling_share": 0.017382,
+  "n_pixels": 10528
+ },
+ {
+  "cell_id": "E9_r0463_c0845",
+  "zone_id": "coah-sureste",
+  "elev_mean_m": 1764.791054,
+  "elev_min_m": 1555.81604,
+  "elev_max_m": 2342.063232,
+  "elev_std_m": 145.711297,
+  "slope_mean_pct": 15.27955,
+  "slope_p90_pct": 38.657137,
+  "aspect_dominant": "E",
+  "aspect_dominant_share": 0.191706,
+  "cold_air_pooling_share": 0.010828,
+  "n_pixels": 10528
+ }
+]

@@ -36,4 +36,4 @@ Capas del lake:
 - **silver:** una tabla por fuente, unidades limpias, sin rellenos, UTC, por celda.
 - **gold:** indicadores por celda, año y decena; climatología; suelo; serie diaria. Partición `data_version`.
 
-Costo esperado: menos de 5 USD en el hackathon (sin VPC ni NAT, Glue Python shell de 0.0625 DPU, logs de 7 días).
+Costo esperado: menos de 5 USD en el hackathon (sin VPC ni NAT, Glue Python shell de 1 DPU desde gold v1 —unos 0.01 USD por corrida—, logs de 7 días).

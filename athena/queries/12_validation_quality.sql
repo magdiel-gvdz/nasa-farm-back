@@ -18,6 +18,9 @@ UNION ALL
 SELECT 'v_cell_daily', count(*), count(*) - count(DISTINCT cell_id || '-' || cast(date AS varchar))
 FROM fieldshift_gold.v_cell_daily
 UNION ALL
+SELECT 'v_cell_terrain', count(*), count(*) - count(DISTINCT cell_id)
+FROM fieldshift_gold.v_cell_terrain
+UNION ALL
 SELECT 'v_sources', count(*), count(*) - count(DISTINCT source_id)
 FROM fieldshift_gold.v_sources
 ORDER BY 1;

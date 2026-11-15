@@ -11,7 +11,7 @@
   "license": "Licencia Copernicus DEM (uso libre con atribución)",
   "data_class": "observación",
   "status": "in_use",
-  "used_for": "elevación media por celda para corregir la temperatura por altura (estimación)"
+  "used_for": "elevación por celda para corregir la temperatura por altura; pendiente, orientación y bajíos fríos (estimaciones)"
  },
  {
   "source_id": "modis_ndvi",
@@ -24,8 +24,8 @@
   "access_date": "2026-11-15",
   "license": "Datos abiertos de la NASA",
   "data_class": "observación",
-  "status": "pending",
-  "used_for": "suelo descubierto (NDVI)"
+  "status": "not_used",
+  "used_for": "no se integra en el MVP: AppEEARS no entregó datos a tiempo; ndvi_mean, bare_obs y bare_prob quedan vacías"
  },
  {
   "source_id": "nasa_power",
@@ -52,8 +52,8 @@
   "access_date": "2026-11-15",
   "license": "Datos abiertos de la NASA",
   "data_class": "observación asimilada en modelo",
-  "status": "pending",
-  "used_for": "humedad de raíz (reemplazará a GWETROOT)"
+  "status": "not_used",
+  "used_for": "no se integra en el MVP: AppEEARS no entregó datos a tiempo; la humedad de raíz sale de POWER GWETROOT (modelo, ~55 km)"
  },
  {
   "source_id": "soilgrids",

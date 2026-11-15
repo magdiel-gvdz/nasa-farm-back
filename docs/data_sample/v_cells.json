@@ -11,7 +11,7 @@
   "power_cell_lat": 25.5,
   "power_cell_lon": -103.125,
   "power_elev_m": 1222.82,
-  "climate_shared_by_n_cells": 24
+  "climate_shared_by_n_cells": 49
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -25,6 +25,6 @@
   "power_cell_lat": 25.5,
   "power_cell_lon": -101.25,
   "power_elev_m": 1611.58,
-  "climate_shared_by_n_cells": 35
+  "climate_shared_by_n_cells": 49
  }
 ]

@@ -32,7 +32,7 @@ variable "ingest_image_tag" {
 }
 
 variable "appeears_poll_enabled" {
-  description = "Programa appeears_poll cada 15 min; apagar cuando todas las tareas estén en raw."
+  description = "Programa appeears_poll cada 15 min; apagado: AppEEARS (SMAP y NDVI) quedó fuera del MVP (decisión C1, 15-nov-2026)."
   type        = bool
-  default     = true
+  default     = false
 }

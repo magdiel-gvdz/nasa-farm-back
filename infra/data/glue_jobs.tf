@@ -1,12 +1,14 @@
-# Jobs de Glue Python shell (3.9, 0.0625 DPU). El código sale del repo:
+# Jobs de Glue Python shell (3.9, 1 DPU = 16 GB). Etapa 2 (C4): power_square_daily = 84 cuadros x 12,784 días
+# (~1.07 M filas); gold calcula indicadores de ~3,000 celdas en tandas de 200 (tope 60 min). El código sale del repo:
 #   scripts/package_glue.py -> build/fieldshift_glue.zip (glue/lib + config en JSON)
 locals {
   repo_root     = "${path.module}/../.."
   glue_code_zip = "code/fieldshift_glue.zip"
   glue_jobs = {
-    silver_build = { script = "silver_build.py", args = { "--SOURCE" = "all" } }
+    silver_build = { script = "silver_build.py", timeout = 30, args = { "--SOURCE" = "all" } }
     gold_build = {
-      script = "gold_build.py"
+      script  = "gold_build.py"
+      timeout = 60
       args = {
         "--SSM_PARAMETER" = aws_ssm_parameter.data_version.name
         "--WORKGROUP"     = aws_athena_workgroup.this.name
@@ -35,9 +37,9 @@ resource "aws_glue_job" "this" {
 
   name         = "${var.project}-${replace(each.key, "_", "-")}"
   role_arn     = aws_iam_role.glue.arn
-  max_capacity = 0.0625
+  max_capacity = 1
   max_retries  = 0
-  timeout      = 30
+  timeout      = each.value.timeout
 
   command {
     name            = "pythonshell"

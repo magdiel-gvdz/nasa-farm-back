@@ -1,5 +1,5 @@
 {
- "data_version": "2026111500",
+ "data_version": "2026111507",
  "cells": {
   "saltillo": "E9_r0463_c0845",
   "la_laguna": "E9_r0461_c0822"
@@ -11,7 +11,8 @@
   "v_cell_year": 20,
   "v_cell_soil": 6,
   "v_cell_daily": 730,
+  "v_cell_terrain": 2,
   "v_sources": 5
  },
- "note": "Muestra real de fieldshift_gold. v_cell_daily solo trae 2025; el resto, completo para estas celdas."
+ "note": "Muestra real de fieldshift_gold. v_cell_daily solo trae 2025 (la vista cubre 1991-2025); el resto, completo para estas celdas."
 }

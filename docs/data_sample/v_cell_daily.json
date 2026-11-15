@@ -15,7 +15,8 @@
   "rh_pct": 20.99,
   "wind_ms": 1.69,
   "wind_max_ms": 4.35,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.650798
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -33,7 +34,8 @@
   "rh_pct": 41.37,
   "wind_ms": 1.2,
   "wind_max_ms": 3.54,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.954068
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -51,7 +53,8 @@
   "rh_pct": 33.5,
   "wind_ms": 1.22,
   "wind_max_ms": 2.93,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.771673
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -69,7 +72,8 @@
   "rh_pct": 47.34,
   "wind_ms": 1.73,
   "wind_max_ms": 4.75,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.318458
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -87,7 +91,8 @@
   "rh_pct": 36.29,
   "wind_ms": 2.13,
   "wind_max_ms": 4.38,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.144216
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -105,7 +110,8 @@
   "rh_pct": 29.34,
   "wind_ms": 1.85,
   "wind_max_ms": 3.87,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.57078
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -123,7 +129,8 @@
   "rh_pct": 32.35,
   "wind_ms": 1.46,
   "wind_max_ms": 3.96,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.882351
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -141,7 +148,8 @@
   "rh_pct": 38.14,
   "wind_ms": 3.2,
   "wind_max_ms": 5.52,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.445597
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -159,7 +167,8 @@
   "rh_pct": 55.86,
   "wind_ms": 3.46,
   "wind_max_ms": 10.17,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.105789
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -177,7 +186,8 @@
   "rh_pct": 42.81,
   "wind_ms": 3.6,
   "wind_max_ms": 8.28,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.530911
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -195,7 +205,8 @@
   "rh_pct": 46.54,
   "wind_ms": 2.54,
   "wind_max_ms": 5.95,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.61004
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -213,7 +224,8 @@
   "rh_pct": 51.88,
   "wind_ms": 2.05,
   "wind_max_ms": 6.29,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.639026
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -231,7 +243,8 @@
   "rh_pct": 44.62,
   "wind_ms": 1.54,
   "wind_max_ms": 4.15,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.354338
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -249,7 +262,8 @@
   "rh_pct": 52.23,
   "wind_ms": 1.46,
   "wind_max_ms": 4.66,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 1.929318
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -267,7 +281,8 @@
   "rh_pct": 61.75,
   "wind_ms": 1.43,
   "wind_max_ms": 5.41,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.51701
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -285,7 +300,8 @@
   "rh_pct": 56.65,
   "wind_ms": 1.17,
   "wind_max_ms": 3.19,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.085247
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -303,7 +319,8 @@
   "rh_pct": 36.37,
   "wind_ms": 3.07,
   "wind_max_ms": 9.01,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.442451
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -321,7 +338,8 @@
   "rh_pct": 40.69,
   "wind_ms": 2.74,
   "wind_max_ms": 6.61,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.115337
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -339,7 +357,8 @@
   "rh_pct": 25.43,
   "wind_ms": 1.98,
   "wind_max_ms": 5.76,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.470833
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -357,7 +376,8 @@
   "rh_pct": 34.77,
   "wind_ms": 1.37,
   "wind_max_ms": 4.77,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.642139
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -375,7 +395,8 @@
   "rh_pct": 43.31,
   "wind_ms": 3.0,
   "wind_max_ms": 6.78,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 1.93283
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -393,7 +414,8 @@
   "rh_pct": 40.26,
   "wind_ms": 1.2,
   "wind_max_ms": 2.77,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.317193
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -411,7 +433,8 @@
   "rh_pct": 27.83,
   "wind_ms": 1.78,
   "wind_max_ms": 5.4,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.42373
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -429,7 +452,8 @@
   "rh_pct": 31.35,
   "wind_ms": 1.24,
   "wind_max_ms": 3.75,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.505126
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -447,7 +471,8 @@
   "rh_pct": 32.13,
   "wind_ms": 1.88,
   "wind_max_ms": 4.55,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.752413
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -465,7 +490,8 @@
   "rh_pct": 40.18,
   "wind_ms": 1.63,
   "wind_max_ms": 4.34,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.711241
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -483,7 +509,8 @@
   "rh_pct": 41.39,
   "wind_ms": 1.41,
   "wind_max_ms": 3.02,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.189465
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -501,7 +528,8 @@
   "rh_pct": 36.23,
   "wind_ms": 1.34,
   "wind_max_ms": 3.31,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.276279
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -519,7 +547,8 @@
   "rh_pct": 26.85,
   "wind_ms": 2.41,
   "wind_max_ms": 7.31,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.994292
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -537,7 +566,8 @@
   "rh_pct": 28.86,
   "wind_ms": 2.36,
   "wind_max_ms": 5.82,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.423075
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -555,7 +585,8 @@
   "rh_pct": 12.97,
   "wind_ms": 1.56,
   "wind_max_ms": 5.07,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.186256
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -573,7 +604,8 @@
   "rh_pct": 20.16,
   "wind_ms": 1.22,
   "wind_max_ms": 3.59,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.275463
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -591,7 +623,8 @@
   "rh_pct": 25.27,
   "wind_ms": 1.51,
   "wind_max_ms": 3.33,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.860357
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -609,7 +642,8 @@
   "rh_pct": 12.12,
   "wind_ms": 1.68,
   "wind_max_ms": 4.03,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.842753
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -627,7 +661,8 @@
   "rh_pct": 12.74,
   "wind_ms": 1.49,
   "wind_max_ms": 3.07,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.739257
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -645,7 +680,8 @@
   "rh_pct": 27.58,
   "wind_ms": 1.49,
   "wind_max_ms": 3.05,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.043149
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -663,7 +699,8 @@
   "rh_pct": 23.07,
   "wind_ms": 1.56,
   "wind_max_ms": 3.27,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.201642
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -681,7 +718,8 @@
   "rh_pct": 20.56,
   "wind_ms": 1.79,
   "wind_max_ms": 4.01,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.380444
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -699,7 +737,8 @@
   "rh_pct": 20.11,
   "wind_ms": 1.53,
   "wind_max_ms": 2.9,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.188043
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -717,7 +756,8 @@
   "rh_pct": 17.3,
   "wind_ms": 1.44,
   "wind_max_ms": 3.3,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.341178
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -735,7 +775,8 @@
   "rh_pct": 17.82,
   "wind_ms": 1.34,
   "wind_max_ms": 3.55,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.090752
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -753,7 +794,8 @@
   "rh_pct": 26.19,
   "wind_ms": 2.76,
   "wind_max_ms": 7.98,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.20493
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -771,7 +813,8 @@
   "rh_pct": 31.09,
   "wind_ms": 3.65,
   "wind_max_ms": 7.89,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.243968
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -789,7 +832,8 @@
   "rh_pct": 26.87,
   "wind_ms": 1.52,
   "wind_max_ms": 5.46,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.911189
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -807,7 +851,8 @@
   "rh_pct": 41.59,
   "wind_ms": 1.94,
   "wind_max_ms": 4.95,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.484066
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -825,7 +870,8 @@
   "rh_pct": 19.75,
   "wind_ms": 2.49,
   "wind_max_ms": 6.38,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.654553
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -843,7 +889,8 @@
   "rh_pct": 24.04,
   "wind_ms": 1.76,
   "wind_max_ms": 3.92,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.889674
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -861,7 +908,8 @@
   "rh_pct": 26.41,
   "wind_ms": 1.82,
   "wind_max_ms": 6.22,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.32694
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -879,7 +927,8 @@
   "rh_pct": 19.51,
   "wind_ms": 1.65,
   "wind_max_ms": 3.73,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.350465
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -897,7 +946,8 @@
   "rh_pct": 23.39,
   "wind_ms": 1.87,
   "wind_max_ms": 3.84,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.672048
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -915,7 +965,8 @@
   "rh_pct": 43.75,
   "wind_ms": 2.75,
   "wind_max_ms": 6.24,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.334985
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -933,7 +984,8 @@
   "rh_pct": 37.01,
   "wind_ms": 2.61,
   "wind_max_ms": 6.33,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.756947
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -951,7 +1003,8 @@
   "rh_pct": 35.84,
   "wind_ms": 1.53,
   "wind_max_ms": 4.88,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.24655
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -969,7 +1022,8 @@
   "rh_pct": 24.92,
   "wind_ms": 1.68,
   "wind_max_ms": 3.77,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.009326
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -987,7 +1041,8 @@
   "rh_pct": 14.35,
   "wind_ms": 1.62,
   "wind_max_ms": 3.05,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.304544
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1005,7 +1060,8 @@
   "rh_pct": 7.71,
   "wind_ms": 1.64,
   "wind_max_ms": 3.63,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.79715
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1023,7 +1079,8 @@
   "rh_pct": 14.02,
   "wind_ms": 2.23,
   "wind_max_ms": 4.96,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.644041
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1041,7 +1098,8 @@
   "rh_pct": 14.83,
   "wind_ms": 2.12,
   "wind_max_ms": 7.73,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.507136
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1059,7 +1117,8 @@
   "rh_pct": 63.62,
   "wind_ms": 2.52,
   "wind_max_ms": 8.17,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.57736
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1077,7 +1136,8 @@
   "rh_pct": 38.43,
   "wind_ms": 1.21,
   "wind_max_ms": 2.72,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.410462
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1095,7 +1155,8 @@
   "rh_pct": 23.03,
   "wind_ms": 2.09,
   "wind_max_ms": 4.47,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.402658
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1113,7 +1174,8 @@
   "rh_pct": 17.78,
   "wind_ms": 2.71,
   "wind_max_ms": 6.85,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.736644
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1131,7 +1193,8 @@
   "rh_pct": 13.56,
   "wind_ms": 3.92,
   "wind_max_ms": 8.16,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.476302
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1149,7 +1212,8 @@
   "rh_pct": 6.38,
   "wind_ms": 1.25,
   "wind_max_ms": 3.86,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.362197
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1167,7 +1231,8 @@
   "rh_pct": 12.09,
   "wind_ms": 1.91,
   "wind_max_ms": 5.24,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.547365
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1185,7 +1250,8 @@
   "rh_pct": 12.19,
   "wind_ms": 3.58,
   "wind_max_ms": 10.48,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.184514
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1203,7 +1269,8 @@
   "rh_pct": 18.07,
   "wind_ms": 3.83,
   "wind_max_ms": 8.54,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.461357
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1221,7 +1288,8 @@
   "rh_pct": 18.68,
   "wind_ms": 2.54,
   "wind_max_ms": 5.8,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.985922
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1239,7 +1307,8 @@
   "rh_pct": 18.63,
   "wind_ms": 1.26,
   "wind_max_ms": 4.55,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.332851
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1257,7 +1326,8 @@
   "rh_pct": 10.31,
   "wind_ms": 1.62,
   "wind_max_ms": 4.21,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.481455
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1275,7 +1345,8 @@
   "rh_pct": 15.33,
   "wind_ms": 3.34,
   "wind_max_ms": 8.87,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.616377
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1293,7 +1364,8 @@
   "rh_pct": 12.0,
   "wind_ms": 2.11,
   "wind_max_ms": 5.99,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.632085
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1311,7 +1383,8 @@
   "rh_pct": 17.17,
   "wind_ms": 4.65,
   "wind_max_ms": 12.27,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.748985
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1329,7 +1402,8 @@
   "rh_pct": 14.6,
   "wind_ms": 3.89,
   "wind_max_ms": 8.03,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.425883
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1347,7 +1421,8 @@
   "rh_pct": 16.16,
   "wind_ms": 2.26,
   "wind_max_ms": 4.66,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.598206
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1365,7 +1440,8 @@
   "rh_pct": 13.24,
   "wind_ms": 1.67,
   "wind_max_ms": 3.54,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.632956
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1383,7 +1459,8 @@
   "rh_pct": 16.18,
   "wind_ms": 2.05,
   "wind_max_ms": 5.2,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.071839
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1401,7 +1478,8 @@
   "rh_pct": 15.06,
   "wind_ms": 3.16,
   "wind_max_ms": 6.38,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.993614
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1419,7 +1497,8 @@
   "rh_pct": 14.27,
   "wind_ms": 2.82,
   "wind_max_ms": 7.51,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.965112
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1437,7 +1516,8 @@
   "rh_pct": 19.39,
   "wind_ms": 2.16,
   "wind_max_ms": 7.58,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.296849
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1455,7 +1535,8 @@
   "rh_pct": 14.61,
   "wind_ms": 2.13,
   "wind_max_ms": 4.33,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.629004
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1473,7 +1554,8 @@
   "rh_pct": 9.63,
   "wind_ms": 2.31,
   "wind_max_ms": 4.67,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.453773
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1491,7 +1573,8 @@
   "rh_pct": 12.55,
   "wind_ms": 1.61,
   "wind_max_ms": 3.63,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.507448
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1509,7 +1592,8 @@
   "rh_pct": 43.22,
   "wind_ms": 2.13,
   "wind_max_ms": 4.83,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.581271
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1527,7 +1611,8 @@
   "rh_pct": 40.88,
   "wind_ms": 2.73,
   "wind_max_ms": 6.49,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.804608
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1545,7 +1630,8 @@
   "rh_pct": 54.26,
   "wind_ms": 2.5,
   "wind_max_ms": 7.04,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.927686
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1563,7 +1649,8 @@
   "rh_pct": 43.29,
   "wind_ms": 2.11,
   "wind_max_ms": 7.13,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.598021
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1581,7 +1668,8 @@
   "rh_pct": 18.31,
   "wind_ms": 2.08,
   "wind_max_ms": 3.74,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.284984
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1599,7 +1687,8 @@
   "rh_pct": 15.19,
   "wind_ms": 2.05,
   "wind_max_ms": 4.49,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.167144
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1617,7 +1706,8 @@
   "rh_pct": 15.11,
   "wind_ms": 2.21,
   "wind_max_ms": 4.77,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.241879
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1635,7 +1725,8 @@
   "rh_pct": 15.69,
   "wind_ms": 1.84,
   "wind_max_ms": 4.03,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.632464
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1653,7 +1744,8 @@
   "rh_pct": 15.59,
   "wind_ms": 3.54,
   "wind_max_ms": 10.86,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.403565
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1671,7 +1763,8 @@
   "rh_pct": 19.42,
   "wind_ms": 3.53,
   "wind_max_ms": 9.02,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.9126
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1689,7 +1782,8 @@
   "rh_pct": 16.42,
   "wind_ms": 4.32,
   "wind_max_ms": 12.1,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.837209
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1707,7 +1801,8 @@
   "rh_pct": 28.74,
   "wind_ms": 3.16,
   "wind_max_ms": 10.4,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.000867
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1725,7 +1820,8 @@
   "rh_pct": 33.62,
   "wind_ms": 3.98,
   "wind_max_ms": 7.46,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.924242
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1743,7 +1839,8 @@
   "rh_pct": 26.92,
   "wind_ms": 2.21,
   "wind_max_ms": 7.32,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.266002
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1761,7 +1858,8 @@
   "rh_pct": 14.89,
   "wind_ms": 1.69,
   "wind_max_ms": 3.72,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.007398
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1779,7 +1877,8 @@
   "rh_pct": 11.15,
   "wind_ms": 1.66,
   "wind_max_ms": 3.45,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.146846
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1797,7 +1896,8 @@
   "rh_pct": 6.82,
   "wind_ms": 2.17,
   "wind_max_ms": 4.88,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.593558
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1815,7 +1915,8 @@
   "rh_pct": 14.33,
   "wind_ms": 3.08,
   "wind_max_ms": 7.73,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.770079
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1833,7 +1934,8 @@
   "rh_pct": 20.71,
   "wind_ms": 2.84,
   "wind_max_ms": 7.68,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.657372
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1851,7 +1953,8 @@
   "rh_pct": 13.49,
   "wind_ms": 2.5,
   "wind_max_ms": 5.07,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.019091
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1869,7 +1972,8 @@
   "rh_pct": 13.69,
   "wind_ms": 2.64,
   "wind_max_ms": 5.3,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.20563
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1887,7 +1991,8 @@
   "rh_pct": 12.2,
   "wind_ms": 2.98,
   "wind_max_ms": 9.64,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.174034
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1905,7 +2010,8 @@
   "rh_pct": 21.21,
   "wind_ms": 2.27,
   "wind_max_ms": 9.09,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.771625
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1923,7 +2029,8 @@
   "rh_pct": 19.76,
   "wind_ms": 1.46,
   "wind_max_ms": 4.43,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.13608
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1941,7 +2048,8 @@
   "rh_pct": 14.77,
   "wind_ms": 1.52,
   "wind_max_ms": 4.14,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.148864
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1959,7 +2067,8 @@
   "rh_pct": 16.69,
   "wind_ms": 2.21,
   "wind_max_ms": 5.95,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.80941
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1977,7 +2086,8 @@
   "rh_pct": 17.25,
   "wind_ms": 2.07,
   "wind_max_ms": 4.29,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.539683
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -1995,7 +2105,8 @@
   "rh_pct": 28.44,
   "wind_ms": 1.72,
   "wind_max_ms": 4.4,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.47444
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2013,7 +2124,8 @@
   "rh_pct": 45.7,
   "wind_ms": 2.29,
   "wind_max_ms": 7.75,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.381924
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2031,7 +2143,8 @@
   "rh_pct": 24.42,
   "wind_ms": 1.87,
   "wind_max_ms": 5.01,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.683773
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2049,7 +2162,8 @@
   "rh_pct": 27.46,
   "wind_ms": 1.65,
   "wind_max_ms": 5.01,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.064926
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2067,7 +2181,8 @@
   "rh_pct": 25.52,
   "wind_ms": 1.22,
   "wind_max_ms": 3.15,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.755387
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2085,7 +2200,8 @@
   "rh_pct": 39.57,
   "wind_ms": 1.61,
   "wind_max_ms": 5.03,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.796638
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2103,7 +2219,8 @@
   "rh_pct": 36.24,
   "wind_ms": 1.68,
   "wind_max_ms": 4.37,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.89818
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2121,7 +2238,8 @@
   "rh_pct": 41.85,
   "wind_ms": 2.18,
   "wind_max_ms": 9.49,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.906786
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2139,7 +2257,8 @@
   "rh_pct": 24.22,
   "wind_ms": 1.68,
   "wind_max_ms": 3.82,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.200567
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2157,7 +2276,8 @@
   "rh_pct": 27.18,
   "wind_ms": 2.05,
   "wind_max_ms": 5.78,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.426233
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2175,7 +2295,8 @@
   "rh_pct": 13.96,
   "wind_ms": 1.95,
   "wind_max_ms": 4.97,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.870531
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2193,7 +2314,8 @@
   "rh_pct": 14.67,
   "wind_ms": 2.08,
   "wind_max_ms": 4.65,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.476611
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2211,7 +2333,8 @@
   "rh_pct": 23.84,
   "wind_ms": 1.86,
   "wind_max_ms": 4.93,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.132519
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2229,7 +2352,8 @@
   "rh_pct": 41.33,
   "wind_ms": 2.0,
   "wind_max_ms": 5.65,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.272994
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2247,7 +2371,8 @@
   "rh_pct": 17.9,
   "wind_ms": 3.31,
   "wind_max_ms": 10.46,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.91512
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2265,7 +2390,8 @@
   "rh_pct": 18.83,
   "wind_ms": 3.59,
   "wind_max_ms": 9.56,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.30946
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2283,7 +2409,8 @@
   "rh_pct": 16.18,
   "wind_ms": 2.49,
   "wind_max_ms": 6.76,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.823767
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2301,7 +2428,8 @@
   "rh_pct": 20.71,
   "wind_ms": 2.09,
   "wind_max_ms": 6.79,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.115727
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2319,7 +2447,8 @@
   "rh_pct": 44.4,
   "wind_ms": 4.06,
   "wind_max_ms": 9.51,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.230514
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2337,7 +2466,8 @@
   "rh_pct": 40.68,
   "wind_ms": 3.27,
   "wind_max_ms": 6.1,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.584555
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2355,7 +2485,8 @@
   "rh_pct": 33.45,
   "wind_ms": 2.01,
   "wind_max_ms": 5.84,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.004075
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2373,7 +2504,8 @@
   "rh_pct": 15.58,
   "wind_ms": 1.74,
   "wind_max_ms": 4.24,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.338592
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2391,7 +2523,8 @@
   "rh_pct": 19.22,
   "wind_ms": 1.86,
   "wind_max_ms": 4.76,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.605055
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2409,7 +2542,8 @@
   "rh_pct": 15.93,
   "wind_ms": 2.77,
   "wind_max_ms": 5.57,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.847577
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2427,7 +2561,8 @@
   "rh_pct": 14.06,
   "wind_ms": 2.48,
   "wind_max_ms": 5.98,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.50593
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2445,7 +2580,8 @@
   "rh_pct": 14.99,
   "wind_ms": 2.23,
   "wind_max_ms": 6.44,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.667806
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2463,7 +2599,8 @@
   "rh_pct": 18.51,
   "wind_ms": 2.16,
   "wind_max_ms": 5.89,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.284191
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2481,7 +2618,8 @@
   "rh_pct": 19.85,
   "wind_ms": 2.08,
   "wind_max_ms": 5.35,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.357261
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2499,7 +2637,8 @@
   "rh_pct": 19.14,
   "wind_ms": 2.6,
   "wind_max_ms": 6.88,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.77021
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2517,7 +2656,8 @@
   "rh_pct": 13.38,
   "wind_ms": 2.31,
   "wind_max_ms": 6.37,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.345417
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2535,7 +2675,8 @@
   "rh_pct": 39.4,
   "wind_ms": 2.84,
   "wind_max_ms": 8.48,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.917183
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2553,7 +2694,8 @@
   "rh_pct": 45.22,
   "wind_ms": 2.86,
   "wind_max_ms": 8.24,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.402275
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2571,7 +2713,8 @@
   "rh_pct": 32.89,
   "wind_ms": 2.46,
   "wind_max_ms": 6.16,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.437817
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2589,7 +2732,8 @@
   "rh_pct": 28.61,
   "wind_ms": 2.63,
   "wind_max_ms": 6.13,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.504791
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2607,7 +2751,8 @@
   "rh_pct": 32.88,
   "wind_ms": 2.05,
   "wind_max_ms": 5.09,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.385393
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2625,7 +2770,8 @@
   "rh_pct": 21.31,
   "wind_ms": 2.3,
   "wind_max_ms": 6.39,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.327104
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2643,7 +2789,8 @@
   "rh_pct": 18.87,
   "wind_ms": 2.17,
   "wind_max_ms": 5.94,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.922856
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2661,7 +2808,8 @@
   "rh_pct": 39.63,
   "wind_ms": 3.12,
   "wind_max_ms": 8.03,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.688038
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2679,7 +2827,8 @@
   "rh_pct": 43.13,
   "wind_ms": 3.03,
   "wind_max_ms": 8.63,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.218385
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2697,7 +2846,8 @@
   "rh_pct": 45.06,
   "wind_ms": 2.59,
   "wind_max_ms": 7.39,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.137756
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2715,7 +2865,8 @@
   "rh_pct": 59.75,
   "wind_ms": 2.54,
   "wind_max_ms": 5.56,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.390113
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2733,7 +2884,8 @@
   "rh_pct": 53.04,
   "wind_ms": 1.86,
   "wind_max_ms": 4.56,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.062216
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2751,7 +2903,8 @@
   "rh_pct": 43.65,
   "wind_ms": 1.72,
   "wind_max_ms": 4.43,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 7.033565
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2769,7 +2922,8 @@
   "rh_pct": 34.31,
   "wind_ms": 3.0,
   "wind_max_ms": 7.03,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 7.004286
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2787,7 +2941,8 @@
   "rh_pct": 33.9,
   "wind_ms": 1.93,
   "wind_max_ms": 5.2,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 7.755069
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2805,7 +2960,8 @@
   "rh_pct": 35.59,
   "wind_ms": 4.38,
   "wind_max_ms": 7.19,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.357095
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2823,7 +2979,8 @@
   "rh_pct": 31.37,
   "wind_ms": 3.64,
   "wind_max_ms": 9.19,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.229074
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2841,7 +2998,8 @@
   "rh_pct": 32.43,
   "wind_ms": 3.27,
   "wind_max_ms": 7.43,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.575978
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2859,7 +3017,8 @@
   "rh_pct": 32.45,
   "wind_ms": 2.84,
   "wind_max_ms": 5.99,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.909262
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2877,7 +3036,8 @@
   "rh_pct": 35.65,
   "wind_ms": 2.31,
   "wind_max_ms": 6.32,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.789525
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2895,7 +3055,8 @@
   "rh_pct": 36.5,
   "wind_ms": 1.27,
   "wind_max_ms": 3.65,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.072808
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2913,7 +3074,8 @@
   "rh_pct": 36.36,
   "wind_ms": 2.21,
   "wind_max_ms": 5.85,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.638484
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2931,7 +3093,8 @@
   "rh_pct": 34.12,
   "wind_ms": 2.69,
   "wind_max_ms": 5.49,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.256828
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2949,7 +3112,8 @@
   "rh_pct": 34.79,
   "wind_ms": 3.28,
   "wind_max_ms": 7.81,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.398324
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2967,7 +3131,8 @@
   "rh_pct": 34.81,
   "wind_ms": 3.43,
   "wind_max_ms": 8.18,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.41096
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -2985,7 +3150,8 @@
   "rh_pct": 38.57,
   "wind_ms": 3.52,
   "wind_max_ms": 8.24,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.046666
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3003,7 +3169,8 @@
   "rh_pct": 43.36,
   "wind_ms": 3.47,
   "wind_max_ms": 8.97,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.825561
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3021,7 +3188,8 @@
   "rh_pct": 34.56,
   "wind_ms": 2.71,
   "wind_max_ms": 7.48,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.20559
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3039,7 +3207,8 @@
   "rh_pct": 34.37,
   "wind_ms": 2.87,
   "wind_max_ms": 6.23,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 7.282042
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3057,7 +3226,8 @@
   "rh_pct": 35.93,
   "wind_ms": 3.68,
   "wind_max_ms": 7.6,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.598663
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3075,7 +3245,8 @@
   "rh_pct": 34.6,
   "wind_ms": 3.54,
   "wind_max_ms": 7.94,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.445916
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3093,7 +3264,8 @@
   "rh_pct": 50.28,
   "wind_ms": 3.01,
   "wind_max_ms": 6.04,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.00258
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3111,7 +3283,8 @@
   "rh_pct": 67.72,
   "wind_ms": 1.77,
   "wind_max_ms": 4.0,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.128071
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3129,7 +3302,8 @@
   "rh_pct": 58.0,
   "wind_ms": 2.98,
   "wind_max_ms": 7.51,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.504666
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3147,7 +3321,8 @@
   "rh_pct": 45.06,
   "wind_ms": 3.04,
   "wind_max_ms": 6.03,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.83568
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3165,7 +3340,8 @@
   "rh_pct": 37.98,
   "wind_ms": 3.45,
   "wind_max_ms": 6.37,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.696356
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3183,7 +3359,8 @@
   "rh_pct": 36.89,
   "wind_ms": 3.37,
   "wind_max_ms": 6.02,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.733005
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3201,7 +3378,8 @@
   "rh_pct": 37.66,
   "wind_ms": 3.44,
   "wind_max_ms": 6.26,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.667918
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3219,7 +3397,8 @@
   "rh_pct": 39.27,
   "wind_ms": 3.19,
   "wind_max_ms": 5.96,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.212565
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3237,7 +3416,8 @@
   "rh_pct": 42.12,
   "wind_ms": 2.57,
   "wind_max_ms": 5.74,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.316665
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3255,7 +3435,8 @@
   "rh_pct": 54.32,
   "wind_ms": 3.13,
   "wind_max_ms": 6.2,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.721273
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3273,7 +3454,8 @@
   "rh_pct": 67.42,
   "wind_ms": 2.99,
   "wind_max_ms": 6.16,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.376724
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3291,7 +3473,8 @@
   "rh_pct": 74.57,
   "wind_ms": 1.36,
   "wind_max_ms": 3.65,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.666754
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3309,7 +3492,8 @@
   "rh_pct": 72.26,
   "wind_ms": 1.58,
   "wind_max_ms": 3.93,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 4.038963
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3327,7 +3511,8 @@
   "rh_pct": 66.52,
   "wind_ms": 1.06,
   "wind_max_ms": 2.88,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 5.841826
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3345,7 +3530,8 @@
   "rh_pct": 58.53,
   "wind_ms": 1.5,
   "wind_max_ms": 2.92,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 4.848629
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3363,7 +3549,8 @@
   "rh_pct": 65.31,
   "wind_ms": 1.52,
   "wind_max_ms": 4.45,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.563415
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3381,7 +3568,8 @@
   "rh_pct": 63.22,
   "wind_ms": 1.7,
   "wind_max_ms": 4.23,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.650747
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3399,7 +3587,8 @@
   "rh_pct": 60.7,
   "wind_ms": 2.32,
   "wind_max_ms": 4.79,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.530403
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3417,7 +3606,8 @@
   "rh_pct": 57.22,
   "wind_ms": 2.01,
   "wind_max_ms": 4.84,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 5.659883
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3435,7 +3625,8 @@
   "rh_pct": 53.6,
   "wind_ms": 1.46,
   "wind_max_ms": 4.12,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.104337
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3453,7 +3644,8 @@
   "rh_pct": 48.92,
   "wind_ms": 1.28,
   "wind_max_ms": 3.72,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.381248
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3471,7 +3663,8 @@
   "rh_pct": 51.82,
   "wind_ms": 1.94,
   "wind_max_ms": 3.99,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 5.755168
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3489,7 +3682,8 @@
   "rh_pct": 57.01,
   "wind_ms": 2.23,
   "wind_max_ms": 6.26,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 6.372113
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3507,7 +3701,8 @@
   "rh_pct": 70.08,
   "wind_ms": 2.01,
   "wind_max_ms": 6.09,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 4.643415
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3525,7 +3720,8 @@
   "rh_pct": 68.68,
   "wind_ms": 1.33,
   "wind_max_ms": 3.22,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 4.338157
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3543,7 +3739,8 @@
   "rh_pct": 64.34,
   "wind_ms": 1.93,
   "wind_max_ms": 4.64,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.670754
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3561,7 +3758,8 @@
   "rh_pct": 59.71,
   "wind_ms": 1.96,
   "wind_max_ms": 4.96,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 6.240435
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3579,7 +3777,8 @@
   "rh_pct": 44.62,
   "wind_ms": 2.71,
   "wind_max_ms": 5.57,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 6.156716
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3597,7 +3796,8 @@
   "rh_pct": 54.0,
   "wind_ms": 2.36,
   "wind_max_ms": 5.4,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.119199
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3615,7 +3815,8 @@
   "rh_pct": 51.41,
   "wind_ms": 2.25,
   "wind_max_ms": 5.01,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.767046
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3633,7 +3834,8 @@
   "rh_pct": 48.16,
   "wind_ms": 2.29,
   "wind_max_ms": 4.92,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.28811
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3651,7 +3853,8 @@
   "rh_pct": 55.13,
   "wind_ms": 1.6,
   "wind_max_ms": 4.2,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 5.418826
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3669,7 +3872,8 @@
   "rh_pct": 56.52,
   "wind_ms": 1.26,
   "wind_max_ms": 3.03,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 5.632754
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3687,7 +3891,8 @@
   "rh_pct": 54.19,
   "wind_ms": 1.71,
   "wind_max_ms": 3.9,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.367584
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3705,7 +3910,8 @@
   "rh_pct": 46.38,
   "wind_ms": 2.17,
   "wind_max_ms": 4.91,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.806448
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3723,7 +3929,8 @@
   "rh_pct": 46.69,
   "wind_ms": 2.21,
   "wind_max_ms": 6.31,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.678367
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3741,7 +3948,8 @@
   "rh_pct": 54.3,
   "wind_ms": 2.14,
   "wind_max_ms": 6.65,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.645636
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3759,7 +3967,8 @@
   "rh_pct": 46.24,
   "wind_ms": 3.28,
   "wind_max_ms": 7.52,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.877813
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3777,7 +3986,8 @@
   "rh_pct": 42.15,
   "wind_ms": 3.05,
   "wind_max_ms": 6.31,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.991165
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3795,7 +4005,8 @@
   "rh_pct": 36.81,
   "wind_ms": 2.7,
   "wind_max_ms": 6.17,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.816448
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3813,7 +4024,8 @@
   "rh_pct": 41.68,
   "wind_ms": 2.16,
   "wind_max_ms": 6.42,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.552768
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3831,7 +4043,8 @@
   "rh_pct": 43.02,
   "wind_ms": 2.6,
   "wind_max_ms": 6.34,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.53917
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3849,7 +4062,8 @@
   "rh_pct": 40.3,
   "wind_ms": 2.5,
   "wind_max_ms": 5.14,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.807896
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3867,7 +4081,8 @@
   "rh_pct": 40.36,
   "wind_ms": 1.99,
   "wind_max_ms": 5.14,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 7.113698
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3885,7 +4100,8 @@
   "rh_pct": 37.48,
   "wind_ms": 2.54,
   "wind_max_ms": 7.53,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 7.013436
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3903,7 +4119,8 @@
   "rh_pct": 38.98,
   "wind_ms": 3.28,
   "wind_max_ms": 8.23,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.729939
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3921,7 +4138,8 @@
   "rh_pct": 41.56,
   "wind_ms": 3.05,
   "wind_max_ms": 8.1,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.798243
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3939,7 +4157,8 @@
   "rh_pct": 37.69,
   "wind_ms": 3.11,
   "wind_max_ms": 6.01,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.878932
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3957,7 +4176,8 @@
   "rh_pct": 39.12,
   "wind_ms": 2.43,
   "wind_max_ms": 5.31,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.709553
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3975,7 +4195,8 @@
   "rh_pct": 39.23,
   "wind_ms": 2.12,
   "wind_max_ms": 5.41,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.731553
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -3993,7 +4214,8 @@
   "rh_pct": 40.6,
   "wind_ms": 2.35,
   "wind_max_ms": 6.03,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.678654
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4011,7 +4233,8 @@
   "rh_pct": 40.99,
   "wind_ms": 2.56,
   "wind_max_ms": 5.6,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.720558
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4029,7 +4252,8 @@
   "rh_pct": 42.69,
   "wind_ms": 2.75,
   "wind_max_ms": 6.32,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.559596
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4047,7 +4271,8 @@
   "rh_pct": 43.0,
   "wind_ms": 2.56,
   "wind_max_ms": 6.0,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.574657
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4065,7 +4290,8 @@
   "rh_pct": 38.77,
   "wind_ms": 2.72,
   "wind_max_ms": 6.22,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.635077
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4083,7 +4309,8 @@
   "rh_pct": 37.03,
   "wind_ms": 2.73,
   "wind_max_ms": 6.08,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 6.387552
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4101,7 +4328,8 @@
   "rh_pct": 41.59,
   "wind_ms": 2.39,
   "wind_max_ms": 5.91,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.367139
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4119,7 +4347,8 @@
   "rh_pct": 44.96,
   "wind_ms": 1.87,
   "wind_max_ms": 5.08,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.307408
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4137,7 +4366,8 @@
   "rh_pct": 38.45,
   "wind_ms": 3.03,
   "wind_max_ms": 6.16,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.563964
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4155,7 +4385,8 @@
   "rh_pct": 38.67,
   "wind_ms": 3.25,
   "wind_max_ms": 8.03,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.391325
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4173,7 +4404,8 @@
   "rh_pct": 43.87,
   "wind_ms": 2.69,
   "wind_max_ms": 7.64,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 5.424991
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4191,7 +4423,8 @@
   "rh_pct": 48.46,
   "wind_ms": 2.21,
   "wind_max_ms": 5.8,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.853032
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4209,7 +4442,8 @@
   "rh_pct": 46.13,
   "wind_ms": 2.62,
   "wind_max_ms": 6.0,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.954373
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4227,7 +4461,8 @@
   "rh_pct": 60.99,
   "wind_ms": 2.93,
   "wind_max_ms": 6.19,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.702655
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4245,7 +4480,8 @@
   "rh_pct": 66.23,
   "wind_ms": 2.1,
   "wind_max_ms": 5.94,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.572735
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4263,7 +4499,8 @@
   "rh_pct": 68.58,
   "wind_ms": 1.98,
   "wind_max_ms": 5.03,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 4.248186
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4281,7 +4518,8 @@
   "rh_pct": 66.23,
   "wind_ms": 1.72,
   "wind_max_ms": 3.9,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 4.783017
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4299,7 +4537,8 @@
   "rh_pct": 57.9,
   "wind_ms": 1.96,
   "wind_max_ms": 5.06,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.349379
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4317,7 +4556,8 @@
   "rh_pct": 50.41,
   "wind_ms": 2.11,
   "wind_max_ms": 4.67,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 5.988968
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4335,7 +4575,8 @@
   "rh_pct": 50.58,
   "wind_ms": 1.82,
   "wind_max_ms": 4.7,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.268423
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4353,7 +4594,8 @@
   "rh_pct": 48.81,
   "wind_ms": 2.13,
   "wind_max_ms": 4.45,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.257988
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4371,7 +4613,8 @@
   "rh_pct": 47.31,
   "wind_ms": 2.37,
   "wind_max_ms": 6.24,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.330562
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4389,7 +4632,8 @@
   "rh_pct": 50.01,
   "wind_ms": 2.7,
   "wind_max_ms": 5.76,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.775154
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4407,7 +4651,8 @@
   "rh_pct": 54.25,
   "wind_ms": 3.02,
   "wind_max_ms": 5.98,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.917488
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4425,7 +4670,8 @@
   "rh_pct": 59.95,
   "wind_ms": 2.2,
   "wind_max_ms": 5.21,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.434034
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4443,7 +4689,8 @@
   "rh_pct": 46.53,
   "wind_ms": 2.01,
   "wind_max_ms": 5.37,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.841368
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4461,7 +4708,8 @@
   "rh_pct": 48.18,
   "wind_ms": 1.14,
   "wind_max_ms": 2.74,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.074138
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4479,7 +4727,8 @@
   "rh_pct": 55.1,
   "wind_ms": 2.1,
   "wind_max_ms": 4.02,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.324263
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4497,7 +4746,8 @@
   "rh_pct": 65.39,
   "wind_ms": 1.77,
   "wind_max_ms": 5.24,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.627341
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4515,7 +4765,8 @@
   "rh_pct": 66.04,
   "wind_ms": 2.05,
   "wind_max_ms": 4.78,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 4.784858
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4533,7 +4784,8 @@
   "rh_pct": 62.53,
   "wind_ms": 2.2,
   "wind_max_ms": 5.88,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.488325
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4551,7 +4803,8 @@
   "rh_pct": 58.92,
   "wind_ms": 2.61,
   "wind_max_ms": 5.61,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.444253
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4569,7 +4822,8 @@
   "rh_pct": 58.58,
   "wind_ms": 2.76,
   "wind_max_ms": 5.6,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.444652
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4587,7 +4841,8 @@
   "rh_pct": 52.02,
   "wind_ms": 3.0,
   "wind_max_ms": 6.61,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.593156
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4605,7 +4860,8 @@
   "rh_pct": 48.13,
   "wind_ms": 3.2,
   "wind_max_ms": 6.9,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.237601
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4623,7 +4879,8 @@
   "rh_pct": 51.42,
   "wind_ms": 2.75,
   "wind_max_ms": 8.13,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.32617
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4641,7 +4898,8 @@
   "rh_pct": 71.06,
   "wind_ms": 2.41,
   "wind_max_ms": 8.45,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.35489
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4659,7 +4917,8 @@
   "rh_pct": 67.74,
   "wind_ms": 2.82,
   "wind_max_ms": 5.01,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 3.59879
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4677,7 +4936,8 @@
   "rh_pct": 63.6,
   "wind_ms": 2.37,
   "wind_max_ms": 4.73,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 4.428416
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4695,7 +4955,8 @@
   "rh_pct": 67.14,
   "wind_ms": 1.87,
   "wind_max_ms": 4.97,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 3.488002
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4713,7 +4974,8 @@
   "rh_pct": 65.87,
   "wind_ms": 0.94,
   "wind_max_ms": 3.26,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 4.897824
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4731,7 +4993,8 @@
   "rh_pct": 63.39,
   "wind_ms": 1.52,
   "wind_max_ms": 3.73,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 5.046248
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4749,7 +5012,8 @@
   "rh_pct": 57.75,
   "wind_ms": 1.62,
   "wind_max_ms": 3.73,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 5.42802
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4767,7 +5031,8 @@
   "rh_pct": 53.14,
   "wind_ms": 1.72,
   "wind_max_ms": 3.33,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.644532
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4785,7 +5050,8 @@
   "rh_pct": 50.9,
   "wind_ms": 1.88,
   "wind_max_ms": 3.77,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.743758
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4803,7 +5069,8 @@
   "rh_pct": 49.83,
   "wind_ms": 2.1,
   "wind_max_ms": 5.64,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.637245
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4821,7 +5088,8 @@
   "rh_pct": 57.9,
   "wind_ms": 2.26,
   "wind_max_ms": 4.69,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.004447
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4839,7 +5107,8 @@
   "rh_pct": 61.19,
   "wind_ms": 1.38,
   "wind_max_ms": 3.07,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.759262
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4857,7 +5126,8 @@
   "rh_pct": 58.47,
   "wind_ms": 1.13,
   "wind_max_ms": 2.96,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.040099
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4875,7 +5145,8 @@
   "rh_pct": 59.58,
   "wind_ms": 1.28,
   "wind_max_ms": 4.17,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.57077
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4893,7 +5164,8 @@
   "rh_pct": 50.17,
   "wind_ms": 1.82,
   "wind_max_ms": 3.99,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.527884
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4911,7 +5183,8 @@
   "rh_pct": 48.74,
   "wind_ms": 2.0,
   "wind_max_ms": 4.39,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.019422
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4929,7 +5202,8 @@
   "rh_pct": 45.85,
   "wind_ms": 1.89,
   "wind_max_ms": 4.65,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.025713
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4947,7 +5221,8 @@
   "rh_pct": 44.46,
   "wind_ms": 2.41,
   "wind_max_ms": 4.91,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.068914
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4965,7 +5240,8 @@
   "rh_pct": 45.79,
   "wind_ms": 2.21,
   "wind_max_ms": 4.99,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.822339
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -4983,7 +5259,8 @@
   "rh_pct": 47.13,
   "wind_ms": 1.76,
   "wind_max_ms": 4.43,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.901435
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5001,7 +5278,8 @@
   "rh_pct": 47.12,
   "wind_ms": 1.81,
   "wind_max_ms": 3.75,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.161941
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5019,7 +5297,8 @@
   "rh_pct": 48.73,
   "wind_ms": 2.66,
   "wind_max_ms": 6.0,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.322546
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5037,7 +5316,8 @@
   "rh_pct": 48.73,
   "wind_ms": 2.86,
   "wind_max_ms": 6.19,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.62534
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5055,7 +5335,8 @@
   "rh_pct": 56.23,
   "wind_ms": 3.62,
   "wind_max_ms": 8.01,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.356077
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5073,7 +5354,8 @@
   "rh_pct": 66.16,
   "wind_ms": 4.31,
   "wind_max_ms": 9.69,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.286471
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5091,7 +5373,8 @@
   "rh_pct": 66.19,
   "wind_ms": 3.88,
   "wind_max_ms": 8.77,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.38815
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5109,7 +5392,8 @@
   "rh_pct": 63.69,
   "wind_ms": 2.52,
   "wind_max_ms": 7.02,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.522474
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5127,7 +5411,8 @@
   "rh_pct": 55.04,
   "wind_ms": 1.42,
   "wind_max_ms": 4.18,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.873749
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5145,7 +5430,8 @@
   "rh_pct": 53.17,
   "wind_ms": 1.21,
   "wind_max_ms": 3.52,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.705424
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5163,7 +5449,8 @@
   "rh_pct": 59.59,
   "wind_ms": 2.62,
   "wind_max_ms": 6.32,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.671202
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5181,7 +5468,8 @@
   "rh_pct": 44.28,
   "wind_ms": 2.61,
   "wind_max_ms": 6.03,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.794177
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5199,7 +5487,8 @@
   "rh_pct": 46.9,
   "wind_ms": 1.5,
   "wind_max_ms": 4.06,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.94233
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5217,7 +5506,8 @@
   "rh_pct": 45.98,
   "wind_ms": 1.29,
   "wind_max_ms": 3.29,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.638512
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5235,7 +5525,8 @@
   "rh_pct": 42.53,
   "wind_ms": 1.84,
   "wind_max_ms": 4.75,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.534954
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5253,7 +5544,8 @@
   "rh_pct": 42.28,
   "wind_ms": 2.18,
   "wind_max_ms": 5.53,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.604376
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5271,7 +5563,8 @@
   "rh_pct": 45.69,
   "wind_ms": 1.98,
   "wind_max_ms": 5.36,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.681748
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5289,7 +5582,8 @@
   "rh_pct": 29.36,
   "wind_ms": 1.76,
   "wind_max_ms": 4.31,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.68348
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5307,7 +5601,8 @@
   "rh_pct": 42.53,
   "wind_ms": 1.97,
   "wind_max_ms": 5.05,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.643501
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5325,7 +5620,8 @@
   "rh_pct": 35.31,
   "wind_ms": 1.62,
   "wind_max_ms": 3.91,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.725643
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5343,7 +5639,8 @@
   "rh_pct": 34.91,
   "wind_ms": 1.46,
   "wind_max_ms": 3.32,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.476922
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5361,7 +5658,8 @@
   "rh_pct": 40.69,
   "wind_ms": 2.14,
   "wind_max_ms": 5.25,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.930205
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5379,7 +5677,8 @@
   "rh_pct": 25.72,
   "wind_ms": 1.0,
   "wind_max_ms": 2.87,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.151563
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5397,7 +5696,8 @@
   "rh_pct": 27.19,
   "wind_ms": 1.25,
   "wind_max_ms": 2.67,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.511709
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5415,7 +5715,8 @@
   "rh_pct": 22.38,
   "wind_ms": 1.83,
   "wind_max_ms": 4.44,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.556309
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5433,7 +5734,8 @@
   "rh_pct": 37.66,
   "wind_ms": 3.36,
   "wind_max_ms": 6.7,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.354795
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5451,7 +5753,8 @@
   "rh_pct": 30.88,
   "wind_ms": 1.37,
   "wind_max_ms": 2.9,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.913409
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5469,7 +5772,8 @@
   "rh_pct": 31.49,
   "wind_ms": 1.16,
   "wind_max_ms": 3.26,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.083799
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5487,7 +5791,8 @@
   "rh_pct": 33.05,
   "wind_ms": 2.33,
   "wind_max_ms": 5.03,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.04667
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5505,7 +5810,8 @@
   "rh_pct": 28.33,
   "wind_ms": 1.9,
   "wind_max_ms": 5.91,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.434717
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5523,7 +5829,8 @@
   "rh_pct": 24.06,
   "wind_ms": 1.41,
   "wind_max_ms": 3.15,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.741335
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5541,7 +5848,8 @@
   "rh_pct": 22.91,
   "wind_ms": 1.19,
   "wind_max_ms": 2.88,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.002695
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5559,7 +5867,8 @@
   "rh_pct": 27.17,
   "wind_ms": 1.76,
   "wind_max_ms": 4.14,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.085299
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5577,7 +5886,8 @@
   "rh_pct": 17.56,
   "wind_ms": 1.12,
   "wind_max_ms": 2.9,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.180667
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5595,7 +5905,8 @@
   "rh_pct": 19.65,
   "wind_ms": 1.68,
   "wind_max_ms": 3.91,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.202339
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5613,7 +5924,8 @@
   "rh_pct": 15.65,
   "wind_ms": 1.52,
   "wind_max_ms": 3.39,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 4.169489
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5631,7 +5943,8 @@
   "rh_pct": 24.4,
   "wind_ms": 3.19,
   "wind_max_ms": 9.13,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.911237
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5649,7 +5962,8 @@
   "rh_pct": 38.42,
   "wind_ms": 2.97,
   "wind_max_ms": 6.65,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.38246
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5667,7 +5981,8 @@
   "rh_pct": 34.88,
   "wind_ms": 1.56,
   "wind_max_ms": 6.17,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.777647
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5685,7 +6000,8 @@
   "rh_pct": 29.8,
   "wind_ms": 1.46,
   "wind_max_ms": 3.2,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.62614
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5703,7 +6019,8 @@
   "rh_pct": 25.12,
   "wind_ms": 1.47,
   "wind_max_ms": 2.87,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.856221
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5721,7 +6038,8 @@
   "rh_pct": 24.92,
   "wind_ms": 1.44,
   "wind_max_ms": 3.31,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.76204
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5739,7 +6057,8 @@
   "rh_pct": 25.4,
   "wind_ms": 1.29,
   "wind_max_ms": 3.05,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.914623
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5757,7 +6076,8 @@
   "rh_pct": 29.43,
   "wind_ms": 1.87,
   "wind_max_ms": 3.72,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.727336
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5775,7 +6095,8 @@
   "rh_pct": 31.11,
   "wind_ms": 1.41,
   "wind_max_ms": 3.36,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.579716
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5793,7 +6114,8 @@
   "rh_pct": 35.57,
   "wind_ms": 1.39,
   "wind_max_ms": 3.83,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.599014
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5811,7 +6133,8 @@
   "rh_pct": 38.1,
   "wind_ms": 1.39,
   "wind_max_ms": 3.31,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.470236
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5829,7 +6152,8 @@
   "rh_pct": 41.57,
   "wind_ms": 1.51,
   "wind_max_ms": 4.17,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.609775
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5847,7 +6171,8 @@
   "rh_pct": 42.71,
   "wind_ms": 1.34,
   "wind_max_ms": 3.86,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.519375
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5865,7 +6190,8 @@
   "rh_pct": 39.39,
   "wind_ms": 1.15,
   "wind_max_ms": 3.96,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.417942
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5883,7 +6209,8 @@
   "rh_pct": 43.88,
   "wind_ms": 1.69,
   "wind_max_ms": 4.45,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.771663
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5901,7 +6228,8 @@
   "rh_pct": 41.43,
   "wind_ms": 1.65,
   "wind_max_ms": 4.27,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.495822
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5919,7 +6247,8 @@
   "rh_pct": 32.61,
   "wind_ms": 1.3,
   "wind_max_ms": 3.73,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.311782
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5937,7 +6266,8 @@
   "rh_pct": 45.36,
   "wind_ms": 1.87,
   "wind_max_ms": 6.48,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.904865
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5955,7 +6285,8 @@
   "rh_pct": 67.49,
   "wind_ms": 1.66,
   "wind_max_ms": 6.76,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.168848
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5973,7 +6304,8 @@
   "rh_pct": 54.06,
   "wind_ms": 2.41,
   "wind_max_ms": 6.72,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.096725
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -5991,7 +6323,8 @@
   "rh_pct": 42.08,
   "wind_ms": 1.91,
   "wind_max_ms": 4.86,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.277937
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6009,7 +6342,8 @@
   "rh_pct": 26.21,
   "wind_ms": 0.98,
   "wind_max_ms": 2.52,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.606262
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6027,7 +6361,8 @@
   "rh_pct": 51.59,
   "wind_ms": 1.94,
   "wind_max_ms": 5.31,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.866896
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6045,7 +6380,8 @@
   "rh_pct": 47.11,
   "wind_ms": 0.99,
   "wind_max_ms": 2.75,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.807382
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6063,7 +6399,8 @@
   "rh_pct": 49.52,
   "wind_ms": 1.83,
   "wind_max_ms": 4.46,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.101369
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6081,7 +6418,8 @@
   "rh_pct": 56.05,
   "wind_ms": 1.32,
   "wind_max_ms": 3.93,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.173867
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6099,7 +6437,8 @@
   "rh_pct": 58.21,
   "wind_ms": 1.99,
   "wind_max_ms": 5.61,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.593726
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6117,7 +6456,8 @@
   "rh_pct": 66.91,
   "wind_ms": 1.39,
   "wind_max_ms": 2.78,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 2.844969
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6135,7 +6475,8 @@
   "rh_pct": 48.6,
   "wind_ms": 1.94,
   "wind_max_ms": 3.97,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 2.786913
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6153,7 +6494,8 @@
   "rh_pct": 38.76,
   "wind_ms": 1.65,
   "wind_max_ms": 3.87,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 2.681399
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6171,7 +6513,8 @@
   "rh_pct": 40.49,
   "wind_ms": 1.13,
   "wind_max_ms": 2.86,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 2.784312
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6189,7 +6532,8 @@
   "rh_pct": 42.45,
   "wind_ms": 1.61,
   "wind_max_ms": 3.59,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 2.934563
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6207,7 +6551,8 @@
   "rh_pct": 31.56,
   "wind_ms": 1.14,
   "wind_max_ms": 2.9,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 2.989776
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6225,7 +6570,8 @@
   "rh_pct": 35.27,
   "wind_ms": 1.95,
   "wind_max_ms": 5.03,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.239783
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6243,7 +6589,8 @@
   "rh_pct": 29.25,
   "wind_ms": 1.44,
   "wind_max_ms": 3.68,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.114914
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6261,7 +6608,8 @@
   "rh_pct": 39.2,
   "wind_ms": 2.7,
   "wind_max_ms": 8.59,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.798808
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6279,7 +6627,8 @@
   "rh_pct": 72.07,
   "wind_ms": 2.62,
   "wind_max_ms": 9.15,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.587825
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6297,7 +6646,8 @@
   "rh_pct": 58.88,
   "wind_ms": 1.42,
   "wind_max_ms": 3.13,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.811364
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6315,7 +6665,8 @@
   "rh_pct": 44.61,
   "wind_ms": 1.85,
   "wind_max_ms": 4.2,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.922827
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6333,7 +6684,8 @@
   "rh_pct": 36.88,
   "wind_ms": 2.02,
   "wind_max_ms": 4.44,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.1247
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6351,7 +6703,8 @@
   "rh_pct": 26.89,
   "wind_ms": 1.24,
   "wind_max_ms": 3.16,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.344941
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6369,7 +6722,8 @@
   "rh_pct": 26.39,
   "wind_ms": 1.94,
   "wind_max_ms": 4.33,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.213913
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6387,7 +6741,8 @@
   "rh_pct": 23.11,
   "wind_ms": 1.58,
   "wind_max_ms": 3.4,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.260853
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6405,7 +6760,8 @@
   "rh_pct": 30.77,
   "wind_ms": 1.74,
   "wind_max_ms": 4.63,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.248016
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6423,7 +6779,8 @@
   "rh_pct": 47.94,
   "wind_ms": 1.49,
   "wind_max_ms": 3.36,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.130625
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6441,7 +6798,8 @@
   "rh_pct": 53.28,
   "wind_ms": 1.51,
   "wind_max_ms": 3.41,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.192009
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6459,7 +6817,8 @@
   "rh_pct": 51.72,
   "wind_ms": 1.55,
   "wind_max_ms": 3.55,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.234025
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6477,7 +6836,8 @@
   "rh_pct": 38.59,
   "wind_ms": 1.42,
   "wind_max_ms": 3.29,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.07865
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6495,7 +6855,8 @@
   "rh_pct": 36.75,
   "wind_ms": 1.38,
   "wind_max_ms": 2.91,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.341341
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6513,7 +6874,8 @@
   "rh_pct": 37.05,
   "wind_ms": 1.69,
   "wind_max_ms": 3.3,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 3.242036
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6531,7 +6893,8 @@
   "rh_pct": 55.36,
   "wind_ms": 3.44,
   "wind_max_ms": 9.79,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.330981
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6549,7 +6912,8 @@
   "rh_pct": 38.85,
   "wind_ms": 2.49,
   "wind_max_ms": 6.55,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 1.977945
  },
  {
   "cell_id": "E9_r0461_c0822",
@@ -6567,7 +6931,8 @@
   "rh_pct": 45.57,
   "wind_ms": 1.09,
   "wind_max_ms": 3.2,
-  "gwetroot_frac": 0.44
+  "gwetroot_frac": 0.44,
+  "et0_mm": 2.896332
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6585,7 +6950,8 @@
   "rh_pct": 35.93,
   "wind_ms": 2.6,
   "wind_max_ms": 5.53,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.655234
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6603,7 +6969,8 @@
   "rh_pct": 64.51,
   "wind_ms": 2.8,
   "wind_max_ms": 5.48,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.720763
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6621,7 +6988,8 @@
   "rh_pct": 63.29,
   "wind_ms": 1.95,
   "wind_max_ms": 4.08,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.773809
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6639,7 +7007,8 @@
   "rh_pct": 62.96,
   "wind_ms": 3.09,
   "wind_max_ms": 7.53,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.843026
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6657,7 +7026,8 @@
   "rh_pct": 34.69,
   "wind_ms": 2.62,
   "wind_max_ms": 6.41,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.759932
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6675,7 +7045,8 @@
   "rh_pct": 29.1,
   "wind_ms": 1.92,
   "wind_max_ms": 5.67,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.741164
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6693,7 +7064,8 @@
   "rh_pct": 52.81,
   "wind_ms": 2.38,
   "wind_max_ms": 5.84,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.252718
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6711,7 +7083,8 @@
   "rh_pct": 60.46,
   "wind_ms": 2.66,
   "wind_max_ms": 5.31,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.326494
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6729,7 +7102,8 @@
   "rh_pct": 67.4,
   "wind_ms": 5.06,
   "wind_max_ms": 13.05,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.635488
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6747,7 +7121,8 @@
   "rh_pct": 54.21,
   "wind_ms": 3.77,
   "wind_max_ms": 7.09,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.128351
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6765,7 +7140,8 @@
   "rh_pct": 56.39,
   "wind_ms": 2.9,
   "wind_max_ms": 7.26,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.17737
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6783,7 +7159,8 @@
   "rh_pct": 64.35,
   "wind_ms": 2.77,
   "wind_max_ms": 6.34,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.049438
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6801,7 +7178,8 @@
   "rh_pct": 52.13,
   "wind_ms": 1.34,
   "wind_max_ms": 4.15,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.252329
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6819,7 +7197,8 @@
   "rh_pct": 57.7,
   "wind_ms": 2.44,
   "wind_max_ms": 5.55,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.255247
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6837,7 +7216,8 @@
   "rh_pct": 53.14,
   "wind_ms": 1.84,
   "wind_max_ms": 5.71,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.664565
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6855,7 +7235,8 @@
   "rh_pct": 58.46,
   "wind_ms": 1.99,
   "wind_max_ms": 5.67,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.784928
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6873,7 +7254,8 @@
   "rh_pct": 46.11,
   "wind_ms": 3.34,
   "wind_max_ms": 8.6,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.7921
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6891,7 +7273,8 @@
   "rh_pct": 42.71,
   "wind_ms": 3.26,
   "wind_max_ms": 9.06,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.472479
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6909,7 +7292,8 @@
   "rh_pct": 35.67,
   "wind_ms": 1.96,
   "wind_max_ms": 5.84,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.48161
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6927,7 +7311,8 @@
   "rh_pct": 46.92,
   "wind_ms": 2.36,
   "wind_max_ms": 5.84,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.397364
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6945,7 +7330,8 @@
   "rh_pct": 57.05,
   "wind_ms": 3.31,
   "wind_max_ms": 6.72,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 1.479159
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6963,7 +7349,8 @@
   "rh_pct": 45.89,
   "wind_ms": 1.83,
   "wind_max_ms": 5.32,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.160934
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6981,7 +7368,8 @@
   "rh_pct": 29.67,
   "wind_ms": 2.02,
   "wind_max_ms": 6.98,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.327685
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -6999,7 +7387,8 @@
   "rh_pct": 38.84,
   "wind_ms": 1.73,
   "wind_max_ms": 6.08,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.439858
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7017,7 +7406,8 @@
   "rh_pct": 43.07,
   "wind_ms": 3.92,
   "wind_max_ms": 7.38,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.069967
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7035,7 +7425,8 @@
   "rh_pct": 36.69,
   "wind_ms": 2.3,
   "wind_max_ms": 5.04,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.152932
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7053,7 +7444,8 @@
   "rh_pct": 46.63,
   "wind_ms": 2.03,
   "wind_max_ms": 4.92,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.171172
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7071,7 +7463,8 @@
   "rh_pct": 52.86,
   "wind_ms": 2.74,
   "wind_max_ms": 5.33,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.990774
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7089,7 +7482,8 @@
   "rh_pct": 26.8,
   "wind_ms": 2.75,
   "wind_max_ms": 6.79,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.49273
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7107,7 +7501,8 @@
   "rh_pct": 31.69,
   "wind_ms": 2.61,
   "wind_max_ms": 7.73,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.029014
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7125,7 +7520,8 @@
   "rh_pct": 16.13,
   "wind_ms": 1.68,
   "wind_max_ms": 5.81,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.877629
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7143,7 +7539,8 @@
   "rh_pct": 30.18,
   "wind_ms": 2.15,
   "wind_max_ms": 5.18,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.157495
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7161,7 +7558,8 @@
   "rh_pct": 38.57,
   "wind_ms": 1.88,
   "wind_max_ms": 3.66,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.426023
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7179,7 +7577,8 @@
   "rh_pct": 37.72,
   "wind_ms": 2.07,
   "wind_max_ms": 5.47,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.609273
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7197,7 +7596,8 @@
   "rh_pct": 59.98,
   "wind_ms": 2.07,
   "wind_max_ms": 5.54,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.467121
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7215,7 +7615,8 @@
   "rh_pct": 56.17,
   "wind_ms": 3.09,
   "wind_max_ms": 5.83,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.519115
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7233,7 +7634,8 @@
   "rh_pct": 34.51,
   "wind_ms": 1.94,
   "wind_max_ms": 5.12,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.728157
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7251,7 +7653,8 @@
   "rh_pct": 47.67,
   "wind_ms": 2.14,
   "wind_max_ms": 5.71,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.949534
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7269,7 +7672,8 @@
   "rh_pct": 51.0,
   "wind_ms": 2.05,
   "wind_max_ms": 4.24,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.915315
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7287,7 +7691,8 @@
   "rh_pct": 42.9,
   "wind_ms": 2.14,
   "wind_max_ms": 4.35,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.880648
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7305,7 +7710,8 @@
   "rh_pct": 54.85,
   "wind_ms": 2.16,
   "wind_max_ms": 4.54,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.973338
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7323,7 +7729,8 @@
   "rh_pct": 46.04,
   "wind_ms": 3.37,
   "wind_max_ms": 7.63,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.517583
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7341,7 +7748,8 @@
   "rh_pct": 31.47,
   "wind_ms": 4.67,
   "wind_max_ms": 11.21,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.320865
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7359,7 +7767,8 @@
   "rh_pct": 26.14,
   "wind_ms": 1.71,
   "wind_max_ms": 6.45,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.565733
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7377,7 +7786,8 @@
   "rh_pct": 58.49,
   "wind_ms": 3.97,
   "wind_max_ms": 8.07,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.907829
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7395,7 +7805,8 @@
   "rh_pct": 25.13,
   "wind_ms": 3.86,
   "wind_max_ms": 10.56,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.35163
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7413,7 +7824,8 @@
   "rh_pct": 29.65,
   "wind_ms": 2.3,
   "wind_max_ms": 8.06,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.811643
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7431,7 +7843,8 @@
   "rh_pct": 34.87,
   "wind_ms": 3.96,
   "wind_max_ms": 8.09,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.79652
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7449,7 +7862,8 @@
   "rh_pct": 21.28,
   "wind_ms": 3.05,
   "wind_max_ms": 6.81,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.057422
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7467,7 +7881,8 @@
   "rh_pct": 29.43,
   "wind_ms": 2.03,
   "wind_max_ms": 6.01,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.502879
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7485,7 +7900,8 @@
   "rh_pct": 53.63,
   "wind_ms": 2.77,
   "wind_max_ms": 6.57,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.372644
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7503,7 +7919,8 @@
   "rh_pct": 44.67,
   "wind_ms": 2.56,
   "wind_max_ms": 6.56,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.316043
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7521,7 +7938,8 @@
   "rh_pct": 39.54,
   "wind_ms": 2.54,
   "wind_max_ms": 6.08,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.789023
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7539,7 +7957,8 @@
   "rh_pct": 30.62,
   "wind_ms": 2.67,
   "wind_max_ms": 6.99,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.427224
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7557,7 +7976,8 @@
   "rh_pct": 13.55,
   "wind_ms": 2.08,
   "wind_max_ms": 4.77,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.873407
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7575,7 +7995,8 @@
   "rh_pct": 7.21,
   "wind_ms": 1.79,
   "wind_max_ms": 3.72,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.492391
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7593,7 +8014,8 @@
   "rh_pct": 11.66,
   "wind_ms": 3.14,
   "wind_max_ms": 6.75,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.154352
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7611,7 +8033,8 @@
   "rh_pct": 20.28,
   "wind_ms": 2.63,
   "wind_max_ms": 9.79,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.434277
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7629,7 +8052,8 @@
   "rh_pct": 66.93,
   "wind_ms": 2.77,
   "wind_max_ms": 8.91,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.574692
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7647,7 +8071,8 @@
   "rh_pct": 49.97,
   "wind_ms": 1.71,
   "wind_max_ms": 4.12,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.073379
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7665,7 +8090,8 @@
   "rh_pct": 48.74,
   "wind_ms": 3.66,
   "wind_max_ms": 6.61,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.49943
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7683,7 +8109,8 @@
   "rh_pct": 22.83,
   "wind_ms": 2.91,
   "wind_max_ms": 6.79,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.79996
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7701,7 +8128,8 @@
   "rh_pct": 13.77,
   "wind_ms": 5.38,
   "wind_max_ms": 12.93,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.544068
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7719,7 +8147,8 @@
   "rh_pct": 6.81,
   "wind_ms": 1.9,
   "wind_max_ms": 6.5,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.098375
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7737,7 +8166,8 @@
   "rh_pct": 18.36,
   "wind_ms": 4.54,
   "wind_max_ms": 9.04,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.616682
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7755,7 +8185,8 @@
   "rh_pct": 12.64,
   "wind_ms": 3.56,
   "wind_max_ms": 8.18,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.60477
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7773,7 +8204,8 @@
   "rh_pct": 17.84,
   "wind_ms": 4.85,
   "wind_max_ms": 12.87,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.781389
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7791,7 +8223,8 @@
   "rh_pct": 24.35,
   "wind_ms": 2.85,
   "wind_max_ms": 6.41,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.458529
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7809,7 +8242,8 @@
   "rh_pct": 20.28,
   "wind_ms": 1.83,
   "wind_max_ms": 3.86,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.068042
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7827,7 +8261,8 @@
   "rh_pct": 14.03,
   "wind_ms": 2.87,
   "wind_max_ms": 6.18,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.628426
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7845,7 +8280,8 @@
   "rh_pct": 12.9,
   "wind_ms": 3.86,
   "wind_max_ms": 9.85,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.700181
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7863,7 +8299,8 @@
   "rh_pct": 11.53,
   "wind_ms": 2.22,
   "wind_max_ms": 5.49,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.007446
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7881,7 +8318,8 @@
   "rh_pct": 14.77,
   "wind_ms": 5.13,
   "wind_max_ms": 11.09,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.536368
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7899,7 +8337,8 @@
   "rh_pct": 12.87,
   "wind_ms": 5.72,
   "wind_max_ms": 11.62,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.062079
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7917,7 +8356,8 @@
   "rh_pct": 16.8,
   "wind_ms": 1.93,
   "wind_max_ms": 4.47,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.799257
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7935,7 +8375,8 @@
   "rh_pct": 23.04,
   "wind_ms": 2.14,
   "wind_max_ms": 5.66,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.01258
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7953,7 +8394,8 @@
   "rh_pct": 21.23,
   "wind_ms": 4.4,
   "wind_max_ms": 8.41,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.116516
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7971,7 +8413,8 @@
   "rh_pct": 11.68,
   "wind_ms": 2.59,
   "wind_max_ms": 5.84,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.595435
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -7989,7 +8432,8 @@
   "rh_pct": 15.67,
   "wind_ms": 3.21,
   "wind_max_ms": 6.3,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.453452
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8007,7 +8451,8 @@
   "rh_pct": 22.94,
   "wind_ms": 3.81,
   "wind_max_ms": 7.51,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.76887
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8025,7 +8470,8 @@
   "rh_pct": 29.06,
   "wind_ms": 2.12,
   "wind_max_ms": 4.76,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.172996
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8043,7 +8489,8 @@
   "rh_pct": 26.82,
   "wind_ms": 2.79,
   "wind_max_ms": 6.18,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.835235
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8061,7 +8508,8 @@
   "rh_pct": 15.89,
   "wind_ms": 2.06,
   "wind_max_ms": 7.16,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.539678
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8079,7 +8527,8 @@
   "rh_pct": 59.01,
   "wind_ms": 2.67,
   "wind_max_ms": 7.26,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.19701
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8097,7 +8546,8 @@
   "rh_pct": 50.52,
   "wind_ms": 3.63,
   "wind_max_ms": 6.86,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.629796
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8115,7 +8565,8 @@
   "rh_pct": 56.14,
   "wind_ms": 3.1,
   "wind_max_ms": 7.19,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.543481
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8133,7 +8584,8 @@
   "rh_pct": 59.45,
   "wind_ms": 3.17,
   "wind_max_ms": 6.38,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.863349
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8151,7 +8603,8 @@
   "rh_pct": 35.12,
   "wind_ms": 2.33,
   "wind_max_ms": 5.96,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.661721
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8169,7 +8622,8 @@
   "rh_pct": 20.86,
   "wind_ms": 3.08,
   "wind_max_ms": 6.24,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.372601
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8187,7 +8641,8 @@
   "rh_pct": 17.84,
   "wind_ms": 1.91,
   "wind_max_ms": 4.84,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.851894
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8205,7 +8660,8 @@
   "rh_pct": 48.39,
   "wind_ms": 3.86,
   "wind_max_ms": 6.47,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.717247
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8223,7 +8679,8 @@
   "rh_pct": 14.03,
   "wind_ms": 4.21,
   "wind_max_ms": 9.79,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.149166
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8241,7 +8698,8 @@
   "rh_pct": 17.09,
   "wind_ms": 4.42,
   "wind_max_ms": 9.54,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.057737
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8259,7 +8717,8 @@
   "rh_pct": 13.55,
   "wind_ms": 3.91,
   "wind_max_ms": 8.71,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.165967
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8277,7 +8736,8 @@
   "rh_pct": 26.47,
   "wind_ms": 3.92,
   "wind_max_ms": 8.98,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.247809
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8295,7 +8755,8 @@
   "rh_pct": 48.2,
   "wind_ms": 4.58,
   "wind_max_ms": 9.1,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.35728
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8313,7 +8774,8 @@
   "rh_pct": 31.46,
   "wind_ms": 2.38,
   "wind_max_ms": 6.85,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 3.860208
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8331,7 +8793,8 @@
   "rh_pct": 19.52,
   "wind_ms": 2.1,
   "wind_max_ms": 4.94,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 4.381976
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8349,7 +8812,8 @@
   "rh_pct": 22.51,
   "wind_ms": 2.36,
   "wind_max_ms": 5.28,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.440946
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8367,7 +8831,8 @@
   "rh_pct": 16.87,
   "wind_ms": 2.68,
   "wind_max_ms": 6.81,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.68192
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8385,7 +8850,8 @@
   "rh_pct": 21.51,
   "wind_ms": 3.49,
   "wind_max_ms": 8.49,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.620878
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8403,7 +8869,8 @@
   "rh_pct": 30.01,
   "wind_ms": 3.34,
   "wind_max_ms": 6.71,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.877628
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8421,7 +8888,8 @@
   "rh_pct": 20.09,
   "wind_ms": 3.57,
   "wind_max_ms": 7.32,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.087753
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8439,7 +8907,8 @@
   "rh_pct": 19.09,
   "wind_ms": 3.19,
   "wind_max_ms": 7.96,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.290041
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8457,7 +8926,8 @@
   "rh_pct": 22.21,
   "wind_ms": 3.54,
   "wind_max_ms": 9.67,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.644584
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8475,7 +8945,8 @@
   "rh_pct": 27.57,
   "wind_ms": 3.55,
   "wind_max_ms": 8.4,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.237225
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8493,7 +8964,8 @@
   "rh_pct": 17.67,
   "wind_ms": 2.69,
   "wind_max_ms": 5.94,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.694846
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8511,7 +8983,8 @@
   "rh_pct": 17.71,
   "wind_ms": 2.56,
   "wind_max_ms": 5.04,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.918988
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8529,7 +9002,8 @@
   "rh_pct": 30.22,
   "wind_ms": 1.96,
   "wind_max_ms": 4.34,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.937374
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8547,7 +9021,8 @@
   "rh_pct": 41.39,
   "wind_ms": 3.22,
   "wind_max_ms": 8.41,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.23432
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8565,7 +9040,8 @@
   "rh_pct": 37.16,
   "wind_ms": 2.61,
   "wind_max_ms": 7.83,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.904191
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8583,7 +9059,8 @@
   "rh_pct": 52.58,
   "wind_ms": 3.35,
   "wind_max_ms": 8.65,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.090622
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8601,7 +9078,8 @@
   "rh_pct": 41.11,
   "wind_ms": 3.26,
   "wind_max_ms": 7.14,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.989018
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8619,7 +9097,8 @@
   "rh_pct": 46.8,
   "wind_ms": 3.29,
   "wind_max_ms": 7.4,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 5.429706
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8637,7 +9116,8 @@
   "rh_pct": 50.38,
   "wind_ms": 2.5,
   "wind_max_ms": 8.72,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.391316
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8655,7 +9135,8 @@
   "rh_pct": 55.66,
   "wind_ms": 3.03,
   "wind_max_ms": 9.23,
-  "gwetroot_frac": 0.45
+  "gwetroot_frac": 0.45,
+  "et0_mm": 6.074747
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8673,7 +9154,8 @@
   "rh_pct": 45.86,
   "wind_ms": 2.92,
   "wind_max_ms": 6.89,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.646272
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8691,7 +9173,8 @@
   "rh_pct": 36.14,
   "wind_ms": 3.45,
   "wind_max_ms": 9.36,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.442112
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8709,7 +9192,8 @@
   "rh_pct": 33.84,
   "wind_ms": 2.93,
   "wind_max_ms": 6.02,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.738736
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8727,7 +9211,8 @@
   "rh_pct": 46.16,
   "wind_ms": 3.31,
   "wind_max_ms": 6.12,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.330827
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8745,7 +9230,8 @@
   "rh_pct": 35.46,
   "wind_ms": 1.81,
   "wind_max_ms": 4.86,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.865252
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8763,7 +9249,8 @@
   "rh_pct": 51.9,
   "wind_ms": 3.28,
   "wind_max_ms": 6.17,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.642118
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8781,7 +9268,8 @@
   "rh_pct": 54.71,
   "wind_ms": 2.43,
   "wind_max_ms": 7.5,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.65886
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8799,7 +9287,8 @@
   "rh_pct": 53.12,
   "wind_ms": 3.51,
   "wind_max_ms": 8.15,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.832403
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8817,7 +9306,8 @@
   "rh_pct": 46.37,
   "wind_ms": 3.71,
   "wind_max_ms": 7.95,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.828574
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8835,7 +9325,8 @@
   "rh_pct": 19.43,
   "wind_ms": 4.06,
   "wind_max_ms": 8.49,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.559507
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8853,7 +9344,8 @@
   "rh_pct": 21.15,
   "wind_ms": 2.24,
   "wind_max_ms": 6.3,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.030762
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8871,7 +9363,8 @@
   "rh_pct": 47.47,
   "wind_ms": 3.15,
   "wind_max_ms": 6.28,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.162414
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8889,7 +9382,8 @@
   "rh_pct": 60.2,
   "wind_ms": 4.68,
   "wind_max_ms": 9.52,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.345378
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8907,7 +9401,8 @@
   "rh_pct": 54.74,
   "wind_ms": 2.99,
   "wind_max_ms": 6.64,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 4.55489
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8925,7 +9420,8 @@
   "rh_pct": 41.77,
   "wind_ms": 2.24,
   "wind_max_ms": 5.98,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 5.23148
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8943,7 +9439,8 @@
   "rh_pct": 29.52,
   "wind_ms": 2.56,
   "wind_max_ms": 5.4,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.397304
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8961,7 +9458,8 @@
   "rh_pct": 20.88,
   "wind_ms": 2.78,
   "wind_max_ms": 6.03,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.739583
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8979,7 +9477,8 @@
   "rh_pct": 25.94,
   "wind_ms": 3.54,
   "wind_max_ms": 8.0,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.867481
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -8997,7 +9496,8 @@
   "rh_pct": 16.12,
   "wind_ms": 3.02,
   "wind_max_ms": 5.96,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.837724
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9015,7 +9515,8 @@
   "rh_pct": 28.02,
   "wind_ms": 2.47,
   "wind_max_ms": 5.04,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.733626
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9033,7 +9534,8 @@
   "rh_pct": 43.81,
   "wind_ms": 1.59,
   "wind_max_ms": 4.83,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.226602
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9051,7 +9553,8 @@
   "rh_pct": 51.91,
   "wind_ms": 2.63,
   "wind_max_ms": 5.48,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 6.161082
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9069,7 +9572,8 @@
   "rh_pct": 46.89,
   "wind_ms": 3.04,
   "wind_max_ms": 7.89,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 5.967317
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9087,7 +9591,8 @@
   "rh_pct": 41.55,
   "wind_ms": 2.57,
   "wind_max_ms": 5.86,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 5.777271
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9105,7 +9610,8 @@
   "rh_pct": 67.74,
   "wind_ms": 3.05,
   "wind_max_ms": 7.16,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.299643
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9123,7 +9629,8 @@
   "rh_pct": 64.36,
   "wind_ms": 3.26,
   "wind_max_ms": 6.94,
-  "gwetroot_frac": 0.5
+  "gwetroot_frac": 0.5,
+  "et0_mm": 5.830898
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9141,7 +9648,8 @@
   "rh_pct": 56.82,
   "wind_ms": 2.7,
   "wind_max_ms": 7.1,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 6.325081
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9159,7 +9667,8 @@
   "rh_pct": 52.67,
   "wind_ms": 2.86,
   "wind_max_ms": 7.14,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 6.268091
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9177,7 +9686,8 @@
   "rh_pct": 49.44,
   "wind_ms": 3.17,
   "wind_max_ms": 6.69,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 6.425121
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9195,7 +9705,8 @@
   "rh_pct": 42.73,
   "wind_ms": 3.71,
   "wind_max_ms": 8.13,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.50197
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9213,7 +9724,8 @@
   "rh_pct": 49.79,
   "wind_ms": 2.01,
   "wind_max_ms": 6.88,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 6.183564
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9231,7 +9743,8 @@
   "rh_pct": 61.36,
   "wind_ms": 3.41,
   "wind_max_ms": 6.97,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.366271
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9249,7 +9762,8 @@
   "rh_pct": 62.36,
   "wind_ms": 2.56,
   "wind_max_ms": 5.7,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 5.707541
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9267,7 +9781,8 @@
   "rh_pct": 64.1,
   "wind_ms": 3.04,
   "wind_max_ms": 6.14,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 4.35695
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9285,7 +9800,8 @@
   "rh_pct": 67.65,
   "wind_ms": 2.62,
   "wind_max_ms": 5.91,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 4.809909
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9303,7 +9819,8 @@
   "rh_pct": 67.99,
   "wind_ms": 2.31,
   "wind_max_ms": 6.3,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 4.311559
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9321,7 +9838,8 @@
   "rh_pct": 62.9,
   "wind_ms": 2.54,
   "wind_max_ms": 5.58,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 6.06271
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9339,7 +9857,8 @@
   "rh_pct": 60.89,
   "wind_ms": 3.01,
   "wind_max_ms": 5.94,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 5.946891
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9357,7 +9876,8 @@
   "rh_pct": 60.66,
   "wind_ms": 2.68,
   "wind_max_ms": 6.94,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 6.42934
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9375,7 +9895,8 @@
   "rh_pct": 54.71,
   "wind_ms": 4.18,
   "wind_max_ms": 8.34,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 6.674135
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9393,7 +9914,8 @@
   "rh_pct": 51.97,
   "wind_ms": 3.7,
   "wind_max_ms": 8.24,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 6.83457
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9411,7 +9933,8 @@
   "rh_pct": 49.98,
   "wind_ms": 3.82,
   "wind_max_ms": 7.93,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.774701
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9429,7 +9952,8 @@
   "rh_pct": 46.65,
   "wind_ms": 3.07,
   "wind_max_ms": 7.4,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.968216
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9447,7 +9971,8 @@
   "rh_pct": 50.61,
   "wind_ms": 3.43,
   "wind_max_ms": 7.19,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.314102
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9465,7 +9990,8 @@
   "rh_pct": 56.96,
   "wind_ms": 2.64,
   "wind_max_ms": 6.29,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 5.707767
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9483,7 +10009,8 @@
   "rh_pct": 56.37,
   "wind_ms": 2.66,
   "wind_max_ms": 6.16,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 5.65187
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9501,7 +10028,8 @@
   "rh_pct": 51.96,
   "wind_ms": 3.43,
   "wind_max_ms": 7.19,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.032117
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9519,7 +10047,8 @@
   "rh_pct": 51.17,
   "wind_ms": 2.83,
   "wind_max_ms": 8.51,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 6.529465
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9537,7 +10066,8 @@
   "rh_pct": 51.95,
   "wind_ms": 3.09,
   "wind_max_ms": 8.03,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 6.69198
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9555,7 +10085,8 @@
   "rh_pct": 60.61,
   "wind_ms": 3.2,
   "wind_max_ms": 8.06,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.69767
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9573,7 +10104,8 @@
   "rh_pct": 59.24,
   "wind_ms": 3.58,
   "wind_max_ms": 8.01,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 6.009538
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9591,7 +10123,8 @@
   "rh_pct": 57.43,
   "wind_ms": 2.52,
   "wind_max_ms": 7.66,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 6.180623
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9609,7 +10142,8 @@
   "rh_pct": 51.89,
   "wind_ms": 3.56,
   "wind_max_ms": 6.85,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 6.447275
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9627,7 +10161,8 @@
   "rh_pct": 54.55,
   "wind_ms": 4.1,
   "wind_max_ms": 8.92,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 6.080442
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9645,7 +10180,8 @@
   "rh_pct": 57.72,
   "wind_ms": 3.24,
   "wind_max_ms": 8.31,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 4.955827
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9663,7 +10199,8 @@
   "rh_pct": 65.73,
   "wind_ms": 2.74,
   "wind_max_ms": 5.85,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 4.601411
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9681,7 +10218,8 @@
   "rh_pct": 63.87,
   "wind_ms": 2.41,
   "wind_max_ms": 6.35,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.112698
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9699,7 +10237,8 @@
   "rh_pct": 60.18,
   "wind_ms": 4.07,
   "wind_max_ms": 8.47,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.90112
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9717,7 +10256,8 @@
   "rh_pct": 57.74,
   "wind_ms": 3.67,
   "wind_max_ms": 7.12,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 6.023828
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9735,7 +10275,8 @@
   "rh_pct": 53.28,
   "wind_ms": 3.33,
   "wind_max_ms": 7.15,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 6.152787
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9753,7 +10294,8 @@
   "rh_pct": 54.46,
   "wind_ms": 3.11,
   "wind_max_ms": 7.59,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 6.00238
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9771,7 +10313,8 @@
   "rh_pct": 58.11,
   "wind_ms": 2.77,
   "wind_max_ms": 7.01,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.568776
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9789,7 +10332,8 @@
   "rh_pct": 56.37,
   "wind_ms": 2.98,
   "wind_max_ms": 7.21,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.642308
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9807,7 +10351,8 @@
   "rh_pct": 59.3,
   "wind_ms": 3.12,
   "wind_max_ms": 7.43,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 5.901267
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9825,7 +10370,8 @@
   "rh_pct": 70.58,
   "wind_ms": 2.78,
   "wind_max_ms": 6.79,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 4.693154
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9843,7 +10389,8 @@
   "rh_pct": 71.51,
   "wind_ms": 2.64,
   "wind_max_ms": 5.89,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 4.165234
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9861,7 +10408,8 @@
   "rh_pct": 71.29,
   "wind_ms": 2.72,
   "wind_max_ms": 8.23,
-  "gwetroot_frac": 0.51
+  "gwetroot_frac": 0.51,
+  "et0_mm": 4.938149
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9879,7 +10427,8 @@
   "rh_pct": 71.95,
   "wind_ms": 2.35,
   "wind_max_ms": 4.96,
-  "gwetroot_frac": 0.51
+  "gwetroot_frac": 0.51,
+  "et0_mm": 4.246987
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9897,7 +10446,8 @@
   "rh_pct": 79.3,
   "wind_ms": 1.66,
   "wind_max_ms": 4.39,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.103322
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9915,7 +10465,8 @@
   "rh_pct": 66.57,
   "wind_ms": 1.3,
   "wind_max_ms": 3.33,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 4.447183
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9933,7 +10484,8 @@
   "rh_pct": 73.24,
   "wind_ms": 1.18,
   "wind_max_ms": 3.35,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 3.763684
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9951,7 +10503,8 @@
   "rh_pct": 71.53,
   "wind_ms": 2.02,
   "wind_max_ms": 5.48,
-  "gwetroot_frac": 0.58
+  "gwetroot_frac": 0.58,
+  "et0_mm": 4.525442
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9969,7 +10522,8 @@
   "rh_pct": 68.07,
   "wind_ms": 2.18,
   "wind_max_ms": 5.95,
-  "gwetroot_frac": 0.59
+  "gwetroot_frac": 0.59,
+  "et0_mm": 5.145418
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -9987,7 +10541,8 @@
   "rh_pct": 63.16,
   "wind_ms": 2.72,
   "wind_max_ms": 5.8,
-  "gwetroot_frac": 0.59
+  "gwetroot_frac": 0.59,
+  "et0_mm": 5.179316
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10005,7 +10560,8 @@
   "rh_pct": 60.12,
   "wind_ms": 1.98,
   "wind_max_ms": 5.15,
-  "gwetroot_frac": 0.59
+  "gwetroot_frac": 0.59,
+  "et0_mm": 5.625315
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10023,7 +10579,8 @@
   "rh_pct": 61.15,
   "wind_ms": 1.95,
   "wind_max_ms": 4.93,
-  "gwetroot_frac": 0.59
+  "gwetroot_frac": 0.59,
+  "et0_mm": 4.979646
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10041,7 +10598,8 @@
   "rh_pct": 60.51,
   "wind_ms": 1.97,
   "wind_max_ms": 4.33,
-  "gwetroot_frac": 0.58
+  "gwetroot_frac": 0.58,
+  "et0_mm": 5.135108
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10059,7 +10617,8 @@
   "rh_pct": 71.82,
   "wind_ms": 2.05,
   "wind_max_ms": 4.47,
-  "gwetroot_frac": 0.59
+  "gwetroot_frac": 0.59,
+  "et0_mm": 4.737637
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10077,7 +10636,8 @@
   "rh_pct": 74.38,
   "wind_ms": 1.78,
   "wind_max_ms": 4.83,
-  "gwetroot_frac": 0.61
+  "gwetroot_frac": 0.61,
+  "et0_mm": 4.799807
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10095,7 +10655,8 @@
   "rh_pct": 70.92,
   "wind_ms": 1.95,
   "wind_max_ms": 4.22,
-  "gwetroot_frac": 0.63
+  "gwetroot_frac": 0.63,
+  "et0_mm": 4.817169
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10113,7 +10674,8 @@
   "rh_pct": 70.29,
   "wind_ms": 2.57,
   "wind_max_ms": 5.06,
-  "gwetroot_frac": 0.64
+  "gwetroot_frac": 0.64,
+  "et0_mm": 4.607369
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10131,7 +10693,8 @@
   "rh_pct": 58.75,
   "wind_ms": 2.52,
   "wind_max_ms": 6.52,
-  "gwetroot_frac": 0.65
+  "gwetroot_frac": 0.65,
+  "et0_mm": 5.958369
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10149,7 +10712,8 @@
   "rh_pct": 56.27,
   "wind_ms": 2.61,
   "wind_max_ms": 6.01,
-  "gwetroot_frac": 0.64
+  "gwetroot_frac": 0.64,
+  "et0_mm": 5.683743
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10167,7 +10731,8 @@
   "rh_pct": 61.89,
   "wind_ms": 2.1,
   "wind_max_ms": 4.97,
-  "gwetroot_frac": 0.63
+  "gwetroot_frac": 0.63,
+  "et0_mm": 5.504003
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10185,7 +10750,8 @@
   "rh_pct": 58.72,
   "wind_ms": 3.0,
   "wind_max_ms": 6.42,
-  "gwetroot_frac": 0.63
+  "gwetroot_frac": 0.63,
+  "et0_mm": 5.763806
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10203,7 +10769,8 @@
   "rh_pct": 61.69,
   "wind_ms": 2.85,
   "wind_max_ms": 7.06,
-  "gwetroot_frac": 0.62
+  "gwetroot_frac": 0.62,
+  "et0_mm": 5.415486
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10221,7 +10788,8 @@
   "rh_pct": 61.83,
   "wind_ms": 1.71,
   "wind_max_ms": 5.21,
-  "gwetroot_frac": 0.62
+  "gwetroot_frac": 0.62,
+  "et0_mm": 5.003771
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10239,7 +10807,8 @@
   "rh_pct": 63.04,
   "wind_ms": 2.27,
   "wind_max_ms": 5.84,
-  "gwetroot_frac": 0.63
+  "gwetroot_frac": 0.63,
+  "et0_mm": 5.416066
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10257,7 +10826,8 @@
   "rh_pct": 58.65,
   "wind_ms": 2.48,
   "wind_max_ms": 6.49,
-  "gwetroot_frac": 0.63
+  "gwetroot_frac": 0.63,
+  "et0_mm": 6.161569
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10275,7 +10845,8 @@
   "rh_pct": 55.52,
   "wind_ms": 2.62,
   "wind_max_ms": 6.54,
-  "gwetroot_frac": 0.62
+  "gwetroot_frac": 0.62,
+  "et0_mm": 5.901183
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10293,7 +10864,8 @@
   "rh_pct": 62.06,
   "wind_ms": 2.24,
   "wind_max_ms": 6.06,
-  "gwetroot_frac": 0.61
+  "gwetroot_frac": 0.61,
+  "et0_mm": 4.811441
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10311,7 +10883,8 @@
   "rh_pct": 64.88,
   "wind_ms": 2.94,
   "wind_max_ms": 6.28,
-  "gwetroot_frac": 0.61
+  "gwetroot_frac": 0.61,
+  "et0_mm": 5.320707
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10329,7 +10902,8 @@
   "rh_pct": 57.38,
   "wind_ms": 3.22,
   "wind_max_ms": 6.51,
-  "gwetroot_frac": 0.6
+  "gwetroot_frac": 0.6,
+  "et0_mm": 5.430112
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10347,7 +10921,8 @@
   "rh_pct": 53.86,
   "wind_ms": 3.18,
   "wind_max_ms": 7.1,
-  "gwetroot_frac": 0.6
+  "gwetroot_frac": 0.6,
+  "et0_mm": 6.1771
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10365,7 +10940,8 @@
   "rh_pct": 48.68,
   "wind_ms": 2.89,
   "wind_max_ms": 6.67,
-  "gwetroot_frac": 0.59
+  "gwetroot_frac": 0.59,
+  "et0_mm": 6.026257
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10383,7 +10959,8 @@
   "rh_pct": 58.69,
   "wind_ms": 2.57,
   "wind_max_ms": 6.98,
-  "gwetroot_frac": 0.59
+  "gwetroot_frac": 0.59,
+  "et0_mm": 5.393369
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10401,7 +10978,8 @@
   "rh_pct": 56.82,
   "wind_ms": 2.51,
   "wind_max_ms": 6.43,
-  "gwetroot_frac": 0.58
+  "gwetroot_frac": 0.58,
+  "et0_mm": 6.008375
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10419,7 +10997,8 @@
   "rh_pct": 57.86,
   "wind_ms": 2.06,
   "wind_max_ms": 5.59,
-  "gwetroot_frac": 0.58
+  "gwetroot_frac": 0.58,
+  "et0_mm": 5.859606
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10437,7 +11016,8 @@
   "rh_pct": 53.24,
   "wind_ms": 2.24,
   "wind_max_ms": 4.68,
-  "gwetroot_frac": 0.58
+  "gwetroot_frac": 0.58,
+  "et0_mm": 5.862736
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10455,7 +11035,8 @@
   "rh_pct": 56.07,
   "wind_ms": 2.68,
   "wind_max_ms": 7.67,
-  "gwetroot_frac": 0.57
+  "gwetroot_frac": 0.57,
+  "et0_mm": 5.620254
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10473,7 +11054,8 @@
   "rh_pct": 58.97,
   "wind_ms": 2.85,
   "wind_max_ms": 6.98,
-  "gwetroot_frac": 0.57
+  "gwetroot_frac": 0.57,
+  "et0_mm": 5.349424
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10491,7 +11073,8 @@
   "rh_pct": 61.76,
   "wind_ms": 2.41,
   "wind_max_ms": 6.36,
-  "gwetroot_frac": 0.56
+  "gwetroot_frac": 0.56,
+  "et0_mm": 5.028708
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10509,7 +11092,8 @@
   "rh_pct": 55.75,
   "wind_ms": 2.99,
   "wind_max_ms": 6.04,
-  "gwetroot_frac": 0.56
+  "gwetroot_frac": 0.56,
+  "et0_mm": 5.864882
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10527,7 +11111,8 @@
   "rh_pct": 56.34,
   "wind_ms": 1.9,
   "wind_max_ms": 5.42,
-  "gwetroot_frac": 0.56
+  "gwetroot_frac": 0.56,
+  "et0_mm": 5.707824
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10545,7 +11130,8 @@
   "rh_pct": 52.92,
   "wind_ms": 2.23,
   "wind_max_ms": 7.22,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 5.775001
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10563,7 +11149,8 @@
   "rh_pct": 61.69,
   "wind_ms": 2.25,
   "wind_max_ms": 6.84,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 5.385894
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10581,7 +11168,8 @@
   "rh_pct": 63.67,
   "wind_ms": 2.56,
   "wind_max_ms": 5.99,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 5.413986
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10599,7 +11187,8 @@
   "rh_pct": 63.24,
   "wind_ms": 2.35,
   "wind_max_ms": 6.2,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 5.270102
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10617,7 +11206,8 @@
   "rh_pct": 62.62,
   "wind_ms": 2.3,
   "wind_max_ms": 6.76,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 5.598776
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10635,7 +11225,8 @@
   "rh_pct": 58.66,
   "wind_ms": 2.42,
   "wind_max_ms": 7.11,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 5.803204
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10653,7 +11244,8 @@
   "rh_pct": 57.32,
   "wind_ms": 2.87,
   "wind_max_ms": 7.57,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 5.657362
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10671,7 +11263,8 @@
   "rh_pct": 62.59,
   "wind_ms": 2.49,
   "wind_max_ms": 5.76,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.80776
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10689,7 +11282,8 @@
   "rh_pct": 62.54,
   "wind_ms": 2.2,
   "wind_max_ms": 7.24,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 5.81299
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10707,7 +11301,8 @@
   "rh_pct": 58.37,
   "wind_ms": 3.41,
   "wind_max_ms": 7.58,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 5.81563
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10725,7 +11320,8 @@
   "rh_pct": 59.59,
   "wind_ms": 3.12,
   "wind_max_ms": 7.98,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 5.360225
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10743,7 +11339,8 @@
   "rh_pct": 73.34,
   "wind_ms": 1.74,
   "wind_max_ms": 5.64,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 3.422557
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10761,7 +11358,8 @@
   "rh_pct": 69.02,
   "wind_ms": 2.31,
   "wind_max_ms": 6.44,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.686751
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10779,7 +11377,8 @@
   "rh_pct": 66.35,
   "wind_ms": 2.32,
   "wind_max_ms": 6.29,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.827645
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10797,7 +11396,8 @@
   "rh_pct": 78.98,
   "wind_ms": 2.46,
   "wind_max_ms": 5.45,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 3.634969
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10815,7 +11415,8 @@
   "rh_pct": 75.17,
   "wind_ms": 2.26,
   "wind_max_ms": 5.41,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 3.896364
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10833,7 +11434,8 @@
   "rh_pct": 74.28,
   "wind_ms": 1.59,
   "wind_max_ms": 4.4,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 3.956391
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10851,7 +11453,8 @@
   "rh_pct": 69.13,
   "wind_ms": 2.08,
   "wind_max_ms": 5.26,
-  "gwetroot_frac": 0.57
+  "gwetroot_frac": 0.57,
+  "et0_mm": 5.059485
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10869,7 +11472,8 @@
   "rh_pct": 60.55,
   "wind_ms": 2.66,
   "wind_max_ms": 5.98,
-  "gwetroot_frac": 0.57
+  "gwetroot_frac": 0.57,
+  "et0_mm": 5.096623
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10887,7 +11491,8 @@
   "rh_pct": 55.7,
   "wind_ms": 2.69,
   "wind_max_ms": 5.26,
-  "gwetroot_frac": 0.56
+  "gwetroot_frac": 0.56,
+  "et0_mm": 5.364851
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10905,7 +11510,8 @@
   "rh_pct": 59.61,
   "wind_ms": 2.16,
   "wind_max_ms": 6.53,
-  "gwetroot_frac": 0.56
+  "gwetroot_frac": 0.56,
+  "et0_mm": 5.453807
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10923,7 +11529,8 @@
   "rh_pct": 56.08,
   "wind_ms": 2.38,
   "wind_max_ms": 6.79,
-  "gwetroot_frac": 0.56
+  "gwetroot_frac": 0.56,
+  "et0_mm": 5.672014
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10941,7 +11548,8 @@
   "rh_pct": 58.98,
   "wind_ms": 2.62,
   "wind_max_ms": 7.56,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 5.564119
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10959,7 +11567,8 @@
   "rh_pct": 63.53,
   "wind_ms": 2.86,
   "wind_max_ms": 6.61,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 5.091019
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10977,7 +11586,8 @@
   "rh_pct": 72.47,
   "wind_ms": 2.37,
   "wind_max_ms": 6.14,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 4.385165
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -10995,7 +11605,8 @@
   "rh_pct": 67.98,
   "wind_ms": 2.64,
   "wind_max_ms": 6.88,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 4.495942
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11013,7 +11624,8 @@
   "rh_pct": 57.87,
   "wind_ms": 2.02,
   "wind_max_ms": 5.4,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 5.263204
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11031,7 +11643,8 @@
   "rh_pct": 58.63,
   "wind_ms": 2.3,
   "wind_max_ms": 5.05,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 5.052033
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11049,7 +11662,8 @@
   "rh_pct": 70.26,
   "wind_ms": 1.79,
   "wind_max_ms": 5.47,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 4.001151
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11067,7 +11681,8 @@
   "rh_pct": 71.37,
   "wind_ms": 2.49,
   "wind_max_ms": 5.17,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 4.45327
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11085,7 +11700,8 @@
   "rh_pct": 81.9,
   "wind_ms": 2.77,
   "wind_max_ms": 7.64,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 3.130688
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11103,7 +11719,8 @@
   "rh_pct": 74.68,
   "wind_ms": 2.5,
   "wind_max_ms": 6.87,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 4.610405
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11121,7 +11738,8 @@
   "rh_pct": 71.93,
   "wind_ms": 2.83,
   "wind_max_ms": 7.07,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 4.674624
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11139,7 +11757,8 @@
   "rh_pct": 70.78,
   "wind_ms": 2.83,
   "wind_max_ms": 6.69,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 4.790062
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11157,7 +11776,8 @@
   "rh_pct": 68.68,
   "wind_ms": 2.91,
   "wind_max_ms": 6.46,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 4.87808
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11175,7 +11795,8 @@
   "rh_pct": 66.93,
   "wind_ms": 2.76,
   "wind_max_ms": 6.26,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 4.731117
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11193,7 +11814,8 @@
   "rh_pct": 71.21,
   "wind_ms": 2.49,
   "wind_max_ms": 5.99,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.389286
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11211,7 +11833,8 @@
   "rh_pct": 76.7,
   "wind_ms": 2.82,
   "wind_max_ms": 6.49,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 3.706582
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11229,7 +11852,8 @@
   "rh_pct": 69.39,
   "wind_ms": 3.06,
   "wind_max_ms": 6.76,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 3.956101
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11247,7 +11871,8 @@
   "rh_pct": 67.84,
   "wind_ms": 2.81,
   "wind_max_ms": 5.94,
-  "gwetroot_frac": 0.55
+  "gwetroot_frac": 0.55,
+  "et0_mm": 4.04391
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11265,7 +11890,8 @@
   "rh_pct": 73.02,
   "wind_ms": 2.16,
   "wind_max_ms": 5.45,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 3.601178
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11283,7 +11909,8 @@
   "rh_pct": 73.91,
   "wind_ms": 1.96,
   "wind_max_ms": 5.73,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 4.413451
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11301,7 +11928,8 @@
   "rh_pct": 72.04,
   "wind_ms": 2.12,
   "wind_max_ms": 5.48,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 4.469243
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11319,7 +11947,8 @@
   "rh_pct": 67.73,
   "wind_ms": 2.25,
   "wind_max_ms": 5.4,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 4.714181
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11337,7 +11966,8 @@
   "rh_pct": 65.11,
   "wind_ms": 2.32,
   "wind_max_ms": 5.73,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.95067
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11355,7 +11985,8 @@
   "rh_pct": 62.23,
   "wind_ms": 2.49,
   "wind_max_ms": 6.27,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.955841
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11373,7 +12004,8 @@
   "rh_pct": 65.91,
   "wind_ms": 2.39,
   "wind_max_ms": 6.87,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.809104
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11391,7 +12023,8 @@
   "rh_pct": 74.48,
   "wind_ms": 2.02,
   "wind_max_ms": 5.34,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 3.97763
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11409,7 +12042,8 @@
   "rh_pct": 74.41,
   "wind_ms": 1.83,
   "wind_max_ms": 4.53,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 3.538891
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11427,7 +12061,8 @@
   "rh_pct": 67.69,
   "wind_ms": 1.97,
   "wind_max_ms": 5.82,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 3.935489
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11445,7 +12080,8 @@
   "rh_pct": 64.69,
   "wind_ms": 2.28,
   "wind_max_ms": 6.07,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.200623
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11463,7 +12099,8 @@
   "rh_pct": 62.75,
   "wind_ms": 2.07,
   "wind_max_ms": 5.52,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 3.955106
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11481,7 +12118,8 @@
   "rh_pct": 57.66,
   "wind_ms": 2.18,
   "wind_max_ms": 5.25,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.312091
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11499,7 +12137,8 @@
   "rh_pct": 62.18,
   "wind_ms": 2.38,
   "wind_max_ms": 5.94,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.237756
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11517,7 +12156,8 @@
   "rh_pct": 60.26,
   "wind_ms": 2.37,
   "wind_max_ms": 6.27,
-  "gwetroot_frac": 0.52
+  "gwetroot_frac": 0.52,
+  "et0_mm": 4.272989
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11535,7 +12175,8 @@
   "rh_pct": 63.43,
   "wind_ms": 2.54,
   "wind_max_ms": 6.52,
-  "gwetroot_frac": 0.52
+  "gwetroot_frac": 0.52,
+  "et0_mm": 4.124243
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11553,7 +12194,8 @@
   "rh_pct": 62.51,
   "wind_ms": 1.94,
   "wind_max_ms": 5.23,
-  "gwetroot_frac": 0.52
+  "gwetroot_frac": 0.52,
+  "et0_mm": 4.213098
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11571,7 +12213,8 @@
   "rh_pct": 64.9,
   "wind_ms": 2.14,
   "wind_max_ms": 5.04,
-  "gwetroot_frac": 0.51
+  "gwetroot_frac": 0.51,
+  "et0_mm": 4.397476
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11589,7 +12232,8 @@
   "rh_pct": 63.64,
   "wind_ms": 2.81,
   "wind_max_ms": 6.6,
-  "gwetroot_frac": 0.51
+  "gwetroot_frac": 0.51,
+  "et0_mm": 4.508602
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11607,7 +12251,8 @@
   "rh_pct": 67.64,
   "wind_ms": 2.61,
   "wind_max_ms": 6.74,
-  "gwetroot_frac": 0.51
+  "gwetroot_frac": 0.51,
+  "et0_mm": 4.11863
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11625,7 +12270,8 @@
   "rh_pct": 75.43,
   "wind_ms": 3.66,
   "wind_max_ms": 8.23,
-  "gwetroot_frac": 0.51
+  "gwetroot_frac": 0.51,
+  "et0_mm": 3.436165
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11643,7 +12289,8 @@
   "rh_pct": 77.77,
   "wind_ms": 4.54,
   "wind_max_ms": 9.7,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 3.466251
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11661,7 +12308,8 @@
   "rh_pct": 76.09,
   "wind_ms": 3.92,
   "wind_max_ms": 7.81,
-  "gwetroot_frac": 0.54
+  "gwetroot_frac": 0.54,
+  "et0_mm": 3.499845
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11679,7 +12327,8 @@
   "rh_pct": 69.86,
   "wind_ms": 2.33,
   "wind_max_ms": 5.96,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.104818
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11697,7 +12346,8 @@
   "rh_pct": 60.86,
   "wind_ms": 2.53,
   "wind_max_ms": 5.49,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.235649
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11715,7 +12365,8 @@
   "rh_pct": 69.77,
   "wind_ms": 2.49,
   "wind_max_ms": 6.63,
-  "gwetroot_frac": 0.53
+  "gwetroot_frac": 0.53,
+  "et0_mm": 4.218582
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11733,7 +12384,8 @@
   "rh_pct": 64.66,
   "wind_ms": 2.96,
   "wind_max_ms": 6.85,
-  "gwetroot_frac": 0.52
+  "gwetroot_frac": 0.52,
+  "et0_mm": 4.173687
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11751,7 +12403,8 @@
   "rh_pct": 62.94,
   "wind_ms": 2.73,
   "wind_max_ms": 5.46,
-  "gwetroot_frac": 0.52
+  "gwetroot_frac": 0.52,
+  "et0_mm": 4.161546
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11769,7 +12422,8 @@
   "rh_pct": 59.89,
   "wind_ms": 2.09,
   "wind_max_ms": 4.65,
-  "gwetroot_frac": 0.52
+  "gwetroot_frac": 0.52,
+  "et0_mm": 4.081126
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11787,7 +12441,8 @@
   "rh_pct": 64.2,
   "wind_ms": 2.36,
   "wind_max_ms": 4.55,
-  "gwetroot_frac": 0.51
+  "gwetroot_frac": 0.51,
+  "et0_mm": 4.082463
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11805,7 +12460,8 @@
   "rh_pct": 63.9,
   "wind_ms": 2.24,
   "wind_max_ms": 4.7,
-  "gwetroot_frac": 0.51
+  "gwetroot_frac": 0.51,
+  "et0_mm": 4.132846
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11823,7 +12479,8 @@
   "rh_pct": 64.04,
   "wind_ms": 2.52,
   "wind_max_ms": 6.31,
-  "gwetroot_frac": 0.51
+  "gwetroot_frac": 0.51,
+  "et0_mm": 3.602375
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11841,7 +12498,8 @@
   "rh_pct": 65.07,
   "wind_ms": 2.21,
   "wind_max_ms": 4.56,
-  "gwetroot_frac": 0.51
+  "gwetroot_frac": 0.51,
+  "et0_mm": 3.983909
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11859,7 +12517,8 @@
   "rh_pct": 47.88,
   "wind_ms": 2.31,
   "wind_max_ms": 7.19,
-  "gwetroot_frac": 0.5
+  "gwetroot_frac": 0.5,
+  "et0_mm": 3.749497
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11877,7 +12536,8 @@
   "rh_pct": 62.31,
   "wind_ms": 2.26,
   "wind_max_ms": 5.44,
-  "gwetroot_frac": 0.5
+  "gwetroot_frac": 0.5,
+  "et0_mm": 3.943929
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11895,7 +12555,8 @@
   "rh_pct": 59.29,
   "wind_ms": 2.31,
   "wind_max_ms": 4.52,
-  "gwetroot_frac": 0.5
+  "gwetroot_frac": 0.5,
+  "et0_mm": 3.926931
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11913,7 +12574,8 @@
   "rh_pct": 61.72,
   "wind_ms": 2.41,
   "wind_max_ms": 5.64,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 3.88369
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11931,7 +12593,8 @@
   "rh_pct": 50.01,
   "wind_ms": 2.59,
   "wind_max_ms": 5.59,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 3.63419
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11949,7 +12612,8 @@
   "rh_pct": 46.53,
   "wind_ms": 1.48,
   "wind_max_ms": 3.78,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 3.699828
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11967,7 +12631,8 @@
   "rh_pct": 57.93,
   "wind_ms": 1.63,
   "wind_max_ms": 3.51,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 3.921521
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -11985,7 +12650,8 @@
   "rh_pct": 38.8,
   "wind_ms": 2.31,
   "wind_max_ms": 6.64,
-  "gwetroot_frac": 0.49
+  "gwetroot_frac": 0.49,
+  "et0_mm": 4.101751
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12003,7 +12669,8 @@
   "rh_pct": 50.96,
   "wind_ms": 3.69,
   "wind_max_ms": 6.09,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 2.783893
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12021,7 +12688,8 @@
   "rh_pct": 49.44,
   "wind_ms": 1.76,
   "wind_max_ms": 4.21,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 3.363942
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12039,7 +12707,8 @@
   "rh_pct": 39.07,
   "wind_ms": 1.73,
   "wind_max_ms": 3.68,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 3.479071
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12057,7 +12726,8 @@
   "rh_pct": 41.39,
   "wind_ms": 2.56,
   "wind_max_ms": 5.96,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 3.555579
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12075,7 +12745,8 @@
   "rh_pct": 44.0,
   "wind_ms": 2.17,
   "wind_max_ms": 5.62,
-  "gwetroot_frac": 0.48
+  "gwetroot_frac": 0.48,
+  "et0_mm": 3.00697
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12093,7 +12764,8 @@
   "rh_pct": 59.82,
   "wind_ms": 2.01,
   "wind_max_ms": 4.91,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 3.282961
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12111,7 +12783,8 @@
   "rh_pct": 58.67,
   "wind_ms": 1.96,
   "wind_max_ms": 4.65,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 3.564342
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12129,7 +12802,8 @@
   "rh_pct": 37.64,
   "wind_ms": 2.06,
   "wind_max_ms": 5.3,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 3.643252
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12147,7 +12821,8 @@
   "rh_pct": 31.52,
   "wind_ms": 1.62,
   "wind_max_ms": 3.45,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 3.603882
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12165,7 +12840,8 @@
   "rh_pct": 25.97,
   "wind_ms": 2.05,
   "wind_max_ms": 4.24,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 3.722901
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12183,7 +12859,8 @@
   "rh_pct": 19.54,
   "wind_ms": 1.6,
   "wind_max_ms": 3.2,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 3.766846
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12201,7 +12878,8 @@
   "rh_pct": 42.44,
   "wind_ms": 3.2,
   "wind_max_ms": 8.07,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 2.143849
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12219,7 +12897,8 @@
   "rh_pct": 45.8,
   "wind_ms": 3.03,
   "wind_max_ms": 6.57,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 2.94491
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12237,7 +12916,8 @@
   "rh_pct": 46.21,
   "wind_ms": 2.63,
   "wind_max_ms": 5.27,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 3.253356
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12255,7 +12935,8 @@
   "rh_pct": 33.84,
   "wind_ms": 1.94,
   "wind_max_ms": 5.0,
-  "gwetroot_frac": 0.47
+  "gwetroot_frac": 0.47,
+  "et0_mm": 3.228458
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12273,7 +12954,8 @@
   "rh_pct": 31.06,
   "wind_ms": 2.04,
   "wind_max_ms": 5.37,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.209847
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12291,7 +12973,8 @@
   "rh_pct": 38.0,
   "wind_ms": 1.99,
   "wind_max_ms": 4.35,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.421338
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12309,7 +12992,8 @@
   "rh_pct": 46.26,
   "wind_ms": 2.17,
   "wind_max_ms": 4.44,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.366304
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12327,7 +13011,8 @@
   "rh_pct": 27.8,
   "wind_ms": 1.96,
   "wind_max_ms": 4.82,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.436027
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12345,7 +13030,8 @@
   "rh_pct": 34.51,
   "wind_ms": 1.61,
   "wind_max_ms": 3.64,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.353873
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12363,7 +13049,8 @@
   "rh_pct": 39.38,
   "wind_ms": 1.74,
   "wind_max_ms": 4.93,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.349772
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12381,7 +13068,8 @@
   "rh_pct": 42.03,
   "wind_ms": 2.18,
   "wind_max_ms": 5.42,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.303949
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12399,7 +13087,8 @@
   "rh_pct": 56.25,
   "wind_ms": 2.51,
   "wind_max_ms": 4.69,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.058631
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12417,7 +13106,8 @@
   "rh_pct": 43.68,
   "wind_ms": 1.28,
   "wind_max_ms": 2.97,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.290783
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12435,7 +13125,8 @@
   "rh_pct": 65.65,
   "wind_ms": 2.02,
   "wind_max_ms": 4.79,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.203137
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12453,7 +13144,8 @@
   "rh_pct": 60.96,
   "wind_ms": 2.92,
   "wind_max_ms": 6.28,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.216709
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12471,7 +13163,8 @@
   "rh_pct": 40.67,
   "wind_ms": 2.54,
   "wind_max_ms": 5.61,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 3.086883
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12489,7 +13182,8 @@
   "rh_pct": 56.22,
   "wind_ms": 1.26,
   "wind_max_ms": 4.27,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.962988
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12507,7 +13201,8 @@
   "rh_pct": 80.65,
   "wind_ms": 2.56,
   "wind_max_ms": 5.79,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.01176
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12525,7 +13220,8 @@
   "rh_pct": 70.01,
   "wind_ms": 2.61,
   "wind_max_ms": 6.22,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.712918
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12543,7 +13239,8 @@
   "rh_pct": 65.95,
   "wind_ms": 3.25,
   "wind_max_ms": 6.57,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.540266
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12561,7 +13258,8 @@
   "rh_pct": 52.16,
   "wind_ms": 3.38,
   "wind_max_ms": 6.4,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.439207
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12579,7 +13277,8 @@
   "rh_pct": 39.46,
   "wind_ms": 1.76,
   "wind_max_ms": 5.03,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.505939
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12597,7 +13296,8 @@
   "rh_pct": 58.74,
   "wind_ms": 3.09,
   "wind_max_ms": 7.82,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.365193
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12615,7 +13315,8 @@
   "rh_pct": 53.65,
   "wind_ms": 1.29,
   "wind_max_ms": 3.67,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.693355
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12633,7 +13334,8 @@
   "rh_pct": 51.83,
   "wind_ms": 2.45,
   "wind_max_ms": 5.7,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.604774
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12651,7 +13353,8 @@
   "rh_pct": 58.14,
   "wind_ms": 1.88,
   "wind_max_ms": 4.8,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.022698
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12669,7 +13372,8 @@
   "rh_pct": 62.63,
   "wind_ms": 2.71,
   "wind_max_ms": 7.27,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.566142
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12687,7 +13391,8 @@
   "rh_pct": 65.99,
   "wind_ms": 1.93,
   "wind_max_ms": 4.63,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.535309
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12705,7 +13410,8 @@
   "rh_pct": 56.03,
   "wind_ms": 2.32,
   "wind_max_ms": 5.57,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.501226
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12723,7 +13429,8 @@
   "rh_pct": 45.05,
   "wind_ms": 1.73,
   "wind_max_ms": 4.75,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.587539
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12741,7 +13448,8 @@
   "rh_pct": 53.59,
   "wind_ms": 1.95,
   "wind_max_ms": 4.28,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.466907
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12759,7 +13467,8 @@
   "rh_pct": 38.22,
   "wind_ms": 2.06,
   "wind_max_ms": 4.86,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.653239
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12777,7 +13486,8 @@
   "rh_pct": 35.43,
   "wind_ms": 1.64,
   "wind_max_ms": 3.73,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.853521
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12795,7 +13505,8 @@
   "rh_pct": 35.92,
   "wind_ms": 2.27,
   "wind_max_ms": 6.24,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.914666
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12813,7 +13524,8 @@
   "rh_pct": 29.89,
   "wind_ms": 1.72,
   "wind_max_ms": 4.24,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.904623
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12831,7 +13543,8 @@
   "rh_pct": 71.65,
   "wind_ms": 2.9,
   "wind_max_ms": 7.93,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.303752
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12849,7 +13562,8 @@
   "rh_pct": 68.7,
   "wind_ms": 3.13,
   "wind_max_ms": 6.81,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.587861
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12867,7 +13581,8 @@
   "rh_pct": 61.67,
   "wind_ms": 3.37,
   "wind_max_ms": 6.18,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.625282
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12885,7 +13600,8 @@
   "rh_pct": 59.42,
   "wind_ms": 2.1,
   "wind_max_ms": 5.83,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.574317
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12903,7 +13619,8 @@
   "rh_pct": 42.14,
   "wind_ms": 2.43,
   "wind_max_ms": 5.86,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.718373
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12921,7 +13638,8 @@
   "rh_pct": 31.75,
   "wind_ms": 2.1,
   "wind_max_ms": 6.02,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.959592
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12939,7 +13657,8 @@
   "rh_pct": 27.59,
   "wind_ms": 2.31,
   "wind_max_ms": 5.63,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.948094
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12957,7 +13676,8 @@
   "rh_pct": 22.09,
   "wind_ms": 2.17,
   "wind_max_ms": 6.72,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.813091
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12975,7 +13695,8 @@
   "rh_pct": 48.79,
   "wind_ms": 2.26,
   "wind_max_ms": 5.97,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.922732
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -12993,7 +13714,8 @@
   "rh_pct": 70.37,
   "wind_ms": 1.96,
   "wind_max_ms": 4.87,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.773464
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -13011,7 +13733,8 @@
   "rh_pct": 64.44,
   "wind_ms": 1.97,
   "wind_max_ms": 4.82,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.84852
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -13029,7 +13752,8 @@
   "rh_pct": 58.15,
   "wind_ms": 1.89,
   "wind_max_ms": 4.54,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.966895
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -13047,7 +13771,8 @@
   "rh_pct": 52.02,
   "wind_ms": 1.67,
   "wind_max_ms": 3.93,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.921628
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -13065,7 +13790,8 @@
   "rh_pct": 50.59,
   "wind_ms": 2.18,
   "wind_max_ms": 5.01,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.91083
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -13083,7 +13809,8 @@
   "rh_pct": 36.94,
   "wind_ms": 2.02,
   "wind_max_ms": 4.55,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.892885
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -13101,7 +13828,8 @@
   "rh_pct": 70.21,
   "wind_ms": 3.53,
   "wind_max_ms": 9.01,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 1.855414
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -13119,7 +13847,8 @@
   "rh_pct": 54.62,
   "wind_ms": 2.82,
   "wind_max_ms": 6.1,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.110858
  },
  {
   "cell_id": "E9_r0463_c0845",
@@ -13137,6 +13866,7 @@
   "rh_pct": 56.0,
   "wind_ms": 1.83,
   "wind_max_ms": 5.05,
-  "gwetroot_frac": 0.46
+  "gwetroot_frac": 0.46,
+  "et0_mm": 2.639151
  }
 ]
