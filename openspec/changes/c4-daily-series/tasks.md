@@ -2,8 +2,8 @@
 
 ## 1. Serie desde gold
 
-- [ ] 1.1 Añadir a `AthenaProvider` la detección de `v_cell_daily` en la carga y la lectura bajo demanda por celda con caché en memoria (máximo 32 celdas); verificar con el ejecutor simulado los casos de vista presente y ausente
-- [ ] 1.2 Convertir las filas a `DailyRow` (fechas UTC, nulos, orden); verificar con una prueba de orden y de relleno a nulo
+- [x] 1.1 Añadir a `AthenaProvider` la detección de `v_cell_daily` en la carga y la lectura bajo demanda por celda con caché en memoria (máximo 32 celdas); verificar con el ejecutor simulado los casos de vista presente y ausente
+- [x] 1.2 Convertir las filas a `DailyRow` (fechas UTC, nulos, orden); verificar con una prueba de orden y de relleno a nulo
 
 ## 2. Respaldo NASA POWER
 
@@ -15,11 +15,11 @@
 ## 3. Integración
 
 - [ ] 3.1 Implementar `daily(cell_id)` en el proveedor con la precedencia gold → POWER, el campo de origen y el error `daily_unavailable`; verificar con pruebas de las tres ramas
-- [ ] 3.2 Verificar con una prueba de API que, con la serie diaria forzada a fallar, el perfil responde `200`
+- [x] 3.2 Verificar con una prueba de API que, con la serie diaria forzada a fallar, el perfil responde `200`
 - [ ] 3.3 En un preview, pedir la serie de una celda de Saltillo por el respaldo y verificar que el objeto aparece en `cache/power/` y que la segunda llamada no sale a Internet (registro); documentar en `README.md` la variable de la tasa y el origen de la serie
 
 ## 4. Coherencia con el contrato publicado
 
 - [ ] 4.1 Distinguir vista ausente de errores de permisos o transitorios; probar que solo la ausencia activa el respaldo POWER y que los demás casos devuelven `daily_unavailable`
-- [ ] 4.2 Indexar la caché gold por `data_version` y `cell_id`, coordinando las consultas diarias con el protocolo de publicación de C2; probar que una recarga no reutiliza series de la versión anterior
+- [x] 4.2 Indexar la caché gold por `data_version` y `cell_id`, coordinando las consultas diarias con el protocolo de publicación de C2; probar que una recarga no reutiliza series de la versión anterior
 - [ ] 4.3 Guardar POWER crudo y ajustar temperaturas por celda después de leer la caché; probar dos celdas del mismo cuadro y distinta elevación con una sola descarga

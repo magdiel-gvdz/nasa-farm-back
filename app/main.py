@@ -51,7 +51,10 @@ def create_app(
         DynamoRepository(config.app_table) if config.app_table else MemoryRepository()
     )
     api.state.locator = locator or GridLocator(BBoxCellCatalog())
-    provider = data_provider or create_provider(config.data_provider)
+    provider = data_provider or create_provider(config)
+    if data_provider is None and hasattr(provider, "start"):
+        # Carga en segundo plano: `/health` responde ya y `/ready` espera a los datos.
+        provider.start()
     api.state.data_provider = provider
     api.state.profiles = ProfileService(provider)
     # Un catálogo inválido impide arrancar: el error nombra el cultivo y el campo.

@@ -66,11 +66,38 @@ class DataProvider(Protocol):
         ...
 
 
-def create_provider(name: str) -> DataProvider:
+_ATHENA_SETTINGS = {
+    "data_region": "DATA_REGION",
+    "athena_workgroup": "ATHENA_WORKGROUP",
+    "athena_database": "ATHENA_DATABASE",
+    "data_version_parameter": "DATA_VERSION_PARAMETER",
+}
+
+
+def create_provider(settings) -> DataProvider:
     """Proveedor elegido por `DATA_PROVIDER`. Un valor desconocido impide arrancar."""
+    name = settings.data_provider
     if name == "fixture":
         from app.data.fixture import FixtureProvider
 
         return FixtureProvider()
-    logger.error("DATA_PROVIDER=%r no es válido; valores admitidos: 'fixture'", name)
+    if name == "athena":
+        from app.data.athena import AthenaProvider, BotoAthenaExecutor, SsmVersionSource
+
+        missing = [
+            variable
+            for attribute, variable in _ATHENA_SETTINGS.items()
+            if not getattr(settings, attribute)
+        ]
+        if missing:
+            logger.error("DATA_PROVIDER=athena necesita las variables: %s", ", ".join(missing))
+            raise ValueError(f"Faltan variables para DATA_PROVIDER=athena: {', '.join(missing)}")
+        return AthenaProvider(
+            BotoAthenaExecutor(
+                settings.data_region, settings.athena_workgroup, settings.athena_database
+            ),
+            SsmVersionSource(settings.data_region, settings.data_version_parameter),
+            poll_seconds=settings.data_poll_seconds,
+        )
+    logger.error("DATA_PROVIDER=%r no es válido; valores admitidos: 'fixture', 'athena'", name)
     raise ValueError(f"DATA_PROVIDER no admitido: {name!r}")

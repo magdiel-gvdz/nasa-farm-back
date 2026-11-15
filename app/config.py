@@ -8,6 +8,17 @@ class Settings:
     environment: str = field(default_factory=lambda: os.getenv("ENVIRONMENT", "local"))
     # Origen de los datos agroclimáticos; `fixture` sirve datos sintéticos sin AWS.
     data_provider: str = field(default_factory=lambda: os.getenv("DATA_PROVIDER", "fixture"))
+    # Solo con `DATA_PROVIDER=athena`: dónde publica DATA (docs/data_access.md).
+    data_region: str = field(default_factory=lambda: os.getenv("DATA_REGION", ""))
+    athena_workgroup: str = field(default_factory=lambda: os.getenv("ATHENA_WORKGROUP", ""))
+    athena_database: str = field(default_factory=lambda: os.getenv("ATHENA_DATABASE", ""))
+    data_version_parameter: str = field(
+        default_factory=lambda: os.getenv("DATA_VERSION_PARAMETER", "")
+    )
+    # Cada cuánto se comprueba si DATA publicó una versión nueva.
+    data_poll_seconds: float = field(
+        default_factory=lambda: float(os.getenv("DATA_POLL_SECONDS", "300"))
+    )
     # Tabla DynamoDB del entorno; vacía = repositorio en memoria (local y pruebas).
     app_table: str = field(default_factory=lambda: os.getenv("APP_TABLE", ""))
     cors_origins: list[str] = field(

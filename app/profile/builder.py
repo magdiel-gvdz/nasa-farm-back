@@ -4,7 +4,7 @@ from collections import Counter
 from collections.abc import Sequence
 from datetime import UTC, datetime
 
-from app.data import DataProvider
+from app.data import DataProvider, DataUnavailableError
 from app.data.models import Cell, ClimatologyDecade, IndicatorYear
 from app.data.models import SoilLayer as SoilRow
 from app.geo.grid import CELL_M
@@ -370,7 +370,12 @@ def build_profile(provider: DataProvider, cell_id: str, language: str) -> dict:
     climatology = provider.climatology(cell_id)
     years = provider.years(cell_id)
     monthly = MonthlyIndicators(indicators)
-    daily = DailyRecords(provider.daily(cell_id), FROST_C)
+    try:
+        daily_rows = provider.daily(cell_id)
+    except DataUnavailableError:
+        # Sin serie diaria no hay récords ni fechas de helada, pero el perfil sigue.
+        daily_rows = ()
+    daily = DailyRecords(daily_rows, FROST_C)
 
     sources_used = Counter(row.sm_src for row in indicators if row.sm_src)
     moisture_source = (
