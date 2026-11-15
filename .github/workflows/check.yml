@@ -26,6 +26,10 @@ jobs:
           ruff check .
           ruff format --check .
           pytest -q
+      - name: Check that the committed API contract is current
+        run: |
+          python scripts/export_openapi.py
+          git diff --exit-code contracts/openapi.json
       - name: Check Terraform formatting
         run: terraform fmt -check -recursive infra
       - name: Validate bootstrap

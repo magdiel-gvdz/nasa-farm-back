@@ -1,10 +1,23 @@
 -r requirements.txt
-certifi==2026.10.23
+cffi==2.1.1
+charset-normalizer==3.5.2
+cryptography==50.0.2
+docker==7.2.0
 httpcore==1.0.9
 httpx==0.28.1
 iniconfig==2.3.1
+MarkupSafe==3.0.4
+moto==5.2.5
 packaging==26.3
 pluggy==1.7.0
+py-partiql-parser==0.6.3
+pycparser==3.12
 pygments==2.21.0
 pytest==9.2.0
+PyYAML==6.0.3
+requests==2.34.2
+responses==0.26.3
 ruff==0.17.5
+Werkzeug==3.1.9
+xmltodict==1.0.4
+pywin32==312; sys_platform == "win32"

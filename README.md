@@ -52,10 +52,23 @@ Desde otra terminal: `curl.exe http://localhost:8080/health`,
 La API corre como usuario 10001, escucha en 8080 y recibe SIGTERM directamente.
 CI verifica salud, exclusión de archivos privados y apagado en menos de 10 s.
 
-`GET /health` y `/docs` funcionan sin credenciales AWS. `/ready` y `/v1/sources`
-todavía usan el lector de manifiestos existente; su sustitución por el proveedor
-de datos pertenece a `c1` y `c2`. El esquema de `contracts/` se conserva porque
-todavía documenta ese contrato. El nuevo rol no concede acceso a manifiestos.
+| Endpoint | Comportamiento |
+| --- | --- |
+| `GET /health` | Liveness: proceso activo, versión de API y entorno; no consulta AWS |
+| `GET /ready` | Estado del proveedor de datos y versión cargada; responde 503 si aún no está listo |
+| `/api/v1/...` | Endpoints de negocio: catálogos, geocercas, perfil, aptitud y rotaciones. Ver [docs/api-contract.md](docs/api-contract.md) |
+| `GET /docs` y `/openapi.json` | Documentación y contrato FastAPI; el contrato versionado está en `contracts/openapi.json` |
+
+Las geocercas (`/api/v1/fields`) son reales; el resto de endpoints de negocio
+devuelve por ahora una respuesta fija marcada con `X-Fieldshift-Mock: 1`, hasta
+que lleguen el proveedor de datos (`c1`, `c2`) y los motores. Tras cambiar una
+ruta o un esquema ejecuta `python scripts/export_openapi.py` y versiona
+`contracts/openapi.json`; CI falla si queda desactualizado.
+
+Variables de la aplicación: `ENVIRONMENT`, `CORS_ORIGINS` (array JSON) y
+`APP_TABLE` (tabla DynamoDB de geocercas; vacía = memoria, los datos se pierden
+al reiniciar). Terraform las configura en el servicio junto con las de DATA.
+Localmente todo funciona sin credenciales AWS mientras `APP_TABLE` esté vacía.
 
 ## Bootstrap y migración
 
@@ -145,6 +158,7 @@ bucket. El rol de tarea conserva el límite de permisos del bootstrap.
 .\.venv\Scripts\python.exe -m ruff check .
 .\.venv\Scripts\python.exe -m ruff format --check .
 .\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe scripts/export_openapi.py --check
 terraform fmt -check -recursive infra
 terraform -chdir=infra/bootstrap init -backend=false -lockfile=readonly
 terraform -chdir=infra/bootstrap validate
@@ -165,7 +179,8 @@ fijado en `.terraform.lock.hcl`; conservar checksums Windows y Linux.
 Abrir los PR como borrador mientras se trabaja: un servicio encendido tiene
 coste continuo y no escala a cero. No hay el límite de peticiones de API Gateway;
 CORS permite cualquier origen si se configura `["*"]`, sin credenciales. La API sigue siendo
-pública. El stack usa VPC y clúster por defecto, sin NAT ni VPC propia.
+pública y no guarda cuentas: las geocercas se separan por el encabezado
+`X-Client-Id`, que no es autenticación. El stack usa VPC y clúster por defecto, sin NAT ni VPC propia.
 Los logs duran 30 días en dev y 3 en previews. El bucket de preview expira objetos
 a los 7 días; esa regla no elimina infraestructura.
 
@@ -183,12 +198,16 @@ OpenSpec 2.0.0 requiere Node.js >=22.12.0:
 con `openspec validate --all --strict`. Los artefactos se redactan en español.
 
 ```text
-app/                         FastAPI, configuración y lector de datos actual
-contracts/                   Contrato de manifiesto todavía utilizado
+app/                         FastAPI y configuración
+app/api/                     Rutas /api/v1, esquemas, errores y respuestas fijas
+app/store/                   Repositorio de geocercas (memoria y DynamoDB)
+app/geo/                     Malla de 9 km, validación de geometría y zonas
+contracts/                   Contrato OpenAPI versionado
 infra/bootstrap/             Estado remoto, OIDC, ECR y permisos de CI
 infra/environment/           ECS Express Mode, DynamoDB y bucket por entorno
 infra/*/tests/               Pruebas Terraform sin credenciales
-tests/                       Pruebas de la API
+scripts/export_openapi.py    Genera contracts/openapi.json
+tests/                       Pruebas de la API, la malla y el repositorio
 Dockerfile                   Imagen Python 3.13 con uvicorn
 .github/workflows/           Checks, publicación, despliegue y limpieza
 openspec/                    Especificaciones y tareas
