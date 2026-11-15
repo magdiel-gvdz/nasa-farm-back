@@ -182,6 +182,12 @@ Variables que necesita, además de `DATA_PROVIDER`: `DATA_REGION`, `ATHENA_WORKG
 `ATHENA_DATABASE` y `DATA_VERSION_PARAMETER`. Si falta alguna, la API no arranca y la nombra.
 Terraform ya las configura en el servicio.
 
+La serie diaria sale de la vista `v_cell_daily` de DATA. Si la vista no existe, la API la pide
+a NASA POWER en vivo, una vez por cuadro climático, y guarda la respuesta en `cache/power/` del
+bucket del entorno (`APP_BUCKET`; en local, un directorio temporal). Ajusta la temperatura por
+altura con `LAPSE_RATE_C_PER_KM` (6.5 por defecto) y añade la fuente `power_live`. Un error de
+permisos o transitorio en Athena no activa este respaldo.
+
 **Antes de activar** deben cumplirse las condiciones de `c2-athena-provider`:
 
 1. DATA publicó las seis vistas, incluida `v_sources`, y el parámetro SSM

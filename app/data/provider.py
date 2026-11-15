@@ -62,7 +62,7 @@ class DataProvider(Protocol):
     def sources(self) -> Sequence[Source]: ...
 
     def daily(self, cell_id: str) -> Sequence[DailyRow]:
-        """Ordenadas por fecha."""
+        """Ordenadas por fecha; `DailySeries` indica además su origen."""
         ...
 
 
@@ -72,6 +72,13 @@ _ATHENA_SETTINGS = {
     "athena_database": "ATHENA_DATABASE",
     "data_version_parameter": "DATA_VERSION_PARAMETER",
 }
+
+
+def _power_source(settings):
+    from app.data.power import LocalCache, PowerClient, PowerDailySource, S3Cache
+
+    cache = S3Cache(settings.app_bucket) if settings.app_bucket else LocalCache()
+    return PowerDailySource(PowerClient(cache), settings.lapse_rate_c_per_km)
 
 
 def create_provider(settings) -> DataProvider:
@@ -98,6 +105,7 @@ def create_provider(settings) -> DataProvider:
             ),
             SsmVersionSource(settings.data_region, settings.data_version_parameter),
             poll_seconds=settings.data_poll_seconds,
+            power=_power_source(settings),
         )
     logger.error("DATA_PROVIDER=%r no es válido; valores admitidos: 'fixture', 'athena'", name)
     raise ValueError(f"DATA_PROVIDER no admitido: {name!r}")
