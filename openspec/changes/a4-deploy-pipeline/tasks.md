@@ -2,8 +2,8 @@
 
 ## 1. Aplicación
 
-- [ ] 1.1 Quitar Mangum de `app/main.py`, `pyproject.toml` y `requirements.txt`, y la prueba del adaptador en `tests/test_api.py`; verificar con `pytest -q` y `ruff check .`
-- [ ] 1.2 Eliminar `scripts/package_lambda.py` y `tests/test_package_lambda.py`, y el paso del paquete Lambda en `check.yml`; verificar que `pytest -q` y `actionlint` pasan
+- [x] 1.1 Quitar Mangum de `app/main.py`, `pyproject.toml` y `requirements.txt`, y la prueba del adaptador en `tests/test_api.py`; verificar con `pytest -q` y `ruff check .`
+- [x] 1.2 Eliminar `scripts/package_lambda.py` y `tests/test_package_lambda.py`, y el paso del paquete Lambda en `check.yml`; verificar que `pytest -q` y `actionlint` pasan
 
 ## 2. Despliegue
 

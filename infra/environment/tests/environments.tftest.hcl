@@ -1,5 +1,7 @@
 mock_provider "aws" {
-  override_during = plan
+  mock_resource "aws_iam_role" {
+    defaults = { arn = "arn:aws:iam::123456789012:role/mock-api" }
+  }
   mock_resource "aws_ecs_express_gateway_service" {
     defaults = {
       ingress_paths = [{ access_type = "PUBLIC", endpoint = "preview.example.com" }]
@@ -92,11 +94,11 @@ run "preview_is_isolated_and_disposable" {
     error_message = "El preview ejecuta una tarea con 1 vCPU y 2 GiB."
   }
   assert {
-    condition     = aws_iam_role.api.permissions_boundary == var.runtime_permissions_boundary_arn && jsondecode(aws_iam_role.api.assume_role_policy).Statement[0].Principal.Service == "ecs-tasks.amazonaws.com"
+    condition     = aws_iam_role.api.permissions_boundary == var.runtime_permissions_boundary_arn && aws_iam_role.api.tags.Environment == "pr-42" && jsondecode(aws_iam_role.api.assume_role_policy).Statement[0].Principal.Service == "ecs-tasks.amazonaws.com"
     error_message = "El rol de tarea debe conservar el límite."
   }
   assert {
-    condition     = local.platform_roles.exec.policy == "AmazonECSTaskExecutionRolePolicy" && local.platform_roles.infra.policy == "AmazonECSInfrastructureRoleforExpressGatewayServices"
+    condition     = aws_iam_role_policy_attachment.platform["exec"].policy_arn == "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy" && aws_iam_role_policy_attachment.platform["infra"].policy_arn == "arn:aws:iam::aws:policy/service-role/AmazonECSInfrastructureRoleforExpressGatewayServices"
     error_message = "Los roles de plataforma deben usar las políticas oficiales."
   }
   assert {
@@ -124,6 +126,29 @@ run "reject_unknown_provider" {
     data_provider = "other"
   }
   expect_failures = [var.data_provider]
+}
+
+run "runtime_permissions_are_isolated" {
+  command = apply
+  variables {
+    environment = "pr-7"
+  }
+  assert {
+    condition     = one([for s in jsondecode(aws_iam_role_policy.api.policy).Statement : s.Resource if s.Sid == "OwnAppTable"]) == [aws_dynamodb_table.app.arn]
+    error_message = "La API solo debe acceder a su propia tabla."
+  }
+  assert {
+    condition     = one([for s in jsondecode(aws_iam_role_policy.api.policy).Statement : s.Resource if s.Sid == "OwnAppObjects"]) == ["${aws_s3_bucket.data_lake.arn}/uploads/*", "${aws_s3_bucket.data_lake.arn}/cache/*"]
+    error_message = "La API solo debe escribir uploads y cache de su bucket."
+  }
+  assert {
+    condition     = one([for s in jsondecode(aws_iam_role_policy.api.policy).Statement : s.Action if s.Sid == "ReadGold"]) == ["s3:GetObject"] && alltrue([for s in jsondecode(aws_iam_role_policy.api.policy).Statement : alltrue([for action in s.Action : !startswith(action, "iam:")])])
+    error_message = "La API no debe administrar IAM ni escribir en gold."
+  }
+  assert {
+    condition     = output.api_url == "https://preview.example.com"
+    error_message = "La URL debe extraer el endpoint público con HTTPS."
+  }
 }
 
 run "reject_permanent_environments_other_than_dev" {

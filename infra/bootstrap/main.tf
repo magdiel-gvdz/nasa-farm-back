@@ -106,6 +106,12 @@ resource "aws_iam_policy" "runtime_boundary" {
         ]
       },
       {
+        "Sid" : "GoldBucketLocation",
+        "Effect" : "Allow",
+        "Action" : ["s3:GetBucketLocation"],
+        "Resource" : ["arn:${local.partition}:s3:::${local.data_lake_bucket}"]
+      },
+      {
         "Sid" : "ListGold",
         "Effect" : "Allow",
         "Action" : [
@@ -212,7 +218,7 @@ resource "aws_iam_policy" "runtime_boundary" {
           "dynamodb:DescribeTable"
         ],
         "Resource" : [
-          "arn:${local.partition}:dynamodb:${var.aws_region}:${local.account_id}:table/${var.project}-*-app"
+          "arn:${local.partition}:dynamodb:${var.aws_region}:${local.account_id}:table/${var.project}-$${aws:PrincipalTag/Environment}-app"
         ]
       },
       {
@@ -224,8 +230,8 @@ resource "aws_iam_policy" "runtime_boundary" {
           "s3:DeleteObject"
         ],
         "Resource" : [
-          "arn:${local.partition}:s3:::${var.project}-*-data-${local.account_id}-${var.aws_region}/uploads/*",
-          "arn:${local.partition}:s3:::${var.project}-*-data-${local.account_id}-${var.aws_region}/cache/*"
+          "arn:${local.partition}:s3:::${var.project}-$${aws:PrincipalTag/Environment}-data-${local.account_id}-${var.aws_region}/uploads/*",
+          "arn:${local.partition}:s3:::${var.project}-$${aws:PrincipalTag/Environment}-data-${local.account_id}-${var.aws_region}/cache/*"
         ]
       },
       {
@@ -236,7 +242,7 @@ resource "aws_iam_policy" "runtime_boundary" {
           "logs:PutLogEvents"
         ],
         "Resource" : [
-          "arn:${local.partition}:logs:${var.aws_region}:${local.account_id}:log-group:/ecs/${var.project}-*:log-stream:*"
+          "arn:${local.partition}:logs:${var.aws_region}:${local.account_id}:log-group:/ecs/${var.project}-$${aws:PrincipalTag/Environment}-api:log-stream:*"
         ]
       }
     ]
@@ -422,7 +428,7 @@ resource "aws_iam_role_policy" "deploy" {
         "Sid" : "ReadDefaultCluster",
         "Effect" : "Allow",
         "Action" : [
-          "ecs:DescribeClusters"
+          "ecs:DescribeClusters", "ecs:CreateCluster"
         ],
         "Resource" : [
           "arn:${local.partition}:ecs:${var.aws_region}:${local.account_id}:cluster/default"
@@ -432,6 +438,7 @@ resource "aws_iam_role_policy" "deploy" {
         "Sid" : "OwnTaskDefinitions",
         "Effect" : "Allow",
         "Action" : [
+          "ecs:RegisterTaskDefinition",
           "ecs:DescribeTaskDefinition",
           "ecs:DeregisterTaskDefinition",
           "ecs:TagResource",

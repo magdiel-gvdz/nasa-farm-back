@@ -95,6 +95,7 @@ resource "aws_s3_bucket_policy" "data_lake" {
 resource "aws_iam_role" "api" {
   name                 = "${local.name}-api"
   permissions_boundary = var.runtime_permissions_boundary_arn
+  tags                 = { Environment = var.environment }
   assume_role_policy = jsonencode({ Version = "2012-10-17", Statement = [{
     Effect = "Allow", Action = "sts:AssumeRole", Principal = { Service = "ecs-tasks.amazonaws.com" }
   }] })
@@ -134,6 +135,12 @@ resource "aws_iam_role_policy" "api" {
         "Resource" : [
           "arn:${data.aws_partition.current.partition}:s3:::${local.data_lake_bucket}/gold/*"
         ]
+      },
+      {
+        "Sid" : "GoldBucketLocation",
+        "Effect" : "Allow",
+        "Action" : ["s3:GetBucketLocation"],
+        "Resource" : ["arn:${data.aws_partition.current.partition}:s3:::${local.data_lake_bucket}"]
       },
       {
         "Sid" : "ListGold",

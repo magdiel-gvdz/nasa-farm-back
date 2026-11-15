@@ -9,7 +9,8 @@ mock_provider "aws" {
 }
 
 run "protect_state_and_limit_oidc_subjects" {
-  command = plan
+  # Apply simulado para resolver los ARN usados dentro de las políticas JSON.
+  command = apply
   variables {
     existing_github_oidc_provider_arn = "arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com"
   }
@@ -60,6 +61,22 @@ run "protect_state_and_limit_oidc_subjects" {
   assert {
     condition     = length(aws_iam_role_policy.deploy["preview"].policy) <= 10240 && length(aws_iam_policy.runtime_boundary.policy) <= 6144
     error_message = "Las políticas deben caber en los límites de IAM."
+  }
+  assert {
+    condition     = one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Resource if try(s.Sid, "") == "PublishAPIImage"]) == [aws_ecr_repository.api.arn] && one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Action if try(s.Sid, "") == "ECRAuthentication"]) == ["ecr:GetAuthorizationToken"]
+    error_message = "La publicación de imágenes debe quedar limitada al repositorio compartido."
+  }
+  assert {
+    condition     = one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Condition.StringEquals["iam:PassedToService"] if try(s.Sid, "") == "PassTaskRoles"]) == "ecs-tasks.amazonaws.com" && one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Condition.StringEquals["iam:PassedToService"] if try(s.Sid, "") == "PassInfrastructureRole"]) == "ecs.amazonaws.com"
+    error_message = "PassRole debe estar condicionado al servicio de ECS correspondiente."
+  }
+  assert {
+    condition     = one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Resource if try(s.Sid, "") == "ManageOwnExecutionRoles"]) == "arn:aws:iam::123456789012:role/nasa-farm-pr-*-api"
+    error_message = "Los permisos de políticas en línea no deben incluir roles de plataforma."
+  }
+  assert {
+    condition     = strcontains(one([for s in jsondecode(aws_iam_policy.runtime_boundary.policy).Statement : s.Resource[0] if try(s.Sid, "") == "OwnAppTable"]), "$${aws:PrincipalTag/Environment}")
+    error_message = "El límite debe aislar la tabla por la etiqueta del entorno de la tarea."
   }
 }
 
