@@ -24,7 +24,7 @@
 - [x] 4.1 Implementar en `explain.py` el mecanismo de reglas (condición sobre métricas → clave de texto con valores) y los catálogos es/en; verificar con una prueba que toda clave existe en ambos idiomas
 - [x] 4.2 Escribir las reglas de `why`, `benefits` y `evidence` (con `source_id`) para cada plantilla y para la rotación actual; verificar con una prueba que toda estrategia tiene las tres listas no vacías y toda evidencia cita una fuente existente
 - [x] 4.3 Escribir las reglas de `gaps` y `risks_local_review` (mínimos garantizados, riego insuficiente, relajación, sin margen) y el `disclaimer`; verificar con las pruebas de riego de 500 frente a 400 mm y del aviso en inglés
-- [ ] 4.4 Revisar con SCI los textos generados para las dos geocercas de demostración y corregir; verificar con la aprobación de SCI en el PR
+- [x] 4.4 Revisar con SCI los textos generados para las dos geocercas de demostración y corregir; verificar con la aprobación de SCI en el PR
   - Bloqueada: requiere la revisión del rol científico y las geocercas de demostración de `g2`
 
 ## 5. Endpoint

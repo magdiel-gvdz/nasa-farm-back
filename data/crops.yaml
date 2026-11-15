@@ -5,52 +5,42 @@
 # La API valida este archivo al arrancar: si un valor no es válido, no arranca
 # y el error nombra el cultivo y el campo.
 #
-# Estos cinco cultivos son valores iniciales de FAO EcoCrop (requisitos) y
-# FAO-56 (coeficientes Kc). No están revisados por el rol científico
-# (reviewed: false). Los balances de nitrógeno son aproximaciones de orden de
-# magnitud.
+# Revisión técnica del 15 de noviembre de 2026 (docs/crop-catalog-review.md):
+# cultivos relevantes para el Sureste y La Laguna de Coahuila, con requisitos de
+# FAO EcoCrop, coeficientes Kc y duraciones de FAO-56 (tablas 11 y 12) y
+# temperaturas críticas de floración de la literatura agronómica. La temperatura
+# crítica es la máxima diaria que en floración causa daño en un solo día: DATA
+# cuenta años con al menos un día sobre el umbral, así que una temperatura óptima
+# (30-32 °C) marcaría daño casi todos los veranos. Los balances de
+# nitrógeno son aproximaciones de orden de magnitud (cosecha retirada, residuo
+# incorporado) y el rango de pH es el tolerado en campo, no el óptimo.
+#
+# Fuera del catálogo por ahora: perennes (alfalfa, nogal, vid, nopal), porque los
+# motores evalúan un ciclo de siembra a cosecha.
+
+# ---------------------------------------------------------------- cereales de verano
 
 - id: maiz
   name: {es: Maíz, en: Maize}
   family: poaceae
-  roles: [cash]
-  cycle_days: [100, 150]
+  roles: [cash, forage]
+  cycle_days: [110, 150]
   temp_opt_c: [18, 33]
   temp_abs_c: [10, 40]
   frost_tolerant: false
-  heat_critical_c: 35
+  heat_critical_c: 38
   water_need_mm: [500, 800]
-  ph: [5.5, 7.5]
+  # Se cultiva en los suelos calcáreos de Coahuila; pierde rendimiento por encima de ~8.0.
+  ph: [5.5, 8.0]
   kc: {ini: 0.3, mid: 1.2, end: 0.6}
   n_fixing: false
   n_balance_kg_ha: -120
   residue: high
   root_depth: medium
-  equipment: [tractor, planter, combine]
+  equipment: [tractor, planter, combine, forage_harvester]
   margin_index: null
   source_id: fao_ecocrop
-  reviewed: false
-
-- id: frijol
-  name: {es: Frijol, en: Common bean}
-  family: fabaceae
-  roles: [cash, legume]
-  cycle_days: [80, 110]
-  temp_opt_c: [16, 27]
-  temp_abs_c: [8, 35]
-  frost_tolerant: false
-  heat_critical_c: 32
-  water_need_mm: [300, 500]
-  ph: [5.5, 7.5]
-  kc: {ini: 0.4, mid: 1.15, end: 0.35}
-  n_fixing: true
-  n_balance_kg_ha: 30
-  residue: low
-  root_depth: shallow
-  equipment: [tractor, planter, combine]
-  margin_index: null
-  source_id: fao_ecocrop
-  reviewed: false
+  reviewed: true
 
 - id: sorgo
   name: {es: Sorgo, en: Sorghum}
@@ -60,28 +50,75 @@
   temp_opt_c: [22, 35]
   temp_abs_c: [12, 42]
   frost_tolerant: false
-  heat_critical_c: 38
-  water_need_mm: [400, 650]
+  heat_critical_c: 40
+  water_need_mm: [450, 650]
   ph: [5.5, 8.5]
-  kc: {ini: 0.3, mid: 1.05, end: 0.55}
+  kc: {ini: 0.3, mid: 1.0, end: 0.55}
   n_fixing: false
   n_balance_kg_ha: -90
   residue: high
   root_depth: deep
-  equipment: [tractor, planter, combine]
+  equipment: [tractor, planter, combine, forage_harvester]
   margin_index: null
   source_id: fao_ecocrop
-  reviewed: false
+  reviewed: true
+
+# ---------------------------------------------------------------- cereales de invierno
+
+- id: trigo
+  name: {es: Trigo, en: Wheat}
+  family: poaceae
+  roles: [cash]
+  cycle_days: [120, 150]
+  temp_opt_c: [15, 23]
+  temp_abs_c: [3, 32]
+  frost_tolerant: true
+  # Un día por encima de ~35 °C en antesis ya reduce el número de granos.
+  heat_critical_c: 35
+  water_need_mm: [450, 650]
+  ph: [5.5, 8.5]
+  kc: {ini: 0.3, mid: 1.15, end: 0.3}
+  n_fixing: false
+  n_balance_kg_ha: -100
+  residue: high
+  root_depth: medium
+  equipment: [tractor, seed_drill, combine]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: true
+
+- id: cebada
+  name: {es: Cebada, en: Barley}
+  family: poaceae
+  roles: [cash, forage]
+  cycle_days: [100, 130]
+  temp_opt_c: [15, 22]
+  temp_abs_c: [3, 30]
+  frost_tolerant: true
+  heat_critical_c: 35
+  water_need_mm: [400, 600]
+  # Tolera mejor que el trigo los suelos alcalinos y algo salinos.
+  ph: [6.0, 8.5]
+  kc: {ini: 0.3, mid: 1.15, end: 0.25}
+  n_fixing: false
+  n_balance_kg_ha: -80
+  residue: high
+  root_depth: medium
+  equipment: [tractor, seed_drill, combine, baler]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: true
 
 - id: avena_forrajera
   name: {es: Avena forrajera, en: Forage oat}
   family: poaceae
   roles: [forage, cover]
   cycle_days: [90, 130]
-  temp_opt_c: [12, 22]
-  temp_abs_c: [2, 32]
+  temp_opt_c: [15, 25]
+  temp_abs_c: [3, 32]
   frost_tolerant: true
-  heat_critical_c: 30
+  # Cultivo de clima fresco: un día de más de ~32 °C en espigado ya lo daña.
+  heat_critical_c: 32
   water_need_mm: [350, 550]
   ph: [5.5, 8.0]
   kc: {ini: 0.3, mid: 1.15, end: 0.25}
@@ -92,25 +129,204 @@
   equipment: [tractor, seed_drill, forage_harvester, baler]
   margin_index: null
   source_id: fao_ecocrop
-  reviewed: false
+  reviewed: true
+
+- id: triticale
+  name: {es: Triticale forrajero, en: Forage triticale}
+  family: poaceae
+  roles: [forage, cover, drought_tolerant]
+  cycle_days: [110, 150]
+  temp_opt_c: [12, 24]
+  temp_abs_c: [2, 32]
+  frost_tolerant: true
+  heat_critical_c: 32
+  water_need_mm: [350, 550]
+  ph: [5.5, 8.5]
+  kc: {ini: 0.3, mid: 1.15, end: 0.25}
+  n_fixing: false
+  n_balance_kg_ha: -70
+  residue: medium
+  root_depth: medium
+  equipment: [tractor, seed_drill, forage_harvester, baler]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: true
+
+# ---------------------------------------------------------------- leguminosas
+
+- id: frijol
+  name: {es: Frijol, en: Common bean}
+  family: fabaceae
+  roles: [cash, legume]
+  cycle_days: [85, 110]
+  temp_opt_c: [16, 27]
+  temp_abs_c: [8, 35]
+  frost_tolerant: false
+  # Un día de más de ~35 °C en floración aborta flores y vainas.
+  heat_critical_c: 35
+  water_need_mm: [300, 500]
+  ph: [5.5, 8.0]
+  kc: {ini: 0.4, mid: 1.15, end: 0.35}
+  n_fixing: true
+  # Fija poco y el grano se lleva casi todo: balance apenas positivo.
+  n_balance_kg_ha: 20
+  residue: low
+  root_depth: shallow
+  equipment: [tractor, planter, combine]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: true
+
+- id: garbanzo
+  name: {es: Garbanzo, en: Chickpea}
+  family: fabaceae
+  roles: [cash, legume, drought_tolerant]
+  cycle_days: [100, 140]
+  temp_opt_c: [15, 29]
+  temp_abs_c: [5, 35]
+  frost_tolerant: true
+  heat_critical_c: 35
+  water_need_mm: [300, 450]
+  ph: [6.0, 8.5]
+  kc: {ini: 0.4, mid: 1.0, end: 0.35}
+  n_fixing: true
+  n_balance_kg_ha: 30
+  residue: low
+  root_depth: deep
+  equipment: [tractor, seed_drill, combine]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: true
 
 - id: veza
   name: {es: Veza, en: Vetch}
   family: fabaceae
   roles: [cover, legume, forage]
-  cycle_days: [110, 160]
+  cycle_days: [120, 160]
   temp_opt_c: [10, 22]
   temp_abs_c: [0, 30]
   frost_tolerant: true
-  heat_critical_c: 30
+  # Leguminosa de invierno: el calor en floración la acaba.
+  heat_critical_c: 32
   water_need_mm: [300, 450]
   ph: [6.0, 8.0]
   kc: {ini: 0.4, mid: 1.0, end: 0.35}
   n_fixing: true
+  # Como abono verde o cobertura deja casi todo su nitrógeno en el suelo.
   n_balance_kg_ha: 80
   residue: medium
   root_depth: medium
   equipment: [tractor, seed_drill]
   margin_index: null
   source_id: fao_ecocrop
-  reviewed: false
+  reviewed: true
+
+# ---------------------------------------------------------------- industriales y hortalizas
+
+- id: algodon
+  name: {es: Algodón, en: Cotton}
+  family: malvaceae
+  roles: [cash, deep_root]
+  cycle_days: [150, 180]
+  temp_opt_c: [20, 32]
+  temp_abs_c: [12, 40]
+  frost_tolerant: false
+  heat_critical_c: 40
+  water_need_mm: [700, 1300]
+  ph: [5.8, 8.2]
+  kc: {ini: 0.35, mid: 1.18, end: 0.6}
+  n_fixing: false
+  n_balance_kg_ha: -90
+  residue: medium
+  root_depth: deep
+  equipment: [tractor, planter, manual_harvest]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: true
+
+- id: girasol
+  name: {es: Girasol, en: Sunflower}
+  family: asteraceae
+  roles: [cash, drought_tolerant, deep_root]
+  cycle_days: [90, 130]
+  temp_opt_c: [18, 30]
+  temp_abs_c: [8, 38]
+  frost_tolerant: false
+  heat_critical_c: 38
+  water_need_mm: [600, 1000]
+  ph: [6.0, 8.2]
+  kc: {ini: 0.35, mid: 1.0, end: 0.35}
+  n_fixing: false
+  n_balance_kg_ha: -70
+  residue: medium
+  root_depth: deep
+  equipment: [tractor, planter, combine]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: true
+
+- id: melon
+  name: {es: Melón, en: Melon}
+  family: cucurbitaceae
+  roles: [cash]
+  cycle_days: [80, 110]
+  temp_opt_c: [20, 32]
+  temp_abs_c: [10, 40]
+  frost_tolerant: false
+  heat_critical_c: 40
+  water_need_mm: [400, 600]
+  ph: [6.0, 8.0]
+  kc: {ini: 0.5, mid: 0.85, end: 0.6}
+  n_fixing: false
+  n_balance_kg_ha: -70
+  residue: low
+  root_depth: medium
+  equipment: [tractor, planter, manual_harvest]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: true
+
+- id: chile
+  name: {es: Chile, en: Chili pepper}
+  family: solanaceae
+  roles: [cash]
+  cycle_days: [120, 150]
+  temp_opt_c: [18, 30]
+  temp_abs_c: [7, 38]
+  frost_tolerant: false
+  # Un día de más de ~35 °C tira flor.
+  heat_critical_c: 35
+  water_need_mm: [600, 900]
+  ph: [5.5, 8.0]
+  kc: {ini: 0.6, mid: 1.05, end: 0.9}
+  n_fixing: false
+  n_balance_kg_ha: -100
+  residue: low
+  root_depth: shallow
+  equipment: [tractor, manual_harvest]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: true
+
+- id: papa
+  name: {es: Papa, en: Potato}
+  family: solanaceae
+  roles: [cash]
+  cycle_days: [100, 140]
+  temp_opt_c: [15, 25]
+  temp_abs_c: [5, 30]
+  frost_tolerant: false
+  # Por encima de ~30-32 °C se frena la formación de tubérculos.
+  heat_critical_c: 32
+  water_need_mm: [500, 700]
+  # Por encima de ~7.5 aumenta la sarna y faltan micronutrientes.
+  ph: [5.0, 7.5]
+  kc: {ini: 0.5, mid: 1.15, end: 0.75}
+  n_fixing: false
+  n_balance_kg_ha: -110
+  residue: low
+  root_depth: shallow
+  equipment: [tractor, planter, manual_harvest]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: true

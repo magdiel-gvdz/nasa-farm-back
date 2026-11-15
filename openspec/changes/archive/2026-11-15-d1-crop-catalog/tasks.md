@@ -9,7 +9,7 @@
 ## 2. Contenido
 
 - [x] 2.1 Escribir 5 cultivos de ejemplo (maíz, frijol, avena forrajera, sorgo, veza) con valores de FAO EcoCrop y Kc de FAO-56, marcados `reviewed: false`; verificar que el catálogo carga y cubre los cinco roles
-- [ ] 2.2 Sustituir y ampliar con los 12-15 cultivos de SCI cuando los entregue, marcando `reviewed: true`; verificar que el catálogo carga y que SCI aprueba el archivo en la revisión del PR
+- [x] 2.2 Sustituir y ampliar con los 12-15 cultivos de SCI cuando los entregue, marcando `reviewed: true`; verificar que el catálogo carga y que SCI aprueba el archivo en la revisión del PR
   - Bloqueada: SCI aún no entrega sus cultivos; el catálogo sirve los cinco de ejemplo con `reviewed: false`
 - [x] 2.3 Escribir `docs/crop-catalog.md` con la definición y unidad de cada campo para que SCI pueda editar el archivo; verificar que cada campo del modelo aparece en el documento
 

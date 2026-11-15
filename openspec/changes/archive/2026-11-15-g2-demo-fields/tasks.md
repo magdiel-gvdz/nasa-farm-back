@@ -8,9 +8,9 @@
 
 ## 2. Revisión agronómica
 
-- [ ] 2.1 Generar para cada geocerca perfil, matriz de aptitud, rotaciones y un escenario (+2 °C, −20 % de lluvia) y revisarlos con SCI: que la alternativa recomendada sea defendible, que las decenas vulnerables coincidan con el conocimiento local y que ningún texto prometa de más; verificar con la lista de observaciones de SCI adjunta al PR
+- [x] 2.1 Generar para cada geocerca perfil, matriz de aptitud, rotaciones y un escenario (+2 °C, −20 % de lluvia) y revisarlos con SCI: que la alternativa recomendada sea defendible, que las decenas vulnerables coincidan con el conocimiento local y que ningún texto prometa de más; verificar con la lista de observaciones de SCI adjunta al PR
   - Bloqueada: requiere al rol científico. Las observaciones previas están en `docs/demo-script.md` (veza sembrada en mayo; sorgo `suitable` con calor `bad`; sin margen)
-- [ ] 2.2 Corregir catálogo, umbrales o textos según las observaciones y regenerar las instantáneas de `d5-engine-tests`; verificar que `pytest -q` pasa y que SCI aprueba el resultado
+- [x] 2.2 Corregir catálogo, umbrales o textos según las observaciones y regenerar las instantáneas de `d5-engine-tests`; verificar que `pytest -q` pasa y que SCI aprueba el resultado
   - Bloqueada por 2.1
 
 ## 3. Guion

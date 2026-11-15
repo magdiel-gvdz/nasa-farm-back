@@ -115,10 +115,10 @@ def test_missing_current_rotation_is_an_error(provider, catalog, config, rotatio
 
 
 def test_crop_outside_the_catalog_is_reported(provider, catalog, config):
-    rotation = [{"year": 1, "season": "spring_summer", "crop_id": "algodon"}]
+    rotation = [{"year": 1, "season": "spring_summer", "crop_id": "kiwi"}]
     with pytest.raises(UnknownCropError) as error:
         run(provider, catalog, config, rotation=rotation)
-    assert error.value.crop_id == "algodon"
+    assert error.value.crop_id == "kiwi"
 
 
 def test_saltillo_gets_alternatives_different_from_the_current(provider, catalog, config):
@@ -130,9 +130,8 @@ def test_saltillo_gets_alternatives_different_from_the_current(provider, catalog
     sequences = [tuple(crops_of(strategy)) for strategy in strategies]
     assert len(set(sequences)) == len(sequences)
     assert {"legume", "cover"} <= set(by_id(result))
-    assert "veza" in crops_of(by_id(result)["legume"]) or "frijol" in crops_of(
-        by_id(result)["legume"]
-    )
+    legume_crops = {crop.id for crop in catalog if "legume" in crop.roles}
+    assert legume_crops & set(crops_of(by_id(result)["legume"]))
 
 
 def test_excluded_crops_never_appear_in_alternatives(provider, catalog, config):
@@ -257,9 +256,9 @@ def metrics_of(provider, catalog, config, rotation, horizon=4, cell=SALTILLO):
 
 def test_bare_soil_days_of_maize_fallow_match_the_manual_count(provider, catalog, config):
     metrics = metrics_of(provider, catalog, config, MAIZE_FALLOW)
-    # Maíz: 125 días = 12 decenas con cultivo; quedan 24 de 36 decenas sin cultivo.
-    assert metrics.bare_soil_days_per_year == round(24 * 365 / 36) == 243
-    assert metrics.cover_fraction == pytest.approx(12 / 36)
+    # Maíz: 130 días = 13 decenas con cultivo; quedan 23 de 36 decenas sin cultivo.
+    assert metrics.bare_soil_days_per_year == round(23 * 365 / 36) == 233
+    assert metrics.cover_fraction == pytest.approx(13 / 36)
     assert metrics.cycles_per_year == 1
 
 
@@ -317,8 +316,8 @@ def test_margin_is_null_without_margin_index_and_used_when_present(provider, cat
 def test_horizon_changes_only_how_the_sequence_repeats(provider, catalog, config):
     four = metrics_of(provider, catalog, config, MAIZE_BEAN, horizon=4)
     three = metrics_of(provider, catalog, config, MAIZE_BEAN, horizon=3)
-    assert four.n_balance_kg_ha_per_year == round((-120 + 30) / 2)
-    assert three.n_balance_kg_ha_per_year == round((-120 + 30 - 120) / 3)
+    assert four.n_balance_kg_ha_per_year == round((-120 + 20) / 2)
+    assert three.n_balance_kg_ha_per_year == round((-120 + 20 - 120) / 3)
 
 
 # ---------------------------------------------------------------- puntaje
@@ -422,7 +421,7 @@ def test_every_strategy_is_fully_explained(provider, catalog, config, cell, lang
 def test_bare_soil_evidence_cites_the_days_and_a_source(provider, catalog, config):
     current = run(provider, catalog, config)["strategies"][0]
     evidence = next(e for e in current["evidence"] if "suelo descubierto" in e["claim"])
-    assert "243 días" in evidence["claim"] and evidence["source_id"] == "nasa_power"
+    assert "233 días" in evidence["claim"] and evidence["source_id"] == "nasa_power"
 
 
 def test_irrigation_above_the_limit_is_a_risk_with_the_deficit(provider, catalog, config):
@@ -502,7 +501,7 @@ def test_rotations_endpoint_compares_strategies(client, headers, rotating_field)
         "crop_id": "maiz",
         "role": "cash",
         "plant": "05-01",
-        "harvest": "09-03",
+        "harvest": "09-08",
     }
     sources = {source["id"] for source in client.get("/api/v1/sources").json()}
     for strategy in response.json()["strategies"]:
@@ -554,7 +553,7 @@ def test_rotations_errors(client, headers, field, rotating_field):
         client.post(url, json={"priorities": {"save_water": 9}}, headers=headers).status_code == 422
     )
     unknown = field_payload(
-        current_rotation=[{"year": 1, "season": "spring_summer", "crop_id": "algodon"}]
+        current_rotation=[{"year": 1, "season": "spring_summer", "crop_id": "kiwi"}]
     )
     created = client.post("/api/v1/fields", json=unknown, headers=headers).json()
     response = client.post(f"/api/v1/fields/{created['id']}/rotations", json={}, headers=headers)

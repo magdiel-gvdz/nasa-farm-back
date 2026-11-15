@@ -23,7 +23,7 @@ Un rango se escribe `[mínimo, máximo]`. Todos los campos son obligatorios salv
 | `temp_opt_c` | °C, rango | Temperatura media en la que el cultivo rinde bien |
 | `temp_abs_c` | °C, rango | Temperaturas límite que soporta; debe contener a `temp_opt_c` |
 | `frost_tolerant` | `true` / `false` | Si aguanta heladas ligeras (Tmin entre 0 y −2 °C) |
-| `heat_critical_c` | °C | Tmax a partir de la cual hay daño, sobre todo en floración. El motor usa el umbral de datos más cercano: 30, 32, 35 o 38 °C |
+| `heat_critical_c` | °C | Tmax que en floración causa daño en un solo día (no la temperatura óptima). El motor usa el umbral de datos más cercano: 30, 32, 35 o 38 °C |
 | `water_need_mm` | mm por ciclo, rango | Agua que consume el cultivo en un ciclo |
 | `ph` | pH, rango | pH del suelo tolerado (entre 0 y 14) |
 | `kc` | `{ini, mid, end}`, sin unidad | Coeficientes de cultivo de FAO-56 en las etapas inicial, media y final; cada uno mayor que 0 y hasta 1.5 |
@@ -61,6 +61,11 @@ Si hace falta una familia, un rol o un equipo que no está en la lista, hay que 
 
 ## Estado del contenido
 
-Los cinco cultivos actuales (maíz, frijol, sorgo, avena forrajera y veza) son valores iniciales de
-FAO EcoCrop y FAO-56 con `reviewed: false`. Los sustituirán y ampliarán los 12-15 cultivos que
-entregue SCI, que se marcarán `reviewed: true`.
+El catálogo tiene 14 cultivos relevantes para el Sureste y La Laguna de Coahuila: maíz, sorgo,
+trigo, cebada, avena forrajera, triticale, frijol, garbanzo, veza, algodón, girasol, melón, chile y
+papa. Los valores salen de FAO EcoCrop y FAO-56 y los revisó el rol científico el 15 de noviembre
+de 2026 contra los datos reales de Athena (`reviewed: true`). La metodología, las fuentes y las
+limitaciones están en [crop-catalog-review.md](crop-catalog-review.md).
+
+Fuera del catálogo por ahora: perennes (alfalfa, nogal, vid, nopal), porque los motores evalúan un
+ciclo de siembra a cosecha.
