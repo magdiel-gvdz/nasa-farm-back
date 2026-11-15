@@ -104,3 +104,114 @@ confianza baja a `low`. La confianza nunca es `high`: los datos son de la zona, 
 
 **Escenarios.** Los parámetros `delta_t_c` y `delta_p_pct` se aceptan pero todavía no cambian el
 resultado; los aplicará el motor de escenarios (`d4`).
+
+## Rotaciones (`POST /fields/{id}/rotations`)
+
+Compara la rotación actual de la geocerca con alternativas y explica en qué se basa cada una.
+Código: `app/engines/rotation/` (`candidates.py`, `simulate.py`, `score.py`, `explain.py`). La
+geocerca debe declarar `current_rotation` con al menos un cultivo; si no, la respuesta es
+`422 current_rotation_required`.
+
+### Rotación actual
+
+Se normaliza a años completos con dos temporadas (`spring_summer` y `fall_winter`); una temporada
+sin cultivo es barbecho. El cultivo principal es el que tiene más ciclos. La rotación actual se
+muestra siempre como línea base, aunque no sea apta en la zona.
+
+| Parámetro | Valor | Significado |
+|---|---|---|
+| `rotation.planting_months.spring_summer` | 5 | Mes de siembra por defecto en primavera-verano |
+| `rotation.planting_months.fall_winter` | 10 | Mes de siembra por defecto en otoño-invierno |
+| `rotation.season_windows.spring_summer` | 3-7 | Meses entre los que se puede mover la siembra |
+| `rotation.season_windows.fall_winter` | 9-11 | Meses entre los que se puede mover la siembra |
+
+### Plantillas
+
+Cada alternativa sale de una plantilla que transforma la rotación actual con una intención clara.
+No se enumeran todas las secuencias posibles.
+
+| Plantilla | Qué hace |
+|---|---|
+| `legume` | Sustituye el último ciclo del cultivo principal por la leguminosa más apta. Si el cultivo principal solo tiene un ciclo, la rotación se alarga al doble para alternar |
+| `cover` | Ocupa las temporadas en barbecho con el cultivo de cobertura más apto para esos meses |
+| `drought` | Cambia el cultivo principal, en todos sus ciclos, por el tolerante a sequía más apto |
+| `forage` | Ocupa el barbecho con el forraje más apto. Solo si la geocerca declara ganado |
+| `diversify` | Último recurso: alterna el cultivo principal con el cultivo permitido más apto de otra familia |
+| `rest` | Relleno: deja un ciclo en barbecho. Solo aparece si las restricciones no dejan otra alternativa |
+
+El cultivo de cada plantilla es el de mayor puntaje de aptitud en el mes de siembra de la
+temporada. Nunca se eligen cultivos de `exclude_crops` ni cultivos cuyo equipo no esté en
+`constraints.equipment` (si la lista va vacía no se restringe por equipo).
+
+### Orden de relajación
+
+Siempre hay al menos dos alternativas además de la actual. Si no las hay, la búsqueda se relaja en
+este orden y la alternativa admitida lo declara en `risks_local_review` y queda con confianza `low`:
+
+1. Solo cultivos `suitable` en el mes de siembra por defecto.
+2. Se admiten cultivos `marginal`.
+3. Se mueve el mes de siembra dentro de la ventana de la temporada.
+4. Se admite cualquier cultivo permitido, aunque sea `unsuitable`.
+5. Plantilla `diversify` y, si aún faltan, plantillas `rest`.
+
+Se devuelven la actual y las mejores `max_strategies − 1` alternativas por puntaje global.
+
+### Métricas
+
+La secuencia se repite sobre `horizon_years` y cada métrica es la media anual.
+
+| Métrica | Cálculo |
+|---|---|
+| `water_demand_mm_per_year` | Suma de la demanda de cada ciclo (Kc por etapa × ET0 mediana), como en aptitud |
+| `irrigation_need_mm_per_year` | Suma de lo que la lluvia efectiva no cubre en cada ciclo. Si supera el límite de riego se declara como riesgo con los milímetros que faltan |
+| `n_balance_kg_ha_per_year` | Suma de `n_balance_kg_ha` del catálogo. Es un balance aproximado |
+| `bare_soil_days_per_year` | Decenas sin cultivo × 10.14 días |
+| `erosion_exposure_index` | De 0 a 1: probabilidad de lluvia intensa de las decenas sin cultivo dividida entre la de todo el año. No son toneladas por hectárea: falta la pendiente |
+| `om_trend` | Índice = 0.3 × rastrojo medio (`low` 0, `medium` 0.5, `high` 1) + 0.7 × fracción del tiempo con cultivo |
+| `pest_break_score` | De 0 a 5: fracción de cambios de cultivo en los que cambia la familia botánica. Repetir siempre la misma familia da 0 |
+| `gross_margin_index` | Media de `margin_index` de los cultivos; `null` si alguno no lo tiene |
+
+| Parámetro | Valor | Significado |
+|---|---|---|
+| `rotation.om_trend.improving_from` | 0.6 | Índice desde el que la tendencia es `improving` |
+| `rotation.om_trend.stable_from` | 0.4 | Índice desde el que es `stable`; por debajo, `declining` |
+
+### Puntajes
+
+Cada prioridad va de 0 a 5 y se calcula contra referencias fijas, de modo que añadir o quitar una
+alternativa no cambia el puntaje de las demás.
+
+| Prioridad | Cálculo |
+|---|---|
+| `save_water` | 5 con 0 mm de riego; 0 en la referencia de riego |
+| `income` | Proporcional a `gross_margin_index`; `null` si no hay margen, y entonces no entra en el puntaje y se declara en `gaps` |
+| `soil_health` | Media de cuatro puntajes: nitrógeno, suelo descubierto, exposición a erosión y tendencia de materia orgánica (1, 3 o 5) |
+| `forage` | Ciclos de cultivos forrajeros por año |
+| `pest_break` | Igual a `pest_break_score` |
+| `low_labor` | 5 con un ciclo por año; 0 en el máximo de ciclos |
+
+| Parámetro | Valor | Significado |
+|---|---|---|
+| `rotation.references.irrigation_mm` | 1000 | Necesidad de riego anual que vale 0 en `save_water` |
+| `rotation.references.n_balance_low_kg_ha` | −150 | Balance de nitrógeno que vale 0 |
+| `rotation.references.n_balance_high_kg_ha` | 50 | Balance de nitrógeno que vale 5 |
+| `rotation.references.forage_cycles_per_year` | 1 | Ciclos de forraje por año que valen 5 |
+| `rotation.references.max_cycles_per_year` | 3 | Ciclos por año que valen 0 en `low_labor` |
+| `rotation.references.margin_index` | 1.5 | Índice de margen que vale 5 en `income` |
+
+`overall` (0 a 100) es la media de las prioridades ponderada por los pesos de 0 a 5 del agricultor,
+multiplicada por 20. Con todos los pesos en cero se usan pesos iguales. `recommended_id` es la
+estrategia con mayor `overall`; en empate gana la rotación actual.
+
+### Explicación
+
+Cada frase de `why`, `evidence`, `benefits`, `gaps` y `risks_local_review` sale de una regla: una
+condición sobre las métricas y un texto es/en con los valores interpolados. No interviene ningún
+modelo de lenguaje. Toda estrategia declara en `gaps` la resolución zonal y la falta de análisis de
+laboratorio, y en `risks_local_review` que plagas, enfermedades y mercado no se observan desde
+satélite. Cada `evidence` lleva un valor calculado y un `source_id` de `/sources`.
+
+**Confianza.** `low` si hubo relajación o si algún cultivo tiene un factor de aptitud desconocido;
+si no, `medium`.
+
+**Escenarios.** `scenario` se devuelve tal cual pero todavía no cambia el resultado (`d4`).

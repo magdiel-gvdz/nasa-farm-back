@@ -3,7 +3,6 @@ import copy
 import pytest
 from pydantic import ValidationError
 
-from app.api.fixtures import load_fixture
 from app.api.schemas.common import ErrorResponse, Gap, Scenario, Source
 from app.api.schemas.crops import Crop
 from app.api.schemas.fields import Field, FieldCreate, FieldUpdate
@@ -14,6 +13,7 @@ from app.catalog.loader import load_catalog
 from tests.helpers import (
     field_payload,
     reference_profile,
+    reference_rotations,
     reference_suitability_detail,
     reference_suitability_matrix,
     square,
@@ -192,7 +192,7 @@ def test_rotation_request_defaults_and_limits():
 
 
 def test_rotation_response_needs_three_strategies_including_the_current_one():
-    response = load_fixture("rotations")
+    response = reference_rotations()
     assert len(RotationResponse.model_validate(response).strategies) >= 3
     with pytest.raises(ValidationError):
         RotationResponse.model_validate({**response, "strategies": response["strategies"][:2]})

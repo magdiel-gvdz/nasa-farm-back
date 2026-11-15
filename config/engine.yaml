@@ -45,3 +45,30 @@ suitability:
     ph_tolerance: 0.5
     # Clases texturales (USDA) que complican el manejo del agua.
     difficult_textures: [sand, loamy sand, clay, silty clay, sandy clay]
+
+rotation:
+  # Mes de siembra por defecto de cada temporada.
+  planting_months:
+    spring_summer: 5
+    fall_winter: 10
+  # Meses entre los que se puede mover la siembra si hace falta relajar la búsqueda.
+  season_windows:
+    spring_summer: [3, 4, 5, 6, 7]
+    fall_winter: [9, 10, 11]
+  # Referencias fijas para convertir cada métrica en un puntaje de 0 a 5.
+  references:
+    # Necesidad de riego anual (mm) que vale 0 en ahorro de agua; 0 mm vale 5.
+    irrigation_mm: 1000
+    # Balance de nitrógeno anual (kg/ha) que vale 0 y que vale 5 en salud del suelo.
+    n_balance_low_kg_ha: -150
+    n_balance_high_kg_ha: 50
+    # Ciclos de forraje por año que valen 5 en forraje.
+    forage_cycles_per_year: 1
+    # Ciclos de cultivo por año que valen 0 en poca mano de obra; 1 ciclo vale 5.
+    max_cycles_per_year: 3
+    # Índice de margen que vale 5 en ingreso.
+    margin_index: 1.5
+  # Índice de materia orgánica (0-1) desde el que la tendencia mejora o se mantiene.
+  om_trend:
+    improving_from: 0.6
+    stable_from: 0.4

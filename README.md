@@ -58,11 +58,12 @@ CI verifica salud, exclusión de archivos privados y apagado en menos de 10 s.
 | `/api/v1/...` | Endpoints de negocio: catálogos, geocercas, perfil, aptitud y rotaciones. Ver [docs/api-contract.md](docs/api-contract.md) |
 | `GET /docs` y `/openapi.json` | Documentación y contrato FastAPI; el contrato versionado está en `contracts/openapi.json` |
 
-Las geocercas (`/api/v1/fields`) son reales, `/api/v1/sources` lee del proveedor
-de datos y `/api/v1/crops` del catálogo `data/crops.yaml`, que se valida al
-arrancar (campos en [docs/crop-catalog.md](docs/crop-catalog.md)) y el perfil
-(`/fields/{id}/profile`) se calcula con los datos del proveedor; el resto de endpoints de negocio devuelve por ahora una respuesta fija
-marcada con `X-Fieldshift-Mock: 1`, hasta que lleguen el perfil y los motores. Tras cambiar una
+Todos los endpoints de negocio calculan con datos: las geocercas se guardan en DynamoDB,
+`/api/v1/sources` lee del proveedor de datos, `/api/v1/crops` del catálogo
+`data/crops.yaml` (campos en [docs/crop-catalog.md](docs/crop-catalog.md)) y el perfil, la
+aptitud y las rotaciones salen de los motores descritos en
+[docs/engines.md](docs/engines.md), con los parámetros de `config/engine.yaml`. El catálogo
+y la configuración se validan al arrancar. Tras cambiar una
 ruta o un esquema ejecuta `python scripts/export_openapi.py` y versiona
 `contracts/openapi.json`; CI falla si queda desactualizado.
 
@@ -220,7 +221,7 @@ infra/bootstrap/             Estado remoto, OIDC, ECR y permisos de CI
 infra/environment/           ECS Express Mode, DynamoDB y bucket por entorno
 infra/*/tests/               Pruebas Terraform sin credenciales
 app/profile/                 Perfil agroclimático de una celda
-app/engines/                 Motores agronómicos (aptitud); docs/engines.md
+app/engines/                 Motores agronómicos (aptitud y rotaciones); docs/engines.md
 config/engine.yaml           Umbrales y pesos de los motores
 app/catalog/                 Modelo y carga del catálogo de cultivos
 data/crops.yaml              Catálogo de cultivos; lo edita el rol científico

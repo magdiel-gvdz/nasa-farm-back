@@ -108,8 +108,56 @@ class SuitabilityConfig(ConfigModel):
         return self
 
 
+Season = Literal["spring_summer", "fall_winter"]
+MonthNumber = Annotated[int, Field(ge=1, le=12)]
+
+
+class RotationReferences(ConfigModel):
+    irrigation_mm: float = Field(gt=0)
+    n_balance_low_kg_ha: float
+    n_balance_high_kg_ha: float
+    forage_cycles_per_year: float = Field(gt=0)
+    max_cycles_per_year: float = Field(gt=1)
+    margin_index: float = Field(gt=0)
+
+    @model_validator(mode="after")
+    def _ordered(self):
+        if self.n_balance_low_kg_ha >= self.n_balance_high_kg_ha:
+            raise ValueError("n_balance_low_kg_ha debe ser menor que n_balance_high_kg_ha")
+        return self
+
+
+class OrganicMatterTrend(ConfigModel):
+    improving_from: Fraction
+    stable_from: Fraction
+
+    @model_validator(mode="after")
+    def _ordered(self):
+        if self.stable_from >= self.improving_from:
+            raise ValueError("stable_from debe ser menor que improving_from")
+        return self
+
+
+class RotationConfig(ConfigModel):
+    planting_months: dict[Season, MonthNumber]
+    season_windows: dict[Season, list[MonthNumber]]
+    references: RotationReferences
+    om_trend: OrganicMatterTrend
+
+    @model_validator(mode="after")
+    def _seasons(self):
+        seasons = {"spring_summer", "fall_winter"}
+        if set(self.planting_months) != seasons or set(self.season_windows) != seasons:
+            raise ValueError("planting_months y season_windows deben tener las dos temporadas")
+        for season, month in self.planting_months.items():
+            if month not in self.season_windows[season]:
+                raise ValueError(f"planting_months.{season} debe estar en season_windows.{season}")
+        return self
+
+
 class EngineConfig(ConfigModel):
     suitability: SuitabilityConfig
+    rotation: RotationConfig
 
 
 def parse_config(document: object) -> EngineConfig:

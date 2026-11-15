@@ -8,7 +8,7 @@ from app.api.schemas.profile import FieldProfile
 from app.api.schemas.rotations import RotationResponse
 from app.api.schemas.suitability import SuitabilityDetail, SuitabilityMatrix
 from scripts import export_openapi
-from tests.helpers import SNAKE_CASE, field_payload, keys
+from tests.helpers import MAIZE_FALLOW, SNAKE_CASE, field_payload, keys
 
 MOCK = "x-fieldshift-mock"
 MVP_OPERATIONS = {
@@ -112,14 +112,16 @@ def test_suitability_needs_crop_and_month_together(client, headers, field):
     assert response.json()["error"]["details"]["fields"][0]["field"] == "query.planting_month"
 
 
-def test_rotations_reference_response_before_the_engine_exists(client, headers, field):
+def test_rotations_are_computed(client, headers):
+    payload = field_payload(current_rotation=MAIZE_FALLOW)
+    field = client.post("/api/v1/fields", json=payload, headers=headers).json()
     response = client.post(
         f"/api/v1/fields/{field['id']}/rotations",
         json={"scenario": {"delta_t_c": 2, "delta_p_pct": -20}},
         headers=headers,
     )
     assert response.status_code == 200
-    assert response.headers[MOCK] == "1"
+    assert MOCK not in response.headers
     rotations = RotationResponse.model_validate(response.json())
     assert len(rotations.strategies) >= 3
     assert any(strategy.is_current for strategy in rotations.strategies)
