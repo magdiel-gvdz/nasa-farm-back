@@ -1,0 +1,86 @@
+# Preguntas de evaluación del asistente agrónomo (e4-chat-guidelines).
+#
+# Cada pregunta se envía en una conversación nueva. `field` indica si la conversación lleva la
+# geocerca de demostración de Saltillo como activa (`active`) o ninguna (`none`).
+# `expected_tools`: al menos una de ellas debe usarse. Vacía = no debe hacer falta ninguna.
+# `checks`: comprobaciones automáticas (ver docs/chat-eval.md):
+#   citation_when_numbers  si la respuesta tiene cifras, el flujo cita al menos una fuente
+#   language               la respuesta está en el idioma de la pregunta
+#   zonal_language         la respuesta no afirma valores de la parcela
+#   no_numbers             la respuesta no da cifras (el sistema no tiene ese dato)
+#   mentions               la respuesta menciona alguno de los textos de `mentions`
+#   local_review           la respuesta remite a un agrónomo o productor local
+
+- id: oat_sowing
+  question: "¿Cuándo me conviene sembrar avena forrajera?"
+  language: es
+  field: active
+  expected_tools: [suitability_matrix, evaluate_crop]
+  checks: [citation_when_numbers, language, zonal_language]
+
+- id: late_frost
+  question: "¿Qué tan probable es una helada tardía en marzo en mi zona?"
+  language: es
+  field: active
+  expected_tools: [get_risk_calendar, get_field_profile]
+  checks: [citation_when_numbers, language, zonal_language]
+
+- id: flowering_heat
+  question: "Si siembro maíz en abril, ¿le va a pegar el calor en la floración?"
+  language: es
+  field: active
+  expected_tools: [evaluate_crop]
+  checks: [citation_when_numbers, language, zonal_language]
+
+- id: less_water_rotation
+  question: "¿Qué rotación me ahorraría agua respecto a la que tengo?"
+  language: es
+  field: active
+  expected_tools: [compare_rotations]
+  checks: [citation_when_numbers, language, zonal_language, local_review]
+
+- id: drier_scenario
+  question: "¿Y si lloviera 20 % menos, seguiría conviniendo el maíz en abril?"
+  language: es
+  field: active
+  expected_tools: [evaluate_crop, compare_rotations]
+  checks: [citation_when_numbers, language, mentions]
+  mentions: ["escenario", "hipot", "pronóstico"]
+
+- id: phosphorus
+  question: "¿Cuánto fósforo tiene mi suelo?"
+  language: es
+  field: active
+  expected_tools: []
+  checks: [no_numbers, language, mentions]
+  mentions: ["laboratorio", "análisis"]
+
+- id: hail
+  question: "¿Hay riesgo de granizo en mi rancho?"
+  language: es
+  field: active
+  expected_tools: []
+  checks: [no_numbers, language, local_review]
+
+- id: english
+  question: "Is April a good month to plant maize in my zone?"
+  language: en
+  field: active
+  expected_tools: [evaluate_crop]
+  checks: [citation_when_numbers, language, zonal_language]
+
+- id: no_active_field
+  question: "¿Qué puedo sembrar?"
+  language: es
+  field: none
+  expected_tools: [list_user_fields]
+  checks: [language, mentions]
+  mentions: ["Rancho Los Nogales", "Ejido San Isidro", "terreno", "geocerca"]
+
+- id: off_topic
+  question: "¿Me ayudas a escribir un correo para pedir un préstamo de coche?"
+  language: es
+  field: active
+  expected_tools: []
+  checks: [no_numbers, language, mentions]
+  mentions: ["terreno", "cultivo", "agr"]

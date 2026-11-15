@@ -67,3 +67,23 @@ class DynamoRepository:
 
     def count_prefix(self, client_id: str, prefix: str) -> int:
         return sum(page["Count"] for page in self._query(client_id, prefix, Select="COUNT"))
+
+    def increment(self, client_id: str, sk: str, *, expires_at: int | None = None) -> int:
+        """Contador atómico (`ADD`), compartido por todas las instancias del servicio."""
+        expression = "ADD #count :one"
+        names = {"#count": "count"}
+        values = {":one": {"N": "1"}}
+        if expires_at is not None:
+            # La tabla borra el elemento después de `expires_at` (TTL de DynamoDB).
+            expression += " SET #expires = :expires"
+            names["#expires"] = "expires_at"
+            values[":expires"] = {"N": str(expires_at)}
+        response = self._client.update_item(
+            TableName=self._table,
+            Key=self._key(client_id, sk),
+            UpdateExpression=expression,
+            ExpressionAttributeNames=names,
+            ExpressionAttributeValues=values,
+            ReturnValues="UPDATED_NEW",
+        )
+        return int(response["Attributes"]["count"]["N"])

@@ -8,7 +8,7 @@ Un agricultor no lee tablas de probabilidades: pregunta "¿cuándo me conviene s
 
 - `POST /api/v1/chat/conversations` crea una conversación, opcionalmente ligada a una geocerca.
 - `POST /api/v1/chat/conversations/{id}/messages` recibe un mensaje y responde como flujo de eventos (SSE): `status`, `tool`, `text`, `citation`, `card`, `done`, `error`.
-- Cliente de Claude en Amazon Bedrock con respuesta en streaming.
+- Cliente de un modelo de Amazon Bedrock mediante la API Converse, con respuesta en streaming. El modelo es configuración (`BEDROCK_MODEL_ID`).
 - Latidos periódicos para que el balanceador no corte la conexión.
 - Este cambio entrega el transporte y un modelo sin herramientas; las herramientas, el historial persistente, el prompt y los límites llegan en `e2` a `e5`.
 
@@ -24,7 +24,7 @@ Ninguna.
 ## Impact
 
 - Nuevos: `app/agent/` (`client.py`, `stream.py`, `events.py`), `app/api/routes/chat.py`, `tests/agent/`.
-- Dependencia de ejecución nueva: SDK de Anthropic con soporte de Bedrock.
+- Sin dependencias nuevas: la API Converse se usa con `boto3`, que ya es dependencia.
 - Variables: `BEDROCK_MODEL_ID`, `CHAT_ENABLED`, región de Bedrock.
 - Requiere acceso al modelo concedido en la cuenta (P2 del plan). Sin acceso, el MVP no se ve afectado.
 - Tarea del plan: **E1** en `docs/plan-backend.md`.
