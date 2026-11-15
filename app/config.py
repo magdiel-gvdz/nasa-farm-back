@@ -21,6 +21,14 @@ class Settings:
     lapse_rate_c_per_km: float = field(
         default_factory=lambda: float(os.getenv("LAPSE_RATE_C_PER_KM", "6.5"))
     )
+    # Celdas que el proveedor Athena precarga al arrancar: las de las geocercas de demostración.
+    data_warm_cells: tuple[str, ...] = field(
+        default_factory=lambda: tuple(
+            cell
+            for cell in os.getenv("DATA_WARM_CELLS", "E9_r0463_c0846,E9_r0461_c0822").split(",")
+            if cell.strip()
+        )
+    )
     # Cada cuánto se comprueba si DATA publicó una versión nueva.
     data_poll_seconds: float = field(
         default_factory=lambda: float(os.getenv("DATA_POLL_SECONDS", "300"))

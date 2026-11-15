@@ -107,6 +107,7 @@ def create_provider(settings) -> DataProvider:
             SsmVersionSource(settings.data_region, settings.data_version_parameter),
             poll_seconds=settings.data_poll_seconds,
             power=_power_source(settings),
+            warm_cells=settings.data_warm_cells,
         )
     logger.error("DATA_PROVIDER=%r no es válido; valores admitidos: 'fixture', 'athena'", name)
     raise ValueError(f"DATA_PROVIDER no admitido: {name!r}")
