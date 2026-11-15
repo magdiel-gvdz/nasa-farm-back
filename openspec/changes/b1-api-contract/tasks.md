@@ -16,5 +16,5 @@
 ## 3. Publicación del contrato
 
 - [x] 3.1 Crear `scripts/export_openapi.py` que escribe `contracts/openapi.json` de forma determinista y generar el archivo; verificar que dos ejecuciones seguidas no producen diferencias
-- [ ] 3.2 Añadir a `check.yml` un paso que regenera el documento y falla si `git diff --exit-code contracts/openapi.json` detecta cambios; verificar con `actionlint` y con la ejecución del workflow
-- [ ] 3.3 Escribir `docs/api-contract.md` con las cinco diferencias respecto al handoff y un ejemplo de llamada por endpoint; avisar al frontend con el enlace al preview; verificar que los ejemplos funcionan contra el preview con `curl`
+- [x] 3.2 Añadir a `check.yml` un paso que regenera el documento y falla si `git diff --exit-code contracts/openapi.json` detecta cambios; verificar con `actionlint` y con la ejecución del workflow
+- [x] 3.3 Escribir `docs/api-contract.md` con las cinco diferencias respecto al handoff y un ejemplo de llamada por endpoint; avisar al frontend con el enlace al preview; verificar que los ejemplos funcionan contra el preview con `curl`

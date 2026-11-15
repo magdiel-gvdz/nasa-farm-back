@@ -15,5 +15,6 @@
 
 ## 3. Integración
 
-- [ ] 3.1 Regenerar `contracts/openapi.json` si cambió algún modelo y actualizar `docs/api-contract.md` con el ciclo de vida de una geocerca y la advertencia de que `X-Client-Id` no es autenticación; verificar que la comprobación del contrato pasa en CI
+- [x] 3.1 Regenerar `contracts/openapi.json` si cambió algún modelo y actualizar `docs/api-contract.md` con el ciclo de vida de una geocerca y la advertencia de que `X-Client-Id` no es autenticación; verificar que la comprobación del contrato pasa en CI
 - [ ] 3.2 En un preview con tabla real, crear una geocerca, forzar un nuevo despliegue y listar; verificar que persiste
+  - Bloqueada: los entornos aún no tienen tabla DynamoDB ni `APP_TABLE` (llegan con a3); el preview `pr-6` usa el almacén en memoria
