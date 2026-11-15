@@ -6,7 +6,7 @@ import pytest
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
-from app.data import StaticDataStatus
+from app.data.fixture import FixtureProvider
 from app.i18n import MESSAGES, resolve_language, translate
 from app.main import create_app
 from tests.helpers import ORIGIN, field_payload
@@ -243,8 +243,26 @@ def test_errors_carry_cors_headers_for_known_origins(client):
 # ---------------------------------------------------------------- disponibilidad
 
 
+class StubProvider(FixtureProvider):
+    """Proveedor sustituible en pruebas: permite fijar la versión o dejarlo sin datos."""
+
+    def __init__(self, ready: bool = True, version: str = "gold-v0"):
+        super().__init__()
+        self._ready, self._version = ready, version
+
+    def is_ready(self) -> bool:
+        return self._ready
+
+    def data_version(self) -> str | None:
+        return self._version if self._ready else None
+
+
+def test_ready_reports_the_data_version_of_the_fixture_provider(client):
+    assert client.get("/ready").json()["data_version"] == "fixture"
+
+
 def test_ready_reports_the_loaded_data_version(settings):
-    client = TestClient(create_app(settings, data_status=StaticDataStatus(version="gold-v0")))
+    client = TestClient(create_app(settings, data_provider=StubProvider()))
     assert client.get("/ready").json() == {
         "status": "ready",
         "environment": "pr-42",
@@ -253,7 +271,7 @@ def test_ready_reports_the_loaded_data_version(settings):
 
 
 def test_not_ready_is_503_while_health_stays_up(settings):
-    client = TestClient(create_app(settings, data_status=StaticDataStatus(ready=False)))
+    client = TestClient(create_app(settings, data_provider=StubProvider(ready=False)))
     assert_envelope(client.get("/ready"), 503, "data_unavailable")
     assert client.get("/health").status_code == 200
     english = client.get("/ready", headers={"Accept-Language": "en"})

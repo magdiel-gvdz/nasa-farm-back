@@ -10,7 +10,9 @@ from tests.helpers import ORIGIN, field_payload
 
 @pytest.fixture
 def settings():
-    return Settings(environment="pr-42", data_lake_bucket="", app_table="", cors_origins=[ORIGIN])
+    return Settings(
+        environment="pr-42", data_provider="fixture", app_table="", cors_origins=[ORIGIN]
+    )
 
 
 @pytest.fixture

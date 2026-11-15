@@ -2,7 +2,6 @@ import pytest
 from pydantic import TypeAdapter
 
 from app.api.fixtures import FIXTURE_NAMES, load_fixture
-from app.api.schemas.common import Source
 from app.api.schemas.crops import Crop
 from app.api.schemas.profile import FieldProfile
 from app.api.schemas.rotations import RotationResponse
@@ -11,7 +10,6 @@ from tests.helpers import SNAKE_CASE, keys
 
 MODELS = {
     "crops": list[Crop],
-    "sources": list[Source],
     "profile": FieldProfile,
     "suitability_detail": SuitabilityDetail,
     "suitability_matrix": SuitabilityMatrix,

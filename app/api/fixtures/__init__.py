@@ -16,7 +16,6 @@ from app.i18n import DEFAULT_LANGUAGE
 MOCK_HEADER = "X-Fieldshift-Mock"
 FIXTURE_NAMES = (
     "crops",
-    "sources",
     "profile",
     "suitability_detail",
     "suitability_matrix",

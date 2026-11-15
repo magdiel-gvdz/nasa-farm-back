@@ -2584,25 +2584,34 @@
               "observation",
               "model",
               "derived",
-              "estimate"
+              "estimate",
+              "synthetic"
             ],
             "title": "Data Class",
-            "type": "string"
-          },
-          "dataset": {
-            "title": "Dataset",
             "type": "string"
           },
           "id": {
             "title": "Id",
             "type": "string"
           },
+          "license": {
+            "title": "License",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "organization": {
+            "title": "Organization",
+            "type": "string"
+          },
           "period": {
             "title": "Period",
             "type": "string"
           },
-          "provider": {
-            "title": "Provider",
+          "product": {
+            "title": "Product",
             "type": "string"
           },
           "resolution": {
@@ -2616,11 +2625,13 @@
         },
         "required": [
           "id",
-          "dataset",
-          "provider",
+          "name",
+          "organization",
+          "product",
+          "url",
           "resolution",
           "period",
-          "url",
+          "license",
           "data_class"
         ],
         "title": "Source",
