@@ -87,11 +87,13 @@ class HeatMonth(Monthly):
     record_tmax_c: float | None
     mean_gdd_base10: float | None
     mean_days_over_30c: float | None
+    mean_days_over_32c: float | None = None
     mean_days_over_35c: float | None
     mean_days_over_38c: float | None
 
 
 class Heat(ResponseModel):
+    thresholds_c: list[float] = Field(description="Umbrales de Tmax con los que se cuentan días")
     annual_mean_c: float
     trend_c_per_decade: float | None = Field(description="Tendencia por cada 10 años")
     hottest_month: Month
@@ -143,10 +145,14 @@ class RiskDecade(ResponseModel):
     starts: MonthDay
     p_frost: Probability | None
     p_frost_severe: Probability | None
+    p_heat_30c: Probability | None = None
+    p_heat_32c: Probability | None = None
     p_heat_35c: Probability | None
+    p_heat_38c: Probability | None = None
     p_heavy_rain: Probability | None
     p_water_stress: Probability | None
     p_bare_soil: Probability | None
+    p_strong_wind: Probability | None = None
     precip_p50_mm: float | None
     et0_p50_mm: float | None
     vulnerable: bool
@@ -172,6 +178,13 @@ class Climate(ResponseModel):
         return entries
 
 
+class UncertaintyRange(ResponseModel):
+    """Capas Q0.05 y Q0.95 de SoilGrids: incertidumbre del modelo, no variación en la celda."""
+
+    p05: float
+    p95: float
+
+
 class SoilLayer(ResponseModel):
     depth_cm: tuple[int, int]
     soc_g_kg: float | None
@@ -184,6 +197,9 @@ class SoilLayer(ResponseModel):
     silt_pct: float | None
     bulk_density_g_cm3: float | None
     awc_mm_per_m: float | None
+    uncertainty: dict[str, UncertaintyRange] = Field(
+        default_factory=dict, description="Rango P05-P95 por propiedad"
+    )
 
 
 class Soil(ResponseModel):
@@ -216,6 +232,10 @@ class Terrain(ResponseModel):
 
 class SoilMoistureMonth(Monthly):
     mean_m3_m3: float | None
+    # Percentil (0-100) de la humedad respecto a la misma celda y época del año.
+    percentile_p10: float | None = None
+    percentile_p50: float | None = None
+    percentile_p90: float | None = None
 
 
 class SoilMoisture(ResponseModel):
@@ -306,6 +326,7 @@ class FieldProfile(ResponseModel):
     resolution_m: int = Field(description="Lado de la celda de análisis; el dato es zonal")
     computed_at: datetime
     pipeline_version: str
+    data_version: str = Field(description="Versión de los datos de DATA con la que se calculó")
     climate: Climate
     soil: Soil | None
     terrain: Terrain | None

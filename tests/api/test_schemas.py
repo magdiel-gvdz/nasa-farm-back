@@ -11,7 +11,7 @@ from app.api.schemas.profile import FieldProfile
 from app.api.schemas.rotations import RotationRequest, RotationResponse
 from app.api.schemas.suitability import SuitabilityDetail, SuitabilityMatrix
 from app.catalog.loader import load_catalog
-from tests.helpers import field_payload, square
+from tests.helpers import field_payload, reference_profile, square
 
 SOURCE = {
     "id": "nasa_power",
@@ -129,7 +129,7 @@ def test_crop_validates():
 
 
 def _profile_with_calendar(mutate) -> dict:
-    profile = copy.deepcopy(load_fixture("profile"))
+    profile = reference_profile()
     mutate(profile["climate"]["risk_calendar"])
     return profile
 
@@ -149,7 +149,7 @@ def test_profile_rejects_a_calendar_without_36_unique_decades(mutate):
 
 
 def test_profile_allows_missing_sections_as_null():
-    profile = copy.deepcopy(load_fixture("profile"))
+    profile = reference_profile()
     for section in ("soil", "terrain", "vegetation", "land_use"):
         profile[section] = None
     profile["water"]["soil_moisture"] = None
@@ -157,7 +157,7 @@ def test_profile_allows_missing_sections_as_null():
 
 
 def test_profile_rejects_incomplete_monthly_series():
-    profile = copy.deepcopy(load_fixture("profile"))
+    profile = reference_profile()
     profile["climate"]["rain"]["by_month"].pop()
     with pytest.raises(ValidationError):
         FieldProfile.model_validate(profile)

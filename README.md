@@ -60,7 +60,8 @@ CI verifica salud, exclusión de archivos privados y apagado en menos de 10 s.
 
 Las geocercas (`/api/v1/fields`) son reales, `/api/v1/sources` lee del proveedor
 de datos y `/api/v1/crops` del catálogo `data/crops.yaml`, que se valida al
-arrancar (campos en [docs/crop-catalog.md](docs/crop-catalog.md)); el resto de endpoints de negocio devuelve por ahora una respuesta fija
+arrancar (campos en [docs/crop-catalog.md](docs/crop-catalog.md)) y el perfil
+(`/fields/{id}/profile`) se calcula con los datos del proveedor; el resto de endpoints de negocio devuelve por ahora una respuesta fija
 marcada con `X-Fieldshift-Mock: 1`, hasta que lleguen el perfil y los motores. Tras cambiar una
 ruta o un esquema ejecuta `python scripts/export_openapi.py` y versiona
 `contracts/openapi.json`; CI falla si queda desactualizado.
@@ -218,6 +219,7 @@ contracts/                   Contrato OpenAPI versionado
 infra/bootstrap/             Estado remoto, OIDC, ECR y permisos de CI
 infra/environment/           ECS Express Mode, DynamoDB y bucket por entorno
 infra/*/tests/               Pruebas Terraform sin credenciales
+app/profile/                 Perfil agroclimático de una celda
 app/catalog/                 Modelo y carga del catálogo de cultivos
 data/crops.yaml              Catálogo de cultivos; lo edita el rol científico
 app/data/                    Proveedor de datos de DATA y datos sintéticos

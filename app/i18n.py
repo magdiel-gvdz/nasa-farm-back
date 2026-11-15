@@ -88,6 +88,70 @@ MESSAGES: dict[str, dict[str, str]] = {
         "es": "El terreno supera el máximo de {max_area_ha} hectáreas.",
         "en": "The field exceeds the maximum of {max_area_ha} hectares.",
     },
+    "profile.gap.zonal_resolution_9km": {
+        "es": "Los datos describen tu zona (celda de 9 km), no tu parcela.",
+        "en": "The data describes your zone (9 km cell), not your individual plot.",
+    },
+    "profile.gap.no_lab_analysis": {
+        "es": "No hay análisis de laboratorio del suelo; los valores de suelo son estimaciones para la zona.",
+        "en": "There is no laboratory soil analysis; soil values are estimates for the zone.",
+    },
+    "profile.gap.synthetic_data": {
+        "es": "Este entorno usa datos sintéticos de prueba: las cifras no son observaciones reales de la zona.",
+        "en": "This environment uses synthetic test data: the figures are not real observations of the zone.",
+    },
+    "profile.gap.shared_climate_series": {
+        "es": "La lluvia, el viento y la humedad vienen de un cuadro climático de ~55 km que comparten {n_cells} celdas de la zona.",
+        "en": "Rain, wind and humidity come from a ~55 km climate grid box shared by {n_cells} cells in the zone.",
+    },
+    "profile.gap.elevation_mismatch": {
+        "es": "La elevación de la zona difiere {difference_m} m de la del cuadro climático; las temperaturas son una estimación corregida por altura.",
+        "en": "The elevation of the zone differs by {difference_m} m from the climate grid box; temperatures are an estimate corrected for altitude.",
+    },
+    "profile.gap.soil_moisture_from_model": {
+        "es": "La humedad del suelo viene de un modelo (NASA POWER), no de SMAP; se expresa como percentil de la zona.",
+        "en": "Soil moisture comes from a model (NASA POWER), not from SMAP; it is expressed as a percentile for the zone.",
+    },
+    "profile.gap.ndvi_not_available": {
+        "es": "Aún no hay datos de vegetación (NDVI) para la zona; no se puede estimar el suelo descubierto.",
+        "en": "There is no vegetation (NDVI) data for the zone yet; bare soil cannot be estimated.",
+    },
+    "profile.gap.no_soil_data": {
+        "es": "No hay datos de suelo para la zona.",
+        "en": "There is no soil data for the zone.",
+    },
+    "profile.gap.no_elevation_data": {
+        "es": "No hay elevación de la zona; las temperaturas no llevan una corrección por altura verificable.",
+        "en": "There is no elevation for the zone; temperatures carry no verifiable altitude correction.",
+    },
+    "profile.gap.no_wind_data": {
+        "es": "No hay datos de viento para la zona.",
+        "en": "There is no wind data for the zone.",
+    },
+    "profile.gap.no_daily_series": {
+        "es": "Sin serie diaria: no se calculan récords de temperatura ni fechas de primera y última helada.",
+        "en": "No daily series: temperature records and first and last frost dates are not computed.",
+    },
+    "profile.gap.no_slope_data": {
+        "es": "La pendiente del terreno aún no está disponible.",
+        "en": "Terrain slope is not available yet.",
+    },
+    "profile.gap.no_groundwater_source": {
+        "es": "No hay fuente de agua subterránea para esta zona.",
+        "en": "There is no groundwater source for this zone.",
+    },
+    "profile.gap.no_light_data": {
+        "es": "La radiación y la luz diaria aún no están disponibles.",
+        "en": "Solar radiation and daily light are not available yet.",
+    },
+    "profile.gap.no_land_use_history": {
+        "es": "No hay historial satelital de cultivos para México; se usa la rotación declarada.",
+        "en": "There is no satellite crop history for Mexico; the declared rotation is used.",
+    },
+    "profile.gap.no_hail_product": {
+        "es": "No existe un producto NASA directo de granizo; consulta a productores locales.",
+        "en": "There is no direct NASA hail product; ask local growers.",
+    },
 }
 
 

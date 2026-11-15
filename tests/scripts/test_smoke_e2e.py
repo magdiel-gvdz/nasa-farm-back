@@ -6,6 +6,7 @@ import pytest
 from app.api.fixtures import load_fixture
 from scripts import smoke_e2e
 from scripts.smoke_e2e import ContractValidator, Smoke, check_profile, check_rotations
+from tests.helpers import reference_profile
 
 API = "/api/v1"
 
@@ -20,7 +21,7 @@ def schema_of(validator, name):
 
 
 def test_valid_fixtures_pass_the_contract(validator):
-    assert validator.errors(load_fixture("profile"), schema_of(validator, "FieldProfile")) == []
+    assert validator.errors(reference_profile(), schema_of(validator, "FieldProfile")) == []
     assert (
         validator.errors(load_fixture("rotations"), schema_of(validator, "RotationResponse")) == []
     )
@@ -52,7 +53,7 @@ def test_union_responses_accept_either_shape(validator):
 
 
 def test_profile_needs_the_36_decades():
-    profile = load_fixture("profile")
+    profile = reference_profile()
     assert check_profile(profile) == []
     profile["climate"]["risk_calendar"].pop()
     assert check_profile(profile)

@@ -75,7 +75,7 @@ def test_field_routes_are_real_and_follow_the_schema(client, headers):
 def test_profile_reference_response(client, headers, field):
     response = client.get(f"/api/v1/fields/{field['id']}/profile", headers=headers)
     assert response.status_code == 200
-    assert response.headers[MOCK] == "1"
+    assert MOCK not in response.headers
     profile = FieldProfile.model_validate(response.json())
     assert profile.status == "ready"
     assert profile.field_id == field["id"]

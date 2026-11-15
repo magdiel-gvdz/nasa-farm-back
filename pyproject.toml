@@ -30,3 +30,7 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# Catálogo de textos: una frase por línea aunque supere el ancho.
+"app/i18n.py" = ["E501"]

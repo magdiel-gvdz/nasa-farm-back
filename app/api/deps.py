@@ -10,6 +10,7 @@ from app.catalog.loader import Catalog
 from app.data import DataProvider
 from app.geo.locate import Locator
 from app.i18n import resolve_language
+from app.profile.builder import ProfileService
 from app.store.base import Repository
 
 
@@ -50,9 +51,14 @@ def catalog(request: Request) -> Catalog:
     return request.app.state.catalog
 
 
+def profiles(request: Request) -> ProfileService:
+    return request.app.state.profiles
+
+
 ClientId = Annotated[str, Depends(client_id)]
 Language = Annotated[str, Depends(language)]
 Repo = Annotated[Repository, Depends(repository)]
 Locate = Annotated[Locator, Depends(locator)]
 Data = Annotated[DataProvider, Depends(data_provider)]
 Crops = Annotated[Catalog, Depends(catalog)]
+Profiles = Annotated[ProfileService, Depends(profiles)]
