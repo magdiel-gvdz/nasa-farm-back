@@ -220,6 +220,8 @@ infra/bootstrap/             Estado remoto, OIDC, ECR y permisos de CI
 infra/environment/           ECS Express Mode, DynamoDB y bucket por entorno
 infra/*/tests/               Pruebas Terraform sin credenciales
 app/profile/                 Perfil agroclimático de una celda
+app/engines/                 Motores agronómicos (aptitud); docs/engines.md
+config/engine.yaml           Umbrales y pesos de los motores
 app/catalog/                 Modelo y carga del catálogo de cultivos
 data/crops.yaml              Catálogo de cultivos; lo edita el rol científico
 app/data/                    Proveedor de datos de DATA y datos sintéticos

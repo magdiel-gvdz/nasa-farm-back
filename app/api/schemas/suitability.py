@@ -19,7 +19,7 @@ class HarvestWindow(ResponseModel):
 
 class SuitabilityReason(ResponseModel):
     factor: str = Field(examples=["frost", "heat", "water", "soil"])
-    status: Literal["ok", "warn", "bad"]
+    status: Literal["ok", "warn", "bad", "unknown"]
     detail: str
     source_id: str | None
 

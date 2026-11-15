@@ -6,7 +6,11 @@ import pytest
 from app.api.fixtures import load_fixture
 from scripts import smoke_e2e
 from scripts.smoke_e2e import ContractValidator, Smoke, check_profile, check_rotations
-from tests.helpers import reference_profile
+from tests.helpers import (
+    reference_profile,
+    reference_suitability_detail,
+    reference_suitability_matrix,
+)
 
 API = "/api/v1"
 
@@ -47,8 +51,8 @@ def test_invalid_responses_are_reported_with_their_location(validator, mutate, e
 
 def test_union_responses_accept_either_shape(validator):
     schema = validator.response_schema("get", f"{API}/fields/{{field_id}}/suitability", 200)
-    assert validator.errors(load_fixture("suitability_matrix"), schema) == []
-    assert validator.errors(load_fixture("suitability_detail"), schema) == []
+    assert validator.errors(reference_suitability_matrix(), schema) == []
+    assert validator.errors(reference_suitability_detail(), schema) == []
     assert validator.errors({"crop_id": "maiz"}, schema)
 
 

@@ -10,6 +10,7 @@ RUN pip install -r requirements.txt \
     && useradd --uid 10001 --gid api --no-create-home api
 COPY app/ ./app/
 COPY data/ ./data/
+COPY config/ ./config/
 USER 10001:10001
 EXPOSE 8080
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080", "--timeout-graceful-shutdown", "8"]

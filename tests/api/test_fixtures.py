@@ -3,12 +3,9 @@ from pydantic import TypeAdapter
 
 from app.api.fixtures import FIXTURE_NAMES, load_fixture
 from app.api.schemas.rotations import RotationResponse
-from app.api.schemas.suitability import SuitabilityDetail, SuitabilityMatrix
 from tests.helpers import SNAKE_CASE, keys
 
 MODELS = {
-    "suitability_detail": SuitabilityDetail,
-    "suitability_matrix": SuitabilityMatrix,
     "rotations": RotationResponse,
 }
 
@@ -41,5 +38,5 @@ def test_fixture_texts_follow_the_language():
 
 
 def test_fixture_copies_are_independent():
-    load_fixture("suitability_matrix").clear()
-    assert len(load_fixture("suitability_matrix")["crops"]) == 5
+    load_fixture("rotations").clear()
+    assert len(load_fixture("rotations")["strategies"]) >= 3

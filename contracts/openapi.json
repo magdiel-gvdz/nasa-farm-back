@@ -3189,7 +3189,8 @@
             "enum": [
               "ok",
               "warn",
-              "bad"
+              "bad",
+              "unknown"
             ],
             "title": "Status",
             "type": "string"
@@ -4305,6 +4306,16 @@
               }
             },
             "description": "Unprocessable Content"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
           }
         },
         "summary": "Matriz cultivo × mes, o el detalle si se envían crop_id y planting_month",

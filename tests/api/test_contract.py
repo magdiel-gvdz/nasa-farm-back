@@ -89,7 +89,7 @@ def test_suitability_reference_responses(client, headers, field):
     base = f"/api/v1/fields/{field['id']}/suitability"
     matrix = client.get(base, headers=headers)
     assert matrix.status_code == 200
-    assert matrix.headers[MOCK] == "1"
+    assert MOCK not in matrix.headers
     SuitabilityMatrix.model_validate(matrix.json())
     detail = client.get(
         base,
@@ -97,7 +97,7 @@ def test_suitability_reference_responses(client, headers, field):
         headers=headers,
     )
     assert detail.status_code == 200
-    assert detail.headers[MOCK] == "1"
+    assert MOCK not in detail.headers
     parsed = SuitabilityDetail.model_validate(detail.json())
     assert (parsed.crop_id, parsed.planting_month) == ("frijol", 6)
     assert "from" in detail.json()["harvest_window"]

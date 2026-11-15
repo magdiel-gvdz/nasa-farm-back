@@ -16,7 +16,7 @@
 | `GET /sources` | Real: fuentes del proveedor de datos activo |
 | `GET /crops` | Real: catálogo de `data/crops.yaml` (ver [crop-catalog.md](crop-catalog.md)) |
 | `GET /fields/{id}/profile` | Real: se calcula con los datos del proveedor activo |
-| `GET /fields/{id}/suitability` | Respuesta fija |
+| `GET /fields/{id}/suitability` | Real: motor de aptitud (ver [engines.md](engines.md)); `delta_t_c` y `delta_p_pct` aún no cambian el resultado |
 | `POST /fields/{id}/rotations` | Respuesta fija |
 
 ## Diferencias respecto a `backend-handoff.md` §6
@@ -107,6 +107,7 @@ Todo error, también los de validación, usa el mismo sobre:
 |---|---|---|---|
 | `validation_error` | 422 | El cuerpo o los parámetros no cumplen el esquema | `fields`: lista de `{field, type, message}`; `field` es la ruta, p. ej. `body.geometry` |
 | `invalid_geometry` | 422 | La geometría no es un polígono válido (ver [Geometría](#geometría-y-celda)) | `reason` y datos del límite incumplido |
+| `crop_not_found` | 404 | `crop_id` no existe en el catálogo de cultivos | `crop_id` |
 | `out_of_region` | 422 | La celda de la geocerca no pertenece a ninguna zona publicada | `cell_id` y `zones`: lista de `{zone_id, name, bbox}` |
 | `missing_client_id` | 400 | Falta `X-Client-Id` en una ruta de `/fields` | — |
 | `invalid_client_id` | 400 | `X-Client-Id` no es un UUID | — |

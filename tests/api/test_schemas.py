@@ -11,7 +11,13 @@ from app.api.schemas.profile import FieldProfile
 from app.api.schemas.rotations import RotationRequest, RotationResponse
 from app.api.schemas.suitability import SuitabilityDetail, SuitabilityMatrix
 from app.catalog.loader import load_catalog
-from tests.helpers import field_payload, reference_profile, square
+from tests.helpers import (
+    field_payload,
+    reference_profile,
+    reference_suitability_detail,
+    reference_suitability_matrix,
+    square,
+)
 
 SOURCE = {
     "id": "nasa_power",
@@ -164,11 +170,11 @@ def test_profile_rejects_incomplete_monthly_series():
 
 
 def test_suitability_models_validate():
-    detail = load_fixture("suitability_detail")
-    assert SuitabilityDetail.model_validate(detail).harvest_window.from_ == "08-10"
+    detail = reference_suitability_detail()
+    assert SuitabilityDetail.model_validate(detail).harvest_window.from_ == "07-10"
     with pytest.raises(ValidationError):
         SuitabilityDetail.model_validate({**detail, "score": 140})
-    matrix = load_fixture("suitability_matrix")
+    matrix = reference_suitability_matrix()
     assert len(SuitabilityMatrix.model_validate(matrix).crops) == 5
     matrix["crops"][0]["scores"] = matrix["crops"][0]["scores"][:11]
     with pytest.raises(ValidationError):

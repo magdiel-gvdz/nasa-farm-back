@@ -152,6 +152,150 @@ MESSAGES: dict[str, dict[str, str]] = {
         "es": "No existe un producto NASA directo de granizo; consulta a productores locales.",
         "en": "There is no direct NASA hail product; ask local growers.",
     },
+    "month.1": {
+        "es": "enero",
+        "en": "January",
+    },
+    "month.2": {
+        "es": "febrero",
+        "en": "February",
+    },
+    "month.3": {
+        "es": "marzo",
+        "en": "March",
+    },
+    "month.4": {
+        "es": "abril",
+        "en": "April",
+    },
+    "month.5": {
+        "es": "mayo",
+        "en": "May",
+    },
+    "month.6": {
+        "es": "junio",
+        "en": "June",
+    },
+    "month.7": {
+        "es": "julio",
+        "en": "July",
+    },
+    "month.8": {
+        "es": "agosto",
+        "en": "August",
+    },
+    "month.9": {
+        "es": "septiembre",
+        "en": "September",
+    },
+    "month.10": {
+        "es": "octubre",
+        "en": "October",
+    },
+    "month.11": {
+        "es": "noviembre",
+        "en": "November",
+    },
+    "month.12": {
+        "es": "diciembre",
+        "en": "December",
+    },
+    "error.crop_not_found": {
+        "es": "El cultivo no existe en el catálogo.",
+        "en": "The crop is not in the catalog.",
+    },
+    "suitability.frost.ok": {
+        "es": "Riesgo bajo de helada durante el ciclo en tu zona: como máximo {pct} % de los años hiela (Tmin < {threshold} °C) en la decena del {decade}.",
+        "en": "Low frost risk during the cycle in your zone: at most {pct}% of years have frost (Tmin < {threshold} °C) in the ten-day period starting {decade}.",
+    },
+    "suitability.frost.warn": {
+        "es": "En tu zona hiela (Tmin < {threshold} °C) en {pct} % de los años en la decena del {decade}, dentro del ciclo.",
+        "en": "In your zone there is frost (Tmin < {threshold} °C) in {pct}% of years in the ten-day period starting {decade}, within the cycle.",
+    },
+    "suitability.frost.bad": {
+        "es": "En tu zona hiela (Tmin < {threshold} °C) en {pct} % de los años en la decena del {decade}, dentro del ciclo, y el cultivo no tolera heladas.",
+        "en": "In your zone there is frost (Tmin < {threshold} °C) in {pct}% of years in the ten-day period starting {decade}, within the cycle, and the crop does not tolerate frost.",
+    },
+    "suitability.frost.tolerant_ok": {
+        "es": "El cultivo tolera heladas ligeras; las heladas fuertes (Tmin < {threshold} °C) ocurren como máximo en {pct} % de los años en la decena del {decade}.",
+        "en": "The crop tolerates light frost; hard frost (Tmin < {threshold} °C) happens in at most {pct}% of years in the ten-day period starting {decade}.",
+    },
+    "suitability.frost.tolerant_warn": {
+        "es": "El cultivo tolera heladas ligeras, pero en tu zona hay heladas fuertes (Tmin < {threshold} °C) en {pct} % de los años en la decena del {decade}.",
+        "en": "The crop tolerates light frost, but your zone has hard frost (Tmin < {threshold} °C) in {pct}% of years in the ten-day period starting {decade}.",
+    },
+    "suitability.frost.unknown": {
+        "es": "No hay datos de heladas para la zona.",
+        "en": "There is no frost data for the zone.",
+    },
+    "suitability.heat.ok": {
+        "es": "Poco calor en la floración: como máximo {pct} % de los años superan {threshold} °C en la decena del {decade} (temperatura crítica del cultivo: {critical} °C; umbral usado: {threshold} °C).",
+        "en": "Little heat at flowering: at most {pct}% of years exceed {threshold} °C in the ten-day period starting {decade} (crop critical temperature: {critical} °C; threshold used: {threshold} °C).",
+    },
+    "suitability.heat.warn": {
+        "es": "La floración cae en la decena del {decade}: en {pct} % de los años tu zona supera {threshold} °C (temperatura crítica del cultivo: {critical} °C; umbral usado: {threshold} °C).",
+        "en": "Flowering falls in the ten-day period starting {decade}: in {pct}% of years your zone exceeds {threshold} °C (crop critical temperature: {critical} °C; threshold used: {threshold} °C).",
+    },
+    "suitability.heat.bad": {
+        "es": "La floración cae en la decena del {decade}: en {pct} % de los años tu zona supera {threshold} °C, lo que daña la floración (temperatura crítica del cultivo: {critical} °C; umbral usado: {threshold} °C).",
+        "en": "Flowering falls in the ten-day period starting {decade}: in {pct}% of years your zone exceeds {threshold} °C, which damages flowering (crop critical temperature: {critical} °C; threshold used: {threshold} °C).",
+    },
+    "suitability.heat.unknown": {
+        "es": "No hay datos de calor para la zona.",
+        "en": "There is no heat data for the zone.",
+    },
+    "suitability.water.ok": {
+        "es": "Demanda de {demand} mm frente a {rain} mm de lluvia efectiva en tu zona y {irrigation} mm de riego: déficit de {deficit} mm.",
+        "en": "Demand of {demand} mm versus {rain} mm of effective rain in your zone and {irrigation} mm of irrigation: deficit of {deficit} mm.",
+    },
+    "suitability.water.warn": {
+        "es": "Demanda de {demand} mm frente a {rain} mm de lluvia efectiva en tu zona y {irrigation} mm de riego: déficit de {deficit} mm.",
+        "en": "Demand of {demand} mm versus {rain} mm of effective rain in your zone and {irrigation} mm of irrigation: deficit of {deficit} mm.",
+    },
+    "suitability.water.bad": {
+        "es": "Demanda de {demand} mm frente a {rain} mm de lluvia efectiva en tu zona y {irrigation} mm de riego: déficit de {deficit} mm, el riego disponible no alcanza.",
+        "en": "Demand of {demand} mm versus {rain} mm of effective rain in your zone and {irrigation} mm of irrigation: deficit of {deficit} mm, the available irrigation is not enough.",
+    },
+    "suitability.water.rainfed_ok": {
+        "es": "Sin riego declarado, se evalúa en temporal: demanda de {demand} mm frente a {rain} mm de lluvia efectiva en tu zona; déficit de {deficit} mm.",
+        "en": "No irrigation declared, evaluated as rainfed: demand of {demand} mm versus {rain} mm of effective rain in your zone; deficit of {deficit} mm.",
+    },
+    "suitability.water.rainfed_warn": {
+        "es": "Sin riego declarado, se evalúa en temporal: demanda de {demand} mm frente a {rain} mm de lluvia efectiva en tu zona; déficit de {deficit} mm.",
+        "en": "No irrigation declared, evaluated as rainfed: demand of {demand} mm versus {rain} mm of effective rain in your zone; deficit of {deficit} mm.",
+    },
+    "suitability.water.rainfed_bad": {
+        "es": "Sin riego declarado, se evalúa en temporal: demanda de {demand} mm frente a {rain} mm de lluvia efectiva en tu zona; déficit de {deficit} mm, la lluvia no alcanza.",
+        "en": "No irrigation declared, evaluated as rainfed: demand of {demand} mm versus {rain} mm of effective rain in your zone; deficit of {deficit} mm, rain is not enough.",
+    },
+    "suitability.water.unlimited_irrigation": {
+        "es": "Demanda de {demand} mm frente a {rain} mm de lluvia efectiva en tu zona; harían falta {irrigation} mm de riego. Declaraste riego sin indicar cuánto: confirma que alcanza.",
+        "en": "Demand of {demand} mm versus {rain} mm of effective rain in your zone; {irrigation} mm of irrigation would be needed. You declared irrigation without an amount: confirm it is enough.",
+    },
+    "suitability.water.unknown": {
+        "es": "No hay datos de lluvia o evapotranspiración para la zona.",
+        "en": "There is no rain or evapotranspiration data for the zone.",
+    },
+    "suitability.soil.ph_ok": {
+        "es": "pH estimado de {ph} en tu zona, dentro del rango del cultivo ({low}-{high}).",
+        "en": "Estimated pH of {ph} in your zone, within the crop range ({low}-{high}).",
+    },
+    "suitability.soil.ph_warn": {
+        "es": "pH estimado de {ph} en tu zona, ligeramente fuera del rango del cultivo ({low}-{high}).",
+        "en": "Estimated pH of {ph} in your zone, slightly outside the crop range ({low}-{high}).",
+    },
+    "suitability.soil.ph_bad": {
+        "es": "pH estimado de {ph} en tu zona, fuera del rango del cultivo ({low}-{high}).",
+        "en": "Estimated pH of {ph} in your zone, outside the crop range ({low}-{high}).",
+    },
+    "suitability.soil.texture": {
+        "es": "La textura estimada ({texture}) complica el manejo del agua.",
+        "en": "The estimated texture ({texture}) makes water management harder.",
+    },
+    "suitability.soil.unknown": {
+        "es": "No hay datos de suelo para la zona.",
+        "en": "There is no soil data for the zone.",
+    },
 }
 
 
