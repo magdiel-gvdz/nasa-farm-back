@@ -29,10 +29,10 @@ El sistema SHALL usar la serie diaria publicada por DATA cuando exista y, en cas
 - **THEN** la serie procede de NASA POWER y su origen es `power_live`
 
 ### Requirement: Uso responsable de NASA POWER
-El respaldo SHALL pedir a NASA POWER como máximo una vez cada cuadro de 0.5° y periodo, guardar la respuesta y reutilizarla en peticiones posteriores, también después de reiniciar el servicio.
+El respaldo SHALL pedir a NASA POWER como máximo una vez cada cuadro POWER identificado por `power_cell_lat` y `power_cell_lon` y periodo, guardar la respuesta y reutilizarla en peticiones posteriores, también después de reiniciar el servicio.
 
 #### Scenario: Dos celdas del mismo cuadro
-- **WHEN** se piden las series de dos celdas que comparten cuadro de 0.5°
+- **WHEN** se piden las series de dos celdas que comparten las coordenadas `power_cell_lat` y `power_cell_lon` del mismo cuadro POWER
 - **THEN** se hace una sola llamada a NASA POWER
 
 #### Scenario: Reinicio
@@ -56,3 +56,18 @@ Si la serie diaria no puede obtenerse, el sistema SHALL informar un error identi
 #### Scenario: NASA POWER no responde
 - **WHEN** no hay vista publicada y NASA POWER devuelve error o no responde en 20 segundos
 - **THEN** la petición de serie falla con `daily_unavailable` y `GET /api/v1/fields/{id}/profile` sigue respondiendo `200`
+
+### Requirement: Contrato diario publicado y caché
+`v_cell_daily` SHALL tratarse como parte del contrato actual de DATA y consultarse por `cell_id`, sin cargarla entera en la instantánea de C2. El respaldo POWER SHALL conservarse para instalaciones sin esa vista; un fallo de permisos o un error transitorio MUST NOT interpretarse como vista ausente ni activar silenciosamente el respaldo. La caché gold SHALL incluir `data_version` y `cell_id` y no reutilizar datos de una publicación anterior tras una recarga. La caché POWER SHALL usar las coordenadas de cuadro publicadas, periodo y parámetros de consulta, sin redondear a una cuadrícula de 0.5°: el contrato describe cuadros de 0.5° × 0.625°. SHALL guardar la respuesta sin ajuste; la corrección por altura SHALL aplicarse por celda después de leer la caché.
+
+#### Scenario: Error de permisos
+- **WHEN** Athena deniega la consulta diaria
+- **THEN** se registra la causa y se devuelve `daily_unavailable`, sin pasar a POWER como si faltara la vista
+
+#### Scenario: Nueva versión de gold
+- **WHEN** cambia la versión de la instantánea y se pide una serie previamente consultada
+- **THEN** no se sirve la entrada de caché gold de la versión anterior
+
+#### Scenario: Dos elevaciones del mismo cuadro
+- **WHEN** dos celdas comparten coordenadas POWER y periodo pero tienen elevaciones distintas
+- **THEN** reutilizan la respuesta cruda y reciben temperaturas ajustadas individualmente

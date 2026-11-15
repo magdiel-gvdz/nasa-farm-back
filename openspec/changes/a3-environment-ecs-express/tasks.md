@@ -22,3 +22,8 @@
 - [ ] 4.1 Reescribir `tests/environments.tftest.hcl` para el nuevo conjunto de recursos y ejecutar `terraform fmt -check -recursive infra`, `validate` y `test`; verificar que todo pasa sin credenciales
 - [ ] 4.2 Aplicar en un preview real a través del PR conjunto con `a4-deploy-pipeline` y verificar que `curl <api_url>/health` responde `200`; anotar en el PR el tiempo de creación y el atributo de `ingress_paths` usado para la URL
 - [ ] 4.3 Si Express Mode no puede crearse en la cuenta tras una hora de intentos, registrar el error en el PR y cambiar a Fargate + ALB en la VPC por defecto manteniendo variables y salidas; verificar con el mismo `curl`
+
+## Integración de permisos de DATA
+
+- [ ] Verificar que la boundary y la política del rol cubren las acciones y recursos de `infra/data/iam.tf` (`gold_read`), incluyendo acceso a buckets, resultados de Athena y SSM exacto en `DATA_REGION`; probar que cada capa por separado no concede acceso efectivo
+- [ ] Usar los outputs del stack DATA como referencia para bucket, workgroup, base gold y parámetro; no recrear ni destruir recursos compartidos con los entornos de API

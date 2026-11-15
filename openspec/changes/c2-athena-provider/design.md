@@ -36,3 +36,11 @@ DATA publica en la base `fieldshift_gold` seis vistas (`v_cells`, `v_cell_profil
 1. Fusionar con `DATA_PROVIDER=fixture` en todos los entornos.
 2. Cuando DATA publique gold V0, cambiar la variable de repositorio a `athena` y redesplegar `dev`.
 3. Vuelta atrás: devolver la variable a `fixture`.
+
+## Condiciones de integración con DATA
+
+- Ejecutar SELECT con `ctas_approach=False`, `unload_approach=False` y reutilización desactivada. El workgroup fija ubicación y cifrado de resultados; no sobrescribir OutputLocation.
+- El valor SSM inicial `none` indica infraestructura sin publicación: esperar con reintentos y mantener la última instantánea válida si existe.
+- Las seis vistas se cargan en memoria; `v_cell_daily` es la séptima vista permitida y se consulta bajo demanda en C4.
+- El intercambio atómico en memoria no resuelve la recreación concurrente de vistas. El contrato actual no proporciona un protocolo suficiente para garantizar una publicación única entre consultas. BE y DATA deben acordarlo e implementarlo antes de activar Athena, por ejemplo mediante lecturas fijadas a una publicación inmutable o coordinación explícita entre lector y publicador. No basta leer SSM antes y después. Las extensiones del contrato y permisos que se acuerden se documentarán; no se asume que Terraform ya las implemente.
+- Activar requiere infraestructura aplicada, artefactos de ingesta y Glue disponibles en el proyecto DATA, pipeline ejecutado, vistas verificadas y versión válida. El backend no aplica la copia `infra/data/`.

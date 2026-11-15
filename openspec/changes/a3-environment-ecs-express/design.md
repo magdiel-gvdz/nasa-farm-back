@@ -43,3 +43,7 @@ Vuelta atrás: revertir el PR; el apply recrea Lambda y API Gateway (los permiso
 ## Open Questions
 
 - Atributo exacto de `ingress_paths` que contiene la URL pública: se confirma con el primer apply en un preview.
+
+## Permisos de DATA
+
+El stack del entorno concederá al rol `-api` permisos equivalentes a `fieldshift-gold-read` mediante su política acotada a los recursos configurados; el bootstrap permitirá esas mismas operaciones en la boundary. Se conserva así la estrategia de política del rol de la tarea 2.2 sin requerir un attachment adicional. Verificar el acceso desde el rol real: ampliar solo la boundary no concede permisos. El bucket del entorno, aunque conserve la dirección `aws_s3_bucket.data_lake`, no es el lake compartido de DATA.
