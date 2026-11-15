@@ -14,4 +14,4 @@
 
 - [x] 3.1 Guardar instantáneas de aptitud (matriz) y rotaciones para las geocercas sintéticas de Saltillo y La Laguna, con un comando documentado para regenerarlas; verificar que la prueba falla al cambiar un peso en `config/engine.yaml` y pasa tras regenerar
 - [x] 3.2 Confirmar que la batería completa corre en el workflow de comprobaciones en menos de 60 s; verificar con la duración del paso en CI
-  - La batería completa (526 pruebas) tarda unos 35 s en local; la duración en CI se anota en el PR
+  - La batería completa (526 pruebas) tarda unos 35 s en local; en CI, el paso «Lint and test API» tardó 13 s en el PR #17
