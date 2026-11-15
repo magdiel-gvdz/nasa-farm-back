@@ -18,3 +18,4 @@
 - [x] 3.2 Usar el pH de laboratorio en el factor suelo con su texto es/en; verificar con la prueba de 7.9 frente a 6.8
 - [x] 3.3 Regenerar `contracts/openapi.json` y documentar el endpoint en `docs/api-contract.md`, incluida la advertencia de no subir documentos con datos personales; verificar que la comprobación del contrato pasa
 - [ ] 3.4 En un preview, subir un análisis real en PDF y otro en foto y verificar a mano los valores extraídos contra el documento; anotar las discrepancias en el PR
+  - Comprobado en el preview `pr-21` solo con documentos de ejemplo generados (un análisis ficticio en PDF y como foto JPG, y una factura): los 11 valores coinciden con el documento, la factura se rechaza con `not_a_soil_report` y el perfil y la aptitud usan el pH de laboratorio. Pendiente: repetirlo con un análisis real de laboratorio, en PDF y en foto
