@@ -1,0 +1,10 @@
+output "lake_bucket" { value = aws_s3_bucket.lake.bucket }
+output "athena_results_bucket" { value = aws_s3_bucket.athena_results.bucket }
+output "athena_workgroup" { value = aws_athena_workgroup.this.name }
+output "glue_databases" { value = [aws_glue_catalog_database.silver.name, aws_glue_catalog_database.gold.name] }
+output "data_version_parameter" { value = aws_ssm_parameter.data_version.name }
+output "earthdata_secret_arn" { value = aws_secretsmanager_secret.earthdata.arn }
+output "ecr_repository_url" { value = aws_ecr_repository.ingest.repository_url }
+output "ingest_lambda_role_arn" { value = aws_iam_role.ingest_lambda.arn }
+output "glue_role_arn" { value = aws_iam_role.glue.arn }
+output "gold_read_policy_arn" { value = aws_iam_policy.gold_read.arn }

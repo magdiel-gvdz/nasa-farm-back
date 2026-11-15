@@ -31,3 +31,7 @@ Ninguna.
 - Responsable sugerido: Carril 3 (Datos y perfil).
 - Depende de: `c1-data-provider`, `a3-environment-ecs-express`, gold V0 publicado por DATA (H15).
 - Estimación: 2.5 h.
+
+## Condiciones para activar
+
+La carga usa seis vistas en memoria; `v_cell_daily` se permite bajo demanda en C4. Se ejecutan SELECT sin CTAS, UNLOAD ni reutilización. SSM `none` no es una publicación. La activación requiere datos publicados y un protocolo de consistencia acordado, implementado y probado con DATA durante la recreación de vistas; el Terraform de referencia no garantiza por sí solo esa consistencia.

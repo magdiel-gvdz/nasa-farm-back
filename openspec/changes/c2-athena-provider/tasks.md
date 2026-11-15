@@ -19,3 +19,11 @@
 - [ ] 3.1 Registrar `athena` en la fábrica de proveedores con sus variables de entorno; verificar con una prueba de configuración incompleta que el arranque falla indicando la variable que falta
 - [ ] 3.2 En un preview, con gold V0 publicado, desplegar con `DATA_PROVIDER=athena`; verificar que `/ready` informa la versión del parámetro SSM y que `GET /api/v1/sources` devuelve las fuentes reales
 - [ ] 3.3 Cambiar la variable de repositorio para `dev`, redesplegar y documentar en `README.md` el procedimiento de activación y de vuelta atrás; verificar que el perfil de una geocerca de cada zona responde `200`
+
+## 4. Condiciones de integración (previas a la activación de la sección 3)
+
+- [ ] 4.1 Acordar con DATA, documentar e implementar en ambos proyectos un protocolo de publicación consistente; verificar con una publicación entre consultas que no se acepta una instantánea mezclada. Comprobar SSM antes y después no basta. Mantener `fixture` hasta satisfacer esta condición
+- [ ] 4.2 Fijar `ctas_approach=False`, `unload_approach=False`, sin reutilización ni OutputLocation propio; verificar workgroup y región y ausencia de CTAS, UNLOAD y escrituras al catálogo
+- [ ] 4.3 Tratar SSM `none` como ausencia de publicación; probar arranque sin vistas, publicación posterior y conservación de una instantánea previa
+- [ ] 4.4 Confirmar que DATA aplicó su stack y ejecutó su pipeline con sus artefactos; verificar vistas y versión publicada sin aplicar `infra/data/` desde el backend
+- [ ] 4.5 Verificar desde el rol real de la tarea lectura de SSM y SELECT en Athena en `DATA_REGION`, con política del rol y boundary compatibles, antes de 3.2 y 3.3

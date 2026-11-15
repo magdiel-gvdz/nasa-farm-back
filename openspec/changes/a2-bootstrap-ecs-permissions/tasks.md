@@ -22,3 +22,8 @@
 - [x] 4.1 Con credenciales de administrador, ejecutar `plan` y `apply` del bootstrap contra el estado remoto; verificar que el plan no destruye el bucket de estado ni el proveedor OIDC y que `terraform output ecr_repository_url` devuelve un valor
 - [x] 4.2 Registrar la variable de repositorio `ECR_REPOSITORY_URL` en GitHub; verificar con `gh variable list`
 - [x] 4.3 Documentar en `README.md` las variables nuevas del bootstrap y la variable de GitHub; verificar que la tabla de variables del README coincide con `variables.tf`
+
+## Integración de permisos de DATA
+
+- [ ] Verificar que la boundary y la política del rol cubren las acciones y recursos de `infra/data/iam.tf` (`gold_read`), incluyendo acceso a buckets, resultados de Athena y SSM exacto en `DATA_REGION`; probar que cada capa por separado no concede acceso efectivo
+- [ ] Usar los outputs del stack DATA como referencia para bucket, workgroup, base gold y parámetro; no recrear ni destruir recursos compartidos con los entornos de API
