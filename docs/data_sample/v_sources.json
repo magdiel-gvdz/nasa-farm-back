@@ -1,0 +1,72 @@
+[
+ {
+  "source_id": "copernicus_dem_glo90",
+  "name": "Copernicus DEM GLO-90",
+  "organization": "ESA / Copernicus (no NASA)",
+  "product_version": "GLO-90 (COG en AWS Open Data)",
+  "url": "https://registry.opendata.aws/copernicus-dem/",
+  "resolution": "~90 m, estático",
+  "period": "estático",
+  "access_date": "2026-11-15",
+  "license": "Licencia Copernicus DEM (uso libre con atribución)",
+  "data_class": "observación",
+  "status": "in_use",
+  "used_for": "elevación media por celda para corregir la temperatura por altura (estimación)"
+ },
+ {
+  "source_id": "modis_ndvi",
+  "name": "MODIS/Terra Vegetation Indices 16-Day",
+  "organization": "NASA LP DAAC",
+  "product_version": "MOD13Q1.061 (vía AppEEARS)",
+  "url": "https://lpdaac.usgs.gov/products/mod13q1v061/",
+  "resolution": "250 m, 16 días",
+  "period": "2016-2025",
+  "access_date": "2026-11-15",
+  "license": "Datos abiertos de la NASA",
+  "data_class": "observación",
+  "status": "pending",
+  "used_for": "suelo descubierto (NDVI)"
+ },
+ {
+  "source_id": "nasa_power",
+  "name": "NASA POWER Daily (comunidad AG)",
+  "organization": "NASA Langley Research Center (LaRC)",
+  "product_version": "POWER Daily API v2 (meteorología MERRA-2)",
+  "url": "https://power.larc.nasa.gov/",
+  "resolution": "0.5° x 0.625° (~55 km), diaria",
+  "period": "2016-2025",
+  "access_date": "2026-11-15",
+  "license": "Datos abiertos de la NASA; citar NASA POWER",
+  "data_class": "modelo (reanálisis MERRA-2)",
+  "status": "in_use",
+  "used_for": "temperatura, lluvia, viento, humedad de raíz (GWETROOT), ET0 derivada"
+ },
+ {
+  "source_id": "smap_l4",
+  "name": "SMAP L4 Global Surface and Root Zone Soil Moisture",
+  "organization": "NASA JPL / GSFC, NSIDC DAAC",
+  "product_version": "SPL4SMGP.008 (vía AppEEARS)",
+  "url": "https://nsidc.org/data/spl4smgp",
+  "resolution": "9 km, cada 3 h",
+  "period": "2016-2025",
+  "access_date": "2026-11-15",
+  "license": "Datos abiertos de la NASA",
+  "data_class": "observación asimilada en modelo",
+  "status": "pending",
+  "used_for": "humedad de raíz (reemplazará a GWETROOT)"
+ },
+ {
+  "source_id": "soilgrids",
+  "name": "SoilGrids 2.0",
+  "organization": "ISRIC - World Soil Information",
+  "product_version": "SoilGrids 2.0 (WCS)",
+  "url": "https://soilgrids.org/",
+  "resolution": "250 m, estático (0-5, 5-15, 15-30 cm)",
+  "period": "estático",
+  "access_date": "2026-11-15",
+  "license": "CC BY 4.0",
+  "data_class": "estimación (modelo sobre perfiles de suelo)",
+  "status": "in_use",
+  "used_for": "textura, pH, carbono orgánico, nitrógeno, CEC, densidad aparente"
+ }
+]
