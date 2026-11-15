@@ -328,8 +328,12 @@ resource "aws_ecs_express_gateway_service" "api" {
     }
   }
   scaling_target {
-    min_task_count = 1
-    max_task_count = local.is_preview ? 1 : 2
+    # El proveedor rellena estos valores por defecto; declararlos evita el
+    # error "inconsistent result after apply".
+    min_task_count            = 1
+    max_task_count            = local.is_preview ? 1 : 2
+    auto_scaling_metric       = "AVERAGE_CPU"
+    auto_scaling_target_value = 60
   }
   depends_on = [aws_iam_role_policy.api, aws_iam_role_policy_attachment.platform]
 }
