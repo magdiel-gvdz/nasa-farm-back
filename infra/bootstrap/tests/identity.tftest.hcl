@@ -67,7 +67,7 @@ run "protect_state_and_limit_oidc_subjects" {
     error_message = "La publicación de imágenes debe quedar limitada al repositorio compartido."
   }
   assert {
-    condition     = one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Condition.StringEquals["iam:PassedToService"] if try(s.Sid, "") == "PassTaskRoles"]) == "ecs-tasks.amazonaws.com" && one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Condition.StringEquals["iam:PassedToService"] if try(s.Sid, "") == "PassInfrastructureRole"]) == "ecs.amazonaws.com"
+    condition     = toset(one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Condition.StringEquals["iam:PassedToService"] if try(s.Sid, "") == "PassTaskRoles"])) == toset(["ecs-tasks.amazonaws.com", "ecs.amazonaws.com"]) && one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Condition.StringEquals["iam:PassedToService"] if try(s.Sid, "") == "PassInfrastructureRole"]) == "ecs.amazonaws.com"
     error_message = "PassRole debe estar condicionado al servicio de ECS correspondiente."
   }
   assert {
@@ -77,6 +77,14 @@ run "protect_state_and_limit_oidc_subjects" {
   assert {
     condition     = strcontains(one([for s in jsondecode(aws_iam_policy.runtime_boundary.policy).Statement : s.Resource[0] if try(s.Sid, "") == "OwnAppTable"]), "$${aws:PrincipalTag/Environment}")
     error_message = "El límite debe aislar la tabla por la etiqueta del entorno de la tarea."
+  }
+  assert {
+    condition     = toset(one([for s in jsondecode(aws_iam_role_policy.deploy["dev"].policy).Statement : s.Resource if try(s.Sid, "") == "CreatePlatformRoles"])) == toset(["arn:aws:iam::123456789012:role/nasa-farm-dev-api-exec", "arn:aws:iam::123456789012:role/nasa-farm-dev-api-infra"])
+    error_message = "Los permisos de dev deben coincidir con los nombres exactos de los roles de ECS."
+  }
+  assert {
+    condition     = toset(one([for s in jsondecode(aws_iam_role_policy.deploy["dev"].policy).Statement : s.Resource if try(s.Sid, "") == "PassTaskRoles"])) == toset(["arn:aws:iam::123456789012:role/nasa-farm-dev-api", "arn:aws:iam::123456789012:role/nasa-farm-dev-api-exec"])
+    error_message = "Dev solo debe pasar los roles de tarea y ejecución previstos para la API."
   }
 }
 

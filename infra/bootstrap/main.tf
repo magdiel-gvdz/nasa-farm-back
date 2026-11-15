@@ -474,8 +474,8 @@ resource "aws_iam_role_policy" "deploy" {
           "iam:CreateRole"
         ],
         "Resource" : [
-          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-exec",
-          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-infra"
+          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-api-exec",
+          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-api-infra"
         ]
       },
       {
@@ -492,8 +492,8 @@ resource "aws_iam_role_policy" "deploy" {
           "iam:ListInstanceProfilesForRole"
         ],
         "Resource" : [
-          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-exec",
-          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-infra"
+          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-api-exec",
+          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-api-infra"
         ]
       },
       {
@@ -504,7 +504,7 @@ resource "aws_iam_role_policy" "deploy" {
           "iam:DetachRolePolicy"
         ],
         "Resource" : [
-          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-exec"
+          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-api-exec"
         ],
         "Condition" : {
           "ArnEquals" : {
@@ -520,7 +520,7 @@ resource "aws_iam_role_policy" "deploy" {
           "iam:DetachRolePolicy"
         ],
         "Resource" : [
-          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-infra"
+          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-api-infra"
         ],
         "Condition" : {
           "ArnEquals" : {
@@ -535,12 +535,12 @@ resource "aws_iam_role_policy" "deploy" {
           "iam:PassRole"
         ],
         "Resource" : [
-          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}",
-          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-exec"
+          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-api",
+          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-api-exec"
         ],
         "Condition" : {
           "StringEquals" : {
-            "iam:PassedToService" : "ecs-tasks.amazonaws.com"
+            "iam:PassedToService" : ["ecs-tasks.amazonaws.com", "ecs.amazonaws.com"]
           }
         }
       },
@@ -551,7 +551,7 @@ resource "aws_iam_role_policy" "deploy" {
           "iam:PassRole"
         ],
         "Resource" : [
-          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-infra"
+          "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-api-infra"
         ],
         "Condition" : {
           "StringEquals" : {
