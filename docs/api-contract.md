@@ -8,7 +8,7 @@
 - Base: `{VITE_API_URL}/api/v1`. `GET /health` y `GET /ready` quedan en la raíz.
 - Todas las claves JSON van en `snake_case`. Los cuerpos de petición rechazan claves desconocidas con `422`.
 - Los datos son **zonales**: describen la celda de 9 km donde cae la geocerca, no la parcela.
-- Un endpoint que todavía no calcula con datos reales devuelve una **respuesta fija** (celda de Saltillo `E9_r0463_c0846`) y la marca con `X-Fieldshift-Mock: 1`. Cuando llegue su implementación, la forma no cambia y el encabezado desaparece.
+- Todos los endpoints calculan con los datos del proveedor activo; ninguno devuelve ya una respuesta fija. El encabezado `X-Fieldshift-Mock: 1` queda reservado para marcar una respuesta fija si un endpoint nuevo la necesita.
 
 | Endpoint | Estado |
 |---|---|
@@ -17,7 +17,7 @@
 | `GET /crops` | Real: catálogo de `data/crops.yaml` (ver [crop-catalog.md](crop-catalog.md)) |
 | `GET /fields/{id}/profile` | Real: se calcula con los datos del proveedor activo |
 | `GET /fields/{id}/suitability` | Real: motor de aptitud (ver [engines.md](engines.md)); `delta_t_c` y `delta_p_pct` aún no cambian el resultado |
-| `POST /fields/{id}/rotations` | Respuesta fija |
+| `POST /fields/{id}/rotations` | Real: motor de rotaciones (ver [engines.md](engines.md)); `scenario` se devuelve pero aún no cambia el resultado |
 
 ## Diferencias respecto a `backend-handoff.md` §6
 
@@ -108,6 +108,7 @@ Todo error, también los de validación, usa el mismo sobre:
 | `validation_error` | 422 | El cuerpo o los parámetros no cumplen el esquema | `fields`: lista de `{field, type, message}`; `field` es la ruta, p. ej. `body.geometry` |
 | `invalid_geometry` | 422 | La geometría no es un polígono válido (ver [Geometría](#geometría-y-celda)) | `reason` y datos del límite incumplido |
 | `crop_not_found` | 404 | `crop_id` no existe en el catálogo de cultivos | `crop_id` |
+| `current_rotation_required` | 422 | Se pidieron rotaciones para una geocerca sin `current_rotation` con algún cultivo | — |
 | `out_of_region` | 422 | La celda de la geocerca no pertenece a ninguna zona publicada | `cell_id` y `zones`: lista de `{zone_id, name, bbox}` |
 | `missing_client_id` | 400 | Falta `X-Client-Id` en una ruta de `/fields` | — |
 | `invalid_client_id` | 400 | `X-Client-Id` no es un UUID | — |

@@ -3,11 +3,11 @@ import json
 
 import pytest
 
-from app.api.fixtures import load_fixture
 from scripts import smoke_e2e
 from scripts.smoke_e2e import ContractValidator, Smoke, check_profile, check_rotations
 from tests.helpers import (
     reference_profile,
+    reference_rotations,
     reference_suitability_detail,
     reference_suitability_matrix,
 )
@@ -26,9 +26,7 @@ def schema_of(validator, name):
 
 def test_valid_fixtures_pass_the_contract(validator):
     assert validator.errors(reference_profile(), schema_of(validator, "FieldProfile")) == []
-    assert (
-        validator.errors(load_fixture("rotations"), schema_of(validator, "RotationResponse")) == []
-    )
+    assert validator.errors(reference_rotations(), schema_of(validator, "RotationResponse")) == []
 
 
 @pytest.mark.parametrize(
@@ -43,7 +41,7 @@ def test_valid_fixtures_pass_the_contract(validator):
     ],
 )
 def test_invalid_responses_are_reported_with_their_location(validator, mutate, expected):
-    body = load_fixture("rotations")
+    body = reference_rotations()
     mutate(body)
     problems = validator.errors(body, schema_of(validator, "RotationResponse"))
     assert problems and any(expected in problem for problem in problems), problems
@@ -64,7 +62,7 @@ def test_profile_needs_the_36_decades():
 
 
 def test_rotations_need_three_strategies_one_current_and_known_sources():
-    rotations = load_fixture("rotations")
+    rotations = reference_rotations()
     cited = {
         evidence["source_id"]
         for strategy in rotations["strategies"]

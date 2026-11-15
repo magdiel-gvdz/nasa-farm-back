@@ -3016,10 +3016,18 @@
             "type": "number"
           },
           "income": {
-            "maximum": 5.0,
-            "minimum": 0.0,
-            "title": "Income",
-            "type": "number"
+            "anyOf": [
+              {
+                "maximum": 5.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "`null` si el catálogo no trae índice de margen",
+            "title": "Income"
           },
           "low_labor": {
             "maximum": 5.0,
@@ -4141,6 +4149,16 @@
               }
             },
             "description": "Unprocessable Content"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
           }
         },
         "summary": "Al menos 3 estrategias, incluida la rotación actual",

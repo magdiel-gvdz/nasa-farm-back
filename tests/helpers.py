@@ -4,6 +4,11 @@ from functools import cache
 
 ORIGIN = "http://localhost:5173"
 SNAKE_CASE = re.compile(r"^[a-z][a-z0-9_]*$")
+# Maíz en primavera-verano y barbecho en otoño-invierno.
+MAIZE_FALLOW = [
+    {"year": 1, "season": "spring_summer", "crop_id": "maiz"},
+    {"year": 1, "season": "fall_winter", "crop_id": None},
+]
 
 
 def square(lon: float = -101.02, lat: float = 25.41, side_deg: float = 0.02) -> dict:
@@ -76,3 +81,25 @@ def reference_suitability_detail() -> dict:
 
 def reference_suitability_matrix() -> dict:
     return _suitability(None)
+
+
+def reference_rotations() -> dict:
+    """Rotaciones de maíz-barbecho en la celda de Saltillo, con datos sintéticos."""
+    from app.api.routes.suitability import cell_data
+    from app.catalog.loader import load_catalog
+    from app.data.fixture import FixtureProvider
+    from app.engines.config import load_config
+    from app.engines.rotation import Constraints, compare
+    from app.engines.suitability import FieldContext
+
+    result = compare(
+        catalog=load_catalog(),
+        cell_data=cell_data(FixtureProvider(), "E9_r0463_c0846"),
+        field_context=FieldContext(),
+        config=load_config(),
+        current_rotation=MAIZE_FALLOW,
+        constraints=Constraints(),
+        weights={},
+        irrigation_limit_mm=None,
+    )
+    return {**result, "scenario": {"delta_t_c": 0, "delta_p_pct": 0}}

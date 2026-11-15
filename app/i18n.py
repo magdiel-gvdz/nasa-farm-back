@@ -296,6 +296,138 @@ MESSAGES: dict[str, dict[str, str]] = {
         "es": "No hay datos de suelo para la zona.",
         "en": "There is no soil data for the zone.",
     },
+    "error.current_rotation_required": {
+        "es": "La geocerca no tiene una rotación actual declarada; añade al menos un cultivo en `current_rotation`.",
+        "en": "The field has no current rotation declared; add at least one crop to `current_rotation`.",
+    },
+    "rotation.fallow": {
+        "es": "barbecho",
+        "en": "fallow",
+    },
+    "rotation.disclaimer": {
+        "es": "Herramienta de apoyo: describe tu zona (celda de 9 km) con datos históricos y no sustituye el juicio de un agrónomo o productor local.",
+        "en": "Decision-support tool: it describes your zone (9 km cell) with historical data and does not replace the judgment of a local agronomist or grower.",
+    },
+    "rotation.why.current": {
+        "es": "Es tu rotación actual: sirve de línea base para comparar las alternativas.",
+        "en": "This is your current rotation: it is the baseline the alternatives are compared against.",
+    },
+    "rotation.why.legume": {
+        "es": "{crop} es una leguminosa que fija nitrógeno: el balance aproximado pasa de {baseline} a {balance} kg N/ha al año.",
+        "en": "{crop} is a legume that fixes nitrogen: the approximate balance goes from {baseline} to {balance} kg N/ha per year.",
+    },
+    "rotation.why.cover": {
+        "es": "{crop} cubre el suelo en la temporada que hoy queda en barbecho: los días de suelo descubierto bajan de {baseline} a {days} al año.",
+        "en": "{crop} covers the soil in the season that is now fallow: bare-soil days drop from {baseline} to {days} per year.",
+    },
+    "rotation.why.drought": {
+        "es": "{crop} tolera la sequía y sustituye a {main}: la necesidad de riego estimada pasa de {baseline} a {need} mm al año.",
+        "en": "{crop} is drought tolerant and replaces {main}: the estimated irrigation need goes from {baseline} to {need} mm per year.",
+    },
+    "rotation.why.forage": {
+        "es": "{crop} aprovecha la temporada en barbecho para producir forraje para tu ganado.",
+        "en": "{crop} uses the fallow season to produce forage for your livestock.",
+    },
+    "rotation.why.diversify": {
+        "es": "Alterna {main} con {crop}, de otra familia botánica, para no repetir el mismo cultivo.",
+        "en": "Alternates {main} with {crop}, from another botanical family, to avoid repeating the same crop.",
+    },
+    "rotation.why.rest": {
+        "es": "Deja descansar el suelo un ciclo: la necesidad de riego estimada pasa de {baseline} a {need} mm al año.",
+        "en": "Rests the soil for one cycle: the estimated irrigation need goes from {baseline} to {need} mm per year.",
+    },
+    "rotation.why.pest_break": {
+        "es": "Alternar familias botánicas rompe ciclos de plagas: el puntaje de ruptura pasa de {baseline} a {score} sobre 5.",
+        "en": "Alternating botanical families breaks pest cycles: the break score goes from {baseline} to {score} out of 5.",
+    },
+    "rotation.evidence.water": {
+        "es": "Demanda de agua de {demand} mm al año y necesidad de riego de {need} mm, con la evapotranspiración y la lluvia mediana de tu zona.",
+        "en": "Water demand of {demand} mm per year and irrigation need of {need} mm, with the evapotranspiration and median rain of your zone.",
+    },
+    "rotation.evidence.bare_soil": {
+        "es": "La secuencia deja {days} días de suelo descubierto al año; en esas decenas cae el {share} % del riesgo de lluvia intensa de tu zona.",
+        "en": "The sequence leaves {days} bare-soil days per year; {share}% of the heavy-rain risk of your zone falls in those ten-day periods.",
+    },
+    "rotation.evidence.soil_ph": {
+        "es": "El pH estimado del suelo de tu zona es {ph}.",
+        "en": "The estimated soil pH of your zone is {ph}.",
+    },
+    "rotation.benefit.current": {
+        "es": "No requiere cambios de manejo, semilla ni equipo.",
+        "en": "It needs no change in management, seed or equipment.",
+    },
+    "rotation.benefit.less_irrigation": {
+        "es": "Necesita {saving} mm menos de riego al año que tu rotación actual.",
+        "en": "It needs {saving} mm less irrigation per year than your current rotation.",
+    },
+    "rotation.benefit.more_nitrogen": {
+        "es": "Deja unos {gain} kg N/ha más al año que tu rotación actual.",
+        "en": "It leaves about {gain} kg N/ha more per year than your current rotation.",
+    },
+    "rotation.benefit.less_bare_soil": {
+        "es": "Reduce el suelo descubierto de {baseline} a {days} días al año.",
+        "en": "It cuts bare soil from {baseline} to {days} days per year.",
+    },
+    "rotation.benefit.pest_break": {
+        "es": "Mejora la ruptura de ciclos de plagas de {baseline} a {score} sobre 5.",
+        "en": "It improves the pest-cycle break from {baseline} to {score} out of 5.",
+    },
+    "rotation.benefit.forage": {
+        "es": "Añade producción de forraje.",
+        "en": "It adds forage production.",
+    },
+    "rotation.benefit.organic_matter": {
+        "es": "Más cobertura y rastrojo: la materia orgánica tiende a mejorar.",
+        "en": "More cover and residue: organic matter tends to improve.",
+    },
+    "rotation.benefit.keeps_main": {
+        "es": "Mantiene {main} como cultivo principal.",
+        "en": "It keeps {main} as the main crop.",
+    },
+    "rotation.gap.zonal": {
+        "es": "Los cálculos usan datos de tu zona (celda de 9 km), no mediciones de tu parcela.",
+        "en": "The calculations use data for your zone (9 km cell), not measurements from your plot.",
+    },
+    "rotation.gap.no_lab": {
+        "es": "No hay análisis de laboratorio del suelo: el nitrógeno y la materia orgánica son aproximaciones.",
+        "en": "There is no laboratory soil analysis: nitrogen and organic matter are approximations.",
+    },
+    "rotation.gap.no_margin": {
+        "es": "No hay datos de margen económico de los cultivos: la prioridad de ingreso no entra en el puntaje.",
+        "en": "There is no economic margin data for the crops: the income priority is left out of the score.",
+    },
+    "rotation.gap.unreviewed_crops": {
+        "es": "Los requisitos de algunos cultivos son valores iniciales sin revisar por un especialista.",
+        "en": "The requirements of some crops are initial values not yet reviewed by a specialist.",
+    },
+    "rotation.risk.local_review": {
+        "es": "Plagas, enfermedades, variedades y mercado local no se observan desde satélite: valida la rotación con un agrónomo o productor local.",
+        "en": "Pests, diseases, varieties and the local market cannot be seen from satellites: validate the rotation with a local agronomist or grower.",
+    },
+    "rotation.risk.irrigation": {
+        "es": "Necesita {need} mm de riego al año y tu límite es de {limit} mm: faltan {deficit} mm.",
+        "en": "It needs {need} mm of irrigation per year and your limit is {limit} mm: {deficit} mm are missing.",
+    },
+    "rotation.risk.relaxed_marginal": {
+        "es": "{crop} se admite con condiciones: su aptitud en tu zona es marginal.",
+        "en": "{crop} is admitted with conditions: its suitability in your zone is marginal.",
+    },
+    "rotation.risk.relaxed_month": {
+        "es": "{crop} se admite con condiciones: solo es viable moviendo la fecha de siembra dentro de la temporada.",
+        "en": "{crop} is admitted with conditions: it is only viable by moving the planting date within the season.",
+    },
+    "rotation.risk.relaxed_any": {
+        "es": "{crop} se admite con condiciones: no hay un cultivo apto para esta función con tus restricciones.",
+        "en": "{crop} is admitted with conditions: no crop is suitable for this role under your constraints.",
+    },
+    "rotation.risk.rest": {
+        "es": "Dejar un ciclo en barbecho reduce la producción; se propone solo porque tus restricciones no dejan otra alternativa.",
+        "en": "Leaving one cycle fallow reduces production; it is proposed only because your constraints leave no other alternative.",
+    },
+    "rotation.risk.weak_crop": {
+        "es": "{crop} sembrado en {month} no es plenamente apto en tu zona (puntaje {score} de 100).",
+        "en": "{crop} planted in {month} is not fully suitable in your zone (score {score} out of 100).",
+    },
 }
 
 

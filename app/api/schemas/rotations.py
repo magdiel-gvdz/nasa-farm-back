@@ -60,7 +60,9 @@ class StrategyMetrics(ResponseModel):
 
 class StrategyScores(ResponseModel):
     save_water: PriorityScore
-    income: PriorityScore
+    income: PriorityScore | None = Field(
+        description="`null` si el catálogo no trae índice de margen"
+    )
     soil_health: PriorityScore
     forage: PriorityScore
     pest_break: PriorityScore
