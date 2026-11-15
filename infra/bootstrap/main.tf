@@ -426,6 +426,7 @@ resource "aws_iam_role_policy" "deploy" {
           "dynamodb:UpdateTable",
           "dynamodb:DescribeContinuousBackups",
           "dynamodb:DescribeTimeToLive",
+          "dynamodb:UpdateTimeToLive",
           "dynamodb:ListTagsOfResource",
           "dynamodb:TagResource",
           "dynamodb:UntagResource"
