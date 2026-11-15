@@ -83,7 +83,7 @@ variable "image_tag" {
   type = string
   validation {
     condition     = can(regex("^[a-f0-9]{40}$", var.image_tag))
-    error_message = "Use el SHA completo de un commit."
+    error_message = "Use una etiqueta de 40 caracteres hexadecimales."
   }
 }
 variable "ecr_repository_url" {

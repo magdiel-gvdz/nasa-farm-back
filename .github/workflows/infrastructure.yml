@@ -46,7 +46,6 @@ jobs:
       TF_VAR_environment: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'dev' }}
       TF_VAR_runtime_permissions_boundary_arn: ${{ vars.RUNTIME_PERMISSIONS_BOUNDARY_ARN }}
       TF_VAR_cors_origins: ${{ vars.API_CORS_ORIGINS || '["http://localhost:5173"]' }}
-      TF_VAR_image_tag: ${{ github.event.pull_request.head.sha || github.sha }}
       TF_VAR_ecr_repository_url: ${{ vars.ECR_REPOSITORY_URL }}
       TF_VAR_data_provider: ${{ vars.DATA_PROVIDER || 'fixture' }}
       TF_VAR_data_region: ${{ vars.DATA_REGION || 'us-west-2' }}
@@ -81,6 +80,14 @@ jobs:
           else
             echo 'deploy=true' >> "$GITHUB_OUTPUT"
           fi
+      # The tag identifies what goes into the image, not the commit, so commits
+      # that leave the image untouched (docs, specs, CI) plan no service change.
+      - name: Derive the image tag from the image contents
+        if: steps.current.outputs.deploy == 'true'
+        run: |
+          tag=$(git ls-tree HEAD -- Dockerfile .dockerignore requirements.txt app | sha256sum | cut -c1-40)
+          [[ "$tag" =~ ^[a-f0-9]{40}$ ]]
+          echo "TF_VAR_image_tag=$tag" >> "$GITHUB_ENV"
       - uses: actions/setup-python@v5
         if: steps.current.outputs.deploy == 'true'
         with:
@@ -123,6 +130,23 @@ jobs:
             -backend-config="key=environments/$TF_VAR_environment/terraform.tfstate" \
             -backend-config="region=$AWS_REGION" \
             -backend-config=encrypt=true -backend-config=use_lockfile=true
+          # The concurrency group admits one CI run per environment, so a lock
+          # left by a runner belongs to a cancelled run. Locks held by anyone
+          # else are never released here.
+          lock_key="environments/$TF_VAR_environment/terraform.tfstate.tflock"
+          found=$(aws s3api list-objects-v2 --bucket "$TF_STATE_BUCKET" --prefix "$lock_key" --query 'Contents[0].Key' --output text)
+          if [ "$found" = "$lock_key" ]; then
+            aws s3api get-object --bucket "$TF_STATE_BUCKET" --key "$lock_key" /tmp/lock.json > /dev/null
+            lock_id=$(python -c "import json; print(json.load(open('/tmp/lock.json'))['ID'])")
+            lock_who=$(python -c "import json; print(json.load(open('/tmp/lock.json'))['Who'])")
+            if [[ "$lock_who" == runner@* ]]; then
+              echo "Releasing stale lock $lock_id left by $lock_who"
+              terraform -chdir=infra/environment force-unlock -force "$lock_id"
+            else
+              echo "State is locked by $lock_who; refusing to release it" >&2
+              exit 1
+            fi
+          fi
           terraform -chdir=infra/environment plan -lock-timeout=5m -out=deploy.tfplan
           terraform -chdir=infra/environment apply -lock-timeout=5m deploy.tfplan
       - name: Smoke test and deployment links

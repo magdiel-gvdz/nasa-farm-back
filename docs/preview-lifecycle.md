@@ -2,8 +2,11 @@
 
 Abrir los PR como borrador mientras se trabaja. Los borradores y forks ejecutan
 checks sin publicar imágenes ni crear recursos. Al pasar un PR interno a listo
-para revisión, el pipeline publica en ECR su SHA, aplica `pr-N` y consulta
-`/health`. Un mismo SHA reutiliza la imagen ya publicada.
+para revisión, el pipeline publica la imagen en ECR, aplica `pr-N` y consulta
+`/health`. La etiqueta es un hash del contenido de la imagen (`Dockerfile`,
+`.dockerignore`, `requirements.txt` y `app/`), no el SHA del commit: un commit
+que solo toca documentación, specs o CI reutiliza la imagen y no redespliega
+el servicio.
 
 Antes del primer preview de esta migración hay que aplicar bootstrap y registrar
 `ECR_REPOSITORY_URL`. ECS Express Mode usa el clúster y la VPC por defecto.
@@ -48,6 +51,11 @@ cerrarlo sin fusionar, destruir el preview con el stack nuevo y credenciales de
 preview, o recuperarlo desde `main` una vez integrada la migración. No dar por
 verificada la limpieza hasta completar la comprobación real. Los permisos
 heredados se mantienen hasta que no queden entornos con la plataforma anterior.
+
+Si se cancela una ejecución en pleno apply, el bloqueo del estado queda
+huérfano. El siguiente despliegue lo libera solo cuando lo dejó un runner de
+CI, porque el grupo de concurrencia garantiza que no hay otra ejecución activa
+para ese entorno; un bloqueo de otra procedencia detiene el job.
 
 No borrar estados manualmente. Ante un bloqueo, confirmar que no hay ejecución
 activa y liberar solo ese bloqueo con `terraform force-unlock` y el backend del
