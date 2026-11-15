@@ -8,6 +8,8 @@
 - [x] 1.3 Implementar la construcción de la instantánea: seis vistas a filas tipadas de `app/data/models.py`, `NaN` y rellenos a nulo, índices por `cell_id`; verificar con datos simulados que la prueba de conformidad de `c1` pasa para `AthenaProvider`
 - [x] 1.4 Implementar la validación por vista (columnas obligatorias, al menos una celda, 36 decenas por celda en `v_cell_profile`); verificar con pruebas de columna ausente, columna extra y vista vacía
 
+  - Cambio respecto al diseño: el contrato v2 de DATA (2,992 celdas, más de un millón de filas en `v_cell_indicators`) pide filtrar siempre por `cell_id`. Solo `v_cells` y `v_sources` se cargan completas; el resto se lee por celda en la primera petición y queda en memoria por versión y celda
+
 ## 2. Ciclo de vida
 
 - [x] 2.1 Lanzar la carga inicial en segundo plano al arrancar la aplicación y reflejar el estado en `is_ready`; verificar con una prueba que `/health` responde antes de terminar la carga y `/ready` pasa de `503` a `200`

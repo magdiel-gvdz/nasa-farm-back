@@ -104,14 +104,17 @@ def provider(executor, versions):
 def test_only_selects_over_published_views_are_issued(provider, executor):
     assert [sql for sql, _ in executor.queries] == [
         "SELECT * FROM v_cells",
-        "SELECT * FROM v_cell_profile",
         "SELECT * FROM v_sources",
-        "SELECT * FROM v_cell_indicators",
-        "SELECT * FROM v_cell_year",
-        "SELECT * FROM v_cell_soil",
     ]
-    for sql, _ in executor.queries:
-        assert sql.startswith("SELECT ") and " FROM v_" in sql
+    provider.climatology(SALTILLO)
+    per_cell = sorted(sql for sql, _ in executor.queries[2:])
+    assert per_cell == [
+        "SELECT * FROM v_cell_indicators WHERE cell_id = ?",
+        "SELECT * FROM v_cell_profile WHERE cell_id = ?",
+        "SELECT * FROM v_cell_soil WHERE cell_id = ?",
+        "SELECT * FROM v_cell_year WHERE cell_id = ?",
+    ]
+    assert all(parameters == (SALTILLO,) for _, parameters in executor.queries[2:])
 
 
 @pytest.mark.parametrize(
@@ -135,6 +138,7 @@ def test_provider_with_the_real_sample_conforms_to_the_interface(provider):
     assert provider.data_version() == "2026111500"
     assert {cell.cell_id for cell in provider.cells()} == {SALTILLO, LA_LAGUNA}
     assert len(provider.indicators(SALTILLO)) == 360
+    assert provider.soil(SALTILLO)[0].awc_mm_per_m is not None
     assert [row.depth_cm for row in provider.soil(LA_LAGUNA)] == ["0-5", "5-15", "15-30"]
 
 
@@ -173,14 +177,22 @@ def test_free_text_data_classes_map_by_their_first_word(text, expected):
     assert _data_class(text) == expected
 
 
-def test_missing_required_column_rejects_the_load_naming_it(executor, versions, caplog):
+def test_missing_required_column_is_reported_naming_view_and_column(provider, executor, caplog):
     for row in executor.views["v_cell_profile"]:
         del row["frost_prob"]
+    with caplog.at_level(logging.ERROR), pytest.raises(DataUnavailableError):
+        provider.climatology(SALTILLO)
+    assert "v_cell_profile" in caplog.text and "frost_prob" in caplog.text
+
+
+def test_missing_column_in_a_snapshot_view_rejects_the_load(executor, versions, caplog):
+    for row in executor.views["v_cells"]:
+        del row["power_elev_m"]
     provider = AthenaProvider(executor, versions)
     with caplog.at_level(logging.ERROR):
         assert provider.refresh() is False
     assert not provider.is_ready()
-    assert "v_cell_profile" in caplog.text and "frost_prob" in caplog.text
+    assert "v_cells" in caplog.text and "power_elev_m" in caplog.text
 
 
 def test_extra_columns_are_ignored(executor, versions):
@@ -190,17 +202,22 @@ def test_extra_columns_are_ignored(executor, versions):
     assert provider.refresh() is True and provider.is_ready()
 
 
-@pytest.mark.parametrize("view", ["v_cells", "v_cell_profile", "v_sources"])
+@pytest.mark.parametrize("view", ["v_cells", "v_sources"])
 def test_empty_view_rejects_the_load(executor, view):
     executor.views[view] = []
     with pytest.raises(SnapshotError, match=view):
         load_snapshot(executor, "v1")
 
 
-def test_cell_without_its_36_decades_rejects_the_load(executor):
-    executor.views["v_cell_profile"].pop()
-    with pytest.raises(SnapshotError, match="36 decenas"):
-        load_snapshot(executor, "v1")
+def test_cell_without_its_36_decades_is_not_served(provider, executor):
+    executor.views["v_cell_profile"] = [
+        row
+        for row in executor.views["v_cell_profile"]
+        if not (row["cell_id"] == SALTILLO and row["decade"] == "36")
+    ]
+    with pytest.raises(DataUnavailableError):
+        provider.climatology(SALTILLO)
+    assert len(provider.climatology(LA_LAGUNA)) == 36
 
 
 def test_null_in_a_required_column_rejects_the_load(executor):
@@ -212,15 +229,23 @@ def test_null_in_a_required_column_rejects_the_load(executor):
 # ---------------------------------------------------------------- ciclo de vida
 
 
-def test_requests_after_the_load_do_not_query_athena(provider, executor):
+def test_a_cell_is_read_once_and_then_served_from_memory(provider, executor):
+    build_profile(provider, SALTILLO, "es")
     executor.queries.clear()
     build_profile(provider, SALTILLO, "es")
-    provider.climatology(LA_LAGUNA)
+    provider.climatology(SALTILLO)
     provider.sources()
-    # Solo la serie diaria se pide bajo demanda.
-    assert [sql for sql, _ in executor.queries] == [
-        "SELECT * FROM v_cell_daily WHERE cell_id = ? ORDER BY date"
-    ]
+    provider.cells()
+    assert executor.queries == []
+
+
+def test_new_version_does_not_reuse_cell_data(provider, executor, versions):
+    before = provider.climatology(SALTILLO)
+    versions.version = "2026111612"
+    provider.refresh()
+    executor.queries.clear()
+    after = provider.climatology(SALTILLO)
+    assert after is not before and len(executor.queries) == 4
 
 
 def test_same_version_does_not_run_any_query(provider, executor, versions):
@@ -238,13 +263,13 @@ def test_new_version_is_loaded_and_swapped(provider, executor, versions):
 
 
 def test_failed_reload_keeps_the_last_good_snapshot(provider, executor, versions, caplog):
-    executor.failures["v_cell_year"] = RuntimeError("Access denied on gold/")
+    executor.failures["v_sources"] = RuntimeError("Access denied on gold/")
     versions.version = "2026111612"
     with caplog.at_level(logging.ERROR):
         assert provider.refresh() is False
     assert provider.is_ready() and provider.data_version() == "2026111500"
-    assert "v_cell_year" in caplog.text and "Access denied" in caplog.text
-    del executor.failures["v_cell_year"]
+    assert "v_sources" in caplog.text and "Access denied" in caplog.text
+    del executor.failures["v_sources"]
     assert provider.refresh() is True and provider.data_version() == "2026111612"
 
 
@@ -276,7 +301,7 @@ def test_previous_snapshot_survives_when_the_parameter_goes_back_to_none(provide
 
 def test_version_changing_during_the_load_is_not_accepted(executor, versions):
     def publish(view):
-        if view == "v_cell_year":
+        if view == "v_sources":
             versions.version = "2026111612"
 
     executor.after_query = publish
@@ -394,4 +419,5 @@ def test_health_answers_while_the_data_loads_and_ready_follows(executor, setting
     assert ready.status_code == 200 and ready.json()["data_version"] == "2026111500"
     sources = client.get("/api/v1/sources").json()
     assert {source["id"] for source in sources} >= {"nasa_power", "soilgrids"}
+    assert "smap_l4" not in {source["id"] for source in sources}
     assert "synthetic" not in {source["data_class"] for source in sources}

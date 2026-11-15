@@ -1,7 +1,9 @@
-"""Proveedor de datos que lee las vistas `v_*` de DATA en Athena y las sirve desde memoria.
+"""Proveedor de datos que lee las vistas `v_*` de DATA en Athena.
 
-Las seis vistas de la instantánea se cargan completas al arrancar y cada vez que cambia la
-versión publicada (parámetro SSM). `v_cell_daily` se consulta bajo demanda, por celda.
+El contrato de DATA cubre casi 3,000 celdas y pide filtrar siempre por `cell_id`, así que
+solo se cargan completas las dos vistas pequeñas (`v_cells` y `v_sources`), al arrancar y
+cada vez que cambia la versión publicada (parámetro SSM). Los datos de una celda se leen la
+primera vez que alguien la pide y quedan en memoria, por versión y celda.
 Solo se emiten `SELECT` sobre vistas `v_*`: sin CTAS, sin UNLOAD, sin reutilización de
 resultados y sin `OutputLocation` propio (lo fija el workgroup de DATA).
 """
@@ -17,6 +19,7 @@ import typing
 import unicodedata
 from collections import OrderedDict
 from collections.abc import Sequence
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from typing import Protocol
 
@@ -43,6 +46,7 @@ _FILL_VALUES = {-999.0, -9999.0}
 # Valor inicial del parámetro: hay infraestructura, pero DATA aún no ha publicado.
 NO_PUBLICATION = "none"
 DAILY_CACHE_CELLS = 32
+CELL_CACHE_CELLS = 256
 _DATA_CLASSES = {
     "observacion": "observation",
     "modelo": "model",
@@ -184,7 +188,12 @@ def build_rows(view: str, model: type, rows: Sequence[Row], renames: dict[str, s
         raise SnapshotError(f"{view}: la vista no tiene filas")
     columns = {renames.get(name, name) if renames else name for name in rows[0]}
     kinds = _field_types(model)
-    missing = sorted(set(kinds) - columns)
+    optional = {
+        column.name
+        for column in dataclasses.fields(model)
+        if column.default is not dataclasses.MISSING
+    }
+    missing = sorted(set(kinds) - columns - optional)
     if missing:
         raise SnapshotError(f"{view}: faltan columnas obligatorias: {', '.join(missing)}")
     built = []
@@ -219,54 +228,63 @@ def _data_class(value: str) -> str:
 
 @dataclass(frozen=True)
 class Snapshot:
-    """Datos de una publicación, inmutables e indexados por celda."""
+    """Lo que se carga completo de una publicación: las celdas y las fuentes."""
 
     version: str
     cells: dict[str, Cell]
-    climatology: dict[str, tuple[ClimatologyDecade, ...]]
-    indicators: dict[str, tuple[IndicatorDecade, ...]]
-    years: dict[str, tuple[IndicatorYear, ...]]
-    soil: dict[str, tuple[SoilLayer, ...]]
     sources: tuple[Source, ...]
 
 
-def _by_cell(rows: Sequence, order) -> dict[str, tuple]:
-    grouped: dict[str, list] = {}
-    for row in rows:
-        grouped.setdefault(row.cell_id, []).append(row)
-    return {cell_id: tuple(sorted(group, key=order)) for cell_id, group in grouped.items()}
+@dataclass(frozen=True)
+class CellRows:
+    """Datos de una celda en una versión."""
+
+    climatology: tuple[ClimatologyDecade, ...]
+    indicators: tuple[IndicatorDecade, ...]
+    years: tuple[IndicatorYear, ...]
+    soil: tuple[SoilLayer, ...]
+
+
+def _read(executor: QueryExecutor, view: str, model: type, cell_id: str | None = None) -> list:
+    sql = f"SELECT * FROM {view}" + (" WHERE cell_id = ?" if cell_id else "")
+    try:
+        rows = executor.run(sql, [cell_id] if cell_id else [])
+    except Exception as error:
+        raise SnapshotError(f"{view}: {error}") from error
+    return build_rows(view, model, rows)
 
 
 def load_snapshot(executor: QueryExecutor, version: str) -> Snapshot:
-    """Lee las seis vistas y valida lo publicado. Lanza `SnapshotError` si no es utilizable."""
-
-    def read(view: str, model: type) -> list:
-        try:
-            rows = executor.run(f"SELECT * FROM {view}")
-        except Exception as error:
-            raise SnapshotError(f"{view}: {error}") from error
-        return build_rows(view, model, rows)
-
-    cells = {cell.cell_id: cell for cell in read("v_cells", Cell)}
-    climatology = _by_cell(read("v_cell_profile", ClimatologyDecade), lambda row: row.decade)
-    for cell_id, decades in climatology.items():
-        if [row.decade for row in decades] != list(range(1, 37)):
-            raise SnapshotError(f"v_cell_profile: la celda {cell_id} no tiene las 36 decenas")
+    """Lee `v_cells` y `v_sources` y los valida. Lanza `SnapshotError` si no son utilizables."""
+    cells = {cell.cell_id: cell for cell in _read(executor, "v_cells", Cell)}
     sources = [
         dataclasses.replace(source, data_class=_data_class(source.data_class))
-        for source in read("v_sources", Source)
+        for source in _read(executor, "v_sources", Source)
     ]
-    return Snapshot(
-        version=version,
-        cells=cells,
-        climatology=climatology,
-        indicators=_by_cell(
-            read("v_cell_indicators", IndicatorDecade), lambda row: (row.year, row.decade)
-        ),
-        years=_by_cell(read("v_cell_year", IndicatorYear), lambda row: row.year),
-        soil=_by_cell(read("v_cell_soil", SoilLayer), lambda row: row.depth_top_cm),
-        sources=tuple(sources),
-    )
+    return Snapshot(version=version, cells=cells, sources=tuple(sources))
+
+
+_CELL_VIEWS = (
+    ("climatology", "v_cell_profile", ClimatologyDecade, lambda row: row.decade),
+    ("indicators", "v_cell_indicators", IndicatorDecade, lambda row: (row.year, row.decade)),
+    ("years", "v_cell_year", IndicatorYear, lambda row: row.year),
+    ("soil", "v_cell_soil", SoilLayer, lambda row: row.depth_top_cm),
+)
+
+
+def load_cell(executor: QueryExecutor, cell_id: str) -> CellRows:
+    """Lee las cuatro vistas de una celda, en paralelo, y valida sus 36 decenas."""
+
+    def read(view_spec):
+        _, view, model, order = view_spec
+        return tuple(sorted(_read(executor, view, model, cell_id), key=order))
+
+    with ThreadPoolExecutor(max_workers=len(_CELL_VIEWS)) as pool:
+        results = list(pool.map(read, _CELL_VIEWS))
+    rows = CellRows(**{spec[0]: result for spec, result in zip(_CELL_VIEWS, results, strict=True)})
+    if [row.decade for row in rows.climatology] != list(range(1, 37)):
+        raise SnapshotError(f"v_cell_profile: la celda {cell_id} no tiene las 36 decenas")
+    return rows
 
 
 def _is_missing_view(error: Exception) -> bool:
@@ -275,19 +293,44 @@ def _is_missing_view(error: Exception) -> bool:
     return "does not exist" in text or "table_not_found" in text or "table not found" in text
 
 
+class _VersionedCache:
+    """Caché acotada cuya clave lleva la versión: una versión nueva no reutiliza nada."""
+
+    def __init__(self, size: int):
+        self._size = size
+        self._items: OrderedDict[tuple[str, str], object] = OrderedDict()
+        self._lock = threading.Lock()
+
+    def get(self, version: str, cell_id: str):
+        with self._lock:
+            key = (version, cell_id)
+            if key in self._items:
+                self._items.move_to_end(key)
+                return self._items[key]
+        return None
+
+    def put(self, version: str, cell_id: str, value) -> None:
+        with self._lock:
+            self._items[(version, cell_id)] = value
+            for stale in [key for key in self._items if key[0] != version]:
+                del self._items[stale]
+            while len(self._items) > self._size:
+                self._items.popitem(last=False)
+
+
 # ---------------------------------------------------------------- proveedor
 
 
 class AthenaProvider:
-    """Sirve la última instantánea válida y la renueva cuando DATA publica otra versión."""
+    """Sirve la última publicación válida y la renueva cuando DATA publica otra versión."""
 
     def __init__(self, executor: QueryExecutor, versions: VersionSource, poll_seconds: float = 300):
         self._executor = executor
         self._versions = versions
         self._poll_seconds = poll_seconds
         self._snapshot: Snapshot | None = None
-        self._daily: OrderedDict[tuple[str, str], tuple[DailyRow, ...]] = OrderedDict()
-        self._daily_lock = threading.Lock()
+        self._cells = _VersionedCache(CELL_CACHE_CELLS)
+        self._daily = _VersionedCache(DAILY_CACHE_CELLS)
         self._stop = threading.Event()
         self._thread: threading.Thread | None = None
 
@@ -310,7 +353,7 @@ class AthenaProvider:
     def refresh(self) -> bool:
         """Comprueba la versión publicada y recarga si cambió. Devuelve si hubo carga nueva.
 
-        Nunca lanza: ante cualquier fallo se conserva la última instantánea válida.
+        Nunca lanza: ante cualquier fallo se conserva la última publicación válida.
         """
         try:
             version = self._versions.current()
@@ -372,23 +415,35 @@ class AthenaProvider:
         except KeyError:
             raise UnknownCellError(cell_id) from None
 
-    def _rows(self, table: str, cell_id: str) -> tuple:
+    def _cell_rows(self, cell_id: str) -> CellRows:
+        """Datos de la celda; la primera petición los lee de Athena y quedan en memoria."""
         snapshot = self._current()
         if cell_id not in snapshot.cells:
             raise UnknownCellError(cell_id)
-        return getattr(snapshot, table).get(cell_id, ())
+        cached = self._cells.get(snapshot.version, cell_id)
+        if cached is not None:
+            return cached
+        started = time.monotonic()
+        try:
+            rows = load_cell(self._executor, cell_id)
+        except Exception as error:
+            logger.error("Datos de la celda %s no disponibles: %s", cell_id, error)
+            raise DataUnavailableError(f"Sin datos para la celda {cell_id}") from error
+        logger.info("Celda %s leída en %.1f s", cell_id, time.monotonic() - started)
+        self._cells.put(snapshot.version, cell_id, rows)
+        return rows
 
     def climatology(self, cell_id: str) -> Sequence[ClimatologyDecade]:
-        return self._rows("climatology", cell_id)
+        return self._cell_rows(cell_id).climatology
 
     def indicators(self, cell_id: str) -> Sequence[IndicatorDecade]:
-        return self._rows("indicators", cell_id)
+        return self._cell_rows(cell_id).indicators
 
     def years(self, cell_id: str) -> Sequence[IndicatorYear]:
-        return self._rows("years", cell_id)
+        return self._cell_rows(cell_id).years
 
     def soil(self, cell_id: str) -> Sequence[SoilLayer]:
-        return self._rows("soil", cell_id)
+        return self._cell_rows(cell_id).soil
 
     def sources(self) -> Sequence[Source]:
         return self._current().sources
@@ -398,11 +453,9 @@ class AthenaProvider:
         snapshot = self._current()
         if cell_id not in snapshot.cells:
             raise UnknownCellError(cell_id)
-        key = (snapshot.version, cell_id)
-        with self._daily_lock:
-            if key in self._daily:
-                self._daily.move_to_end(key)
-                return self._daily[key]
+        cached = self._daily.get(snapshot.version, cell_id)
+        if cached is not None:
+            return cached
         try:
             rows = self._executor.run(
                 "SELECT * FROM v_cell_daily WHERE cell_id = ? ORDER BY date", [cell_id]
@@ -412,11 +465,5 @@ class AthenaProvider:
             cause = "la vista no existe" if _is_missing_view(error) else str(error)
             logger.error("Serie diaria de %s no disponible: %s", cell_id, cause)
             raise DailyUnavailableError(f"Serie diaria no disponible: {cause}") from error
-        with self._daily_lock:
-            self._daily[key] = series
-            # Las series de versiones anteriores no se reutilizan: se descartan.
-            for stale in [k for k in self._daily if k[0] != snapshot.version]:
-                del self._daily[stale]
-            while len(self._daily) > DAILY_CACHE_CELLS:
-                self._daily.popitem(last=False)
+        self._daily.put(snapshot.version, cell_id, series)
         return series

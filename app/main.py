@@ -14,7 +14,7 @@ from app.config import Settings
 from app.data import DataProvider, DataUnavailableError, create_provider
 from app.engines.config import EngineConfig, load_config
 from app.geo.locate import GridLocator, Locator
-from app.geo.zones import BBoxCellCatalog
+from app.geo.zones import BBoxCellCatalog, ProviderCellCatalog
 from app.profile.builder import ProfileService
 from app.store.base import MemoryRepository, Repository
 from app.store.dynamodb import DynamoRepository
@@ -50,12 +50,17 @@ def create_app(
     api.state.repository = repository or (
         DynamoRepository(config.app_table) if config.app_table else MemoryRepository()
     )
-    api.state.locator = locator or GridLocator(BBoxCellCatalog())
     provider = data_provider or create_provider(config)
     if data_provider is None and hasattr(provider, "start"):
         # Carga en segundo plano: `/health` responde ya y `/ready` espera a los datos.
         provider.start()
     api.state.data_provider = provider
+    # Con los datos de DATA, las celdas publicadas son las suyas; con datos sintéticos se
+    # usan los recuadros de las zonas piloto.
+    published = (
+        ProviderCellCatalog(provider) if config.data_provider == "athena" else BBoxCellCatalog()
+    )
+    api.state.locator = locator or GridLocator(published)
     api.state.profiles = ProfileService(provider)
     # Un catálogo inválido impide arrancar: el error nombra el cultivo y el campo.
     api.state.catalog = catalog or load_catalog()

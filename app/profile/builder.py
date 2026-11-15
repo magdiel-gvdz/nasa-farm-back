@@ -230,7 +230,7 @@ def _soil(layers: Sequence[SoilRow]) -> dict | None:
                 "sand_pct": rounded(row.sand_pct),
                 "silt_pct": rounded(row.silt_pct),
                 "bulk_density_g_cm3": rounded(row.bdod_kg_dm3, 2),
-                "awc_mm_per_m": None,
+                "awc_mm_per_m": rounded(row.awc_mm_per_m),
                 "uncertainty": {
                     name: {
                         "p05": rounded(getattr(row, f"{column}_p05"), 2),
@@ -244,7 +244,7 @@ def _soil(layers: Sequence[SoilRow]) -> dict | None:
             for row in layers
         ],
         "lab": None,
-        "k_factor": None,
+        "k_factor": rounded(layers[0].k_factor, 3),
     }
 
 

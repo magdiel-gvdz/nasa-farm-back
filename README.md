@@ -168,9 +168,11 @@ bucket. El rol de tarea conserva el límite de permisos del bootstrap.
 
 ## Activar los datos reales (Athena)
 
-Con `DATA_PROVIDER=athena` la API lee las vistas `v_*` de DATA (`docs/data_contract.md`) y las
-sirve desde memoria. Al arrancar carga las seis vistas en segundo plano: `/health` responde
-desde el primer momento y `/ready` devuelve `503` hasta terminar. Después comprueba el parámetro
+Con `DATA_PROVIDER=athena` la API lee las vistas `v_*` de DATA (`docs/data_contract.md`). Al
+arrancar carga en segundo plano las celdas y las fuentes: `/health` responde desde el primer
+momento y `/ready` devuelve `503` hasta terminar. Los datos de cada celda se leen de Athena la
+primera vez que se piden (unos segundos) y después se sirven desde memoria; las geocercas se
+ubican en las celdas que publica DATA. Después comprueba el parámetro
 SSM de versión cada `DATA_POLL_SECONDS` (300 por defecto) y recarga solo si cambió. Si una
 recarga falla o lo publicado no supera la validación, sigue sirviendo la última versión buena.
 Solo emite `SELECT` sobre vistas `v_*`, sin reutilización de resultados, y usa boto3
