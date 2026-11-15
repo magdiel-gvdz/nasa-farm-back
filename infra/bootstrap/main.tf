@@ -75,8 +75,8 @@ resource "aws_iam_openid_connect_provider" "github" {
   client_id_list = ["sts.amazonaws.com"]
 }
 
-# Even a modified inline policy cannot grant a Lambda execution role write access
-# or access to IAM. CI cannot remove this boundary from the roles it creates.
+# El límite impide conceder acceso a IAM o escritura en el lake compartido.
+# CI no puede quitarlo de los roles que crea.
 resource "aws_iam_policy" "runtime_boundary" {
   name = "${var.project}-runtime-boundary"
   policy = jsonencode({
@@ -171,6 +171,7 @@ resource "aws_iam_policy" "runtime_boundary" {
         "Effect" : "Allow",
         "Action" : [
           "glue:GetDatabase",
+          "glue:GetDatabases",
           "glue:GetTable",
           "glue:GetTables",
           "glue:GetPartition",

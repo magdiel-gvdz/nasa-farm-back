@@ -20,7 +20,11 @@ de expiración del bucket no elimina el servicio ni su coste.
 4. Comprobar que ya no aparecen servicio ECS, tabla DynamoDB, bucket, roles ni
    logs de ese preview, y que `dev` sigue disponible.
 
-Todavía no se registran tiempos observados: deben obtenerse del primer apply real.
+Observado en `pr-7` el 14 de noviembre de 2026: el primer despliegue ECS
+inició a las 20:05:18 y terminó a las 20:10:22 (America/Mexico_City),
+5 min 4 s. Una actualización posterior tardó 8 min 26 s. El primer job
+falló al seguir el despliegue por permisos de IAM; la tarea sí quedó sana.
+La recuperación conserva el servicio y reconcilia su estado antes de reintentar CI.
 La imagen ECR compartida se conserva y su ciclo de vida retiene 30 imágenes.
 
 ## Recuperación y transición

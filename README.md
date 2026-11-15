@@ -108,7 +108,7 @@ Configurar las variables de repositorio después del bootstrap:
 | `AWS_PREVIEW_ROLE_ARN` | Output `preview_role_arn` |
 | `RUNTIME_PERMISSIONS_BOUNDARY_ARN` | Output `runtime_permissions_boundary_arn` |
 | `ECR_REPOSITORY_URL` | Output `ecr_repository_url` |
-| `API_CORS_ORIGINS` | Array JSON de orígenes exactos del frontend |
+| `API_CORS_ORIGINS` | `["*"]` permite cualquier origen; sin credenciales CORS |
 | `INFRA_ENABLED` | `true` al terminar la configuración |
 | `DATA_PROVIDER` | `fixture`; cambiar a `athena` cuando esté implementado y DATA publique gold |
 | `DATA_REGION` | `us-west-2` |
@@ -164,7 +164,7 @@ fijado en `.terraform.lock.hcl`; conservar checksums Windows y Linux.
 
 Abrir los PR como borrador mientras se trabaja: un servicio encendido tiene
 coste continuo y no escala a cero. No hay el límite de peticiones de API Gateway;
-CORS restringe navegadores y no sustituye autenticación. La API sigue siendo
+CORS permite cualquier origen si se configura `["*"]`, sin credenciales. La API sigue siendo
 pública. El stack usa VPC y clúster por defecto, sin NAT ni VPC propia.
 Los logs duran 30 días en dev y 3 en previews. El bucket de preview expira objetos
 a los 7 días; esa regla no elimina infraestructura.

@@ -76,3 +76,14 @@ def test_cors_allows_only_configured_origins(client):
         headers={"Origin": "https://untrusted.example", "Access-Control-Request-Method": "GET"},
     )
     assert "access-control-allow-origin" not in response.headers
+
+
+def test_cors_accepts_any_origin_when_wildcard_is_configured():
+    client = TestClient(create_app(Settings(cors_origins=["*"])))
+    response = client.options(
+        "/health",
+        headers={"Origin": "https://frontend.example", "Access-Control-Request-Method": "GET"},
+    )
+    assert response.status_code == 200
+    assert response.headers["access-control-allow-origin"] == "*"
+    assert "access-control-allow-credentials" not in response.headers

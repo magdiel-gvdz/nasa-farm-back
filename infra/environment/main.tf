@@ -202,6 +202,7 @@ resource "aws_iam_role_policy" "api" {
         "Effect" : "Allow",
         "Action" : [
           "glue:GetDatabase",
+          "glue:GetDatabases",
           "glue:GetTable",
           "glue:GetTables",
           "glue:GetPartition",

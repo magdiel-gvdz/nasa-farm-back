@@ -38,9 +38,9 @@ variable "cors_origins" {
   validation {
     condition = alltrue([
       for origin in var.cors_origins :
-      can(regex("^https?://[^/ *]+(:[0-9]+)?$", origin)) && !strcontains(origin, "*")
+      origin == "*" || can(regex("^https?://[^/ *]+(:[0-9]+)?$", origin))
     ])
-    error_message = "CORS origins must be explicit HTTP(S) origins without paths or wildcards."
+    error_message = "Use orígenes HTTP(S) sin rutas, o * para permitir cualquier origen."
   }
 }
 

@@ -163,11 +163,14 @@ run "reject_permanent_environments_other_than_dev" {
   expect_failures = [var.environment]
 }
 
-run "reject_wildcard_cors" {
+run "allow_all_origins_when_explicitly_configured" {
   command = plan
   variables {
     environment  = "dev"
     cors_origins = ["*"]
   }
-  expect_failures = [var.cors_origins]
+  assert {
+    condition     = one([for entry in aws_ecs_express_gateway_service.api.primary_container[0].environment : entry.value if entry.name == "CORS_ORIGINS"]) == jsonencode(["*"])
+    error_message = "El comodín autorizado debe llegar al contenedor."
+  }
 }
