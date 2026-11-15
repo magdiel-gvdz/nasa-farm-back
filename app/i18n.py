@@ -528,6 +528,54 @@ MESSAGES: dict[str, dict[str, str]] = {
         "es": "Se alcanzó el máximo de consultas para este mensaje: responde con la información que ya tienes.",
         "en": "The maximum number of lookups for this message was reached: answer with the information you already have.",
     },
+    "error.unsupported_file_type": {
+        "es": "Solo se admiten archivos PDF, JPG o PNG.",
+        "en": "Only PDF, JPG or PNG files are accepted.",
+    },
+    "error.file_too_large": {
+        "es": "El archivo supera los {max_mb} MB.",
+        "en": "The file exceeds {max_mb} MB.",
+    },
+    "error.not_a_soil_report": {
+        "es": "El documento no parece un análisis de suelo de laboratorio. La geocerca no cambió.",
+        "en": "The document does not look like a laboratory soil analysis. The field was not changed.",
+    },
+    "error.llm_unavailable": {
+        "es": "El servicio que lee los documentos no está disponible. Inténtalo de nuevo en unos minutos.",
+        "en": "The document reading service is not available. Please try again in a few minutes.",
+    },
+    "soil.lab_source": {
+        "es": "Análisis de suelo del agricultor",
+        "en": "Farmer's soil analysis",
+    },
+    "soil.lab_unknown": {
+        "es": "Laboratorio no indicado",
+        "en": "Laboratory not stated",
+    },
+    "soil.lab_product": {
+        "es": "Informe de laboratorio subido por el agricultor",
+        "en": "Laboratory report uploaded by the farmer",
+    },
+    "soil.lab_resolution": {
+        "es": "Muestra de la parcela",
+        "en": "Sample from the plot",
+    },
+    "soil.lab_license": {
+        "es": "Datos del agricultor; uso privado",
+        "en": "Farmer's data; private use",
+    },
+    "suitability.soil.lab_ph_ok": {
+        "es": "pH de {ph} según tu análisis de laboratorio, dentro del rango del cultivo ({low}-{high}).",
+        "en": "pH of {ph} according to your laboratory analysis, within the crop range ({low}-{high}).",
+    },
+    "suitability.soil.lab_ph_warn": {
+        "es": "pH de {ph} según tu análisis de laboratorio, ligeramente fuera del rango del cultivo ({low}-{high}).",
+        "en": "pH of {ph} according to your laboratory analysis, slightly outside the crop range ({low}-{high}).",
+    },
+    "suitability.soil.lab_ph_bad": {
+        "es": "pH de {ph} según tu análisis de laboratorio, fuera del rango del cultivo ({low}-{high}).",
+        "en": "pH of {ph} according to your laboratory analysis, outside the crop range ({low}-{high}).",
+    },
 }
 
 

@@ -49,7 +49,12 @@ def compare_rotations(
     limit = body.constraints.irrigation_mm_per_year
     if limit is not None:
         # El límite de la petición sustituye al riego declarado en la geocerca.
-        context = FieldContext(irrigation_declared=True, irrigation_mm=limit, language=language)
+        context = FieldContext(
+            irrigation_declared=True,
+            irrigation_mm=limit,
+            language=language,
+            lab_ph=context.lab_ph,
+        )
     elif context.irrigation_declared:
         limit = context.irrigation_mm
     applied = scenarios.apply(

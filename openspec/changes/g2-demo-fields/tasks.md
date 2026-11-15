@@ -16,5 +16,6 @@
 ## 3. Guion
 
 - [x] 3.1 Escribir `docs/demo-script.md` con el recorrido paso a paso (qué se muestra, qué llamada hay detrás, qué resultado se espera) y las frases sobre resolución zonal, vacíos de información y validación local; verificar siguiendo el guion completo contra `dev`
-- [ ] 3.2 Sembrar `dev` tras la última publicación de DATA y ejecutar `scripts/smoke_e2e.py --require-real` en ambas zonas; verificar que termina con código 0 y anotar la versión de datos usada en el guion
+- [x] 3.2 Sembrar `dev` tras la última publicación de DATA y ejecutar `scripts/smoke_e2e.py --require-real` en ambas zonas; verificar que termina con código 0 y anotar la versión de datos usada en el guion
+  - `dev` con datos reales (versión `2026111508`): `--require-real` termina con `OK` en `sureste` y `laguna` y las geocercas de la demo están sembradas
   - Bloqueada: `dev` sirve datos sintéticos hasta activar Athena (`c2` 4.1)

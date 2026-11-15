@@ -21,6 +21,7 @@ DAYS_PER_DECADE = 365 / DECADES_PER_YEAR
 HEAT_THRESHOLDS_C = (30, 32, 35, 38)
 CLIMATE_SOURCE = "nasa_power"
 SOIL_SOURCE = "soilgrids"
+LAB_SOURCE = "lab_report"
 FACTORS = ("frost", "heat", "water", "soil")
 _DAYS_BEFORE_MONTH = (0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334)
 
@@ -45,6 +46,8 @@ class FieldContext:
     irrigation_declared: bool = False
     irrigation_mm: float | None = 0.0
     language: str = "es"
+    # pH del análisis de laboratorio del agricultor; si existe, sustituye al estimado.
+    lab_ph: float | None = None
 
 
 @dataclass(frozen=True)
@@ -220,25 +223,35 @@ def _water(balance: WaterBalance | None, context: FieldContext, config: Suitabil
     return FactorResult("water", status, detail, CLIMATE_SOURCE, score)
 
 
-def _soil(crop, layers: Sequence[SoilLayer], config: SuitabilityConfig, language: str):
+def _soil(
+    crop,
+    layers: Sequence[SoilLayer],
+    config: SuitabilityConfig,
+    language: str,
+    lab_ph: float | None = None,
+):
     top = min(layers, key=lambda layer: layer.depth_top_cm, default=None)
-    if top is None or top.ph is None:
+    ph = lab_ph if lab_ph is not None else (top.ph if top is not None else None)
+    if ph is None:
         return _unknown("soil", language)
     low, high = crop.ph
-    distance = max(low - top.ph, top.ph - high, 0.0)
+    distance = max(low - ph, ph - high, 0.0)
     tolerance = config.soil.ph_tolerance
     status, score = _graded(distance, tolerance / 2, tolerance, tolerance * 3, config)
     if distance == 0:
         status, score = "ok", 100.0
-    difficult = top.texture_class in config.soil.difficult_textures
+    difficult = top is not None and top.texture_class in config.soil.difficult_textures
     if difficult and status == "ok":
         status, score = "warn", config.score_at_warn
     key = "ph_ok" if distance == 0 else f"ph_{status}"
-    detail = translate(f"suitability.soil.{key}", language, ph=f"{top.ph:.1f}", low=low, high=high)
+    if lab_ph is not None:
+        key = "lab_" + key
+    detail = translate(f"suitability.soil.{key}", language, ph=f"{ph:.1f}", low=low, high=high)
     if difficult:
         texture = translate("suitability.soil.texture", language, texture=top.texture_class)
         detail = f"{detail} {texture}"
-    return FactorResult("soil", status, detail, SOIL_SOURCE, score)
+    source = LAB_SOURCE if lab_ph is not None else SOIL_SOURCE
+    return FactorResult("soil", status, detail, source, score)
 
 
 # ---------------------------------------------------------------- evaluación
@@ -271,7 +284,7 @@ def evaluate(
         _frost(crop, rows, config, language),
         _heat(crop, rows_by_decade, cycle, config, language),
         _water(balance, field_context, config),
-        _soil(crop, cell_data.soil, config, language),
+        _soil(crop, cell_data.soil, config, language, field_context.lab_ph),
     )
     known = [reason for reason in reasons if reason.score is not None]
     weight = sum(config.weights[reason.factor] for reason in known)

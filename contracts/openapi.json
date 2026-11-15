@@ -26,6 +26,21 @@
         "title": "Admin",
         "type": "object"
       },
+      "Body_upload_soil_report_api_v1_fields__field_id__soil_report_post": {
+        "properties": {
+          "file": {
+            "contentMediaType": "application/octet-stream",
+            "description": "Análisis en PDF, JPG o PNG; sin datos personales",
+            "title": "File",
+            "type": "string"
+          }
+        },
+        "required": [
+          "file"
+        ],
+        "title": "Body_upload_soil_report_api_v1_fields__field_id__soil_report_post",
+        "type": "object"
+      },
       "Climate": {
         "properties": {
           "elevation_m": {
@@ -805,6 +820,16 @@
             "const": "ready",
             "title": "Profile Status",
             "type": "string"
+          },
+          "soil_lab": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SoilLab"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "zone_id": {
             "examples": [
@@ -2923,6 +2948,82 @@
         "title": "Soil",
         "type": "object"
       },
+      "SoilLab": {
+        "description": "Valores aceptados del análisis de laboratorio subido por el agricultor.",
+        "properties": {
+          "depth_cm": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Depth Cm"
+          },
+          "file_key": {
+            "title": "File Key",
+            "type": "string"
+          },
+          "lab": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lab"
+          },
+          "sample_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sample Date"
+          },
+          "texture": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Texture"
+          },
+          "uploaded_at": {
+            "title": "Uploaded At",
+            "type": "string"
+          },
+          "values": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "description": "ph, om_pct, ec_ds_m, cec_cmol_kg, n_mg_kg, p_mg_kg, k_mg_kg",
+            "title": "Values",
+            "type": "object"
+          }
+        },
+        "required": [
+          "values",
+          "lab",
+          "sample_date",
+          "depth_cm",
+          "texture",
+          "uploaded_at",
+          "file_key"
+        ],
+        "title": "SoilLab",
+        "type": "object"
+      },
       "SoilLayer": {
         "properties": {
           "awc_mm_per_m": {
@@ -3168,6 +3269,52 @@
           "mean_m3_m3"
         ],
         "title": "SoilMoistureMonth",
+        "type": "object"
+      },
+      "SoilReportResult": {
+        "properties": {
+          "applied": {
+            "description": "Si al menos un valor se guardó en la geocerca",
+            "title": "Applied",
+            "type": "boolean"
+          },
+          "extracted": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "description": "Todos los campos; `null` si no se leyó",
+            "title": "Extracted",
+            "type": "object"
+          },
+          "field_id": {
+            "title": "Field Id",
+            "type": "string"
+          },
+          "unreadable_fields": {
+            "items": {
+              "$ref": "#/components/schemas/UnreadableField"
+            },
+            "title": "Unreadable Fields",
+            "type": "array"
+          }
+        },
+        "required": [
+          "field_id",
+          "extracted",
+          "unreadable_fields",
+          "applied"
+        ],
+        "title": "SoilReportResult",
         "type": "object"
       },
       "Source": {
@@ -3667,6 +3814,29 @@
           "p95"
         ],
         "title": "UncertaintyRange",
+        "type": "object"
+      },
+      "UnreadableField": {
+        "properties": {
+          "field": {
+            "title": "Field",
+            "type": "string"
+          },
+          "reason": {
+            "enum": [
+              "missing",
+              "out_of_range",
+              "invalid"
+            ],
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "field",
+          "reason"
+        ],
+        "title": "UnreadableField",
         "type": "object"
       },
       "Vegetation": {
@@ -5046,6 +5216,126 @@
         "summary": "Al menos 3 estrategias, incluida la rotación actual",
         "tags": [
           "rotations"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/soil-report": {
+      "post": {
+        "operationId": "upload_soil_report_api_v1_fields__field_id__soil_report_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "title": "Field Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "UUID que genera el frontend; separa los datos de cada cliente",
+            "in": "header",
+            "name": "x-client-id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "UUID que genera el frontend; separa los datos de cada cliente",
+              "title": "X-Client-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_soil_report_api_v1_fields__field_id__soil_report_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SoilReportResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Content Too Large"
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unsupported Media Type"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Subir el análisis de suelo de laboratorio (PDF, JPG o PNG, hasta 10 MB)",
+        "tags": [
+          "soil"
         ]
       }
     },
