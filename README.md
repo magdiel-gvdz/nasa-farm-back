@@ -5,6 +5,10 @@ migración a contenedores con ECS Express Mode, ECR y DynamoDB. La migración re
 de `dev` se verifica después del merge mediante las tareas de `a5-migrate-dev`.
 Terraform administra AWS y GitHub Actions usa OIDC, sin llaves guardadas en GitHub.
 
+Bootstrap también prepara `AWSServiceRoleForECS`, un prerrequisito de cuenta
+administrado por AWS. Se conserva al destruir previews; CI solo administra los
+tres roles propios de cada entorno.
+
 ```mermaid
 flowchart LR
   PR[PR interno listo para revisión] --> Build[Imagen ECR por SHA]

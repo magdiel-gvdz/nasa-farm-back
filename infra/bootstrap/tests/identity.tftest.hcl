@@ -19,6 +19,10 @@ run "protect_state_and_limit_oidc_subjects" {
     error_message = "The shared state bucket must never be force-deleted."
   }
   assert {
+    condition     = aws_iam_service_linked_role.ecs.aws_service_name == "ecs.amazonaws.com"
+    error_message = "Bootstrap debe preparar el rol vinculado al servicio que ECS necesita en la cuenta."
+  }
+  assert {
     condition     = jsondecode(aws_iam_role.deploy["dev"].assume_role_policy).Statement[0].Condition.StringEquals["token.actions.githubusercontent.com:sub"] == ["repo:magdiel-gvdz/nasa-farm-back:ref:refs/heads/main"]
     error_message = "Only main may assume the dev role."
   }
@@ -85,6 +89,14 @@ run "protect_state_and_limit_oidc_subjects" {
   assert {
     condition     = toset(one([for s in jsondecode(aws_iam_role_policy.deploy["dev"].policy).Statement : s.Resource if try(s.Sid, "") == "PassTaskRoles"])) == toset(["arn:aws:iam::123456789012:role/nasa-farm-dev-api", "arn:aws:iam::123456789012:role/nasa-farm-dev-api-exec"])
     error_message = "Dev solo debe pasar los roles de tarea y ejecución previstos para la API."
+  }
+  assert {
+    condition     = one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Resource if try(s.Sid, "") == "OwnTaskDefinitions"]) == ["arn:aws:ecs:us-east-1:123456789012:task-definition/default-nasa-farm-pr-*-api:*"]
+    error_message = "Express Mode antepone el nombre del clúster default a la familia de tareas del entorno."
+  }
+  assert {
+    condition     = contains(one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Action if try(s.Sid, "") == "OwnExpressService"]), "ecs:ListServiceDeployments") && one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Resource if try(s.Sid, "") == "OwnServiceDeployments"]) == ["arn:aws:ecs:us-east-1:123456789012:service-deployment/default/nasa-farm-pr-*-api/*"]
+    error_message = "Terraform debe poder seguir únicamente los despliegues del servicio de su entorno."
   }
 }
 

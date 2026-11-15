@@ -416,6 +416,7 @@ resource "aws_iam_role_policy" "deploy" {
           "ecs:DeleteExpressGatewayService",
           "ecs:DescribeExpressGatewayService",
           "ecs:DescribeServices",
+          "ecs:ListServiceDeployments",
           "ecs:TagResource",
           "ecs:UntagResource",
           "ecs:ListTagsForResource"
@@ -423,6 +424,19 @@ resource "aws_iam_role_policy" "deploy" {
         "Resource" : [
           "arn:${local.partition}:ecs:${var.aws_region}:${local.account_id}:service/default/${each.value.name_pattern}-api"
         ]
+      },
+      {
+        "Sid" : "OwnServiceDeployments",
+        "Effect" : "Allow",
+        "Action" : ["ecs:DescribeServiceDeployments"],
+        "Resource" : ["arn:${local.partition}:ecs:${var.aws_region}:${local.account_id}:service-deployment/default/${each.value.name_pattern}-api/*"]
+      },
+      {
+        "Sid" : "ReadServiceSecurityGroups",
+        "Effect" : "Allow",
+        "Action" : ["ec2:DescribeSecurityGroups"],
+        "Resource" : "*",
+        "Condition" : { "StringEquals" : { "aws:RequestedRegion" : var.aws_region } }
       },
       {
         "Sid" : "ReadDefaultCluster",
@@ -446,7 +460,7 @@ resource "aws_iam_role_policy" "deploy" {
           "ecs:ListTagsForResource"
         ],
         "Resource" : [
-          "arn:${local.partition}:ecs:${var.aws_region}:${local.account_id}:task-definition/${each.value.name_pattern}-api:*"
+          "arn:${local.partition}:ecs:${var.aws_region}:${local.account_id}:task-definition/default-${each.value.name_pattern}-api:*"
         ]
       },
       {
@@ -578,6 +592,14 @@ resource "aws_iam_role_policy" "deploy" {
       }
     ]
   })
+}
+
+# Prerrequisito de cuenta: CI solo administra los tres roles de cada entorno.
+resource "aws_iam_service_linked_role" "ecs" {
+  aws_service_name = "ecs.amazonaws.com"
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_ecr_repository" "api" {
