@@ -428,6 +428,14 @@ MESSAGES: dict[str, dict[str, str]] = {
         "es": "{crop} sembrado en {month} no es plenamente apto en tu zona (puntaje {score} de 100).",
         "en": "{crop} planted in {month} is not fully suitable in your zone (score {score} out of 100).",
     },
+    "error.daily_unavailable": {
+        "es": "La serie diaria de la zona no está disponible: no se puede calcular el escenario. Sin escenario la petición funciona.",
+        "en": "The daily series for the zone is not available: the scenario cannot be computed. Without a scenario the request works.",
+    },
+    "scenario.note": {
+        "es": "Escenario hipotético, no un pronóstico: desplaza el clima histórico de tu zona de forma uniforme. La humedad del suelo, el suelo descubierto y el viento se mantienen como en los datos publicados.",
+        "en": "Hypothetical scenario, not a forecast: it shifts the historical climate of your zone uniformly. Soil moisture, bare soil and wind stay as in the published data.",
+    },
 }
 
 

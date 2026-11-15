@@ -59,9 +59,25 @@ def _suitability(crop_id: str | None) -> dict:
     cell = cell_data(FixtureProvider(), "E9_r0463_c0846")
     if crop_id is not None:
         evaluation = evaluate(catalog.get(crop_id), 4, cell, FieldContext(), config=config)
-        return detail_response(evaluation)
+        return {
+            **detail_response(evaluation),
+            "scenario": {
+                "delta_t_c": 0.0,
+                "delta_p_pct": 0.0,
+                "daily_origin": None,
+                "not_recomputed": [],
+                "note": None,
+            },
+        }
     matrix = evaluate_matrix(list(catalog), cell, FieldContext(), config=config)
     return {
+        "scenario": {
+            "delta_t_c": 0.0,
+            "delta_p_pct": 0.0,
+            "daily_origin": None,
+            "not_recomputed": [],
+            "note": None,
+        },
         "months": list(range(1, 13)),
         "crops": [
             {
@@ -102,4 +118,13 @@ def reference_rotations() -> dict:
         weights={},
         irrigation_limit_mm=None,
     )
-    return {**result, "scenario": {"delta_t_c": 0, "delta_p_pct": 0}}
+    return {
+        **result,
+        "scenario": {
+            "delta_t_c": 0.0,
+            "delta_p_pct": 0.0,
+            "daily_origin": None,
+            "not_recomputed": [],
+            "note": None,
+        },
+    }

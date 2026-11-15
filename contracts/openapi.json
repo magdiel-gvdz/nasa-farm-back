@@ -2308,7 +2308,7 @@
             "type": "string"
           },
           "scenario": {
-            "$ref": "#/components/schemas/Scenario"
+            "$ref": "#/components/schemas/ScenarioApplied"
           },
           "strategies": {
             "items": {
@@ -2373,20 +2373,75 @@
         "properties": {
           "delta_p_pct": {
             "default": 0,
-            "maximum": 100.0,
-            "minimum": -100.0,
+            "description": "Cambio de lluvia en %",
+            "maximum": 50.0,
+            "minimum": -50.0,
             "title": "Delta P Pct",
             "type": "number"
           },
           "delta_t_c": {
             "default": 0,
-            "maximum": 10.0,
-            "minimum": -10.0,
+            "description": "Cambio de temperatura en °C",
+            "maximum": 5.0,
+            "minimum": -2.0,
             "title": "Delta T C",
             "type": "number"
           }
         },
         "title": "Scenario",
+        "type": "object"
+      },
+      "ScenarioApplied": {
+        "description": "Escenario con el que se calculó la respuesta. Es hipotético, no un pronóstico.",
+        "properties": {
+          "daily_origin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Origen de la serie diaria: `gold`, `power_live` o `synthetic`; `null` sin escenario",
+            "title": "Daily Origin"
+          },
+          "delta_p_pct": {
+            "title": "Delta P Pct",
+            "type": "number"
+          },
+          "delta_t_c": {
+            "title": "Delta T C",
+            "type": "number"
+          },
+          "not_recomputed": {
+            "description": "Indicadores que el escenario no cambia y se toman de los datos publicados",
+            "items": {
+              "type": "string"
+            },
+            "title": "Not Recomputed",
+            "type": "array"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          }
+        },
+        "required": [
+          "delta_t_c",
+          "delta_p_pct",
+          "daily_origin",
+          "not_recomputed",
+          "note"
+        ],
+        "title": "ScenarioApplied",
         "type": "object"
       },
       "SequenceStep": {
@@ -3110,6 +3165,9 @@
             "title": "Reasons",
             "type": "array"
           },
+          "scenario": {
+            "$ref": "#/components/schemas/ScenarioApplied"
+          },
           "score": {
             "maximum": 100.0,
             "minimum": 0.0,
@@ -3133,7 +3191,8 @@
           "score",
           "harvest_window",
           "reasons",
-          "confidence"
+          "confidence",
+          "scenario"
         ],
         "title": "SuitabilityDetail",
         "type": "object"
@@ -3157,11 +3216,15 @@
             "minItems": 12,
             "title": "Months",
             "type": "array"
+          },
+          "scenario": {
+            "$ref": "#/components/schemas/ScenarioApplied"
           }
         },
         "required": [
           "months",
-          "crops"
+          "crops",
+          "scenario"
         ],
         "title": "SuitabilityMatrix",
         "type": "object"
@@ -4216,25 +4279,29 @@
             }
           },
           {
+            "description": "Cambio de temperatura en °C",
             "in": "query",
             "name": "delta_t_c",
             "required": false,
             "schema": {
               "default": 0,
-              "maximum": 10,
-              "minimum": -10,
+              "description": "Cambio de temperatura en °C",
+              "maximum": 5,
+              "minimum": -2,
               "title": "Delta T C",
               "type": "number"
             }
           },
           {
+            "description": "Cambio de lluvia en %",
             "in": "query",
             "name": "delta_p_pct",
             "required": false,
             "schema": {
               "default": 0,
-              "maximum": 100,
-              "minimum": -100,
+              "description": "Cambio de lluvia en %",
+              "maximum": 50,
+              "minimum": -50,
               "title": "Delta P Pct",
               "type": "number"
             }

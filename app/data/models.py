@@ -206,3 +206,21 @@ class DailyRow:
     wind_ms: float | None
     wind_max_ms: float | None
     gwetroot_frac: float | None
+
+
+class DailySeries(tuple):
+    """Filas de la serie diaria con su origen: `gold` (vista de DATA), `power_live`
+    (respaldo con NASA POWER) o `synthetic` (datos de prueba).
+
+    `elevation_adjusted` es falso si las temperaturas `*_adj_c` no llevan corrección por
+    altura porque faltaba alguna elevación.
+    """
+
+    origin: str
+    elevation_adjusted: bool
+
+    def __new__(cls, rows, origin: str, elevation_adjusted: bool = True):
+        series = super().__new__(cls, rows)
+        series.origin = origin
+        series.elevation_adjusted = elevation_adjusted
+        return series

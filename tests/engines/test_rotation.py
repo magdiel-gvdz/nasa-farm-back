@@ -220,7 +220,18 @@ def test_everything_excluded_falls_back_to_resting_the_soil(provider, catalog, c
     rest = by_id(result)["rest"]
     assert rest["confidence"] == "low"
     assert any("barbecho" in risk for risk in rest["risks_local_review"])
-    RotationResponse.model_validate({**result, "scenario": {}})
+    RotationResponse.model_validate(
+        {
+            **result,
+            "scenario": {
+                "delta_t_c": 0.0,
+                "delta_p_pct": 0.0,
+                "daily_origin": None,
+                "not_recomputed": [],
+                "note": None,
+            },
+        }
+    )
 
 
 def test_relaxation_levels_are_tried_in_order(provider, catalog, config):
@@ -520,10 +531,10 @@ def test_rotations_honour_the_request(client, headers, rotating_field):
     response = client.post(url, json=body, headers={**headers, "Accept-Language": "en"})
     assert response.status_code == 200
     result = response.json()
-    assert len(result["strategies"]) == 3 and result["scenario"] == {
-        "delta_t_c": 2,
-        "delta_p_pct": -20,
-    }
+    assert len(result["strategies"]) == 3
+    assert (result["scenario"]["delta_t_c"], result["scenario"]["delta_p_pct"]) == (2, -20)
+    assert result["scenario"]["daily_origin"] == "synthetic"
+    assert "not a forecast" in result["scenario"]["note"]
     assert all("sorgo" not in crops_of(s) for s in result["strategies"])
     assert any(
         "your limit is 300 mm" in r for s in result["strategies"] for r in s["risks_local_review"]

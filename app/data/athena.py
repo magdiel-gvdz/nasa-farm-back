@@ -27,6 +27,7 @@ from app.data.models import (
     Cell,
     ClimatologyDecade,
     DailyRow,
+    DailySeries,
     IndicatorDecade,
     IndicatorYear,
     SoilLayer,
@@ -324,8 +325,17 @@ class _VersionedCache:
 class AthenaProvider:
     """Sirve la última publicación válida y la renueva cuando DATA publica otra versión."""
 
-    def __init__(self, executor: QueryExecutor, versions: VersionSource, poll_seconds: float = 300):
+    def __init__(
+        self,
+        executor: QueryExecutor,
+        versions: VersionSource,
+        poll_seconds: float = 300,
+        power=None,
+    ):
         self._executor = executor
+        # Respaldo con NASA POWER (`PowerDailySource`) para cuando no existe `v_cell_daily`.
+        self._power = power
+        self._power_used = False
         self._versions = versions
         self._poll_seconds = poll_seconds
         self._snapshot: Snapshot | None = None
@@ -446,10 +456,19 @@ class AthenaProvider:
         return self._cell_rows(cell_id).soil
 
     def sources(self) -> Sequence[Source]:
-        return self._current().sources
+        sources = self._current().sources
+        if self._power_used:
+            from app.data.power import POWER_LIVE_SOURCE
 
-    def daily(self, cell_id: str) -> Sequence[DailyRow]:
-        """Serie diaria de la celda, leída bajo demanda y guardada por versión y celda."""
+            return (*sources, POWER_LIVE_SOURCE)
+        return sources
+
+    def daily(self, cell_id: str) -> DailySeries:
+        """Serie diaria de la celda, leída bajo demanda y guardada por versión y celda.
+
+        Precedencia: la vista `v_cell_daily` de DATA y, solo si la vista no existe, NASA POWER.
+        Un error de permisos o transitorio no activa el respaldo: se informa como tal.
+        """
         snapshot = self._current()
         if cell_id not in snapshot.cells:
             raise UnknownCellError(cell_id)
@@ -460,10 +479,25 @@ class AthenaProvider:
             rows = self._executor.run(
                 "SELECT * FROM v_cell_daily WHERE cell_id = ? ORDER BY date", [cell_id]
             )
-            series = tuple(sorted(build_rows("v_cell_daily", DailyRow, rows), key=lambda r: r.date))
+            ordered = sorted(build_rows("v_cell_daily", DailyRow, rows), key=lambda r: r.date)
+            series = DailySeries(ordered, "gold")
         except Exception as error:
-            cause = "la vista no existe" if _is_missing_view(error) else str(error)
-            logger.error("Serie diaria de %s no disponible: %s", cell_id, cause)
-            raise DailyUnavailableError(f"Serie diaria no disponible: {cause}") from error
+            if _is_missing_view(error) and self._power is not None:
+                series = self._from_power(snapshot.cells[cell_id])
+            else:
+                cause = "la vista no existe" if _is_missing_view(error) else str(error)
+                logger.error("Serie diaria de %s no disponible: %s", cell_id, cause)
+                raise DailyUnavailableError(f"Serie diaria no disponible: {cause}") from error
         self._daily.put(snapshot.version, cell_id, series)
         return series
+
+    def _from_power(self, cell: Cell) -> DailySeries:
+        from app.data.power import PowerUnavailableError
+
+        try:
+            rows, adjusted = self._power.daily(cell)
+        except (PowerUnavailableError, ValueError, KeyError) as error:
+            logger.error("Serie diaria de %s no disponible en NASA POWER: %s", cell.cell_id, error)
+            raise DailyUnavailableError(f"Serie diaria no disponible: {error}") from error
+        self._power_used = True
+        return DailySeries(rows, "power_live", adjusted)

@@ -75,8 +75,10 @@ def test_source_requires_a_known_data_class():
 
 def test_scenario_defaults_to_no_change_and_bounds_deltas():
     assert Scenario().model_dump() == {"delta_t_c": 0, "delta_p_pct": 0}
-    with pytest.raises(ValidationError):
-        Scenario(delta_p_pct=-150)
+    for values in ({"delta_p_pct": -60}, {"delta_p_pct": 51}, {"delta_t_c": -3}, {"delta_t_c": 10}):
+        with pytest.raises(ValidationError):
+            Scenario(**values)
+    assert Scenario(delta_t_c=5, delta_p_pct=-50).delta_t_c == 5
 
 
 def test_field_create_accepts_a_full_example():

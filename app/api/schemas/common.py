@@ -42,9 +42,29 @@ class Gap(ResponseModel):
     message: str
 
 
+DeltaT = Annotated[float, Field(ge=-2, le=5, description="Cambio de temperatura en °C")]
+DeltaP = Annotated[float, Field(ge=-50, le=50, description="Cambio de lluvia en %")]
+
+
 class Scenario(RequestModel):
-    delta_t_c: float = Field(default=0, ge=-10, le=10)
-    delta_p_pct: float = Field(default=0, ge=-100, le=100)
+    delta_t_c: DeltaT = 0
+    delta_p_pct: DeltaP = 0
+
+
+class ScenarioApplied(ResponseModel):
+    """Escenario con el que se calculó la respuesta. Es hipotético, no un pronóstico."""
+
+    delta_t_c: float
+    delta_p_pct: float
+    daily_origin: str | None = Field(
+        description=(
+            "Origen de la serie diaria: `gold`, `power_live` o `synthetic`; `null` sin escenario"
+        )
+    )
+    not_recomputed: list[str] = Field(
+        description="Indicadores que el escenario no cambia y se toman de los datos publicados"
+    )
+    note: str | None
 
 
 class ErrorBody(ResponseModel):

@@ -13,6 +13,7 @@ from app.catalog.loader import Catalog, load_catalog
 from app.config import Settings
 from app.data import DataProvider, DataUnavailableError, create_provider
 from app.engines.config import EngineConfig, load_config
+from app.engines.scenario import ScenarioService
 from app.geo.locate import GridLocator, Locator
 from app.geo.zones import BBoxCellCatalog, ProviderCellCatalog
 from app.profile.builder import ProfileService
@@ -62,6 +63,7 @@ def create_app(
     )
     api.state.locator = locator or GridLocator(published)
     api.state.profiles = ProfileService(provider)
+    api.state.scenarios = ScenarioService(provider)
     # Un catálogo inválido impide arrancar: el error nombra el cultivo y el campo.
     api.state.catalog = catalog or load_catalog()
     api.state.engine_config = engine_config or load_config()

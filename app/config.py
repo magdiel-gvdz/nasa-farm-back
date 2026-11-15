@@ -15,6 +15,12 @@ class Settings:
     data_version_parameter: str = field(
         default_factory=lambda: os.getenv("DATA_VERSION_PARAMETER", "")
     )
+    # Bucket del entorno: guarda las respuestas de NASA POWER en `cache/power/`.
+    app_bucket: str = field(default_factory=lambda: os.getenv("APP_BUCKET", ""))
+    # Tasa de corrección de temperatura por altura del respaldo NASA POWER (°C/km).
+    lapse_rate_c_per_km: float = field(
+        default_factory=lambda: float(os.getenv("LAPSE_RATE_C_PER_KM", "6.5"))
+    )
     # Cada cuánto se comprueba si DATA publicó una versión nueva.
     data_poll_seconds: float = field(
         default_factory=lambda: float(os.getenv("DATA_POLL_SECONDS", "300"))

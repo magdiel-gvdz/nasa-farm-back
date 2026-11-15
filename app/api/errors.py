@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.data import DataUnavailableError
+from app.engines.scenario import DailyUnavailableError as ScenarioDailyUnavailableError
 from app.geo.geometry import GeometryError
 from app.geo.locate import OutOfRegionError
 from app.i18n import resolve_language, translate
@@ -94,6 +95,10 @@ def register_error_handlers(api: FastAPI) -> None:
         return error_response(
             request, "out_of_region", 422, details={"cell_id": exc.cell_id, "zones": zones}
         )
+
+    @api.exception_handler(ScenarioDailyUnavailableError)
+    async def daily_unavailable(request: Request, _exc: ScenarioDailyUnavailableError):
+        return error_response(request, "daily_unavailable", 503)
 
     @api.exception_handler(DataUnavailableError)
     async def data_unavailable(request: Request, _exc: DataUnavailableError):

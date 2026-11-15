@@ -9,6 +9,7 @@ from app.api.errors import ApiError
 from app.catalog.loader import Catalog
 from app.data import DataProvider
 from app.engines.config import EngineConfig
+from app.engines.scenario import ScenarioService
 from app.geo.locate import Locator
 from app.i18n import resolve_language
 from app.profile.builder import ProfileService
@@ -60,6 +61,10 @@ def engine_config(request: Request) -> EngineConfig:
     return request.app.state.engine_config
 
 
+def scenarios(request: Request) -> ScenarioService:
+    return request.app.state.scenarios
+
+
 ClientId = Annotated[str, Depends(client_id)]
 Language = Annotated[str, Depends(language)]
 Repo = Annotated[Repository, Depends(repository)]
@@ -68,3 +73,4 @@ Data = Annotated[DataProvider, Depends(data_provider)]
 Crops = Annotated[Catalog, Depends(catalog)]
 Profiles = Annotated[ProfileService, Depends(profiles)]
 Engine = Annotated[EngineConfig, Depends(engine_config)]
+Scenarios = Annotated[ScenarioService, Depends(scenarios)]

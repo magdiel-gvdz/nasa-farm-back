@@ -10,6 +10,7 @@ from app.data.models import (
     Cell,
     ClimatologyDecade,
     DailyRow,
+    DailySeries,
     IndicatorDecade,
     IndicatorYear,
     SoilLayer,
@@ -35,8 +36,8 @@ def _by_cell(model: type, name: str) -> dict[str, tuple]:
 
 
 @cache
-def _daily(cell_id: str) -> tuple[DailyRow, ...]:
-    return tuple(DailyRow(**row) for row in synthetic.daily_rows(cell_id))
+def _daily(cell_id: str) -> DailySeries:
+    return DailySeries((DailyRow(**row) for row in synthetic.daily_rows(cell_id)), "synthetic")
 
 
 class FixtureProvider:

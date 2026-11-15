@@ -4,7 +4,7 @@ from typing import Annotated, Literal
 
 from pydantic import ConfigDict, Field
 
-from app.api.schemas.common import Confidence, Month, MonthDay, ResponseModel
+from app.api.schemas.common import Confidence, Month, MonthDay, ResponseModel, ScenarioApplied
 
 SuitabilityStatus = Literal["suitable", "marginal", "unsuitable"]
 Score = Annotated[float, Field(ge=0, le=100)]
@@ -32,6 +32,7 @@ class SuitabilityDetail(ResponseModel):
     harvest_window: HarvestWindow | None
     reasons: list[SuitabilityReason]
     confidence: Confidence
+    scenario: ScenarioApplied
 
 
 class CropSuitabilityRow(ResponseModel):
@@ -43,3 +44,4 @@ class CropSuitabilityRow(ResponseModel):
 class SuitabilityMatrix(ResponseModel):
     months: list[Month] = Field(min_length=12, max_length=12)
     crops: list[CropSuitabilityRow]
+    scenario: ScenarioApplied
