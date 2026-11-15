@@ -4,7 +4,7 @@ from collections import Counter
 from collections.abc import Sequence
 from datetime import UTC, datetime
 
-from app.data import DataProvider
+from app.data import DataProvider, DataUnavailableError
 from app.data.models import Cell, ClimatologyDecade, IndicatorYear
 from app.data.models import SoilLayer as SoilRow
 from app.geo.grid import CELL_M
@@ -230,7 +230,7 @@ def _soil(layers: Sequence[SoilRow]) -> dict | None:
                 "sand_pct": rounded(row.sand_pct),
                 "silt_pct": rounded(row.silt_pct),
                 "bulk_density_g_cm3": rounded(row.bdod_kg_dm3, 2),
-                "awc_mm_per_m": None,
+                "awc_mm_per_m": rounded(row.awc_mm_per_m),
                 "uncertainty": {
                     name: {
                         "p05": rounded(getattr(row, f"{column}_p05"), 2),
@@ -244,7 +244,7 @@ def _soil(layers: Sequence[SoilRow]) -> dict | None:
             for row in layers
         ],
         "lab": None,
-        "k_factor": None,
+        "k_factor": rounded(layers[0].k_factor, 3),
     }
 
 
@@ -370,7 +370,12 @@ def build_profile(provider: DataProvider, cell_id: str, language: str) -> dict:
     climatology = provider.climatology(cell_id)
     years = provider.years(cell_id)
     monthly = MonthlyIndicators(indicators)
-    daily = DailyRecords(provider.daily(cell_id), FROST_C)
+    try:
+        daily_rows = provider.daily(cell_id)
+    except DataUnavailableError:
+        # Sin serie diaria no hay récords ni fechas de helada, pero el perfil sigue.
+        daily_rows = ()
+    daily = DailyRecords(daily_rows, FROST_C)
 
     sources_used = Counter(row.sm_src for row in indicators if row.sm_src)
     moisture_source = (

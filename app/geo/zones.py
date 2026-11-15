@@ -83,3 +83,39 @@ class BBoxCellCatalog:
 
     def cell_ids(self) -> list[str]:
         return sorted(self._by_cell)
+
+
+class ProviderCellCatalog:
+    """Celdas y regiones que publica DATA, leídas del proveedor de datos activo.
+
+    Las regiones de DATA son rectángulos aproximados y la malla incluye celdas de estados
+    vecinos: `zone_id` es una etiqueta para agrupar, no un dato administrativo.
+    """
+
+    def __init__(self, provider, state: str = "Coahuila", country: str = "MX"):
+        self._provider = provider
+        self._state = state
+        self._country = country
+
+    def _zone(self, zone_id: str, name: str, cells) -> Zone:
+        lons = [cell.lon for cell in cells]
+        lats = [cell.lat for cell in cells]
+        bbox = (min(lons), min(lats), max(lons), max(lats))
+        return Zone(zone_id, name, self._state, self._country, (), bbox)
+
+    def zones(self) -> tuple[Zone, ...]:
+        by_zone: dict[str, list] = {}
+        for cell in self._provider.cells():
+            by_zone.setdefault(cell.zone_id, []).append(cell)
+        return tuple(
+            self._zone(zone_id, cells[0].zone_name, cells) for zone_id, cells in by_zone.items()
+        )
+
+    def zone_of(self, cell_id: str) -> Zone | None:
+        from app.data import UnknownCellError
+
+        try:
+            cell = self._provider.cell(cell_id)
+        except UnknownCellError:
+            return None
+        return Zone(cell.zone_id, cell.zone_name, self._state, self._country, (), (0, 0, 0, 0))

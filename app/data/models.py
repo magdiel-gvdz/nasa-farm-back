@@ -162,6 +162,9 @@ class SoilLayer:
     texture_class: str | None
     valid_pixel_pct: float | None
     low_coverage: bool
+    # Columnas que DATA añadió en el contrato v2; los datos sintéticos no las traen.
+    awc_mm_per_m: float | None = None
+    k_factor: float | None = None
 
 
 @dataclass(frozen=True, slots=True)

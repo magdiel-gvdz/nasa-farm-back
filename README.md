@@ -72,8 +72,8 @@ Variables de la aplicación: `ENVIRONMENT`, `CORS_ORIGINS` (array JSON) y
 al reiniciar). Terraform las configura en el servicio junto con las de DATA.
 Localmente todo funciona sin credenciales AWS mientras `APP_TABLE` esté vacía.
 
-`DATA_PROVIDER` elige de dónde salen los datos agroclimáticos. El valor por
-defecto, `fixture`, sirve datos sintéticos de dos celdas (Saltillo
+`DATA_PROVIDER` elige de dónde salen los datos agroclimáticos: `fixture` o
+`athena` (ver más abajo). El valor por defecto, `fixture`, sirve datos sintéticos de dos celdas (Saltillo
 `E9_r0463_c0846` y La Laguna `E9_r0461_c0822`, 2016-2025) con las columnas del
 contrato de DATA; `/ready` informa entonces `data_version: "fixture"` y cada
 fuente lleva `data_class: "synthetic"`. Un valor desconocido impide arrancar.
@@ -165,6 +165,36 @@ Los permisos permiten leer `gold/`, consultar el workgroup, leer Glue y SSM, y
 usar el bucket de resultados de Athena. No permiten escribir en el lake.
 Cada entorno puede escribir únicamente su tabla y `uploads/` y `cache/` de su
 bucket. El rol de tarea conserva el límite de permisos del bootstrap.
+
+## Activar los datos reales (Athena)
+
+Con `DATA_PROVIDER=athena` la API lee las vistas `v_*` de DATA (`docs/data_contract.md`). Al
+arrancar carga en segundo plano las celdas y las fuentes: `/health` responde desde el primer
+momento y `/ready` devuelve `503` hasta terminar. Los datos de cada celda se leen de Athena la
+primera vez que se piden (unos segundos) y después se sirven desde memoria; las geocercas se
+ubican en las celdas que publica DATA. Después comprueba el parámetro
+SSM de versión cada `DATA_POLL_SECONDS` (300 por defecto) y recarga solo si cambió. Si una
+recarga falla o lo publicado no supera la validación, sigue sirviendo la última versión buena.
+Solo emite `SELECT` sobre vistas `v_*`, sin reutilización de resultados, y usa boto3
+directamente (no `awswrangler`). La serie diaria (`v_cell_daily`) se pide por celda, bajo demanda.
+
+Variables que necesita, además de `DATA_PROVIDER`: `DATA_REGION`, `ATHENA_WORKGROUP`,
+`ATHENA_DATABASE` y `DATA_VERSION_PARAMETER`. Si falta alguna, la API no arranca y la nombra.
+Terraform ya las configura en el servicio.
+
+**Antes de activar** deben cumplirse las condiciones de `c2-athena-provider`:
+
+1. DATA publicó las seis vistas, incluida `v_sources`, y el parámetro SSM
+   `/fieldshift/data_version` tiene una versión (no `none`).
+2. DATA y backend acordaron un protocolo que impida leer vistas de dos publicaciones a la vez. La
+   API descarta una carga si la versión cambió mientras cargaba, pero eso no es una garantía.
+3. El rol de tarea puede leer SSM y consultar Athena en `DATA_REGION`.
+
+**Activar:** cambiar la variable de repositorio `DATA_PROVIDER` a `athena`, relanzar el workflow
+**API infrastructure** en `main` y comprobar que `/ready` informa la versión del parámetro SSM y
+que `scripts/smoke_e2e.py --require-real` pasa en las dos zonas (ver `docs/smoke.md`).
+
+**Volver atrás:** devolver `DATA_PROVIDER` a `fixture` y relanzar el workflow.
 
 ## Validación
 

@@ -29,4 +29,6 @@ def list_sources(data: Data):
             data_class=source.data_class,
         )
         for source in data.sources()
+        # DATA lista también fuentes previstas que el MVP no usa (SMAP, NDVI).
+        if source.status == "in_use"
     ]

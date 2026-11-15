@@ -47,12 +47,12 @@ def test_fixture_provider_conforms_to_the_interface(provider):
 
 def test_default_provider_is_the_fixture_one():
     assert Settings().data_provider == "fixture"
-    assert isinstance(create_provider(Settings().data_provider), FixtureProvider)
+    assert isinstance(create_provider(Settings()), FixtureProvider)
 
 
 def test_unknown_provider_name_is_rejected(caplog):
     with pytest.raises(ValueError, match="athena-v9"):
-        create_provider("athena-v9")
+        create_provider(Settings(data_provider="athena-v9"))
     assert "athena-v9" in caplog.text
 
 
