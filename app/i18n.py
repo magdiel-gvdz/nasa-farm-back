@@ -436,6 +436,58 @@ MESSAGES: dict[str, dict[str, str]] = {
         "es": "Escenario hipotético, no un pronóstico: desplaza el clima histórico de tu zona de forma uniforme. La humedad del suelo, el suelo descubierto y el viento se mantienen como en los datos publicados.",
         "en": "Hypothetical scenario, not a forecast: it shifts the historical climate of your zone uniformly. Soil moisture, bare soil and wind stay as in the published data.",
     },
+    "error.not_a_greenhouse": {
+        "es": "La geocerca no es un invernadero (`kind` debe ser `greenhouse`).",
+        "en": "The field is not a greenhouse (`kind` must be `greenhouse`).",
+    },
+    "greenhouse.wind_note": {
+        "es": "El viento procede de un modelo a escala de unos 55 km y es el máximo de medias horarias, no la ráfaga instantánea; la topografía local puede aumentarlo. Valida la resistencia con el fabricante o con registros locales.",
+        "en": "Wind comes from a model at a scale of about 55 km and is the maximum of hourly means, not the instantaneous gust; local topography can increase it. Validate the rating with the manufacturer or with local records.",
+    },
+    "greenhouse.gap.short_wind_record": {
+        "es": "Solo hay {years} años completos de viento en tu zona: los niveles de retorno son poco fiables.",
+        "en": "There are only {years} complete years of wind data for your zone: return levels are unreliable.",
+    },
+    "greenhouse.gap.insufficient_wind_record": {
+        "es": "Solo hay {years} años completos de viento en tu zona: no alcanzan para estimar niveles de retorno.",
+        "en": "There are only {years} complete years of wind data for your zone: not enough to estimate return levels.",
+    },
+    "greenhouse.gap.no_rated_wind": {
+        "es": "No se declaró la resistencia al viento de la estructura (`rated_wind_kmh`): no se puede calcular la probabilidad de superarla.",
+        "en": "The structure's wind rating (`rated_wind_kmh`) was not declared: the probability of exceeding it cannot be computed.",
+    },
+    "greenhouse.gap.no_light_assessment": {
+        "es": "La luz dentro del invernadero no se evalúa.",
+        "en": "Light inside the greenhouse is not assessed.",
+    },
+    "greenhouse.gap.no_heating_assessment": {
+        "es": "Las necesidades de calefacción no se evalúan.",
+        "en": "Heating needs are not assessed.",
+    },
+    "greenhouse.gap.no_co2_assessment": {
+        "es": "El enriquecimiento con CO₂ no se evalúa.",
+        "en": "CO₂ enrichment is not assessed.",
+    },
+    "greenhouse.gap.no_hail_assessment": {
+        "es": "No existe un producto NASA directo de granizo; consulta a productores locales.",
+        "en": "There is no direct NASA hail product; ask local growers.",
+    },
+    "greenhouse.recommend.anchors": {
+        "es": "Revisa anclajes, cubierta y ventilas antes de los meses de más viento en tu zona: {months}.",
+        "en": "Check anchors, cover and vents before the windiest months in your zone: {months}.",
+    },
+    "greenhouse.recommend.manufacturer": {
+        "es": "Confirma con el fabricante la resistencia de la estructura y de la cubierta a ráfagas.",
+        "en": "Confirm with the manufacturer the gust rating of the structure and the cover.",
+    },
+    "greenhouse.recommend.warn": {
+        "es": "Hay un {pct} % de probabilidad al año de que una ráfaga supere los {rated} km/h de la estructura: refuerza anclajes y valida con el fabricante.",
+        "en": "There is a {pct}% annual probability that a gust exceeds the structure's {rated} km/h: reinforce anchors and validate with the manufacturer.",
+    },
+    "greenhouse.recommend.bad": {
+        "es": "Hay un {pct} % de probabilidad al año de que una ráfaga supere los {rated} km/h de la estructura: es un riesgo alto; considera una estructura más resistente.",
+        "en": "There is a {pct}% annual probability that a gust exceeds the structure's {rated} km/h: the risk is high; consider a stronger structure.",
+    },
 }
 
 
