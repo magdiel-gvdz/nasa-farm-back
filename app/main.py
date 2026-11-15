@@ -1,51 +1,78 @@
 import logging
+from typing import Literal
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 from mangum import Mangum
+from pydantic import BaseModel
 
+from app.api.errors import register_error_handlers
+from app.api.fixtures import MOCK_HEADER
+from app.api.routes import router as api_router
+from app.api.schemas.common import ErrorResponse
 from app.config import Settings
-from app.data import DataUnavailableError, EvidenceSource, load_manifest
+from app.data import DataStatus, DataUnavailableError, StaticDataStatus
+from app.geo.locate import GridLocator, Locator
+from app.geo.zones import BBoxCellCatalog
+from app.store.base import MemoryRepository, Repository
+from app.store.dynamodb import DynamoRepository
 
 logging.basicConfig(level=logging.INFO)
 
+API_VERSION = "0.1.0"
 
-def create_app(settings: Settings | None = None) -> FastAPI:
+
+class Health(BaseModel):
+    status: Literal["ok"]
+    environment: str
+    version: str
+
+
+class Ready(BaseModel):
+    status: Literal["ready"]
+    environment: str
+    data_version: str
+
+
+def create_app(
+    settings: Settings | None = None,
+    *,
+    repository: Repository | None = None,
+    locator: Locator | None = None,
+    data_status: DataStatus | None = None,
+) -> FastAPI:
     config = settings or Settings()
-    api = FastAPI(title="Field Shift API", version="0.1.0")
+    api = FastAPI(title="Field Shift API", version=API_VERSION)
+    api.state.repository = repository or (
+        DynamoRepository(config.app_table) if config.app_table else MemoryRepository()
+    )
+    api.state.locator = locator or GridLocator(BBoxCellCatalog())
+    status = data_status or StaticDataStatus()
+
     api.add_middleware(
         CORSMiddleware,
         allow_origins=config.cors_origins,
         allow_credentials=False,
-        allow_methods=["GET", "POST", "OPTIONS"],
-        allow_headers=["Content-Type", "Authorization"],
+        allow_methods=["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+        allow_headers=["Content-Type", "X-Client-Id", "Accept-Language"],
+        expose_headers=[MOCK_HEADER],
     )
+    register_error_handlers(api)
 
-    @api.exception_handler(DataUnavailableError)
-    async def unavailable_handler(_request: Request, _exc: DataUnavailableError):
-        return JSONResponse(
-            status_code=503,
-            content={"detail": "DATA_UNAVAILABLE", "environment": config.environment},
-        )
-
-    @api.get("/health")
+    @api.get("/health", response_model=Health, tags=["platform"])
     def health():
-        return {"status": "ok", "environment": config.environment, "version": "0.1.0"}
+        return {"status": "ok", "environment": config.environment, "version": API_VERSION}
 
-    @api.get("/ready")
+    @api.get(
+        "/ready", response_model=Ready, tags=["platform"], responses={503: {"model": ErrorResponse}}
+    )
     def ready():
-        manifest = load_manifest(config)
-        return {
-            "status": "ready",
-            "environment": config.environment,
-            "data_manifest_version": manifest.version,
-        }
+        version = status.data_version() if status.is_ready() else None
+        if version is None:
+            raise DataUnavailableError("Data provider is not ready")
+        return {"status": "ready", "environment": config.environment, "data_version": version}
 
-    @api.get("/v1/sources")
-    def sources() -> list[EvidenceSource]:
-        return load_manifest(config).sources
-
+    api.include_router(api_router)
     return api
 
 

@@ -1,0 +1,57 @@
+{
+  "crop_id": "maiz",
+  "planting_month": 4,
+  "status": "marginal",
+  "score": 58,
+  "harvest_window": {
+    "from": "08-10",
+    "to": "09-05"
+  },
+  "reasons": [
+    {
+      "factor": "frost",
+      "status": "ok",
+      "source_id": "nasa_power",
+      "detail": {
+        "$t": {
+          "es": "La siembra queda después de la última helada probable de tu zona (26-mar).",
+          "en": "Planting falls after the last likely frost in your zone (Mar 26)."
+        }
+      }
+    },
+    {
+      "factor": "heat",
+      "status": "warn",
+      "source_id": "nasa_power",
+      "detail": {
+        "$t": {
+          "es": "La floración cae en junio: 3.1 días al año por encima de 35 °C en tu zona.",
+          "en": "Flowering falls in June: 3.1 days per year above 35 °C in your zone."
+        }
+      }
+    },
+    {
+      "factor": "water",
+      "status": "bad",
+      "source_id": "nasa_power",
+      "detail": {
+        "$t": {
+          "es": "Demanda de 620 mm frente a 240 mm de lluvia efectiva; requiere 380 mm de riego.",
+          "en": "Demand of 620 mm versus 240 mm of effective rain; needs 380 mm of irrigation."
+        }
+      }
+    },
+    {
+      "factor": "soil",
+      "status": "ok",
+      "source_id": "soilgrids",
+      "detail": {
+        "$t": {
+          "es": "pH 7.9 en tu zona, dentro del rango tolerable.",
+          "en": "pH 7.9 in your zone, within the tolerable range."
+        }
+      }
+    }
+  ],
+  "confidence": "medium"
+}

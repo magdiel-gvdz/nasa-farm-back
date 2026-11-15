@@ -51,11 +51,13 @@ En Linux/macOS se usa `python3.13` y `.venv/bin/python`. Las dependencias runtim
 | Endpoint | Comportamiento |
 | --- | --- |
 | `GET /health` | Liveness: proceso activo, versión de API y entorno; no consulta AWS |
-| `GET /ready` | Consulta un manifiesto válido en S3; responde 503 si no hay datos publicados |
-| `GET /v1/sources` | Fuentes declaradas en el manifiesto; responde 503 si no está disponible |
-| `GET /docs` y `/openapi.json` | Documentación y contrato FastAPI |
+| `GET /ready` | Estado del proveedor de datos y versión cargada; responde 503 si aún no está listo |
+| `/api/v1/...` | Endpoints de negocio: catálogos, geocercas, perfil, aptitud y rotaciones. Ver [docs/api-contract.md](docs/api-contract.md) |
+| `GET /docs` y `/openapi.json` | Documentación y contrato FastAPI; el contrato versionado está en `contracts/openapi.json` |
 
-Variables runtime: `ENVIRONMENT`, `DATA_LAKE_BUCKET`, `DATA_MANIFEST_KEY` (por defecto `manifests/manifest.json`) y `CORS_ORIGINS` (array JSON). Terraform las configura automáticamente en Lambda. Localmente, `/health` y `/docs` funcionan sin credenciales. Para leer S3 se usa la cadena normal de credenciales AWS; no se introduce ningún secreto en código.
+Las geocercas (`/api/v1/fields`) son reales; el resto de endpoints de negocio devuelve por ahora una respuesta fija marcada con `X-Fieldshift-Mock: 1`. Tras cambiar una ruta o un esquema ejecuta `python scripts/export_openapi.py` y versiona `contracts/openapi.json`; CI falla si queda desactualizado.
+
+Variables runtime: `ENVIRONMENT`, `DATA_LAKE_BUCKET`, `DATA_MANIFEST_KEY` (por defecto `manifests/manifest.json`), `CORS_ORIGINS` (array JSON) y `APP_TABLE` (tabla DynamoDB de geocercas; vacía = memoria, los datos se pierden al reiniciar). Terraform configura las cuatro primeras en Lambda; `APP_TABLE` llegará con la tabla del entorno. Localmente, `/health` y `/docs` funcionan sin credenciales. Para leer S3 se usa la cadena normal de credenciales AWS; no se introduce ningún secreto en código.
 
 ## Arranque inicial de AWS
 
@@ -120,7 +122,7 @@ aws s3 cp data/curated/ s3://BUCKET-DEL-ENTORNO/curated/ --recursive
 aws s3 cp data/manifest.json s3://BUCKET-DEL-ENTORNO/manifests/manifest.json --content-type application/json
 ```
 
-Un despliegue nuevo **no incluye datos científicos de ejemplo**. `/ready` y `/v1/sources` devuelven 503 hasta publicar el manifiesto. La comprobación de despliegue usa `/health`, para que configurar infraestructura no dependa de haber completado el pipeline.
+Un despliegue nuevo **no incluye datos científicos de ejemplo**. Hasta que exista el proveedor de datos, `/ready` responde con una versión provisional y los endpoints de datos devuelven respuestas fijas marcadas con `X-Fieldshift-Mock: 1`; el manifiesto de S3 ya no se consulta. La comprobación de despliegue usa `/health`, para que configurar infraestructura no dependa de haber completado el pipeline.
 
 En `dev` el versionado conserva versiones anteriores hasta 90 días. No hay expiración de los objetos actuales. En previews los objetos expiran a los 7 días y el cierre del PR los elimina de inmediato. La regla S3 elimina objetos; no elimina la infraestructura si falla el workflow de cierre.
 
@@ -130,6 +132,7 @@ En `dev` el versionado conserva versiones anteriores hasta 90 días. No hay expi
 .\.venv\Scripts\python.exe -m ruff check .
 .\.venv\Scripts\python.exe -m ruff format --check .
 .\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe scripts/export_openapi.py --check
 terraform fmt -check -recursive infra
 terraform -chdir=infra/bootstrap init -backend=false -lockfile=readonly
 terraform -chdir=infra/bootstrap validate
@@ -148,17 +151,21 @@ Si falla el borrado de un PR, usa el workflow manual **Cleanup preview** desde `
 
 Los cambios estructurales de Terraform en un PR también requieren comprobar que el código de limpieza de `main` puede destruirlos; la limpieza normal usa el commit base del PR. Conserva los nombres de proveedores al refactorizar. Un cierre fallido requiere recuperación: no hay un recolector programado en este setup.
 
-La API inicial es pública y no guarda terrenos ni cuentas. CORS restringe navegadores; no sustituye autenticación. API Gateway limita peticiones por entorno (dev: 10/s, burst 20; preview: 2/s, burst 5). Los logs se retienen 30 días en dev y 3 en previews. Los permisos de CI de Lambda, S3, estado e IAM se limitan por nombres; el plano de administración de HTTP APIs permite gestionar las APIs de la región en esta cuenta. Usa una cuenta dedicada al proyecto y revisa cualquier PR antes de ejecutar código con su rol de despliegue. No hay VPC, NAT Gateway, base de datos, Glue ni Athena; este alcance es la API y su almacenamiento de datos. No se ha desplegado infraestructura con solo clonar el repositorio.
+La API es pública y no guarda cuentas. Las geocercas se separan por el encabezado `X-Client-Id`, que no es autenticación: quien conozca ese UUID puede verlas y borrarlas. CORS restringe navegadores; tampoco sustituye autenticación. API Gateway limita peticiones por entorno (dev: 10/s, burst 20; preview: 2/s, burst 5). Los logs se retienen 30 días en dev y 3 en previews. Los permisos de CI de Lambda, S3, estado e IAM se limitan por nombres; el plano de administración de HTTP APIs permite gestionar las APIs de la región en esta cuenta. Usa una cuenta dedicada al proyecto y revisa cualquier PR antes de ejecutar código con su rol de despliegue. No hay VPC, NAT Gateway, base de datos, Glue ni Athena; este alcance es la API y su almacenamiento de datos. No se ha desplegado infraestructura con solo clonar el repositorio.
 
 ## Estructura
 
 ```text
 app/                         FastAPI, configuración y lector del manifiesto
-contracts/                   Esquema del manifiesto de datos
+app/api/                     Rutas /api/v1, esquemas, errores y respuestas fijas
+app/store/                   Repositorio de geocercas (memoria y DynamoDB)
+app/geo/                     Malla de 9 km, validación de geometría y zonas
+contracts/                   Contrato OpenAPI y esquema del manifiesto de datos
 infra/bootstrap/             Estado remoto, OIDC y permisos de CI
 infra/environment/           Stack reutilizado para dev y pr-N
 infra/environment/tests/     Planes de prueba con proveedor simulado
 scripts/package_lambda.py    Empaquetado Linux para Lambda
+scripts/export_openapi.py    Genera contracts/openapi.json
 tests/                       Contratos básicos de la API y adaptador Lambda
 .github/workflows/           Checks, deploy y destrucción de previews
 ```
