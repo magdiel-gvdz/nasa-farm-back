@@ -4,8 +4,8 @@
 
 - [x] 1.1 Portar `grid.py` de DATA a `app/geo/grid.py` con las constantes EPSG:6933, 3856 × 1624 celdas, lado 9008.055210146 m, X0 = −17367530.44516138 e Y0 = 7314540.830638, y sus 7 pruebas a `tests/geo/test_grid.py`; verificar que las 7 pasan
 - [x] 1.2 Añadir como dato de prueba el CSV de las 136 celdas de DATA y una prueba que recalcula `cell_id` desde cada centroide; verificar que coinciden las 136
-- [ ] 1.3 Añadir `pyproj` y `shapely` a las dependencias de ejecución y regenerar el bloqueo; verificar que la imagen Docker construye y arranca
-  - Dependencias fijadas en `requirements.txt` (pyproj 3.8.0, shapely 2.2.0) y verificadas en el paquete Lambda del preview `pr-6`. Falta la imagen Docker, que llega con a1
+- [x] 1.3 Añadir `pyproj` y `shapely` a las dependencias de ejecución y regenerar el bloqueo; verificar que la imagen Docker construye y arranca
+  - Verificado en `pr-7`: la imagen construye y arranca en CI con pyproj 3.8.0 y shapely 2.2.0, y el servicio ECS asigna celdas
 
 ## 2. Geometría
 

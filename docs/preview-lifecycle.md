@@ -25,6 +25,14 @@ inició a las 20:05:18 y terminó a las 20:10:22 (America/Mexico_City),
 5 min 4 s. Una actualización posterior tardó 8 min 26 s. El primer job
 falló al seguir el despliegue por permisos de IAM; la tarea sí quedó sana.
 La recuperación conserva el servicio y reconcilia su estado antes de reintentar CI.
+El 15 de noviembre dos actualizaciones completas (imagen nueva, apply y prueba
+de humo) tardaron 10 min 10 s y 11 min 3 s. Contar con unos 10 minutos por
+push a un PR listo para revisión.
+
+Un apply falló con "Provider produced inconsistent result after apply" en
+`scaling_target`: el proveedor rellena `auto_scaling_metric` y
+`auto_scaling_target_value` tras crear el servicio. Se declaran explícitamente
+con sus valores por defecto (`AVERAGE_CPU`, 60).
 La imagen ECR compartida se conserva y su ciclo de vida retiene 30 imágenes.
 
 ## Recuperación y transición

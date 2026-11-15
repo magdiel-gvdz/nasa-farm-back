@@ -20,8 +20,9 @@
 ## 4. Verificación
 
 - [x] 4.1 Reescribir `tests/environments.tftest.hcl` para el nuevo conjunto de recursos y ejecutar `terraform fmt -check -recursive infra`, `validate` y `test`; verificar que todo pasa sin credenciales
-- [ ] 4.2 Aplicar en un preview real a través del PR conjunto con `a4-deploy-pipeline` y verificar que `curl <api_url>/health` responde `200`; anotar en el PR el tiempo de creación y el atributo de `ingress_paths` usado para la URL
-- [ ] 4.3 Si Express Mode no puede crearse en la cuenta tras una hora de intentos, registrar el error en el PR y cambiar a Fargate + ALB en la VPC por defecto manteniendo variables y salidas; verificar con el mismo `curl`
+- [x] 4.2 Aplicar en un preview real a través del PR conjunto con `a4-deploy-pipeline` y verificar que `curl <api_url>/health` responde `200`; anotar en el PR el tiempo de creación y el atributo de `ingress_paths` usado para la URL
+- [x] 4.3 Si Express Mode no puede crearse en la cuenta tras una hora de intentos, registrar el error en el PR y cambiar a Fargate + ALB en la VPC por defecto manteniendo variables y salidas; verificar con el mismo `curl`
+  - No aplica: Express Mode se creó correctamente en la cuenta (`docs/platform-verification.md`)
 
 ## Integración de permisos de DATA
 

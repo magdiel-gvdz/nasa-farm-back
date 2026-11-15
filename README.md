@@ -1,8 +1,7 @@
 # Field Shift API
 
-Backend de NASA Space Apps en Python 3.13 y FastAPI. Esta rama prepara la
-migración a contenedores con ECS Express Mode, ECR y DynamoDB. La migración real
-de `dev` se verifica después del merge mediante las tareas de `a5-migrate-dev`.
+Backend de NASA Space Apps en Python 3.13 y FastAPI. Se ejecuta como contenedor
+en ECS Express Mode, con la imagen en ECR y las geocercas en DynamoDB.
 Terraform administra AWS y GitHub Actions usa OIDC, sin llaves guardadas en GitHub.
 
 Bootstrap también prepara `AWSServiceRoleForECS`, un prerrequisito de cuenta
