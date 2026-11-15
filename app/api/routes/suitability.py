@@ -38,11 +38,16 @@ def cell_data(provider: DataProvider, cell_id: str) -> CellData:
 
 
 def field_context(field: dict, language: str) -> FieldContext:
+    lab_ph = ((field.get("soil_lab") or {}).get("values") or {}).get("ph")
     irrigation = field.get("irrigation")
     if irrigation is None:
-        return FieldContext(irrigation_declared=False, irrigation_mm=0.0, language=language)
+        return FieldContext(
+            irrigation_declared=False, irrigation_mm=0.0, language=language, lab_ph=lab_ph
+        )
     available = irrigation.get("max_mm_per_year") if irrigation["available"] else 0.0
-    return FieldContext(irrigation_declared=True, irrigation_mm=available, language=language)
+    return FieldContext(
+        irrigation_declared=True, irrigation_mm=available, language=language, lab_ph=lab_ph
+    )
 
 
 def detail_response(evaluation: Evaluation) -> dict:

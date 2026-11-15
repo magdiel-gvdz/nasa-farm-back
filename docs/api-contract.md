@@ -150,6 +150,24 @@ for (;;) {
 }
 ```
 
+## Análisis de suelo de laboratorio
+
+`POST /fields/{id}/soil-report` recibe un archivo (`multipart/form-data`, campo `file`): PDF, JPG o
+PNG de hasta 10 MB. Un modelo de Bedrock con entrada de documentos (`BEDROCK_EXTRACT_MODEL_ID`) lee
+laboratorio, fecha, profundidad, textura, pH, materia orgánica, conductividad eléctrica, CIC,
+nitrógeno, fósforo y potasio, en unidades normalizadas (`om_pct`, `ec_ds_m`, `cec_cmol_kg`,
+`n_mg_kg`, `p_mg_kg`, `k_mg_kg`). Los valores fuera de un rango plausible se descartan
+(pH 3-11, materia orgánica 0-20 %, CE 0-20 dS/m, CIC 0-100 cmol/kg, N ≤ 10,000, P ≤ 2,000 y
+K ≤ 10,000 mg/kg) y aparecen en `unreadable_fields` con su motivo.
+
+Con al menos un valor aceptado, la geocerca guarda `soil_lab`; el perfil muestra esos valores en
+`soil.lab` con confianza `high`, añade la fuente `lab_report` y retira el vacío
+`no_lab_analysis`; la aptitud usa el pH de laboratorio en el factor suelo y lo dice en su detalle.
+El archivo se guarda en el almacenamiento privado del entorno, bajo un prefijo del cliente, sin URL
+pública. Requiere `CHAT_ENABLED=true` (si no, `503 chat_disabled`).
+
+**No subas documentos con datos personales** (nombre, domicilio, RFC): el modelo los leería.
+
 ## Encabezados
 
 | Encabezado | Sentido | Uso |
@@ -194,6 +212,10 @@ Todo error, también los de validación, usa el mismo sobre:
 | `field_required` | 422 | Una herramienta del chat necesita una geocerca y no hay ninguna activa | `hint` |
 | `message_too_long` | 422 | El mensaje del chat supera los 2,000 caracteres | — |
 | `rate_limited` | 429 | El cliente superó su límite de mensajes de chat por minuto o por día | `reason` (`per_minute` o `per_day`), `retry_after`; cabecera `Retry-After` |
+| `unsupported_file_type` | 415 | El análisis de suelo no es un PDF, JPG o PNG (se comprueba el contenido, no el nombre) | — |
+| `file_too_large` | 413 | El análisis de suelo supera los 10 MB | — |
+| `not_a_soil_report` | 422 | El documento subido no es un análisis de suelo; la geocerca no cambia | — |
+| `llm_unavailable` | 503 | El modelo que lee el análisis de suelo no respondió | — |
 | `out_of_region` | 422 | La celda de la geocerca no pertenece a ninguna zona publicada | `cell_id` y `zones`: lista de `{zone_id, name, bbox}` |
 | `missing_client_id` | 400 | Falta `X-Client-Id` en una ruta de `/fields` | — |
 | `invalid_client_id` | 400 | `X-Client-Id` no es un UUID | — |

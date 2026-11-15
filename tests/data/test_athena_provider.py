@@ -481,7 +481,7 @@ def test_configured_cells_are_warmed_after_a_load(executor, versions):
     provider = AthenaProvider(executor, versions, warm_cells=[SALTILLO, "E9_r0001_c0001"])
     assert provider.refresh() is True
     deadline = time.monotonic() + 5
-    while provider._cells.get("2026111500", SALTILLO) is None and time.monotonic() < deadline:
+    while provider._daily.get("2026111500", SALTILLO) is None and time.monotonic() < deadline:
         time.sleep(0.01)
     executor.queries.clear()
     provider.climatology(SALTILLO)

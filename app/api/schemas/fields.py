@@ -91,6 +91,34 @@ class Admin(ResponseModel):
     municipality: str | None
 
 
+class SoilLab(ResponseModel):
+    """Valores aceptados del análisis de laboratorio subido por el agricultor."""
+
+    values: dict[str, float] = F(
+        description="ph, om_pct, ec_ds_m, cec_cmol_kg, n_mg_kg, p_mg_kg, k_mg_kg"
+    )
+    lab: str | None
+    sample_date: str | None
+    depth_cm: str | None
+    texture: str | None
+    uploaded_at: str
+    file_key: str
+
+
+class UnreadableField(ResponseModel):
+    field: str
+    reason: Literal["missing", "out_of_range", "invalid"]
+
+
+class SoilReportResult(ResponseModel):
+    field_id: str
+    extracted: dict[str, float | str | None] = F(
+        description="Todos los campos; `null` si no se leyó"
+    )
+    unreadable_fields: list[UnreadableField]
+    applied: bool = F(description="Si al menos un valor se guardó en la geocerca")
+
+
 class Field(ResponseModel):
     id: str = F(examples=["fld_01KA0Z5T9M3X8Q2W4E6R7T8Y9A"])
     name: str
@@ -109,3 +137,4 @@ class Field(ResponseModel):
     admin: Admin
     created_at: datetime
     profile_status: Literal["ready"]
+    soil_lab: SoilLab | None = None

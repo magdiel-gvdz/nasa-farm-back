@@ -78,6 +78,8 @@ def create_app(
     catalog: Catalog | None = None,
     engine_config: EngineConfig | None = None,
     model_client=None,
+    soil_extractor=None,
+    uploads=None,
 ) -> FastAPI:
     config = settings or Settings()
     api = FastAPI(title="Field Shift API", version=API_VERSION)
@@ -101,6 +103,16 @@ def create_app(
     api.state.catalog = catalog or load_catalog()
     api.state.engine_config = engine_config or load_config()
     api.state.chat = build_chat(config, api.state.repository, api.state.catalog, model_client)
+    api.state.soil_extractor = soil_extractor
+    if soil_extractor is None and config.chat_enabled:
+        from app.agent.extract import BedrockSoilExtractor
+
+        api.state.soil_extractor = BedrockSoilExtractor(
+            config.bedrock_extract_model_id, config.bedrock_region
+        )
+    from app.api.routes.soil import UploadStore
+
+    api.state.uploads = uploads or UploadStore(config.app_bucket)
 
     api.add_middleware(
         CORSMiddleware,
