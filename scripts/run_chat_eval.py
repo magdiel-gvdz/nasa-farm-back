@@ -116,11 +116,19 @@ def run(client: httpx.Client, questions: list[dict]) -> list[dict]:
         conversation = client.post("/api/v1/chat/conversations", json=body, headers=headers)
         conversation.raise_for_status()
         started = time.perf_counter()
-        response = client.post(
-            f"/api/v1/chat/conversations/{conversation.json()['conversation_id']}/messages",
-            json={"text": question["question"]},
-            headers={**headers, "Accept-Language": question["language"]},
-        )
+        for _ in range(3):
+            response = client.post(
+                f"/api/v1/chat/conversations/{conversation.json()['conversation_id']}/messages",
+                json={"text": question["question"]},
+                headers={**headers, "Accept-Language": question["language"]},
+            )
+            if response.status_code != 429:
+                break
+            # Límite por minuto del chat: se espera lo que indica el servidor y se reintenta.
+            wait = int(response.headers.get("retry-after", "60"))
+            print(f"     límite por minuto: esperando {wait} s")
+            time.sleep(wait)
+            started = time.perf_counter()
         events = parse_sse(response.text) if response.status_code == 200 else []
         report = evaluate(question, events)
         report["seconds"] = round(time.perf_counter() - started, 1)

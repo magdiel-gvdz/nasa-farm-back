@@ -15,4 +15,5 @@
 
 - [x] 3.1 Implementar `GET /chat/conversations/{id}` con la vista visible y el aislamiento por cliente; verificar con pruebas de historial ordenado, de ausencia de bloques de razonamiento y de `404` para otro cliente
 - [x] 3.2 Actualizar `contracts/openapi.json` y `docs/api-contract.md`; verificar que la comprobación del contrato pasa
-- [ ] 3.3 En un preview, mantener una conversación de dos turnos con una pregunta de seguimiento, forzar un redespliegue entre ambos y verificar que el asistente conserva el contexto
+- [x] 3.3 En un preview, mantener una conversación de dos turnos con una pregunta de seguimiento, forzar un redespliegue entre ambos y verificar que el asistente conserva el contexto
+  - Preview `pr-20`: primer turno sobre frijol en junio, redespliegue forzado (`ecs update-service --force-new-deployment`, tarea `0983f1ef…` → `845b19a7…`) y "¿y en julio?": el asistente evaluó frijol en julio sin volver a preguntar el cultivo

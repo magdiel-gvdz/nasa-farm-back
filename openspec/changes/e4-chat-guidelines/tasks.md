@@ -8,8 +8,10 @@
 ## 2. Evaluación
 
 - [x] 2.1 Escribir `evals/chat/questions.yaml` con 10 preguntas del agrónomo (siembra de avena, helada tardía, calor en floración, rotación con menos agua, escenario de −20 % de lluvia, fósforo, granizo, pregunta en inglés, sin geocerca activa, tema ajeno) y, por cada una, herramientas esperadas y comprobaciones; verificar que el archivo valida contra su esquema
-- [ ] 2.2 Implementar `scripts/run_chat_eval.py` que envía cada pregunta a una URL, recoge eventos y aplica comprobaciones automáticas (herramienta esperada usada, al menos una cita cuando hay cifras, idioma, ausencia de expresiones de parcela); verificar ejecutándolo contra un preview y guardando el informe
+- [x] 2.2 Implementar `scripts/run_chat_eval.py` que envía cada pregunta a una URL, recoge eventos y aplica comprobaciones automáticas (herramienta esperada usada, al menos una cita cuando hay cifras, idioma, ausencia de expresiones de parcela); verificar ejecutándolo contra un preview y guardando el informe
+  - Contra el preview `pr-20` (datos reales): 10/10 preguntas superan todas las comprobaciones. El script espera el `Retry-After` del límite por minuto
 - [ ] 2.3 Revisar a mano las 10 respuestas con SCI buscando cifras sin respaldo en los resultados de herramientas, y ajustar las instrucciones hasta que no haya ninguna; verificar con el informe final adjunto al PR
+  - Revisión previa del equipo (no sustituye a SCI): con Qwen 3 Next había cifras sin herramienta en 5 de 10 respuestas; se cambió a Mistral Large 3 y se ajustaron las instrucciones. Queda un caso residual (un rango de pH no devuelto por la herramienta en la pregunta de la avena). Pendiente: revisión con SCI
 
 ## 3. Documentación
 

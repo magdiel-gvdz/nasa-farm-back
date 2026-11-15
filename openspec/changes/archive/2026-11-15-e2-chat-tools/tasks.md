@@ -15,5 +15,6 @@
 
 ## 3. Verificación
 
-- [ ] 3.1 En un preview, preguntar "¿puedo sembrar maíz en abril?" con una geocerca activa y verificar con `curl -N` la secuencia `tool` → `card` → `text` → `citation` → `done`
+- [x] 3.1 En un preview, preguntar "¿puedo sembrar maíz en abril?" con una geocerca activa y verificar con `curl -N` la secuencia `tool` → `card` → `text` → `citation` → `done`
+  - Preview `pr-20`: "¿Puedo sembrar maíz en abril?" → `status` → `text` → `tool` (running, done) → `card` (`suitability`) → `text` → `citation` ×2 → `done`, con la cifra de la herramienta (42/100) y su fuente
 - [x] 3.2 Documentar en `docs/api-contract.md` la lista de herramientas, los tipos de `card` y sus esquemas; verificar que cada tipo documentado tiene una prueba

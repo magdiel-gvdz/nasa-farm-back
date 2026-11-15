@@ -22,5 +22,7 @@
 
 ## 4. Verificación desplegada
 
-- [ ] 4.1 En un preview con acceso al modelo, enviar un mensaje con `curl -N` y verificar que los eventos `text` llegan de forma incremental y que el flujo termina con `done`; anotar en el PR el tiempo hasta el primer fragmento
-- [ ] 4.2 Verificar en el preview que una respuesta de más de 60 s (o una pausa forzada) no se corta gracias a los latidos
+- [x] 4.1 En un preview con acceso al modelo, enviar un mensaje con `curl -N` y verificar que los eventos `text` llegan de forma incremental y que el flujo termina con `done`; anotar en el PR el tiempo hasta el primer fragmento
+  - Preview `pr-20` con Mistral Large 3 y datos reales: primer `text` a 0.8 s, 348 fragmentos hasta 7.3 s y `done` al final; llegada incremental observada con un cliente en streaming
+- [x] 4.2 Verificar en el preview que una respuesta de más de 60 s (o una pausa forzada) no se corta gracias a los latidos
+  - Respuesta de 72.3 s con 8 consultas a celdas frías de Athena: terminó con `done` sin cortes. El mayor hueco entre líneas fue de 9.8 s, por debajo del latido de 15 s, así que no hizo falta ninguno; el latido está cubierto por las pruebas

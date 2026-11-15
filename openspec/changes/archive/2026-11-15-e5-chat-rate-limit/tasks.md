@@ -9,5 +9,7 @@
 ## 2. Integración
 
 - [x] 2.1 Aplicar los límites en `POST /chat/conversations/{id}/messages` antes de abrir el flujo, con `429` y `Retry-After`, y `503` para el presupuesto; verificar con pruebas de API y de que el perfil sigue respondiendo para un cliente limitado
-- [ ] 2.2 Añadir las cuatro variables a `infra/environment` con valores más bajos en previews, y al `README.md`; verificar con `terraform test` y con una ráfaga real contra un preview que el séptimo mensaje del minuto recibe `429`
-- [ ] 2.3 Registrar cada rechazo con cliente abreviado y motivo, y el total diario al procesar cada mensaje; verificar en los registros del preview
+- [x] 2.2 Añadir las cuatro variables a `infra/environment` con valores más bajos en previews, y al `README.md`; verificar con `terraform test` y con una ráfaga real contra un preview que el séptimo mensaje del minuto recibe `429`
+  - `terraform test` del entorno pasa; en el preview `pr-20` el séptimo mensaje del minuto recibió `429 rate_limited` con `Retry-After: 55`
+- [x] 2.3 Registrar cada rechazo con cliente abreviado y motivo, y el total diario al procesar cada mensaje; verificar en los registros del preview
+  - Registros de `pr-20`: `Chat limitado: cliente fd2be6ef, motivo per_minute` y `Chat: mensaje 14 del día (presupuesto 200)`
