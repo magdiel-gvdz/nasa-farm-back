@@ -247,3 +247,34 @@ intencionado, se regeneran y se revisa el diff en el PR:
 .\.venv\Scripts\python.exe -m tests.engines.test_agronomy_cases
 ```
 
+## Viento en invernaderos (`GET /fields/{id}/greenhouse`)
+
+Código: `app/engines/greenhouse.py`. Solo para geocercas con `kind` igual a `greenhouse`; si no,
+`409 not_a_greenhouse`. Necesita la serie diaria; sin ella, `503 daily_unavailable`.
+
+1. **Máximos anuales.** De la serie diaria se toma el máximo anual de `wind_max_ms` (viento máximo a
+   10 m), solo de los años con al menos `greenhouse.min_days_per_year` días con dato, y se pasa a km/h.
+2. **Gumbel por momentos.** `β = √6·σ/π` y `μ = media − 0.5772·β` sobre esos máximos.
+3. **Niveles de retorno** a 10, 25 y 50 años: `x_T = μ − β·ln(−ln(1 − 1/T))`. La ráfaga estimada es
+   `x_T × greenhouse.gust_factor`.
+4. **Probabilidad de superar la resistencia.** La estructura falla si la ráfaga supera
+   `rated_wind_kmh`, es decir si el sostenido supera `rated_wind_kmh ÷ gust_factor`:
+   `P = 1 − exp(−exp(−(x − μ)/β))`.
+5. **Estado:** `ok` por debajo de `greenhouse.warn_probability`, `warn` hasta
+   `greenhouse.bad_probability` y `bad` por encima. Sin resistencia declarada, el estado es `null` y
+   se declara el vacío `no_rated_wind`.
+6. **Meses de mayor riesgo:** los tres con mayor máximo mensual medio.
+
+| Parámetro | Valor | Significado |
+|---|---|---|
+| `greenhouse.gust_factor` | 1.4 | Ráfaga estimada ÷ viento sostenido (supuesto) |
+| `greenhouse.warn_probability` | 0.02 | Probabilidad anual desde la que el estado es `warn` |
+| `greenhouse.bad_probability` | 0.10 | Probabilidad anual por encima de la que el estado es `bad` |
+| `greenhouse.min_days_per_year` | 360 | Días con dato para que un año cuente |
+| `greenhouse.reliable_years` | 15 | Por debajo, confianza `low` y vacío `short_wind_record` |
+| `greenhouse.minimum_years` | 5 | Por debajo, sin niveles de retorno y vacío `insufficient_wind_record` |
+
+**Límites.** El viento es de un modelo a ~55 km y es el máximo de medias horarias, no la ráfaga
+instantánea; la topografía local puede aumentarlo. Luz, calefacción, CO₂ y granizo quedan fuera de
+alcance: van en `null` con su vacío. Con la vista diaria de DATA (1991-2025) hay 35 años; los datos
+sintéticos solo traen 10, así que su confianza es `low`.

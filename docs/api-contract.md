@@ -18,6 +18,7 @@
 | `GET /fields/{id}/profile` | Real: se calcula con los datos del proveedor activo |
 | `GET /fields/{id}/suitability` | Real: motor de aptitud (ver [engines.md](engines.md)); admite escenario con `delta_t_c` y `delta_p_pct` |
 | `POST /fields/{id}/rotations` | Real: motor de rotaciones (ver [engines.md](engines.md)); admite escenario en `scenario` |
+| `GET /fields/{id}/greenhouse` | Real: riesgo de viento para invernaderos (ver [engines.md](engines.md)) |
 
 ## Diferencias respecto a `backend-handoff.md` §6
 
@@ -120,6 +121,7 @@ Todo error, también los de validación, usa el mismo sobre:
 | `invalid_geometry` | 422 | La geometría no es un polígono válido (ver [Geometría](#geometría-y-celda)) | `reason` y datos del límite incumplido |
 | `crop_not_found` | 404 | `crop_id` no existe en el catálogo de cultivos | `crop_id` |
 | `current_rotation_required` | 422 | Se pidieron rotaciones para una geocerca sin `current_rotation` con algún cultivo | — |
+| `not_a_greenhouse` | 409 | Se pidió `/greenhouse` para una geocerca cuyo `kind` no es `greenhouse` | — |
 | `out_of_region` | 422 | La celda de la geocerca no pertenece a ninguna zona publicada | `cell_id` y `zones`: lista de `{zone_id, name, bbox}` |
 | `missing_client_id` | 400 | Falta `X-Client-Id` en una ruta de `/fields` | — |
 | `invalid_client_id` | 400 | `X-Client-Id` no es un UUID | — |

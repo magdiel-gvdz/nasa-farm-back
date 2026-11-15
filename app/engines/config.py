@@ -155,9 +155,27 @@ class RotationConfig(ConfigModel):
         return self
 
 
+class GreenhouseConfig(ConfigModel):
+    gust_factor: float = Field(ge=1, le=3)
+    warn_probability: Fraction
+    bad_probability: Fraction
+    min_days_per_year: int = Field(ge=200, le=366)
+    reliable_years: int = Field(ge=2)
+    minimum_years: int = Field(ge=2)
+
+    @model_validator(mode="after")
+    def _ordered(self):
+        if self.warn_probability >= self.bad_probability:
+            raise ValueError("warn_probability debe ser menor que bad_probability")
+        if self.minimum_years > self.reliable_years:
+            raise ValueError("minimum_years no puede superar reliable_years")
+        return self
+
+
 class EngineConfig(ConfigModel):
     suitability: SuitabilityConfig
     rotation: RotationConfig
+    greenhouse: GreenhouseConfig
 
 
 def parse_config(document: object) -> EngineConfig:

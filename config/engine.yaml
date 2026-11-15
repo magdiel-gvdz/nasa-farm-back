@@ -72,3 +72,16 @@ rotation:
   om_trend:
     improving_from: 0.6
     stable_from: 0.4
+
+greenhouse:
+  # Ráfaga estimada = viento sostenido × este factor. Es un supuesto, no una medición.
+  gust_factor: 1.4
+  # Probabilidad anual de superar la resistencia desde la que el estado es `warn` y `bad`.
+  warn_probability: 0.02
+  bad_probability: 0.10
+  # Días con dato que necesita un año para contar su máximo.
+  min_days_per_year: 360
+  # Años completos por debajo de los cuales la confianza es baja.
+  reliable_years: 15
+  # Años completos por debajo de los cuales no se estiman niveles de retorno.
+  minimum_years: 5

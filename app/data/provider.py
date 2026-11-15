@@ -78,7 +78,8 @@ def _power_source(settings):
     from app.data.power import LocalCache, PowerClient, PowerDailySource, S3Cache
 
     cache = S3Cache(settings.app_bucket) if settings.app_bucket else LocalCache()
-    return PowerDailySource(PowerClient(cache), settings.lapse_rate_c_per_km)
+    # Desde 1991: el viento de invernaderos necesita un registro largo de máximos anuales.
+    return PowerDailySource(PowerClient(cache, first_year=1991), settings.lapse_rate_c_per_km)
 
 
 def create_provider(settings) -> DataProvider:
