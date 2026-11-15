@@ -171,6 +171,19 @@ jobs:
             echo "Data provider: $TF_VAR_data_provider"
             echo "Image: $TF_VAR_image_tag"
           } >> "$GITHUB_STEP_SUMMARY"
+      # Full user journey against the deployed API. Fixed responses are allowed here;
+      # docs/smoke.md explains when to run it with --require-real.
+      - name: End-to-end smoke test
+        if: steps.current.outputs.deploy == 'true'
+        run: |
+          python -m pip install --quiet httpx==0.28.1
+          api_url=$(terraform -chdir=infra/environment output -raw api_url)
+          python scripts/smoke_e2e.py --base-url "${api_url%/}" | tee /tmp/smoke-e2e.txt
+          {
+            echo '```'
+            cat /tmp/smoke-e2e.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
   destroy-preview:
     if: >-

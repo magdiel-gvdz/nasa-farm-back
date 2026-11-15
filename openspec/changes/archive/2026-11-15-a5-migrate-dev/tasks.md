@@ -11,4 +11,5 @@
 
 - [x] 2.1 Confirmar que no queda ningún preview abierto con Lambda (`aws lambda list-functions` sin funciones `nasa-farm-pr-*`); verificar con la salida del comando
 - [x] 2.2 Quitar de `infra/bootstrap/main.tf` las sentencias de Lambda y API Gateway, sus registros y `lambda.amazonaws.com` de `iam:PassRole`, y actualizar el test; verificar con `terraform -chdir=infra/bootstrap test`
-- [ ] 2.3 Aplicar el bootstrap con credenciales de administrador y relanzar el workflow de `dev`; verificar que el despliegue termina correctamente
+- [x] 2.3 Aplicar el bootstrap con credenciales de administrador y relanzar el workflow de `dev`; verificar que el despliegue termina correctamente
+  - Aplicado el 15 de noviembre de 2026 con credenciales de administrador (3 políticas cambiadas, ninguna creada ni destruida). `aws lambda list-functions` ya no lista funciones `nasa-farm-*` y el workflow de `dev` relanzado después terminó correctamente
