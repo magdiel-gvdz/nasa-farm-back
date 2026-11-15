@@ -114,6 +114,11 @@ resource "aws_dynamodb_table" "app" {
     name = "sk"
     type = "S"
   }
+  # Los contadores de uso del chat caducan solos al día siguiente.
+  ttl {
+    attribute_name = "expires_at"
+    enabled        = true
+  }
 }
 resource "aws_cloudwatch_log_group" "api" {
   name              = "/ecs/${local.name}-api"
@@ -226,14 +231,17 @@ resource "aws_iam_role_policy" "api" {
         ]
       },
       {
-        "Sid" : "InvokeAnthropic",
+        "Sid" : "InvokeChatModels",
         "Effect" : "Allow",
         "Action" : [
           "bedrock:InvokeModel",
           "bedrock:InvokeModelWithResponseStream"
         ],
         "Resource" : [
-          "arn:${data.aws_partition.current.partition}:bedrock:${var.aws_region}::foundation-model/anthropic.*"
+          "arn:${data.aws_partition.current.partition}:bedrock:${var.aws_region}::foundation-model/anthropic.*",
+          "arn:${data.aws_partition.current.partition}:bedrock:${var.aws_region}::foundation-model/qwen.*",
+          "arn:${data.aws_partition.current.partition}:bedrock:${var.aws_region}::foundation-model/mistral.*",
+          "arn:${data.aws_partition.current.partition}:bedrock:${var.aws_region}::foundation-model/amazon.nova-*"
         ]
       },
       {
@@ -289,6 +297,11 @@ locals {
     DATA_VERSION_PARAMETER = var.data_version_parameter
     BEDROCK_MODEL_ID       = var.bedrock_model_id
     CHAT_ENABLED           = tostring(var.chat_enabled)
+    BEDROCK_REGION         = var.aws_region
+    CHAT_RATE_PER_MINUTE   = tostring(var.chat_rate_per_minute)
+    CHAT_RATE_PER_DAY      = tostring(local.is_preview ? min(var.chat_rate_per_day, 20) : var.chat_rate_per_day)
+    CHAT_DAILY_BUDGET      = tostring(local.is_preview ? min(var.chat_daily_budget, 200) : var.chat_daily_budget)
+    CHAT_MAX_OUTPUT_TOKENS = tostring(var.chat_max_output_tokens)
   }
 }
 resource "aws_iam_role" "platform" {

@@ -202,6 +202,17 @@ que `scripts/smoke_e2e.py --require-real` pasa en las dos zonas (ver `docs/smoke
 
 **Volver atrás:** devolver `DATA_PROVIDER` a `fixture` y relanzar el workflow.
 
+## Chat agrónomo
+
+El chat (`/api/v1/chat`, ver `docs/api-contract.md`) usa un modelo de Amazon Bedrock con la API
+Converse. Variables: `CHAT_ENABLED` (`false` por defecto), `BEDROCK_MODEL_ID`
+(`mistral.mistral-large-3-675b-instruct`; cambiarla basta para usar otro modelo, también Claude cuando la cuenta
+tenga acceso), `BEDROCK_EXTRACT_MODEL_ID` (lectura de análisis de suelo, `amazon.nova-pro-v1:0`),
+`CHAT_RATE_PER_MINUTE` (6), `CHAT_RATE_PER_DAY` (80; en previews, como mucho 20),
+`CHAT_DAILY_BUDGET` (1,500; en previews, como mucho 200) y `CHAT_MAX_OUTPUT_TOKENS` (2,048).
+Las conversaciones y los contadores de uso se guardan en la tabla del entorno. Las instrucciones
+del asistente están en `app/agent/prompts/system.md`; la evaluación, en `docs/chat-eval.md`.
+
 ## Validación
 
 ```powershell

@@ -28,12 +28,14 @@ class ApiError(Exception):
         *,
         details: dict | None = None,
         params: dict | None = None,
+        headers: dict | None = None,
     ):
         super().__init__(code)
         self.code = code
         self.status_code = status_code
         self.details = details or {}
         self.params = params or {}
+        self.headers = headers
 
 
 def error_response(
@@ -59,7 +61,12 @@ def register_error_handlers(api: FastAPI) -> None:
     @api.exception_handler(ApiError)
     async def api_error(request: Request, exc: ApiError):
         return error_response(
-            request, exc.code, exc.status_code, details=exc.details, params=exc.params
+            request,
+            exc.code,
+            exc.status_code,
+            details=exc.details,
+            params=exc.params,
+            headers=exc.headers,
         )
 
     @api.exception_handler(RequestValidationError)

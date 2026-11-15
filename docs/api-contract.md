@@ -84,6 +84,72 @@ hipotético y no un pronóstico. Con ambos valores en cero, el resultado es idé
 petición sin escenario. Si la serie diaria no está disponible, un escenario distinto de cero
 responde `503 daily_unavailable`.
 
+## Chat con el asistente agrónomo
+
+Requiere `CHAT_ENABLED=true` en el entorno; si no, todas las rutas responden `503 chat_disabled`.
+El modelo es de Amazon Bedrock (API Converse) y se elige con `BEDROCK_MODEL_ID`.
+
+| Método y ruta | Qué hace |
+|---|---|
+| `POST /chat/conversations` | Crea una conversación, opcionalmente con `field_id` (geocerca activa). `201` con `conversation_id` (`conv_...`) |
+| `GET /chat/conversations/{id}` | Historial visible: mensajes del usuario y del asistente con su texto, tarjetas, citas y estado (`done` o `failed`). Nunca incluye resultados de herramientas en bruto |
+| `POST /chat/conversations/{id}/messages` | Cuerpo `{"text": "...", "field_id": "..."}` (`field_id` opcional, cambia la geocerca activa). Responde un flujo `text/event-stream` |
+
+Los errores previos al flujo usan el sobre JSON común (`404`, `409 conversation_full`,
+`422 message_too_long`, `429 rate_limited` con `Retry-After`, `503 chat_budget_exhausted`).
+Límites por defecto: 6 mensajes por minuto y 80 por día por cliente, 1,500 al día en total, 2,000
+caracteres por mensaje y 40 mensajes del usuario por conversación.
+
+**Eventos del flujo.** Cada evento es `event: <tipo>` y `data: <JSON>`; las líneas `: ping` son
+latidos (uno cada 15 s como mínimo) y se ignoran.
+
+| Evento | Datos | Cuándo |
+|---|---|---|
+| `status` | `state`, `label` | Siempre el primero |
+| `tool` | `name`, `label` (en el idioma de la petición), `state`: `running`, `done` o `failed` | Al empezar y al terminar cada consulta del asistente |
+| `card` | `type`, `payload` | Cuando una consulta devuelve una evaluación o una comparación |
+| `text` | `delta` | Fragmentos de la respuesta, en orden |
+| `citation` | `source_id`, `label` (nombre y periodo) | Una por fuente usada, sin repetir, al final |
+| `done` | `message_id`, `usage` (`input_tokens`, `output_tokens`) | Final correcto |
+| `error` | `code` (`llm_unavailable`, `refused`, `internal_error`), `message` | Final con error; no hay `done` |
+
+**Tarjetas.** `payload` es exactamente la respuesta del endpoint equivalente:
+
+| `type` | Esquema | Endpoint equivalente |
+|---|---|---|
+| `suitability` | `SuitabilityDetail` | `GET /fields/{id}/suitability?crop_id=...&planting_month=...` |
+| `suitability_matrix` | `SuitabilityMatrix` | `GET /fields/{id}/suitability` |
+| `rotations` | `RotationResponse` | `POST /fields/{id}/rotations` |
+
+**Herramientas del asistente.** Operan solo sobre las geocercas del cliente de la conversación y
+devuelven lo mismo que su endpoint: `list_user_fields`, `get_field_profile`, `get_risk_calendar`,
+`evaluate_crop`, `suitability_matrix`, `compare_rotations` y `list_crops`. Como máximo 8 por mensaje.
+
+Ejemplo de consumo con `fetch`:
+
+```js
+const response = await fetch(`${API}/api/v1/chat/conversations/${id}/messages`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json", "X-Client-Id": clientId, "Accept-Language": "es" },
+  body: JSON.stringify({ text: "¿Puedo sembrar maíz en abril?" }),
+});
+const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+let buffer = "";
+for (;;) {
+  const { value, done } = await reader.read();
+  if (done) break;
+  buffer += value;
+  const chunks = buffer.split("\n\n");
+  buffer = chunks.pop();
+  for (const chunk of chunks) {
+    if (chunk.startsWith(":")) continue; // latido
+    const event = chunk.match(/^event: (.*)$/m)[1];
+    const data = JSON.parse(chunk.match(/^data: (.*)$/m)[1]);
+    handle(event, data); // status, tool, card, text, citation, done o error
+  }
+}
+```
+
 ## Encabezados
 
 | Encabezado | Sentido | Uso |
@@ -122,6 +188,12 @@ Todo error, también los de validación, usa el mismo sobre:
 | `crop_not_found` | 404 | `crop_id` no existe en el catálogo de cultivos | `crop_id` |
 | `current_rotation_required` | 422 | Se pidieron rotaciones para una geocerca sin `current_rotation` con algún cultivo | — |
 | `not_a_greenhouse` | 409 | Se pidió `/greenhouse` para una geocerca cuyo `kind` no es `greenhouse` | — |
+| `chat_disabled` | 503 | El chat está apagado en el entorno (`CHAT_ENABLED=false`) | — |
+| `chat_budget_exhausted` | 503 | Se alcanzó el presupuesto diario de mensajes de todos los clientes; vuelve al día siguiente (UTC) | `reason`, `retry_after`; cabecera `Retry-After` |
+| `conversation_full` | 409 | La conversación ya tiene 40 mensajes del usuario; hay que abrir otra | — |
+| `field_required` | 422 | Una herramienta del chat necesita una geocerca y no hay ninguna activa | `hint` |
+| `message_too_long` | 422 | El mensaje del chat supera los 2,000 caracteres | — |
+| `rate_limited` | 429 | El cliente superó su límite de mensajes de chat por minuto o por día | `reason` (`per_minute` o `per_day`), `retry_after`; cabecera `Retry-After` |
 | `out_of_region` | 422 | La celda de la geocerca no pertenece a ninguna zona publicada | `cell_id` y `zones`: lista de `{zone_id, name, bbox}` |
 | `missing_client_id` | 400 | Falta `X-Client-Id` en una ruta de `/fields` | — |
 | `invalid_client_id` | 400 | `X-Client-Id` no es un UUID | — |

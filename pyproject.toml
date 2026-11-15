@@ -34,3 +34,5 @@ select = ["E", "F", "I", "UP", "B"]
 [tool.ruff.lint.per-file-ignores]
 # Catálogo de textos: una frase por línea aunque supere el ancho.
 "app/i18n.py" = ["E501"]
+"app/agent/tools/definitions.py" = ["E501"]
+"scripts/run_chat_eval.py" = ["E501"]

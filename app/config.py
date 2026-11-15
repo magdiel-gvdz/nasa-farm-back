@@ -15,6 +15,31 @@ class Settings:
     data_version_parameter: str = field(
         default_factory=lambda: os.getenv("DATA_VERSION_PARAMETER", "")
     )
+    # Chat agrónomo (Bedrock, API Converse). Apagado salvo que se active explícitamente.
+    chat_enabled: bool = field(
+        default_factory=lambda: os.getenv("CHAT_ENABLED", "false").lower() == "true"
+    )
+    bedrock_model_id: str = field(default_factory=lambda: os.getenv("BEDROCK_MODEL_ID", ""))
+    bedrock_region: str = field(default_factory=lambda: os.getenv("BEDROCK_REGION", "us-east-1"))
+    # Modelo con entrada de documentos e imágenes para leer análisis de suelo.
+    bedrock_extract_model_id: str = field(
+        default_factory=lambda: os.getenv("BEDROCK_EXTRACT_MODEL_ID", "amazon.nova-pro-v1:0")
+    )
+    chat_rate_per_minute: int = field(
+        default_factory=lambda: int(os.getenv("CHAT_RATE_PER_MINUTE", "6"))
+    )
+    chat_rate_per_day: int = field(
+        default_factory=lambda: int(os.getenv("CHAT_RATE_PER_DAY", "80"))
+    )
+    chat_daily_budget: int = field(
+        default_factory=lambda: int(os.getenv("CHAT_DAILY_BUDGET", "1500"))
+    )
+    chat_max_output_tokens: int = field(
+        default_factory=lambda: int(os.getenv("CHAT_MAX_OUTPUT_TOKENS", "2048"))
+    )
+    chat_heartbeat_seconds: float = field(
+        default_factory=lambda: float(os.getenv("CHAT_HEARTBEAT_SECONDS", "15"))
+    )
     # Bucket del entorno: guarda las respuestas de NASA POWER en `cache/power/`.
     app_bucket: str = field(default_factory=lambda: os.getenv("APP_BUCKET", ""))
     # Tasa de corrección de temperatura por altura del respaldo NASA POWER (°C/km).

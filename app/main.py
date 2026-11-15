@@ -37,6 +37,38 @@ class Ready(BaseModel):
     data_version: str
 
 
+def build_chat(config: Settings, repository: Repository, catalog: Catalog, model_client=None):
+    """Servicios del chat, o `None` si está apagado. Con el chat activo, falta el modelo = error."""
+    if not config.chat_enabled:
+        return None
+    from app.agent.client import BedrockConverseClient
+    from app.agent.context import system_prompt
+    from app.agent.limits import ChatLimits, RateLimiter
+    from app.agent.tools.definitions import build_registry
+    from app.api.routes.chat import ChatServices
+    from app.store.conversations import ConversationStore
+
+    if model_client is None:
+        if not config.bedrock_model_id:
+            raise ValueError("CHAT_ENABLED=true necesita BEDROCK_MODEL_ID")
+        model_client = BedrockConverseClient(config.bedrock_model_id, config.bedrock_region)
+    system_prompt()  # Las instrucciones deben existir: si no, la aplicación no arranca.
+    limits = ChatLimits(
+        per_minute=config.chat_rate_per_minute,
+        per_day=config.chat_rate_per_day,
+        daily_budget=config.chat_daily_budget,
+        max_output_tokens=config.chat_max_output_tokens,
+    )
+    return ChatServices(
+        client=model_client,
+        store=ConversationStore(repository),
+        registry=build_registry([crop.id for crop in catalog]),
+        rate_limiter=RateLimiter(repository, limits),
+        limits=limits,
+        heartbeat_seconds=config.chat_heartbeat_seconds,
+    )
+
+
 def create_app(
     settings: Settings | None = None,
     *,
@@ -45,6 +77,7 @@ def create_app(
     data_provider: DataProvider | None = None,
     catalog: Catalog | None = None,
     engine_config: EngineConfig | None = None,
+    model_client=None,
 ) -> FastAPI:
     config = settings or Settings()
     api = FastAPI(title="Field Shift API", version=API_VERSION)
@@ -67,6 +100,7 @@ def create_app(
     # Un catálogo inválido impide arrancar: el error nombra el cultivo y el campo.
     api.state.catalog = catalog or load_catalog()
     api.state.engine_config = engine_config or load_config()
+    api.state.chat = build_chat(config, api.state.repository, api.state.catalog, model_client)
 
     api.add_middleware(
         CORSMiddleware,

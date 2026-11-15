@@ -197,7 +197,10 @@ resource "aws_iam_policy" "runtime_boundary" {
           "bedrock:InvokeModelWithResponseStream"
         ],
         "Resource" : [
-          "arn:${local.partition}:bedrock:${var.aws_region}::foundation-model/anthropic.*"
+          "arn:${local.partition}:bedrock:${var.aws_region}::foundation-model/anthropic.*",
+          "arn:${local.partition}:bedrock:${var.aws_region}::foundation-model/qwen.*",
+          "arn:${local.partition}:bedrock:${var.aws_region}::foundation-model/mistral.*",
+          "arn:${local.partition}:bedrock:${var.aws_region}::foundation-model/amazon.nova-*"
         ]
       },
       {
@@ -424,6 +427,7 @@ resource "aws_iam_role_policy" "deploy" {
           "dynamodb:UpdateTable",
           "dynamodb:DescribeContinuousBackups",
           "dynamodb:DescribeTimeToLive",
+          "dynamodb:UpdateTimeToLive",
           "dynamodb:ListTagsOfResource",
           "dynamodb:TagResource",
           "dynamodb:UntagResource"

@@ -34,12 +34,17 @@ class Repository(Protocol):
 
     def count_prefix(self, client_id: str, prefix: str) -> int: ...
 
+    def increment(self, client_id: str, sk: str, *, expires_at: int | None = None) -> int:
+        """Suma 1 de forma atómica al contador `client_id`/`sk` y devuelve el valor nuevo."""
+        ...
+
 
 class MemoryRepository:
     """Para desarrollo local y pruebas; los datos se pierden al reiniciar el proceso."""
 
     def __init__(self):
         self._items: dict[tuple[str, str], str] = {}
+        self._counters: dict[tuple[str, str], int] = {}
         self._lock = threading.Lock()
 
     def put(
@@ -71,6 +76,12 @@ class MemoryRepository:
     def delete(self, client_id: str, sk: str) -> bool:
         with self._lock:
             return self._items.pop((client_id, sk), None) is not None
+
+    def increment(self, client_id: str, sk: str, *, expires_at: int | None = None) -> int:
+        with self._lock:
+            value = self._counters.get((client_id, sk), 0) + 1
+            self._counters[(client_id, sk)] = value
+            return value
 
     def count_prefix(self, client_id: str, prefix: str) -> int:
         require_prefix(prefix)

@@ -488,6 +488,46 @@ MESSAGES: dict[str, dict[str, str]] = {
         "es": "Hay un {pct} % de probabilidad al año de que una ráfaga supere los {rated} km/h de la estructura: es un riesgo alto; considera una estructura más resistente.",
         "en": "There is a {pct}% annual probability that a gust exceeds the structure's {rated} km/h: the risk is high; consider a stronger structure.",
     },
+    "error.chat_disabled": {
+        "es": "El chat no está activo en este entorno.",
+        "en": "Chat is not enabled in this environment.",
+    },
+    "error.conversation_full": {
+        "es": "La conversación llegó al máximo de mensajes. Abre una conversación nueva para seguir.",
+        "en": "The conversation reached its message limit. Open a new conversation to continue.",
+    },
+    "error.rate_limited": {
+        "es": "Enviaste demasiados mensajes. Inténtalo de nuevo más tarde; si alcanzaste el límite diario, podrás seguir mañana.",
+        "en": "You sent too many messages. Try again later; if you reached the daily limit, you can continue tomorrow.",
+    },
+    "error.chat_budget_exhausted": {
+        "es": "El chat alcanzó su uso máximo de hoy. Vuelve a intentarlo mañana; el resto de la herramienta sigue disponible.",
+        "en": "Chat reached today's maximum usage. Try again tomorrow; the rest of the tool is still available.",
+    },
+    "error.message_too_long": {
+        "es": "El mensaje supera los {max_chars} caracteres.",
+        "en": "The message exceeds {max_chars} characters.",
+    },
+    "error.field_required": {
+        "es": "Hace falta indicar una geocerca.",
+        "en": "A field is required.",
+    },
+    "chat.thinking": {
+        "es": "Pensando",
+        "en": "Thinking",
+    },
+    "chat.refused": {
+        "es": "No puedo responder a eso. Pregúntame sobre tu terreno, tus cultivos o el clima de tu zona.",
+        "en": "I can't answer that. Ask me about your field, your crops or your zone's climate.",
+    },
+    "chat.llm_unavailable": {
+        "es": "El asistente no está disponible en este momento. Inténtalo de nuevo en unos minutos.",
+        "en": "The assistant is not available right now. Please try again in a few minutes.",
+    },
+    "chat.tool_limit": {
+        "es": "Se alcanzó el máximo de consultas para este mensaje: responde con la información que ya tienes.",
+        "en": "The maximum number of lookups for this message was reached: answer with the information you already have.",
+    },
 }
 
 

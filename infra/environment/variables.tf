@@ -76,7 +76,7 @@ variable "data_version_parameter" {
 
 variable "bedrock_model_id" {
   type    = string
-  default = "anthropic.claude-3-haiku-20240307-v1:0"
+  default = "mistral.mistral-large-3-675b-instruct"
 }
 
 variable "image_tag" {
@@ -105,3 +105,28 @@ variable "chat_enabled" {
   type    = bool
   default = false
 }
+
+variable "chat_rate_per_minute" {
+  type        = number
+  default     = 6
+  description = "Mensajes de chat por cliente y minuto."
+}
+
+variable "chat_rate_per_day" {
+  type        = number
+  default     = 80
+  description = "Mensajes de chat por cliente y día (en previews, como mucho 20)."
+}
+
+variable "chat_daily_budget" {
+  type        = number
+  default     = 1500
+  description = "Mensajes de chat de todos los clientes por día (en previews, como mucho 200)."
+}
+
+variable "chat_max_output_tokens" {
+  type        = number
+  default     = 2048
+  description = "Tokens máximos de cada respuesta del asistente."
+}
+

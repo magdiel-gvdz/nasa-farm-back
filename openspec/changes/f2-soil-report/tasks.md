@@ -2,7 +2,7 @@
 
 ## 1. Extracción
 
-- [ ] 1.1 Consultar en la documentación vigente de Anthropic y Bedrock cómo enviar un PDF y una imagen al modelo y cómo pedir salida con esquema JSON, y anotarlo en el PR; verificar con una llamada mínima con un análisis de ejemplo
+- [ ] 1.1 Consultar en la documentación vigente de Bedrock cómo enviar un PDF y una imagen al modelo con la API Converse y cómo pedir salida con esquema JSON (herramienta forzada), y anotarlo en el PR; verificar con una llamada mínima con un análisis de ejemplo
 - [ ] 1.2 Implementar en `app/agent/extract.py` la llamada con el documento y el esquema de `extracted`, más la señal de "no es un análisis de suelo", detrás de la interfaz del cliente del modelo; verificar con el cliente simulado
 - [ ] 1.3 Implementar la normalización de unidades y la validación por rangos (pH 3-11, materia orgánica 0-20 %, CE 0-20 dS/m, CIC 0-100 cmol/kg, N, P y K no negativos con máximos amplios); verificar con pruebas de pH 81 y de valores en el límite
 
