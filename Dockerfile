@@ -5,7 +5,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1
 WORKDIR /app
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt \
+RUN pip install -r requirements.txt \
     && groupadd --gid 10001 api \
     && useradd --uid 10001 --gid api --no-create-home api
 COPY app/ ./app/
