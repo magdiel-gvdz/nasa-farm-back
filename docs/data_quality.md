@@ -76,9 +76,41 @@ Los jobs de Glue no publican si falla alguna validación (unicidad, rangos, rell
 - Años más secos según POWER: La Laguna 2022 (113 mm), 2021 (135 mm), 2020 (152 mm); Centro 2025 (195 mm)
   y 2022 (198 mm). Pendiente contrastar con registros locales.
 
-## 6. Pendientes de calidad
+## 6. Validación de gold (15-nov-2026, `data_version = 2026111500`)
+
+| # | Comprobación | Resultado |
+|---|---|---|
+| 1 | Conteos esperados y claves únicas en las 7 vistas; las vistas filtran la versión de SSM | Pasa (0 duplicados) |
+| 2 | `v_cell_year` = suma de `v_cell_indicators` (lluvia, heladas, calor, ET0, lluvia intensa, racha seca) | Pasa (1,360 celda-años; diferencia máx. 1e-12 mm) |
+| 3 | `v_cell_indicators` = recuento directo sobre `v_cell_daily` (días, heladas 0 y −2 °C, calor 30 y 35 °C, lluvia, Tmax media, viento) | Pasa (48,960 decenas; 0 diferencias) |
+| 4 | Probabilidades de `v_cell_profile` = fracción de años con evento (helada, calor, lluvia intensa, estrés hídrico) | Pasa (4,896 filas; 0 diferencias) |
+| 5 | Invariantes: probabilidades en [0, 1], 10 años y 36 decenas por celda, calor 30 ≥ 32 ≥ 35 ≥ 38, helada −2 ≤ helada 0, P10 ≤ P50 ≤ P90, `vulnerable` coherente con sus motivos | Pasa (0 violaciones) |
+| 6 | Estacionalidad: heladas de noviembre a marzo, calor > 35 °C de abril a septiembre, lluvia máxima de junio a septiembre | Pasa en las 4 zonas |
+| 7 | ET0 anual Hargreaves-Samani | 1,269-1,887 mm; plausible para clima semiárido. Por revisar con SCI |
+| 8 | Humedad (percentil de GWETROOT) frente a lluvia anual | Correlación 0.70-0.87 por zona: coherente |
+| 9 | Heladas crecen con la altura y calor decrece (corrección por altura) | Pasa (Sureste: 2.2 → 8.5 → 24.9 heladas/año por banda) |
+| 10 | Contraste con normales 1991-2020 del SMN (fuente secundaria, ver abajo) | Pasa en lluvia y temperatura media; ver diferencias |
+
+**Contraste externo.** Normales 1991-2020 de CONAGUA/SMN tomadas de Climate-Zone (las tablas oficiales del
+SMN no respondieron el 15-nov). Periodos distintos: normales 1991-2020 frente a gold 2016-2025.
+
+| Estación SMN | Celda gold | Lluvia anual SMN / gold | Sesgo medio Tmax | Sesgo medio Tmin |
+|---|---|---|---|---|
+| Saltillo (DGE) | `E9_r0463_c0846` (1,651 m) | 330 / 333 mm (+1 %) | +2.0 °C | +0.6 °C |
+| Torreón (Presa Coyote) | `E9_r0461_c0820` (1,123 m) | 211 / 217 mm (+3 %) | −0.7 °C | +0.2 °C |
+
+- La lluvia anual y su reparto mensual coinciden bien; la mayor diferencia mensual es noviembre en Saltillo
+  (9 frente a 17 mm).
+- Saltillo sale ~2 °C más cálido en máximas en todos los meses: parte puede ser el periodo más reciente y
+  parte el sesgo del cuadro de ~55 km. Afecta a `hot_days_*` (posible sobreestimación de calor en el Sureste).
+- Las mínimas medias coinciden, pero eso **no** valida el número de heladas: el reanálisis tiende a
+  suavizar los extremos fríos de los valles. Validar los días con helada requiere datos diarios de estación.
+- Nota: la primera helada de otoño cae el mismo día en las 4 zonas (mediana día 342) porque las heladas
+  llegan con frentes fríos que cubren toda la región (24-dic-2022 heló en las 136 celdas). No es un error.
+
+## 7. Pendientes de calidad
 
 1. Integrar SMAP y comparar el percentil propio con `sm_rootzone_pctl` (alerta si la correlación es < 0.8).
 2. Integrar NDVI y revisar cobertura de píxeles válidos por celda.
-3. Validar heladas y lluvia contra estaciones locales.
+3. Validar días con helada contra datos diarios de estación (CLICOM/SMN); confirmar el sesgo cálido de Tmax en Saltillo.
 4. Confirmar con SCI los umbrales (viento 10 m/s, calor 35 °C para vulnerabilidad, piso de 0.2).
