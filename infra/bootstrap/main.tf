@@ -83,11 +83,6 @@ resource "aws_iam_policy" "runtime_boundary" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect   = "Allow"
-        Action   = ["logs:CreateLogStream", "logs:PutLogEvents"]
-        Resource = "arn:${local.partition}:logs:${var.aws_region}:${local.account_id}:log-group:/aws/lambda/${var.project}-*:log-stream:*"
-      },
-      {
         Effect = "Allow"
         Action = ["s3:GetObject"]
         Resource = [
@@ -307,32 +302,6 @@ resource "aws_iam_role_policy" "deploy" {
         ]
       },
       {
-        Sid    = "OwnFunctions"
-        Effect = "Allow"
-        Action = [
-          "lambda:CreateFunction", "lambda:DeleteFunction", "lambda:GetFunction*",
-          "lambda:GetRuntimeManagementConfig", "lambda:UpdateFunctionCode",
-          "lambda:UpdateFunctionConfiguration", "lambda:ListVersionsByFunction",
-          "lambda:GetPolicy", "lambda:AddPermission", "lambda:RemovePermission",
-          "lambda:TagResource", "lambda:UntagResource", "lambda:ListTags"
-        ]
-        Resource = "arn:${local.partition}:lambda:${var.aws_region}:${local.account_id}:function:${each.value.name_pattern}-api"
-      },
-      {
-        Sid    = "OwnLogs"
-        Effect = "Allow"
-        Action = [
-          "logs:CreateLogGroup", "logs:DeleteLogGroup", "logs:PutRetentionPolicy",
-          "logs:DeleteRetentionPolicy", "logs:ListTagsForResource", "logs:TagResource", "logs:UntagResource"
-        ]
-        Resource = [
-          "arn:${local.partition}:logs:${var.aws_region}:${local.account_id}:log-group:/aws/lambda/${each.value.name_pattern}-api",
-          "arn:${local.partition}:logs:${var.aws_region}:${local.account_id}:log-group:/aws/lambda/${each.value.name_pattern}-api:*",
-          "arn:${local.partition}:logs:${var.aws_region}:${local.account_id}:log-group:/aws/apigateway/${each.value.name_pattern}",
-          "arn:${local.partition}:logs:${var.aws_region}:${local.account_id}:log-group:/aws/apigateway/${each.value.name_pattern}:*"
-        ]
-      },
-      {
         Effect = "Allow"
         Action = [
           "logs:DescribeLogGroups", "logs:CreateLogDelivery", "logs:GetLogDelivery",
@@ -341,19 +310,6 @@ resource "aws_iam_role_policy" "deploy" {
         ]
         Resource  = "*"
         Condition = { StringEquals = { "aws:RequestedRegion" = var.aws_region } }
-      },
-      {
-        Sid    = "HttpApiControlPlane"
-        Effect = "Allow"
-        Action = [
-          "apigateway:GET", "apigateway:POST", "apigateway:PUT", "apigateway:PATCH", "apigateway:DELETE",
-          "apigateway:TagResource", "apigateway:UntagResource"
-        ]
-        Resource = [
-          "arn:${local.partition}:apigateway:${var.aws_region}::/apis",
-          "arn:${local.partition}:apigateway:${var.aws_region}::/apis/*",
-          "arn:${local.partition}:apigateway:${var.aws_region}::/tags/*"
-        ]
       },
       {
         Sid      = "CreateBoundedExecutionRoles"
@@ -373,13 +329,6 @@ resource "aws_iam_role_policy" "deploy" {
           "iam:GetRolePolicy", "iam:PutRolePolicy", "iam:DeleteRolePolicy"
         ]
         Resource = "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-api"
-      },
-      {
-        Sid       = "PassOwnRoleOnlyToLambda"
-        Effect    = "Allow"
-        Action    = ["iam:PassRole"]
-        Resource  = "arn:${local.partition}:iam::${local.account_id}:role/${each.value.name_pattern}-api"
-        Condition = { StringEquals = { "iam:PassedToService" = "lambda.amazonaws.com" } }
       },
       {
         "Sid" : "ECRAuthentication",
