@@ -176,6 +176,7 @@ jobs:
       - name: End-to-end smoke test
         if: steps.current.outputs.deploy == 'true'
         run: |
+          set -o pipefail
           python -m pip install --quiet httpx==0.28.1
           api_url=$(terraform -chdir=infra/environment output -raw api_url)
           python scripts/smoke_e2e.py --base-url "${api_url%/}" | tee /tmp/smoke-e2e.txt

@@ -20,7 +20,8 @@
 ## 3. Activación
 
 - [x] 3.1 Registrar `athena` en la fábrica de proveedores con sus variables de entorno; verificar con una prueba de configuración incompleta que el arranque falla indicando la variable que falta
-- [ ] 3.2 En un preview, con gold V0 publicado, desplegar con `DATA_PROVIDER=athena`; verificar que `/ready` informa la versión del parámetro SSM y que `GET /api/v1/sources` devuelve las fuentes reales
+- [x] 3.2 En un preview, con gold V0 publicado, desplegar con `DATA_PROVIDER=athena`; verificar que `/ready` informa la versión del parámetro SSM y que `GET /api/v1/sources` devuelve las fuentes reales
+  - Verificado en el preview `pr-19` (15 de noviembre de 2026): `/ready` informa `2026111508`, `/sources` devuelve las fuentes reales y `scripts/smoke_e2e.py --require-real` termina con `OK` en las dos zonas
 - [ ] 3.3 Cambiar la variable de repositorio para `dev`, redesplegar y documentar en `README.md` el procedimiento de activación y de vuelta atrás; verificar que el perfil de una geocerca de cada zona responde `200`
   - Bloqueada por 3.2 y 4.1. El procedimiento de activación y de vuelta atrás ya está en `README.md`
 

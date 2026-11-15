@@ -26,8 +26,8 @@ API = "/api/v1"
 
 # Cuadrados de ~2 km dentro de cada zona piloto: (lon, lat) de la esquina suroeste.
 ZONES = {"sureste": (-101.02, 25.41), "laguna": (-103.22, 25.56)}
-# Fuera de las cuatro zonas de Coahuila (Monterrey).
-OUT_OF_REGION = (-100.32, 25.67)
+# Fuera de la malla publicada por DATA, que cubre el rectángulo de Coahuila (Ciudad de México).
+OUT_OF_REGION = (-99.13, 19.43)
 
 _JSON_TYPES: dict[str, Callable[[object], bool]] = {
     "object": lambda value: isinstance(value, dict),

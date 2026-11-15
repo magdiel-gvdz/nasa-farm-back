@@ -10,6 +10,7 @@
 
 - [x] 2.1 Añadir los modelos de respuesta y `GET /fields/{id}/greenhouse` con `not_a_greenhouse`, `daily_unavailable`, secciones no cubiertas en `null` y vacíos y notas es/en; verificar con pruebas de API de cada caso
 - [x] 2.2 Añadir recomendaciones por plantillas (revisar anclajes antes de los meses de riesgo, validar con el fabricante); regenerar `contracts/openapi.json`; verificar con la prueba de contrato
-- [ ] 2.3 Configurar el respaldo de POWER para pedir desde 1991 cuando el origen de la serie sea `power_live`, y verificar en un preview que un invernadero de Saltillo devuelve confianza distinta de `low`
+- [x] 2.3 Configurar el respaldo de POWER para pedir desde 1991 cuando el origen de la serie sea `power_live`, y verificar en un preview que un invernadero de Saltillo devuelve confianza distinta de `low`
+  - En `pr-19` con datos reales: invernadero de Saltillo con 35 años de registro, confianza `medium` y estado `ok`
   - Configurado: el respaldo POWER pide desde 1991. Los previews usan datos sintéticos (10 años, confianza `low`); con la vista diaria real de DATA (1991-2025) hay 35 años. Verificación en preview pendiente de activar Athena (`c2`). Con la serie real de DATA, leída en local, un invernadero de Saltillo con 100 km/h da 35 años, confianza `medium`, niveles de 56.4, 61.2 y 64.7 km/h, probabilidad anual 0.53 % y estado `ok`
 - [x] 2.4 Añadir la sección de invernadero a `docs/engines.md` con fórmulas, cortes y límites; verificar que los cortes coinciden con `config/engine.yaml`
