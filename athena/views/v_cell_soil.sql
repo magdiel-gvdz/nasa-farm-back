@@ -1,0 +1,39 @@
+-- Celda x profundidad (0-5, 5-15, 15-30 cm): suelo de SoilGrids.
+-- Filtra la data_version vigente por dentro; gold_build la recrea al publicar ({data_version} se sustituye).
+CREATE OR REPLACE VIEW fieldshift_gold.v_cell_soil AS
+SELECT
+  cell_id,
+  zone_id,
+  depth_cm,
+  depth_top_cm,
+  depth_bottom_cm,
+  clay_pct,
+  clay_pct_p05,
+  clay_pct_p95,
+  sand_pct,
+  sand_pct_p05,
+  sand_pct_p95,
+  silt_pct,
+  silt_pct_p05,
+  silt_pct_p95,
+  soc_g_kg,
+  soc_g_kg_p05,
+  soc_g_kg_p95,
+  nitrogen_g_kg,
+  nitrogen_g_kg_p05,
+  nitrogen_g_kg_p95,
+  cec_cmol_kg,
+  cec_cmol_kg_p05,
+  cec_cmol_kg_p95,
+  ph,
+  ph_p05,
+  ph_p95,
+  bdod_kg_dm3,
+  bdod_kg_dm3_p05,
+  bdod_kg_dm3_p95,
+  om_pct_est,
+  texture_class,
+  valid_pixel_pct,
+  low_coverage
+FROM fieldshift_gold.soil_profile
+WHERE data_version = '{data_version}'

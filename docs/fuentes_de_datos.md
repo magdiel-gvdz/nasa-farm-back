@@ -1,5 +1,12 @@
 # Field Shift / RotaSat — Arquitectura y concepto de datos
 
+> **Actualización (14-nov-2026, DATA):** el contrato vigente de las vistas está en
+> [`data_contract.md`](data_contract.md); cómo conectarse, en [`data_access.md`](data_access.md); la
+> infraestructura real, en [`data_infra.md`](data_infra.md); la calidad, en [`data_quality.md`](data_quality.md).
+> Cambios respecto a este documento: la pila se despliega con Terraform (no CloudFormation); la elevación
+> sale de Copernicus DEM GLO-90 (no de SRTM por AppEEARS); hay una séptima vista, `v_cell_daily`;
+> gold V0 usa la humedad de POWER hasta integrar SMAP, y NDVI sigue pendiente.
+
 > **Para:** Solution Architect del equipo. **De:** Ingeniería de datos.
 > **Fecha:** sáb 14-nov-2026 (NASA Space Apps 2026, hackathon del 14 al 15 de nov; H0 = sáb 09:00, hora de Monterrey).
 > **Propósito:** documento autocontenido para validar la propuesta de datos y continuar el trabajo. No requiere ningún otro archivo del repositorio.
