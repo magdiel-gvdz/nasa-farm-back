@@ -76,7 +76,7 @@ variable "data_version_parameter" {
 
 variable "bedrock_model_id" {
   type    = string
-  default = "qwen.qwen3-next-80b-a3b"
+  default = "mistral.mistral-large-3-675b-instruct"
 }
 
 variable "image_tag" {

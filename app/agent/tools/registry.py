@@ -131,6 +131,42 @@ def fit(result: Any, limit: int = MAX_RESULT_CHARS) -> Any:
     return result
 
 
+def source_ids(node: Any) -> set[str]:
+    """`source_id` citados en un resultado y los `id` de sus listas `sources`."""
+    found: set[str] = set()
+    if isinstance(node, dict):
+        if isinstance(node.get("source_id"), str):
+            found.add(node["source_id"])
+        if isinstance(node.get("sources"), list):
+            found |= {
+                item["id"] for item in node["sources"] if isinstance(item, dict) and "id" in item
+            }
+        for value in node.values():
+            found |= source_ids(value)
+    elif isinstance(node, list):
+        for value in node:
+            found |= source_ids(value)
+    return found
+
+
+def describe_sources(context: "ToolContext", ids: set[str]) -> list[dict]:
+    """Nombre y periodo de cada fuente, para que el modelo los cite sin inventarlos."""
+    try:
+        known = {source.source_id: source for source in context.data.sources()}
+    except Exception:
+        known = {}
+    described = []
+    for source_id in sorted(ids):
+        source = known.get(source_id)
+        if source is not None:
+            described.append({"id": source_id, "name": source.name, "period": source.period})
+        elif source_id == "lab_report":
+            described.append(
+                {"id": source_id, "name": "Análisis de laboratorio del agricultor", "period": None}
+            )
+    return described
+
+
 @dataclass(frozen=True)
 class ToolOutcome:
     ok: bool
@@ -169,5 +205,13 @@ class ToolRegistry:
             return ToolOutcome(False, {"error": error.code, "details": error.details})
         except DataUnavailableError as error:
             return ToolOutcome(False, {"error": "data_unavailable", "message": str(error)})
-        card = {"type": tool.card_type, "payload": result} if tool.card_type else None
+        payload = (
+            {key: value for key, value in result.items() if key != "sources"}
+            if isinstance(result, dict)
+            else result
+        )
+        card = {"type": tool.card_type, "payload": payload} if tool.card_type else None
+        ids = source_ids(result)
+        if ids and isinstance(result, dict):
+            result = {**result, "cite_sources": describe_sources(context, ids)}
         return ToolOutcome(True, fit(result), card)

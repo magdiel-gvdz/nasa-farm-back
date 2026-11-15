@@ -13,7 +13,7 @@ from dataclasses import dataclass, field
 
 from app.agent.client import ModelClient, ModelUnavailableError, TextDelta, TurnEnd
 from app.agent.events import HEARTBEAT, sse
-from app.agent.tools.registry import ToolContext, ToolRegistry
+from app.agent.tools.registry import ToolContext, ToolRegistry, source_ids
 from app.i18n import translate
 from app.store.conversations import ConversationStore, Exchange
 
@@ -41,20 +41,7 @@ class TurnInputs:
 
 
 def _source_ids(node) -> set[str]:
-    if isinstance(node, dict):
-        found = set()
-        for key, value in node.items():
-            if key in {"source_id", "id"} and isinstance(value, str) and key == "source_id":
-                found.add(value)
-            found |= _source_ids(value)
-        if "sources" in node and isinstance(node["sources"], list):
-            found |= {
-                item["id"] for item in node["sources"] if isinstance(item, dict) and "id" in item
-            }
-        return found
-    if isinstance(node, list):
-        return set().union(*(_source_ids(item) for item in node)) if node else set()
-    return set()
+    return source_ids(node)
 
 
 def run_turn(inputs: TurnInputs, emit) -> None:

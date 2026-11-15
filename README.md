@@ -206,7 +206,7 @@ que `scripts/smoke_e2e.py --require-real` pasa en las dos zonas (ver `docs/smoke
 
 El chat (`/api/v1/chat`, ver `docs/api-contract.md`) usa un modelo de Amazon Bedrock con la API
 Converse. Variables: `CHAT_ENABLED` (`false` por defecto), `BEDROCK_MODEL_ID`
-(`qwen.qwen3-next-80b-a3b`; cambiarla basta para usar otro modelo, también Claude cuando la cuenta
+(`mistral.mistral-large-3-675b-instruct`; cambiarla basta para usar otro modelo, también Claude cuando la cuenta
 tenga acceso), `BEDROCK_EXTRACT_MODEL_ID` (lectura de análisis de suelo, `amazon.nova-pro-v1:0`),
 `CHAT_RATE_PER_MINUTE` (6), `CHAT_RATE_PER_DAY` (80; en previews, como mucho 20),
 `CHAT_DAILY_BUDGET` (1,500; en previews, como mucho 200) y `CHAT_MAX_OUTPUT_TOKENS` (2,048).

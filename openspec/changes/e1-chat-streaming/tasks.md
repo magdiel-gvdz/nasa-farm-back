@@ -3,7 +3,7 @@
 ## 1. Cliente del modelo
 
 - [x] 1.1 Consultar la documentación vigente de Amazon Bedrock y anotar en el PR: cliente (API Converse con `boto3`), identificador exacto del modelo, límite de tokens y cómo se informa una negativa; verificar con una llamada mínima desde la máquina local con el perfil del proyecto
-  - Llamadas mínimas con `magidel-memo` en `us-east-1`: los modelos de Anthropic devuelven 403 o 404 (sin acceso); `qwen.qwen3-next-80b-a3b` responde en streaming con herramientas (`contentBlockStart.toolUse`, `contentBlockDelta.toolUse`, `messageStop.stopReason = tool_use`, `metadata.usage`)
+  - Llamadas mínimas con `magidel-memo` en `us-east-1`: los modelos de Anthropic devuelven 403 o 404 (sin acceso); `qwen.qwen3-next-80b-a3b` responde en streaming con herramientas (`contentBlockStart.toolUse`, `contentBlockDelta.toolUse`, `messageStop.stopReason = tool_use`, `metadata.usage`). El modelo final, `mistral.mistral-large-3-675b-instruct`, se verificó igual en la evaluación local de 10 preguntas
 - [x] 1.2 Añadir `BEDROCK_MODEL_ID`, región y `CHAT_ENABLED` a `app/config.py` (Converse no necesita dependencias nuevas); verificar que la imagen construye y que la configuración incompleta con el chat activo impide el arranque con un mensaje claro
 - [x] 1.3 Implementar `app/agent/client.py` con una interfaz de generación en streaming y la implementación de Bedrock, más un cliente simulado guionizable para pruebas; verificar con una prueba que el simulado reproduce una secuencia de texto
 

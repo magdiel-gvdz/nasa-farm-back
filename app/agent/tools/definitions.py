@@ -136,7 +136,9 @@ def _evaluate_crop(context: ToolContext, arguments: dict):
 
 
 def _suitability_matrix(context: ToolContext, arguments: dict):
-    return _suitability(context, arguments, crop_id=None, planting_month=None)
+    matrix = _suitability(context, arguments, crop_id=None, planting_month=None)
+    # La matriz no lleva motivos; se declaran sus fuentes para poder citarlas.
+    return {**matrix, "sources": [{"id": "nasa_power"}, {"id": "soilgrids"}]}
 
 
 def _compare_rotations(context: ToolContext, arguments: dict):

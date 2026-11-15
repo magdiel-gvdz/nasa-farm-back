@@ -54,7 +54,7 @@ jobs:
       TF_VAR_athena_workgroup: ${{ vars.ATHENA_WORKGROUP || 'fieldshift' }}
       TF_VAR_athena_database: ${{ vars.ATHENA_DATABASE || 'fieldshift_gold' }}
       TF_VAR_data_version_parameter: ${{ vars.DATA_VERSION_PARAMETER || '/fieldshift/data_version' }}
-      TF_VAR_bedrock_model_id: ${{ vars.BEDROCK_MODEL_ID || 'qwen.qwen3-next-80b-a3b' }}
+      TF_VAR_bedrock_model_id: ${{ vars.BEDROCK_MODEL_ID || 'mistral.mistral-large-3-675b-instruct' }}
       TF_VAR_chat_enabled: ${{ vars.CHAT_ENABLED || 'false' }}
     steps:
       - uses: actions/checkout@v4

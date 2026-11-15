@@ -199,6 +199,7 @@ resource "aws_iam_policy" "runtime_boundary" {
         "Resource" : [
           "arn:${local.partition}:bedrock:${var.aws_region}::foundation-model/anthropic.*",
           "arn:${local.partition}:bedrock:${var.aws_region}::foundation-model/qwen.*",
+          "arn:${local.partition}:bedrock:${var.aws_region}::foundation-model/mistral.*",
           "arn:${local.partition}:bedrock:${var.aws_region}::foundation-model/amazon.nova-*"
         ]
       },

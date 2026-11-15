@@ -240,6 +240,7 @@ resource "aws_iam_role_policy" "api" {
         "Resource" : [
           "arn:${data.aws_partition.current.partition}:bedrock:${var.aws_region}::foundation-model/anthropic.*",
           "arn:${data.aws_partition.current.partition}:bedrock:${var.aws_region}::foundation-model/qwen.*",
+          "arn:${data.aws_partition.current.partition}:bedrock:${var.aws_region}::foundation-model/mistral.*",
           "arn:${data.aws_partition.current.partition}:bedrock:${var.aws_region}::foundation-model/amazon.nova-*"
         ]
       },
