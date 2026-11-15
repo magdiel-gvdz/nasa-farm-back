@@ -4,7 +4,7 @@ El proveedor Athena de la API deberá leer **solo** las vistas `v_*`. El contrat
 `docs/data_contract.md`.
 
 Esta entrega documenta los datos publicados; no implementa todavía el proveedor Athena ni configura
-su acceso en la Lambda. La API actual sigue leyendo el manifiesto de su bucket S3. Las variables y el
+su proveedor de acceso en la API. La API actual sigue leyendo el manifiesto de su bucket S3. Las variables y el
 ejemplo de permisos de esta guía son requisitos para esa integración posterior.
 
 ## Variables de entorno
@@ -23,7 +23,7 @@ deben crearse con `region_name = DATA_REGION`.
 ## Permisos
 
 DATA publica una política IAM administrada de solo lectura. La integración debe adjuntarla al rol de
-ejecución de la Lambda de la API:
+tarea de ECS de la API, o conceder permisos equivalentes mediante su política en línea:
 
 ```hcl
 resource "aws_iam_role_policy_attachment" "api_gold_read" {
@@ -33,15 +33,15 @@ resource "aws_iam_role_policy_attachment" "api_gold_read" {
 ```
 
 Además, el rol de la API tiene una **permissions boundary** (`nasa-farm-runtime-boundary`) definida en
-`infra/bootstrap/main.tf`. Actualmente solo permite logs y lecturas de `curated/` y `manifests/` del
-bucket de la API. Adjuntar `fieldshift-gold-read` por sí solo no habilita Athena: el acceso efectivo es
+`infra/bootstrap/main.tf`. El bootstrap permite DATA, DynamoDB y el almacenamiento propio del entorno;
+la política en línea del rol de tarea concede las operaciones correspondientes. Adjuntar `fieldshift-gold-read` por sí solo no habilita Athena: el acceso efectivo es
 la intersección entre las políticas del rol y su boundary.
 
 Antes de habilitar el proveedor, se deben ampliar los permisos de la boundary para las acciones y
 recursos de `fieldshift-gold-read` (Athena, Glue y SSM en `us-west-2`, lectura de `gold/` y lectura/escritura
 de resultados), conservando los permisos existentes. Ese cambio requiere actualizar el bootstrap;
 el despliegue de `infra/environment` no modifica la boundary. Después se adjunta la política al rol y se
-configuran las variables de entorno de la Lambda. `infra/data/` es una referencia y no se aplica desde
+configuran las variables de entorno del contenedor. `infra/data/` es una referencia y no se aplica desde
 el CI de este repositorio.
 
 Qué permite: ejecutar consultas en el workgroup `fieldshift`, leer el catálogo de `fieldshift_gold`, leer

@@ -1,13 +1,62 @@
-# Prueba del ciclo de vida de previews
+# Ciclo de vida de previews
 
-Requisitos: usar un PR interno del mismo repositorio, fuera de borrador,
-con la variable `INFRA_ENABLED` configurada en `true`.
+Abrir los PR como borrador mientras se trabaja. Los borradores y forks ejecutan
+checks sin publicar imágenes ni crear recursos. Al pasar un PR interno a listo
+para revisión, el pipeline publica la imagen en ECR, aplica `pr-N` y consulta
+`/health`. La etiqueta es un hash del contenido de la imagen (`Dockerfile`,
+`.dockerignore`, `requirements.txt` y `app/`), no el SHA del commit: un commit
+que solo toca documentación, specs o CI reutiliza la imagen y no redespliega
+el servicio.
 
-Para comprobar el flujo completo, abrir ese PR con un cambio pequeño y verificar:
+Antes del primer preview de esta migración hay que aplicar bootstrap y registrar
+`ECR_REPOSITORY_URL`. ECS Express Mode usa el clúster y la VPC por defecto.
+Cada entorno mantiene al menos una tarea encendida; no escala a cero. La regla
+de expiración del bucket no elimina el servicio ni su coste.
 
-1. Los checks y el despliegue de `pr-N` terminan correctamente.
-2. `/health` responde con `environment` igual a `pr-N`.
-3. Después del merge, el job `destroy-preview` termina correctamente.
-4. La Lambda, la API y el bucket de `pr-N` desaparecen, y `dev` permanece disponible.
+## Evidencia requerida
 
-Conservar los enlaces de las ejecuciones como evidencia de la prueba.
+1. Registrar el enlace del workflow, SHA, tiempo real de creación y `api_url`.
+   La salida selecciona `ingress_paths` con `access_type == "PUBLIC"` y toma
+   su atributo `endpoint`, añadiendo HTTPS cuando hace falta.
+2. Consultar `curl <api_url>/health` y verificar el entorno `pr-N`.
+3. Cerrar el PR y comprobar que termina `destroy-preview`.
+4. Comprobar que ya no aparecen servicio ECS, tabla DynamoDB, bucket, roles ni
+   logs de ese preview, y que `dev` sigue disponible.
+
+Observado en `pr-7` el 14 de noviembre de 2026: el primer despliegue ECS
+inició a las 20:05:18 y terminó a las 20:10:22 (America/Mexico_City),
+5 min 4 s. Una actualización posterior tardó 8 min 26 s. El primer job
+falló al seguir el despliegue por permisos de IAM; la tarea sí quedó sana.
+La recuperación conserva el servicio y reconcilia su estado antes de reintentar CI.
+El 15 de noviembre dos actualizaciones completas (imagen nueva, apply y prueba
+de humo) tardaron 10 min 10 s y 11 min 3 s. Contar con unos 10 minutos por
+push a un PR listo para revisión.
+
+Un apply falló con "Provider produced inconsistent result after apply" en
+`scaling_target`: el proveedor rellena `auto_scaling_metric` y
+`auto_scaling_target_value` tras crear el servicio. Se declaran explícitamente
+con sus valores por defecto (`AVERAGE_CPU`, 60).
+La imagen ECR compartida se conserva y su ciclo de vida retiene 30 imágenes.
+
+## Recuperación y transición
+
+**Cleanup preview** recibe el número de un PR cerrado, valida que pertenece al
+repositorio y ejecuta `terraform plan -destroy` y `terraform apply` desde `main`.
+Usa valores válidos de relleno para la etiqueta y no necesita reconstruir imagen.
+Los workflows serializan applies y limpieza; nunca se cancela un apply en curso.
+
+La limpieza de un PR sin fusionar utiliza el código de su base. Durante el primer
+PR que introduce ECS, esa base todavía contiene el stack anterior: antes de
+cerrarlo sin fusionar, destruir el preview con el stack nuevo y credenciales de
+preview, o recuperarlo desde `main` una vez integrada la migración. No dar por
+verificada la limpieza hasta completar la comprobación real. Los permisos
+heredados se mantienen hasta que no queden entornos con la plataforma anterior.
+
+Si se cancela una ejecución en pleno apply, el bloqueo del estado queda
+huérfano. El siguiente despliegue lo libera solo cuando lo dejó un runner de
+CI, porque el grupo de concurrencia garantiza que no hay otra ejecución activa
+para ese entorno; un bloqueo de otra procedencia detiene el job.
+
+No borrar estados manualmente. Ante un bloqueo, confirmar que no hay ejecución
+activa y liberar solo ese bloqueo con `terraform force-unlock` y el backend del
+preview correcto.

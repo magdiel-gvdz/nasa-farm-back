@@ -71,7 +71,7 @@ El pipeline recibe una **lista de zonas** desde configuración (`config/zones.ya
                                                   │
                   ─────────────── frontera DATA ↔ APP ───────────────
                                                   │
-                         API (Lambda FastAPI, de BE/TL) consulta las vistas con WHERE cell_id = ?
+                         API (FastAPI en ECS Express Mode, de BE/TL) consulta las vistas con WHERE cell_id = ?
 ```
 
 ### Componentes

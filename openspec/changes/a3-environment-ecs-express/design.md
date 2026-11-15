@@ -42,7 +42,7 @@ Vuelta atrás: revertir el PR; el apply recrea Lambda y API Gateway (los permiso
 
 ## Open Questions
 
-- Atributo exacto de `ingress_paths` que contiene la URL pública: se confirma con el primer apply en un preview.
+- Confirmado en `pr-7`: se selecciona `ingress_paths` con `access_type == "PUBLIC"` y se toma `endpoint`, que ya incluye HTTPS.
 
 ## Permisos de DATA
 

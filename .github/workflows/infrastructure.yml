@@ -25,13 +25,13 @@ jobs:
     needs: checks
     if: >-
       vars.INFRA_ENABLED == 'true' &&
-      (github.event_name == 'push' ||
+      ((github.event_name == 'push' && github.ref == 'refs/heads/main') ||
        (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
        (github.event_name == 'pull_request' &&
         github.event.pull_request.head.repo.full_name == github.repository &&
         !github.event.pull_request.draft))
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 60
     permissions:
       contents: read
       pull-requests: read
@@ -46,8 +46,20 @@ jobs:
       TF_VAR_environment: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'dev' }}
       TF_VAR_runtime_permissions_boundary_arn: ${{ vars.RUNTIME_PERMISSIONS_BOUNDARY_ARN }}
       TF_VAR_cors_origins: ${{ vars.API_CORS_ORIGINS || '["http://localhost:5173"]' }}
+      TF_VAR_ecr_repository_url: ${{ vars.ECR_REPOSITORY_URL }}
+      TF_VAR_data_provider: ${{ vars.DATA_PROVIDER || 'fixture' }}
+      TF_VAR_data_region: ${{ vars.DATA_REGION || 'us-west-2' }}
+      TF_VAR_data_lake_bucket: ${{ vars.DATA_LAKE_BUCKET }}
+      TF_VAR_athena_results_bucket: ${{ vars.ATHENA_RESULTS_BUCKET }}
+      TF_VAR_athena_workgroup: ${{ vars.ATHENA_WORKGROUP || 'fieldshift' }}
+      TF_VAR_athena_database: ${{ vars.ATHENA_DATABASE || 'fieldshift_gold' }}
+      TF_VAR_data_version_parameter: ${{ vars.DATA_VERSION_PARAMETER || '/fieldshift/data_version' }}
+      TF_VAR_bedrock_model_id: ${{ vars.BEDROCK_MODEL_ID || 'anthropic.claude-3-haiku-20240307-v1:0' }}
+      TF_VAR_chat_enabled: ${{ vars.CHAT_ENABLED || 'false' }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Skip stale or closed PR runs
         id: current
         env:
@@ -61,13 +73,21 @@ jobs:
           import json, os
           with open('/tmp/pr.json') as handle:
               pr = json.load(handle)
-          current = pr['state'] == 'open' and pr['head']['sha'] == os.environ['EXPECTED_HEAD']
+          current = pr['state'] == 'open' and not pr['draft'] and pr['head']['sha'] == os.environ['EXPECTED_HEAD']
           with open(os.environ['GITHUB_OUTPUT'], 'a') as handle:
               handle.write(f"deploy={str(current).lower()}\n")
           PY
           else
             echo 'deploy=true' >> "$GITHUB_OUTPUT"
           fi
+      # The tag identifies what goes into the image, not the commit, so commits
+      # that leave the image untouched (docs, specs, CI) plan no service change.
+      - name: Derive the image tag from the image contents
+        if: steps.current.outputs.deploy == 'true'
+        run: |
+          tag=$(git ls-tree HEAD -- Dockerfile .dockerignore requirements.txt app | sha256sum | cut -c1-40)
+          [[ "$tag" =~ ^[a-f0-9]{40}$ ]]
+          echo "TF_VAR_image_tag=$tag" >> "$GITHUB_ENV"
       - uses: actions/setup-python@v5
         if: steps.current.outputs.deploy == 'true'
         with:
@@ -76,25 +96,57 @@ jobs:
         if: steps.current.outputs.deploy == 'true'
         with:
           terraform_version: '1.14.0'
-      - name: Package API
-        if: steps.current.outputs.deploy == 'true'
-        run: python scripts/package_lambda.py
       - uses: aws-actions/configure-aws-credentials@v4
         if: steps.current.outputs.deploy == 'true'
         with:
           role-to-assume: ${{ github.event_name == 'pull_request' && vars.AWS_PREVIEW_ROLE_ARN || vars.AWS_DEV_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
           role-session-name: github-${{ github.run_id }}
+      - name: Build and publish immutable image
+        if: steps.current.outputs.deploy == 'true'
+        run: |
+          test -n "$TF_VAR_ecr_repository_url"
+          registry="${TF_VAR_ecr_repository_url%%/*}"
+          repository="${TF_VAR_ecr_repository_url#*/}"
+          aws ecr get-login-password --region "$AWS_REGION" | docker login --username AWS --password-stdin "$registry"
+          if aws ecr describe-images --repository-name "$repository" --image-ids "imageTag=$TF_VAR_image_tag" > /tmp/image.json 2> /tmp/image-error; then
+            echo "Reusing image $TF_VAR_image_tag"
+          elif grep -q 'ImageNotFoundException' /tmp/image-error; then
+            docker build --platform linux/amd64 -t "$TF_VAR_ecr_repository_url:$TF_VAR_image_tag" .
+            docker push "$TF_VAR_ecr_repository_url:$TF_VAR_image_tag"
+          else
+            cat /tmp/image-error >&2
+            exit 1
+          fi
       - name: Terraform init, plan and apply
         if: steps.current.outputs.deploy == 'true'
         env:
           TF_STATE_BUCKET: ${{ vars.TF_STATE_BUCKET }}
         run: |
+          if [ -z "${TF_VAR_data_lake_bucket:-}" ]; then unset TF_VAR_data_lake_bucket; fi
+          if [ -z "${TF_VAR_athena_results_bucket:-}" ]; then unset TF_VAR_athena_results_bucket; fi
           terraform -chdir=infra/environment init -input=false -lockfile=readonly \
             -backend-config="bucket=$TF_STATE_BUCKET" \
             -backend-config="key=environments/$TF_VAR_environment/terraform.tfstate" \
             -backend-config="region=$AWS_REGION" \
             -backend-config=encrypt=true -backend-config=use_lockfile=true
+          # The concurrency group admits one CI run per environment, so a lock
+          # left by a runner belongs to a cancelled run. Locks held by anyone
+          # else are never released here.
+          lock_key="environments/$TF_VAR_environment/terraform.tfstate.tflock"
+          found=$(aws s3api list-objects-v2 --bucket "$TF_STATE_BUCKET" --prefix "$lock_key" --query 'Contents[0].Key' --output text)
+          if [ "$found" = "$lock_key" ]; then
+            aws s3api get-object --bucket "$TF_STATE_BUCKET" --key "$lock_key" /tmp/lock.json > /dev/null
+            lock_id=$(python -c "import json; print(json.load(open('/tmp/lock.json'))['ID'])")
+            lock_who=$(python -c "import json; print(json.load(open('/tmp/lock.json'))['Who'])")
+            if [[ "$lock_who" == runner@* ]]; then
+              echo "Releasing stale lock $lock_id left by $lock_who"
+              terraform -chdir=infra/environment force-unlock -force "$lock_id"
+            else
+              echo "State is locked by $lock_who; refusing to release it" >&2
+              exit 1
+            fi
+          fi
           terraform -chdir=infra/environment plan -lock-timeout=5m -out=deploy.tfplan
           terraform -chdir=infra/environment apply -lock-timeout=5m deploy.tfplan
       - name: Smoke test and deployment links
@@ -102,7 +154,7 @@ jobs:
         run: |
           api_url=$(terraform -chdir=infra/environment output -raw api_url)
           lake=$(terraform -chdir=infra/environment output -raw data_lake_bucket)
-          curl --fail --silent --show-error --retry 6 --retry-all-errors --retry-delay 5 \
+          curl --fail --silent --show-error --retry 24 --retry-all-errors --retry-delay 5 --retry-max-time 120 --max-time 5 \
             "${api_url%/}/health" > /tmp/health.json
           python - <<'PY'
           import json, os
@@ -116,7 +168,8 @@ jobs:
             echo "API: ${api_url%/}"
             echo "OpenAPI: ${api_url%/}/docs"
             echo "Data lake: s3://$lake"
-            echo 'Readiness requires a valid, published data manifest.'
+            echo "Data provider: $TF_VAR_data_provider"
+            echo "Image: $TF_VAR_image_tag"
           } >> "$GITHUB_STEP_SUMMARY"
 
   destroy-preview:
@@ -125,7 +178,7 @@ jobs:
       vars.INFRA_ENABLED == 'true' &&
       github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 60
     permissions:
       contents: read
       id-token: write
@@ -138,6 +191,8 @@ jobs:
       TF_VAR_aws_region: ${{ vars.AWS_REGION || 'us-east-1' }}
       TF_VAR_environment: pr-${{ github.event.pull_request.number }}
       TF_VAR_runtime_permissions_boundary_arn: ${{ vars.RUNTIME_PERMISSIONS_BOUNDARY_ARN }}
+      TF_VAR_image_tag: '0000000000000000000000000000000000000000'
+      TF_VAR_ecr_repository_url: ${{ vars.ECR_REPOSITORY_URL || '123456789012.dkr.ecr.us-east-1.amazonaws.com/cleanup' }}
     steps:
       # A merged setup PR may introduce Terraform itself; use its merged commit.
       # Unmerged closures keep using trusted base code, never the PR head.

@@ -26,10 +26,6 @@ variable "github_repository" {
   default = "magdiel-gvdz/nasa-farm-back"
 }
 
-variable "lambda_zip_path" {
-  type    = string
-  default = "../../build/api.zip"
-}
 
 variable "runtime_permissions_boundary_arn" {
   type        = string
@@ -42,8 +38,70 @@ variable "cors_origins" {
   validation {
     condition = alltrue([
       for origin in var.cors_origins :
-      can(regex("^https?://[^/ *]+(:[0-9]+)?$", origin)) && !strcontains(origin, "*")
+      origin == "*" || can(regex("^https?://[^/ *]+(:[0-9]+)?$", origin))
     ])
-    error_message = "CORS origins must be explicit HTTP(S) origins without paths or wildcards."
+    error_message = "Use orígenes HTTP(S) sin rutas, o * para permitir cualquier origen."
   }
+}
+
+variable "data_region" {
+  type    = string
+  default = "us-west-2"
+}
+
+variable "data_lake_bucket" {
+  type    = string
+  default = null
+}
+
+variable "athena_results_bucket" {
+  type    = string
+  default = null
+}
+
+variable "athena_workgroup" {
+  type    = string
+  default = "fieldshift"
+}
+
+variable "athena_database" {
+  type    = string
+  default = "fieldshift_gold"
+}
+
+variable "data_version_parameter" {
+  type    = string
+  default = "/fieldshift/data_version"
+}
+
+variable "bedrock_model_id" {
+  type    = string
+  default = "anthropic.claude-3-haiku-20240307-v1:0"
+}
+
+variable "image_tag" {
+  type = string
+  validation {
+    condition     = can(regex("^[a-f0-9]{40}$", var.image_tag))
+    error_message = "Use una etiqueta de 40 caracteres hexadecimales."
+  }
+}
+variable "ecr_repository_url" {
+  type = string
+  validation {
+    condition     = can(regex("^[0-9]{12}\\.dkr\\.ecr\\.[a-z0-9-]+\\.amazonaws\\.com/[a-z0-9/_-]+$", var.ecr_repository_url))
+    error_message = "Use la URL de un repositorio ECR privado, sin etiqueta."
+  }
+}
+variable "data_provider" {
+  type    = string
+  default = "fixture"
+  validation {
+    condition     = contains(["fixture", "athena"], var.data_provider)
+    error_message = "Use fixture o athena."
+  }
+}
+variable "chat_enabled" {
+  type    = bool
+  default = false
 }

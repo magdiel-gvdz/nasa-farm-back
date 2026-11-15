@@ -5,12 +5,12 @@ context: |
   All artifacts must be written in es.
   Keep OpenSpec structural headings and SHALL/MUST keywords in English.
   Project: Field Shift, NASA Space Apps backend API.
-  Stack: Python 3.13, FastAPI, Mangum, AWS Lambda, API Gateway HTTP and S3.
+  Stack: Python 3.13, FastAPI y uvicorn en contenedores ECS Express Mode; ECR, DynamoDB y S3 por entorno. Migración de dev pendiente de verificación en a5.
   Infrastructure: Terraform with S3 remote state and GitHub Actions OIDC.
   Environments: one persistent dev and disposable pr-N previews.
   Git: all changes reach main through pull requests; never push directly to main.
-  Validation: Ruff, pytest, Terraform validate/test, actionlint and Lambda packaging.
-  Scope: backend API only; scientific ingestion and agronomic scoring are separate features.
+  Validation: Ruff, pytest, Terraform validate/test, actionlint, construcción Docker y comprobación de salud y apagado.
+  Scope: API backend, motores agronómicos y chat; ingesta científica separada. Lectura de gold, Athena, Glue y SSM de DATA en us-west-2.
 
 # Per-artifact rules (optional)
 # Add custom rules for specific artifacts.

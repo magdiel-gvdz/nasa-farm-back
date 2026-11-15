@@ -3,7 +3,6 @@ from typing import Literal
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from mangum import Mangum
 from pydantic import BaseModel
 
 from app.api.errors import register_error_handlers
@@ -77,4 +76,3 @@ def create_app(
 
 
 app = create_app()
-handler = Mangum(app, lifespan="off")

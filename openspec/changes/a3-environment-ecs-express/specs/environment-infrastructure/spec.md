@@ -53,7 +53,11 @@ Tras aplicar el stack, el entorno MUST NOT contener la función Lambda ni la API
 - **THEN** ambos recursos y sus grupos de registros quedan eliminados y el bucket del entorno conserva sus objetos
 
 ### Requirement: Acceso efectivo a DATA
-El acceso de la API SHALL resultar de una política que conceda las operaciones y una permissions boundary que las permita sobre los mismos recursos. El bootstrap SHALL ampliar la boundary; el stack de entorno SHALL conceder los permisos mediante `fieldshift-gold-read` o una política equivalente acotada a los recursos configurados. Ambos SHALL permitir consultas en el workgroup, lectura de Glue gold y S3 `gold/*`, lectura/escritura de resultados de Athena y lectura del parámetro SSM exacto, en `DATA_REGION`. MUST NOT conceder escritura en el lake, modificación del catálogo ni actualización de SSM. El bucket del entorno y el lake compartido de DATA SHALL ser recursos distintos; destruir un preview MUST NOT destruir recursos de DATA.
+El acceso de la API SHALL resultar de una política que conceda las operaciones y una permissions boundary que las permita sobre los mismos recursos. El bootstrap SHALL ampliar la boundary; el stack de entorno SHALL conceder los permisos mediante `fieldshift-gold-read` o una política equivalente acotada a los recursos configurados.
+
+#### Scenario: Recursos y operaciones permitidos
+- **WHEN** se aplican bootstrap y entorno
+- **THEN** Ambos SHALL permitir consultas en el workgroup, lectura de Glue gold y S3 `gold/*`, lectura/escritura de resultados de Athena y lectura del parámetro SSM exacto, en `DATA_REGION`. MUST NOT conceder escritura en el lake, modificación del catálogo ni actualización de SSM. El bucket del entorno y el lake compartido de DATA SHALL ser recursos distintos; destruir un preview MUST NOT destruir recursos de DATA.
 
 #### Scenario: Acceso con el rol real de la API
 - **WHEN** están aplicados bootstrap y entorno y DATA ha publicado una versión válida

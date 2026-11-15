@@ -58,7 +58,11 @@ Si la serie diaria no puede obtenerse, el sistema SHALL informar un error identi
 - **THEN** la petición de serie falla con `daily_unavailable` y `GET /api/v1/fields/{id}/profile` sigue respondiendo `200`
 
 ### Requirement: Contrato diario publicado y caché
-`v_cell_daily` SHALL tratarse como parte del contrato actual de DATA y consultarse por `cell_id`, sin cargarla entera en la instantánea de C2. El respaldo POWER SHALL conservarse para instalaciones sin esa vista; un fallo de permisos o un error transitorio MUST NOT interpretarse como vista ausente ni activar silenciosamente el respaldo. La caché gold SHALL incluir `data_version` y `cell_id` y no reutilizar datos de una publicación anterior tras una recarga. La caché POWER SHALL usar las coordenadas de cuadro publicadas, periodo y parámetros de consulta, sin redondear a una cuadrícula de 0.5°: el contrato describe cuadros de 0.5° × 0.625°. SHALL guardar la respuesta sin ajuste; la corrección por altura SHALL aplicarse por celda después de leer la caché.
+`v_cell_daily` SHALL tratarse como parte del contrato actual de DATA y consultarse por `cell_id`, sin cargarla entera en la instantánea de C2. El respaldo POWER SHALL conservarse para instalaciones sin esa vista; un fallo de permisos o un error transitorio MUST NOT interpretarse como vista ausente ni activar silenciosamente el respaldo.
+
+#### Scenario: Identidad y contenido de las cachés
+- **WHEN** se guarda o se lee una serie diaria en caché
+- **THEN** La caché gold SHALL incluir `data_version` y `cell_id` y no reutilizar datos de una publicación anterior tras una recarga. La caché POWER SHALL usar las coordenadas de cuadro publicadas, periodo y parámetros de consulta, sin redondear a una cuadrícula de 0.5°: el contrato describe cuadros de 0.5° × 0.625°. SHALL guardar la respuesta sin ajuste; la corrección por altura SHALL aplicarse por celda después de leer la caché.
 
 #### Scenario: Error de permisos
 - **WHEN** Athena deniega la consulta diaria
