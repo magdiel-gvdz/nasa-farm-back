@@ -246,21 +246,56 @@ class CellRows:
     soil: tuple[SoilLayer, ...]
 
 
-def _read(executor: QueryExecutor, view: str, model: type, cell_id: str | None = None) -> list:
+class VersionMismatchError(SnapshotError):
+    """Una vista devolvió filas de otra publicación: DATA está publicando una versión nueva."""
+
+    def __init__(self, view: str, expected: str, found: set[str]):
+        super().__init__(
+            f"{view}: se esperaba la versión {expected} y llegó {', '.join(sorted(found))}"
+        )
+        self.found = found
+
+
+_warned_without_version: set[str] = set()
+
+
+def check_version(view: str, rows: Sequence[Row], expected: str) -> None:
+    """Protocolo de publicación con DATA: cada fila trae su `data_version`.
+
+    Si llega una versión distinta de la que se está sirviendo, la lectura se descarta en lugar
+    de mezclar dos publicaciones. Una vista sin la columna (plantillas de DATA anteriores al
+    protocolo) se acepta con un aviso: entonces solo queda la comprobación del parámetro SSM.
+    """
+    if not rows:
+        return
+    if "data_version" not in rows[0]:
+        if view not in _warned_without_version:
+            _warned_without_version.add(view)
+            logger.warning("%s no trae data_version: no se puede verificar la publicación", view)
+        return
+    found = {row["data_version"] for row in rows}
+    if found != {expected}:
+        raise VersionMismatchError(view, expected, found)
+
+
+def _read(
+    executor: QueryExecutor, view: str, model: type, version: str, cell_id: str | None = None
+) -> list:
     sql = f"SELECT * FROM {view}" + (" WHERE cell_id = ?" if cell_id else "")
     try:
         rows = executor.run(sql, [cell_id] if cell_id else [])
     except Exception as error:
         raise SnapshotError(f"{view}: {error}") from error
+    check_version(view, rows, version)
     return build_rows(view, model, rows)
 
 
 def load_snapshot(executor: QueryExecutor, version: str) -> Snapshot:
     """Lee `v_cells` y `v_sources` y los valida. Lanza `SnapshotError` si no son utilizables."""
-    cells = {cell.cell_id: cell for cell in _read(executor, "v_cells", Cell)}
+    cells = {cell.cell_id: cell for cell in _read(executor, "v_cells", Cell, version)}
     sources = [
         dataclasses.replace(source, data_class=_data_class(source.data_class))
-        for source in _read(executor, "v_sources", Source)
+        for source in _read(executor, "v_sources", Source, version)
     ]
     return Snapshot(version=version, cells=cells, sources=tuple(sources))
 
@@ -273,12 +308,12 @@ _CELL_VIEWS = (
 )
 
 
-def load_cell(executor: QueryExecutor, cell_id: str) -> CellRows:
-    """Lee las cuatro vistas de una celda, en paralelo, y valida sus 36 decenas."""
+def load_cell(executor: QueryExecutor, cell_id: str, version: str) -> CellRows:
+    """Lee las cuatro vistas de una celda, en paralelo, y valida sus 36 decenas y su versión."""
 
     def read(view_spec):
         _, view, model, order = view_spec
-        return tuple(sorted(_read(executor, view, model, cell_id), key=order))
+        return tuple(sorted(_read(executor, view, model, version, cell_id), key=order))
 
     with ThreadPoolExecutor(max_workers=len(_CELL_VIEWS)) as pool:
         results = list(pool.map(read, _CELL_VIEWS))
@@ -331,17 +366,22 @@ class AthenaProvider:
         versions: VersionSource,
         poll_seconds: float = 300,
         power=None,
+        warm_cells: Sequence[str] = (),
     ):
         self._executor = executor
         # Respaldo con NASA POWER (`PowerDailySource`) para cuando no existe `v_cell_daily`.
         self._power = power
         self._power_used = False
         self._versions = versions
+        # Celdas que se leen en cuanto hay datos (las de la demo), para no esperar ~10 s.
+        self._warm_cells = tuple(warm_cells)
         self._poll_seconds = poll_seconds
         self._snapshot: Snapshot | None = None
         self._cells = _VersionedCache(CELL_CACHE_CELLS)
         self._daily = _VersionedCache(DAILY_CACHE_CELLS)
         self._stop = threading.Event()
+        # Despierta el bucle antes de tiempo cuando una lectura detecta otra publicación.
+        self._wake = threading.Event()
         self._thread: threading.Thread | None = None
 
     # ------------------------------------------------------------ ciclo de vida
@@ -354,11 +394,13 @@ class AthenaProvider:
 
     def stop(self) -> None:
         self._stop.set()
+        self._wake.set()
 
     def _loop(self) -> None:
         while not self._stop.is_set():
             self.refresh()
-            self._stop.wait(self._poll_seconds)
+            self._wake.wait(self._poll_seconds)
+            self._wake.clear()
 
     def refresh(self) -> bool:
         """Comprueba la versión publicada y recarga si cambió. Devuelve si hubo carga nueva.
@@ -386,6 +428,8 @@ class AthenaProvider:
             logger.error("Carga de datos %s rechazada: %s", version, error)
             return False
         self._snapshot = snapshot
+        if self._warm_cells:
+            threading.Thread(target=self.warm, name="athena-warm", daemon=True).start()
         logger.info(
             "Datos %s cargados: %d celdas en %.1f s",
             version,
@@ -393,6 +437,15 @@ class AthenaProvider:
             time.monotonic() - started,
         )
         return True
+
+    def warm(self) -> None:
+        """Lee de antemano las celdas configuradas; un fallo solo se registra."""
+        for cell_id in self._warm_cells:
+            try:
+                self._cell_rows(cell_id)
+                self.daily(cell_id)
+            except Exception as error:
+                logger.warning("No se pudo precargar la celda %s: %s", cell_id, error)
 
     # ------------------------------------------------------------ lectura
 
@@ -435,7 +488,13 @@ class AthenaProvider:
             return cached
         started = time.monotonic()
         try:
-            rows = load_cell(self._executor, cell_id)
+            rows = load_cell(self._executor, cell_id, snapshot.version)
+        except VersionMismatchError as error:
+            logger.warning("Celda %s: %s; se comprueba la versión publicada", cell_id, error)
+            self._wake.set()
+            raise DataUnavailableError(
+                f"DATA está publicando una versión nueva: {error}"
+            ) from error
         except Exception as error:
             logger.error("Datos de la celda %s no disponibles: %s", cell_id, error)
             raise DataUnavailableError(f"Sin datos para la celda {cell_id}") from error
@@ -479,8 +538,14 @@ class AthenaProvider:
             rows = self._executor.run(
                 "SELECT * FROM v_cell_daily WHERE cell_id = ? ORDER BY date", [cell_id]
             )
+            check_version("v_cell_daily", rows, snapshot.version)
             ordered = sorted(build_rows("v_cell_daily", DailyRow, rows), key=lambda r: r.date)
             series = DailySeries(ordered, "gold")
+        except VersionMismatchError as error:
+            self._wake.set()
+            raise DailyUnavailableError(
+                f"DATA está publicando una versión nueva: {error}"
+            ) from error
         except Exception as error:
             if _is_missing_view(error) and self._power is not None:
                 series = self._from_power(snapshot.cells[cell_id])

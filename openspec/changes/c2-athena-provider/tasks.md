@@ -20,18 +20,18 @@
 ## 3. Activación
 
 - [x] 3.1 Registrar `athena` en la fábrica de proveedores con sus variables de entorno; verificar con una prueba de configuración incompleta que el arranque falla indicando la variable que falta
-- [ ] 3.2 En un preview, con gold V0 publicado, desplegar con `DATA_PROVIDER=athena`; verificar que `/ready` informa la versión del parámetro SSM y que `GET /api/v1/sources` devuelve las fuentes reales
-  - Bloqueada: en la cuenta faltan la vista `v_sources` y el parámetro SSM `/fieldshift/data_version` (comprobado el 15 de noviembre de 2026)
+- [x] 3.2 En un preview, con gold V0 publicado, desplegar con `DATA_PROVIDER=athena`; verificar que `/ready` informa la versión del parámetro SSM y que `GET /api/v1/sources` devuelve las fuentes reales
+  - Verificado en el preview `pr-19` (15 de noviembre de 2026): `/ready` informa `2026111508`, `/sources` devuelve las fuentes reales y `scripts/smoke_e2e.py --require-real` termina con `OK` en las dos zonas
 - [ ] 3.3 Cambiar la variable de repositorio para `dev`, redesplegar y documentar en `README.md` el procedimiento de activación y de vuelta atrás; verificar que el perfil de una geocerca de cada zona responde `200`
   - Bloqueada por 3.2 y 4.1. El procedimiento de activación y de vuelta atrás ya está en `README.md`
 
 ## 4. Condiciones de integración (previas a la activación de la sección 3)
 
-- [ ] 4.1 Acordar con DATA, documentar e implementar en ambos proyectos un protocolo de publicación consistente; verificar con una publicación entre consultas que no se acepta una instantánea mezclada. Comprobar SSM antes y después no basta. Mantener `fixture` hasta satisfacer esta condición
-  - Bloqueada: requiere el acuerdo con DATA. La API descarta la carga si la versión cambia mientras carga, pero eso no es garantía suficiente
+- [x] 4.1 Acordar con DATA, documentar e implementar en ambos proyectos un protocolo de publicación consistente; verificar con una publicación entre consultas que no se acepta una instantánea mezclada. Comprobar SSM antes y después no basta. Mantener `fixture` hasta satisfacer esta condición
+  - Protocolo «versión en cada fila» (`docs/data_access.md`): las 8 vistas se recrearon con la columna `data_version` y la API rechaza cualquier fila de otra versión. Pendiente de DATA: llevar la columna a sus plantillas de `gold_build`
 - [x] 4.2 Fijar `ctas_approach=False`, `unload_approach=False`, sin reutilización ni OutputLocation propio; verificar workgroup y región y ausencia de CTAS, UNLOAD y escrituras al catálogo
 - [x] 4.3 Tratar SSM `none` como ausencia de publicación; probar arranque sin vistas, publicación posterior y conservación de una instantánea previa
-- [ ] 4.4 Confirmar que DATA aplicó su stack y ejecutó su pipeline con sus artefactos; verificar vistas y versión publicada sin aplicar `infra/data/` desde el backend
-  - Parcial: las vistas `v_cells`, `v_cell_profile`, `v_cell_indicators`, `v_cell_year`, `v_cell_soil` y `v_cell_daily` existen; faltan `v_sources` y la versión publicada
-- [ ] 4.5 Verificar desde el rol real de la tarea lectura de SSM y SELECT en Athena en `DATA_REGION`, con política del rol y boundary compatibles, antes de 3.2 y 3.3
-  - Bloqueada por 3.2
+- [x] 4.4 Confirmar que DATA aplicó su stack y ejecutó su pipeline con sus artefactos; verificar vistas y versión publicada sin aplicar `infra/data/` desde el backend
+  - Verificado el 15 de noviembre de 2026: existen las vistas `v_*` y el parámetro vale `2026111508`. (Una nota anterior decía que faltaban: era un error de la terminal, que convertía la ruta del parámetro.)
+- [x] 4.5 Verificar desde el rol real de la tarea lectura de SSM y SELECT en Athena en `DATA_REGION`, con política del rol y boundary compatibles, antes de 3.2 y 3.3
+  - Verificado con el simulador de IAM sobre `nasa-farm-dev-api`: lectura de SSM, Athena, Glue, `gold/` y resultados permitidos con su límite de permisos

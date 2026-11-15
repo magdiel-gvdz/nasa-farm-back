@@ -16,7 +16,8 @@
 
 - [x] 3.1 Implementar `daily(cell_id)` en el proveedor con la precedencia gold → POWER, el campo de origen y el error `daily_unavailable`; verificar con pruebas de las tres ramas
 - [x] 3.2 Verificar con una prueba de API que, con la serie diaria forzada a fallar, el perfil responde `200`
-- [ ] 3.3 En un preview, pedir la serie de una celda de Saltillo por el respaldo y verificar que el objeto aparece en `cache/power/` y que la segunda llamada no sale a Internet (registro); documentar en `README.md` la variable de la tasa y el origen de la serie
+- [x] 3.3 En un preview, pedir la serie de una celda de Saltillo por el respaldo y verificar que el objeto aparece en `cache/power/` y que la segunda llamada no sale a Internet (registro); documentar en `README.md` la variable de la tasa y el origen de la serie
+  - En `pr-19` la serie sale de `v_cell_daily` (origen `gold`). El respaldo se verificó contra el bucket real del preview: la primera lectura descargó una vez y guardó `cache/power/25.5_-101.25_2023-2024_….json`; un cliente nuevo la leyó de la caché sin salir a Internet. Variables y origen documentados en `README.md`
   - Documentado en `README.md`. La verificación en un preview requiere `DATA_PROVIDER=athena` sin `v_cell_daily`; DATA ya publica la vista, así que el respaldo no se activa en ningún entorno y se verificó con pruebas y una descarga real desde local
 
 ## 4. Coherencia con el contrato publicado

@@ -82,3 +82,24 @@ integración de SMAP (humedad) y de NDVI (suelo descubierto); no cambian nombres
 tipos que devuelve Athena, para pruebas locales y para el futuro proveedor `fixture`. Los valores
 numéricos están redondeados a seis decimales; al comparar agregados de la muestra, usar una tolerancia
 absoluta de `0.0001` para cantidades continuas. Los conteos enteros deben coincidir exactamente.
+
+## Protocolo de publicación (versión en cada fila)
+
+Acordado entre DATA y backend el 15 de noviembre de 2026 para activar el proveedor Athena
+(`c2-athena-provider`, tarea 4.1):
+
+1. Cada vista `v_*` incluye la columna `data_version` con la versión de la fila. Las vistas siguen
+   filtrando por dentro la versión vigente; la columna solo la hace visible. Añadir una columna no
+   rompe el contrato.
+2. La API lee primero `/fieldshift/data_version` y exige que todas las filas que lee traigan esa
+   versión. Si llega otra, descarta la lectura en lugar de mezclar publicaciones, responde `503`
+   mientras tanto y vuelve a comprobar el parámetro de inmediato.
+3. DATA mantiene el orden actual: recrea las vistas y después actualiza el parámetro.
+
+Estado: las 8 vistas de `fieldshift_gold` se recrearon con la columna sobre la versión
+`2026111508`. **Pendiente de DATA:** añadir `data_version` al `SELECT` de sus plantillas de
+`gold_build` (las de su repositorio), porque la siguiente publicación recrea las vistas desde ellas.
+El cambio está en las copias de `athena/views/` de este repositorio. Mientras DATA no lo aplique,
+la API acepta vistas sin la columna con un aviso en el registro y solo le queda la comprobación del
+parámetro antes y después de cargar.
+

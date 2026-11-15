@@ -421,3 +421,69 @@ def test_health_answers_while_the_data_loads_and_ready_follows(executor, setting
     assert {source["id"] for source in sources} >= {"nasa_power", "soilgrids"}
     assert "smap_l4" not in {source["id"] for source in sources}
     assert "synthetic" not in {source["data_class"] for source in sources}
+
+
+# ---------------------------------------------------------------- protocolo de versión
+
+
+def with_version(executor, version="2026111500", views=None):
+    for view, rows in executor.views.items():
+        if views is None or view in views:
+            for row in rows:
+                row["data_version"] = version
+    return executor
+
+
+def test_rows_of_the_served_version_are_accepted(executor, versions):
+    provider = AthenaProvider(with_version(executor), versions)
+    assert provider.refresh() is True
+    assert len(provider.climatology(SALTILLO)) == 36
+    assert provider.daily(SALTILLO)[0].date == "2025-01-01"
+
+
+def test_snapshot_with_rows_of_another_version_is_rejected(executor, versions, caplog):
+    with_version(executor)
+    with_version(executor, "2026111612", views={"v_sources"})
+    provider = AthenaProvider(executor, versions)
+    with caplog.at_level(logging.ERROR):
+        assert provider.refresh() is False
+    assert not provider.is_ready()
+    assert "v_sources" in caplog.text and "2026111612" in caplog.text
+
+
+def test_cell_read_during_a_publication_is_not_mixed(executor, versions):
+    provider = AthenaProvider(with_version(executor), versions)
+    provider.refresh()
+    # DATA recrea las vistas con la versión nueva antes de actualizar el parámetro.
+    with_version(executor, "2026111612", views={"v_cell_profile", "v_cell_daily"})
+    with pytest.raises(DataUnavailableError, match="versión nueva"):
+        provider.climatology(SALTILLO)
+    with pytest.raises(DailyUnavailableError, match="versión nueva"):
+        provider.daily(SALTILLO)
+    assert provider._wake.is_set()
+    # Cuando DATA actualiza el parámetro, la API carga la versión nueva completa.
+    with_version(executor, "2026111612")
+    versions.version = "2026111612"
+    assert provider.refresh() is True
+    assert len(provider.climatology(SALTILLO)) == 36
+
+
+def test_views_without_the_column_are_accepted_with_a_warning(provider, caplog):
+    from app.data import athena
+
+    athena._warned_without_version.clear()
+    with caplog.at_level(logging.WARNING):
+        provider.climatology(LA_LAGUNA)
+    assert "no trae data_version" in caplog.text
+
+
+def test_configured_cells_are_warmed_after_a_load(executor, versions):
+    provider = AthenaProvider(executor, versions, warm_cells=[SALTILLO, "E9_r0001_c0001"])
+    assert provider.refresh() is True
+    deadline = time.monotonic() + 5
+    while provider._cells.get("2026111500", SALTILLO) is None and time.monotonic() < deadline:
+        time.sleep(0.01)
+    executor.queries.clear()
+    provider.climatology(SALTILLO)
+    provider.daily(SALTILLO)
+    assert executor.queries == []

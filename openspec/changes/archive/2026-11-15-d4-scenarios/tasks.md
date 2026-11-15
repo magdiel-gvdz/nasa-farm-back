@@ -19,5 +19,6 @@
 - [x] 3.1 Añadir la validación de rangos y el paso de la climatología del escenario a aptitud (parámetros de consulta) y a rotaciones (objeto `scenario`); verificar con pruebas de `200`, `422` y de igualdad entre escenario cero y sin escenario
 - [x] 3.2 Añadir a las respuestas el bloque `scenario` (valores, origen de la serie, `not_recomputed`, aviso es/en) y regenerar `contracts/openapi.json`; verificar con la prueba de contrato
 - [x] 3.3 Implementar el error `daily_unavailable` solo para escenarios distintos de cero; verificar con la prueba de serie diaria forzada a fallar
-- [ ] 3.4 Medir en un preview dos escenarios seguidos para la geocerca de Saltillo y verificar que ambos responden en menos de 2 s; anotar los tiempos en el PR
+- [x] 3.4 Medir en un preview dos escenarios seguidos para la geocerca de Saltillo y verificar que ambos responden en menos de 2 s; anotar los tiempos en el PR
+  - En `pr-19` con datos reales, geocerca de Saltillo: dos escenarios seguidos respondieron en 0.09 s y 0.10 s, con serie diaria `gold`
 - [x] 3.5 Añadir a `docs/engines.md` qué se recalcula, qué no, la regla de paridad y los límites; verificar que coincide con `scenario.not_recomputed`
