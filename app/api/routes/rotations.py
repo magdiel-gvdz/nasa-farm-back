@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from app.api.deps import ClientId, Crops, Data, Engine, Language, Repo
+from app.api.deps import ClientId, Crops, Data, Engine, Language, Repo, Scenarios
 from app.api.errors import ApiError
 from app.api.routes.fields import load_field
 from app.api.routes.suitability import cell_data, field_context
@@ -14,6 +14,7 @@ from app.engines.rotation import (
     UnknownCropError,
     compare,
 )
+from app.engines.scenario import Scenario
 from app.engines.suitability import FieldContext
 
 router = APIRouter(
@@ -41,6 +42,7 @@ def compare_rotations(
     data: Data,
     catalog: Crops,
     engine: Engine,
+    scenarios: Scenarios,
 ):
     field = load_field(repo, client_id, field_id)
     context = field_context(field, language)
@@ -50,10 +52,15 @@ def compare_rotations(
         context = FieldContext(irrigation_declared=True, irrigation_mm=limit, language=language)
     elif context.irrigation_declared:
         limit = context.irrigation_mm
+    applied = scenarios.apply(
+        field["cell_id"],
+        cell_data(data, field["cell_id"]),
+        Scenario(body.scenario.delta_t_c, body.scenario.delta_p_pct),
+    )
     try:
         result = compare(
             catalog=catalog,
-            cell_data=cell_data(data, field["cell_id"]),
+            cell_data=applied.cell_data,
             field_context=context,
             config=engine,
             current_rotation=field.get("current_rotation"),
@@ -71,4 +78,4 @@ def compare_rotations(
         raise ApiError("current_rotation_required", 422) from None
     except UnknownCropError as error:
         raise ApiError("crop_not_found", 404, details={"crop_id": error.crop_id}) from None
-    return {**result, "scenario": body.scenario.model_dump()}
+    return {**result, "scenario": applied.describe(language)}

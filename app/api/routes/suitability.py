@@ -4,12 +4,13 @@ from typing import Annotated
 
 from fastapi import APIRouter, Query
 
-from app.api.deps import ClientId, Crops, Data, Engine, Language, Repo
+from app.api.deps import ClientId, Crops, Data, Engine, Language, Repo, Scenarios
 from app.api.errors import ApiError
 from app.api.routes.fields import load_field
-from app.api.schemas.common import ErrorResponse
+from app.api.schemas.common import DeltaP, DeltaT, ErrorResponse
 from app.api.schemas.suitability import SuitabilityDetail, SuitabilityMatrix
 from app.data import DataProvider, DataUnavailableError, UnknownCellError
+from app.engines.scenario import Scenario
 from app.engines.suitability import (
     CellData,
     Evaluation,
@@ -81,10 +82,11 @@ def get_suitability(
     data: Data,
     catalog: Crops,
     engine: Engine,
+    scenarios: Scenarios,
     crop_id: Annotated[str | None, Query(max_length=60)] = None,
     planting_month: Annotated[int | None, Query(ge=1, le=12)] = None,
-    delta_t_c: Annotated[float, Query(ge=-10, le=10)] = 0,
-    delta_p_pct: Annotated[float, Query(ge=-100, le=100)] = 0,
+    delta_t_c: Annotated[DeltaT, Query()] = 0,
+    delta_p_pct: Annotated[DeltaP, Query()] = 0,
 ):
     field = load_field(repo, client_id, field_id)
     if (crop_id is None) != (planting_month is None):
@@ -105,13 +107,18 @@ def get_suitability(
     crop = catalog.get(crop_id) if crop_id is not None else None
     if crop_id is not None and crop is None:
         raise ApiError("crop_not_found", 404, details={"crop_id": crop_id})
-    cell = cell_data(data, field["cell_id"])
+    applied = scenarios.apply(
+        field["cell_id"], cell_data(data, field["cell_id"]), Scenario(delta_t_c, delta_p_pct)
+    )
+    cell = applied.cell_data
     context = field_context(field, language)
+    scenario = applied.describe(language)
     if crop is not None:
         evaluation = evaluate(crop, planting_month, cell, context, config=engine.suitability)
-        return detail_response(evaluation)
+        return {**detail_response(evaluation), "scenario": scenario}
     matrix = evaluate_matrix(list(catalog), cell, context, config=engine.suitability)
     return {
+        "scenario": scenario,
         "months": list(range(1, 13)),
         "crops": [
             {

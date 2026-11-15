@@ -102,8 +102,6 @@ la media ponderada de los factores conocidos.
 **Datos faltantes.** Si falta el dato de un factor, queda como `unknown`, no entra en la media y la
 confianza baja a `low`. La confianza nunca es `high`: los datos son de la zona, no de la parcela.
 
-**Escenarios.** Los parámetros `delta_t_c` y `delta_p_pct` se aceptan pero todavía no cambian el
-resultado; los aplicará el motor de escenarios (`d4`).
 
 ## Rotaciones (`POST /fields/{id}/rotations`)
 
@@ -214,4 +212,24 @@ satélite. Cada `evidence` lleva un valor calculado y un `source_id` de `/source
 **Confianza.** `low` si hubo relajación o si algún cultivo tiene un factor de aptitud desconocido;
 si no, `medium`.
 
-**Escenarios.** `scenario` se devuelve tal cual pero todavía no cambia el resultado (`d4`).
+## Escenarios (`delta_t_c`, `delta_p_pct`)
+
+Código: `app/engines/scenario.py` y `app/engines/indicators.py`. Los motores no saben de
+escenarios: reciben una climatología, y el escenario solo decide cuál.
+
+- **Transformación.** `delta_t_c` se suma a las temperaturas diarias ajustadas por altura (máxima,
+  mínima y media); `delta_p_pct` multiplica la lluvia diaria. Es un desplazamiento uniforme, no una
+  proyección climática: no cambia la variabilidad ni la estacionalidad.
+- **Se recalcula**, por año y decena sobre la ventana de los indicadores publicados (2016-2025):
+  heladas (Tmin < 0 °C) y heladas fuertes (< −2 °C), días de calor sobre 30, 32, 35 y 38 °C,
+  lluvia, días de lluvia intensa (> 25 mm) y ET0 de Hargreaves-Samani (FAO-56, ecuaciones 21 y 52)
+  con las temperaturas desplazadas. De ahí salen las probabilidades por decena, los percentiles de
+  lluvia, la mediana de ET0 y las decenas vulnerables.
+- **No se recalcula** y se toma de los datos publicados (`scenario.not_recomputed`):
+  `soil_moisture`, `water_stress`, `bare_soil`, `wind` y `soil`.
+- **Paridad.** Con ambos cambios en cero, las probabilidades recalculadas deben coincidir con las
+  publicadas por DATA con una diferencia máxima de 0.1 por decena (un año de diez). Con escenario
+  cero, la API no recalcula: usa la climatología publicada, así que el resultado es idéntico.
+- **Caché.** Climatologías por celda, versión de datos y escenario redondeado a 0.5 °C y 5 %, hasta
+  256 entradas.
+- **Límites.** `delta_t_c` de −2 a +5 °C y `delta_p_pct` de −50 a +50 %.

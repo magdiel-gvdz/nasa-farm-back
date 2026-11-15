@@ -4,7 +4,14 @@ from typing import Annotated, Literal
 
 from pydantic import Field, model_validator
 
-from app.api.schemas.common import Confidence, MonthDay, RequestModel, ResponseModel, Scenario
+from app.api.schemas.common import (
+    Confidence,
+    MonthDay,
+    RequestModel,
+    ResponseModel,
+    Scenario,
+    ScenarioApplied,
+)
 from app.api.schemas.fields import Season
 
 Weight = Annotated[int, Field(ge=0, le=5)]
@@ -91,7 +98,7 @@ class Strategy(ResponseModel):
 
 
 class RotationResponse(ResponseModel):
-    scenario: Scenario
+    scenario: ScenarioApplied
     strategies: list[Strategy] = Field(min_length=3)
     recommended_id: str
     disclaimer: str

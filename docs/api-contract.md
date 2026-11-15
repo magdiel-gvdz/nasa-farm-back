@@ -16,8 +16,8 @@
 | `GET /sources` | Real: fuentes del proveedor de datos activo |
 | `GET /crops` | Real: catálogo de `data/crops.yaml` (ver [crop-catalog.md](crop-catalog.md)) |
 | `GET /fields/{id}/profile` | Real: se calcula con los datos del proveedor activo |
-| `GET /fields/{id}/suitability` | Real: motor de aptitud (ver [engines.md](engines.md)); `delta_t_c` y `delta_p_pct` aún no cambian el resultado |
-| `POST /fields/{id}/rotations` | Real: motor de rotaciones (ver [engines.md](engines.md)); `scenario` se devuelve pero aún no cambia el resultado |
+| `GET /fields/{id}/suitability` | Real: motor de aptitud (ver [engines.md](engines.md)); admite escenario con `delta_t_c` y `delta_p_pct` |
+| `POST /fields/{id}/rotations` | Real: motor de rotaciones (ver [engines.md](engines.md)); admite escenario en `scenario` |
 
 ## Diferencias respecto a `backend-handoff.md` §6
 
@@ -72,6 +72,17 @@ propiedad: es la incertidumbre del modelo SoilGrids, no la variación dentro de 
 | `no_land_use_history` | low | Siempre: `land_use` es `null` |
 | `no_hail_product` | medium | Siempre: `hazards.hail` es `null` |
 
+## Escenarios
+
+Aptitud (parámetros de consulta) y rotaciones (objeto `scenario` del cuerpo) aceptan
+`delta_t_c` de −2 a +5 °C y `delta_p_pct` de −50 a +50 %; fuera de rango responden `422`. Los
+valores se redondean a pasos de 0.5 °C y 5 %. Toda respuesta trae el bloque `scenario`: con un
+escenario distinto de cero indica los valores aplicados, `daily_origin` (de dónde salió la serie
+diaria), `not_recomputed` (lo que el escenario no cambia) y `note`, un aviso de que es un escenario
+hipotético y no un pronóstico. Con ambos valores en cero, el resultado es idéntico al de una
+petición sin escenario. Si la serie diaria no está disponible, un escenario distinto de cero
+responde `503 daily_unavailable`.
+
 ## Encabezados
 
 | Encabezado | Sentido | Uso |
@@ -116,6 +127,7 @@ Todo error, también los de validación, usa el mismo sobre:
 | `method_not_allowed` | 405 | La ruta no admite ese método | — |
 | `field_limit_reached` | 409 | El cliente ya tiene 50 geocercas | `limit` |
 | `bad_request` | 4xx | Cualquier otro error de la petición | — |
+| `daily_unavailable` | 503 | Se pidió un escenario distinto de cero y la serie diaria de la zona no está disponible; sin escenario la petición funciona | — |
 | `data_unavailable` | 503 | El proveedor de datos aún no terminó su primera carga (`/ready`) | — |
 | `internal_error` | 500 | Error inesperado. El cuerpo nunca incluye trazas ni nombres internos | — |
 
