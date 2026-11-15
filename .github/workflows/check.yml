@@ -43,7 +43,7 @@ jobs:
           docker build -t fieldshift-api .
           container=$(docker run -d -p 127.0.0.1:8080:8080 -e ENVIRONMENT=pr-7 fieldshift-api)
           trap 'docker logs "$container"; docker rm -f "$container"' EXIT
-          curl --fail --silent --show-error --retry 9 --retry-connrefused --retry-delay 1 --max-time 2 \
+          curl --fail --silent --show-error --retry 9 --retry-all-errors --retry-delay 1 --retry-max-time 9 --max-time 1 \
             http://localhost:8080/health > /tmp/container-health.json
           python - <<'PY'
           import json
