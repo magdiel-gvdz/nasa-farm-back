@@ -233,3 +233,17 @@ escenarios: reciben una climatología, y el escenario solo decide cuál.
 - **Caché.** Climatologías por celda, versión de datos y escenario redondeado a 0.5 °C y 5 %, hasta
   256 entradas.
 - **Límites.** `delta_t_c` de −2 a +5 °C y `delta_p_pct` de −50 a +50 %.
+
+## Pruebas de los motores
+
+`tests/engines/test_agronomy_cases.py` reúne casos agronómicos con resultado evidente (sin
+heladas, heladas todo el invierno, calor extremo, sin lluvia, suelo alcalino) construidos con
+`tests/engines/builders.py`, y compara la matriz de aptitud y las rotaciones de las dos geocercas
+de demostración con las instantáneas de `tests/engines/snapshots/`. Un cambio en
+`config/engine.yaml`, en el catálogo o en las reglas hace fallar esas instantáneas. Si el cambio es
+intencionado, se regeneran y se revisa el diff en el PR:
+
+```powershell
+.\.venv\Scripts\python.exe -m tests.engines.test_agronomy_cases
+```
+
