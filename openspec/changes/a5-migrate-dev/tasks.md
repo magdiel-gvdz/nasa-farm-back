@@ -8,6 +8,6 @@
 
 ## 2. Retiro de permisos heredados
 
-- [ ] 2.1 Confirmar que no queda ningún preview abierto con Lambda (`aws lambda list-functions` sin funciones `nasa-farm-pr-*`); verificar con la salida del comando
+- [x] 2.1 Confirmar que no queda ningún preview abierto con Lambda (`aws lambda list-functions` sin funciones `nasa-farm-pr-*`); verificar con la salida del comando
 - [ ] 2.2 Quitar de `infra/bootstrap/main.tf` las sentencias de Lambda y API Gateway, sus registros y `lambda.amazonaws.com` de `iam:PassRole`, y actualizar el test; verificar con `terraform -chdir=infra/bootstrap test`
 - [ ] 2.3 Aplicar el bootstrap con credenciales de administrador y relanzar el workflow de `dev`; verificar que el despliegue termina correctamente

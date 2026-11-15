@@ -418,6 +418,7 @@ resource "aws_iam_role_policy" "deploy" {
           "ecs:DescribeExpressGatewayService",
           "ecs:DescribeServices",
           "ecs:ListServiceDeployments",
+          "ecs:DescribeServiceDeployments",
           "ecs:TagResource",
           "ecs:UntagResource",
           "ecs:ListTagsForResource"

@@ -25,5 +25,5 @@
 
 ## Integración de permisos de DATA
 
-- [ ] Verificar que la boundary y la política del rol cubren las acciones y recursos de `infra/data/iam.tf` (`gold_read`), incluyendo acceso a buckets, resultados de Athena y SSM exacto en `DATA_REGION`; probar que cada capa por separado no concede acceso efectivo
-- [ ] Usar los outputs del stack DATA como referencia para bucket, workgroup, base gold y parámetro; no recrear ni destruir recursos compartidos con los entornos de API
+- [x] Verificar que la boundary y la política del rol cubren las acciones y recursos de `infra/data/iam.tf` (`gold_read`), incluyendo acceso a buckets, resultados de Athena y SSM exacto en `DATA_REGION`; probar que cada capa por separado no concede acceso efectivo
+- [x] Usar los outputs del stack DATA como referencia para bucket, workgroup, base gold y parámetro; no recrear ni destruir recursos compartidos con los entornos de API

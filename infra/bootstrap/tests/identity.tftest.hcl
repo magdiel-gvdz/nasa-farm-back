@@ -95,7 +95,7 @@ run "protect_state_and_limit_oidc_subjects" {
     error_message = "Express Mode antepone el nombre del clúster default a la familia de tareas del entorno."
   }
   assert {
-    condition     = contains(one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Action if try(s.Sid, "") == "OwnExpressService"]), "ecs:ListServiceDeployments") && one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Resource if try(s.Sid, "") == "OwnServiceDeployments"]) == ["arn:aws:ecs:us-east-1:123456789012:service-deployment/default/nasa-farm-pr-*-api/*"]
+    condition     = contains(one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Action if try(s.Sid, "") == "OwnExpressService"]), "ecs:ListServiceDeployments") && contains(one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Action if try(s.Sid, "") == "OwnExpressService"]), "ecs:DescribeServiceDeployments") && one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Resource if try(s.Sid, "") == "OwnServiceDeployments"]) == ["arn:aws:ecs:us-east-1:123456789012:service-deployment/default/nasa-farm-pr-*-api/*"]
     error_message = "Terraform debe poder seguir únicamente los despliegues del servicio de su entorno."
   }
 }
