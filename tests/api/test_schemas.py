@@ -10,6 +10,7 @@ from app.api.schemas.fields import Field, FieldCreate, FieldUpdate
 from app.api.schemas.profile import FieldProfile
 from app.api.schemas.rotations import RotationRequest, RotationResponse
 from app.api.schemas.suitability import SuitabilityDetail, SuitabilityMatrix
+from app.catalog.loader import load_catalog
 from tests.helpers import field_payload, square
 
 SOURCE = {
@@ -119,7 +120,7 @@ def test_field_response_validates():
 
 
 def test_crop_validates():
-    crop = load_fixture("crops")[0]
+    crop = load_catalog().get("maiz").model_dump(mode="json")
     assert Crop.model_validate(crop).heat_critical_c == 35
     with pytest.raises(ValidationError):
         Crop.model_validate({**crop, "roles": ["ornamental"]})

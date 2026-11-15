@@ -9,6 +9,7 @@ from app.api.errors import register_error_handlers
 from app.api.fixtures import MOCK_HEADER
 from app.api.routes import router as api_router
 from app.api.schemas.common import ErrorResponse
+from app.catalog.loader import Catalog, load_catalog
 from app.config import Settings
 from app.data import DataProvider, DataUnavailableError, create_provider
 from app.geo.locate import GridLocator, Locator
@@ -39,6 +40,7 @@ def create_app(
     repository: Repository | None = None,
     locator: Locator | None = None,
     data_provider: DataProvider | None = None,
+    catalog: Catalog | None = None,
 ) -> FastAPI:
     config = settings or Settings()
     api = FastAPI(title="Field Shift API", version=API_VERSION)
@@ -48,6 +50,8 @@ def create_app(
     api.state.locator = locator or GridLocator(BBoxCellCatalog())
     provider = data_provider or create_provider(config.data_provider)
     api.state.data_provider = provider
+    # Un catálogo inválido impide arrancar: el error nombra el cultivo y el campo.
+    api.state.catalog = catalog or load_catalog()
 
     api.add_middleware(
         CORSMiddleware,

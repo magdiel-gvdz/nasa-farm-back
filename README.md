@@ -58,8 +58,9 @@ CI verifica salud, exclusión de archivos privados y apagado en menos de 10 s.
 | `/api/v1/...` | Endpoints de negocio: catálogos, geocercas, perfil, aptitud y rotaciones. Ver [docs/api-contract.md](docs/api-contract.md) |
 | `GET /docs` y `/openapi.json` | Documentación y contrato FastAPI; el contrato versionado está en `contracts/openapi.json` |
 
-Las geocercas (`/api/v1/fields`) son reales y `/api/v1/sources` lee del proveedor
-de datos; el resto de endpoints de negocio devuelve por ahora una respuesta fija
+Las geocercas (`/api/v1/fields`) son reales, `/api/v1/sources` lee del proveedor
+de datos y `/api/v1/crops` del catálogo `data/crops.yaml`, que se valida al
+arrancar (campos en [docs/crop-catalog.md](docs/crop-catalog.md)); el resto de endpoints de negocio devuelve por ahora una respuesta fija
 marcada con `X-Fieldshift-Mock: 1`, hasta que lleguen el perfil y los motores. Tras cambiar una
 ruta o un esquema ejecuta `python scripts/export_openapi.py` y versiona
 `contracts/openapi.json`; CI falla si queda desactualizado.
@@ -217,6 +218,8 @@ contracts/                   Contrato OpenAPI versionado
 infra/bootstrap/             Estado remoto, OIDC, ECR y permisos de CI
 infra/environment/           ECS Express Mode, DynamoDB y bucket por entorno
 infra/*/tests/               Pruebas Terraform sin credenciales
+app/catalog/                 Modelo y carga del catálogo de cultivos
+data/crops.yaml              Catálogo de cultivos; lo edita el rol científico
 app/data/                    Proveedor de datos de DATA y datos sintéticos
 scripts/export_openapi.py    Genera contracts/openapi.json
 scripts/build_fixtures.py    Regenera los datos sintéticos de app/data/fixtures

@@ -85,7 +85,7 @@ jobs:
       - name: Derive the image tag from the image contents
         if: steps.current.outputs.deploy == 'true'
         run: |
-          tag=$(git ls-tree HEAD -- Dockerfile .dockerignore requirements.txt app | sha256sum | cut -c1-40)
+          tag=$(git ls-tree HEAD -- Dockerfile .dockerignore requirements.txt app data | sha256sum | cut -c1-40)
           [[ "$tag" =~ ^[a-f0-9]{40}$ ]]
           echo "TF_VAR_image_tag=$tag" >> "$GITHUB_ENV"
       - uses: actions/setup-python@v5

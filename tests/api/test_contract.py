@@ -29,11 +29,17 @@ def test_old_sources_route_is_gone(client):
     assert client.get("/v1/sources").status_code == 404
 
 
-def test_crops_return_reference_data(client):
+def test_crops_come_from_the_catalog(client):
     response = client.get("/api/v1/crops")
     assert response.status_code == 200
-    assert response.headers[MOCK] == "1"
-    assert len(TypeAdapter(list[Crop]).validate_python(response.json())) >= 5
+    assert MOCK not in response.headers
+    crops = TypeAdapter(list[Crop]).validate_python(response.json())
+    assert len(crops) >= 5
+    for crop in response.json():
+        assert crop["name"]["es"] and crop["name"]["en"]
+        assert {"id", "family", "roles", "cycle_days", "kc", "source_id", "reviewed"} <= set(crop)
+    roles = {role for crop in crops for role in crop.roles}
+    assert {"cash", "legume", "cover", "forage", "drought_tolerant"} <= roles
 
 
 def test_sources_come_from_the_data_provider(client):
