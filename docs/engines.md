@@ -27,8 +27,8 @@ al menos un día de Tmin < 0 °C).
 
 | Parámetro | Valor | Significado |
 |---|---|---|
-| `suitability.frost.warn_prob` | 0.2 | Desde esta probabilidad el factor es `warn` |
-| `suitability.frost.bad_prob` | 0.5 | Desde esta probabilidad el factor es `bad` |
+| `suitability.frost.warn_prob` | 0.1 | Desde esta probabilidad el factor es `warn` (1 año de cada 10) |
+| `suitability.frost.bad_prob` | 0.3 | Desde esta probabilidad el factor es `bad` |
 
 Si el cultivo es `frost_tolerant` se usa la probabilidad de helada fuerte (`frost_m2_prob`,
 Tmin < −2 °C) y el factor nunca pasa de `warn`: un cultivo tolerante no queda excluido por helada.
@@ -40,11 +40,16 @@ probabilidad de superar 30, 32, 35 y 38 °C; se usa el umbral más cercano a `he
 cultivo (en empate, el más bajo) y el detalle dice cuál se usó. Se toma la decena de la floración
 con mayor probabilidad.
 
+El indicador de DATA cuenta años con al menos un día sobre el umbral, así que `heat_critical_c`
+es la máxima que causa daño en un solo día (no la óptima) y el factor solo es `bad` cuando ese día
+llega casi todos los años. 38 °C es el umbral más alto publicado: para cultivos que toleran más
+(algodón, sorgo, melón) el factor es conservador.
+
 | Parámetro | Valor | Significado |
 |---|---|---|
 | `suitability.heat.flowering_window` | 0.55-0.65 | Parte del ciclo en la que ocurre la floración |
 | `suitability.heat.warn_prob` | 0.3 | Desde esta probabilidad el factor es `warn` |
-| `suitability.heat.bad_prob` | 0.6 | Desde esta probabilidad el factor es `bad` |
+| `suitability.heat.bad_prob` | 0.9 | Desde esta probabilidad el factor es `bad` |
 
 ### Factor agua (`water`) — fuente `nasa_power`
 
@@ -96,7 +101,7 @@ la media ponderada de los factores conocidos.
 | `suitability.score_at_bad` | 30 | Puntaje de un factor en el umbral de `bad` |
 | `suitability.status_cuts.suitable` | 70 | Puntaje mínimo de `suitable` |
 | `suitability.status_cuts.marginal` | 40 | Puntaje mínimo de `marginal`; por debajo es `unsuitable` |
-| `suitability.exclusive_factors` | frost | Factores que, en `bad`, descartan el cultivo |
+| `suitability.exclusive_factors` | frost, heat | Factores que, en `bad`, descartan el cultivo |
 | `suitability.exclusive_score_cap` | 39 | Puntaje máximo cuando un factor excluyente es `bad` |
 
 **Datos faltantes.** Si falta el dato de un factor, queda como `unknown`, no entra en la media y la

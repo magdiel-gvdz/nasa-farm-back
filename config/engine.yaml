@@ -14,19 +14,24 @@ suitability:
     water: 0.30
     soil: 0.20
   # Un factor excluyente en estado `bad` limita el puntaje a `exclusive_score_cap`.
-  exclusive_factors: [frost]
+  # La helada en un cultivo sensible y el calor extremo en floración descartan el cultivo.
+  exclusive_factors: [frost, heat]
   exclusive_score_cap: 39
   # Puntaje de un factor justo en el umbral de `warn` y en el de `bad`.
   score_at_warn: 70
   score_at_bad: 30
   frost:
-    # Probabilidad de helada en la peor decena del ciclo.
-    warn_prob: 0.2
-    bad_prob: 0.5
+    # Probabilidad de helada en la peor decena del ciclo. Para un cultivo sensible, 1 año de
+    # cada 10 ya es un aviso y 3 de cada 10 lo descartan.
+    warn_prob: 0.1
+    bad_prob: 0.3
   heat:
     # Probabilidad de calor sobre el umbral en la peor decena de la floración.
+    # El indicador cuenta años con al menos un día sobre el umbral: solo es grave cuando
+    # ocurre casi todos los años (9 de cada 10). 38 °C es el umbral más alto publicado, así
+    # que para cultivos que toleran más (algodón, sorgo, melón) el indicador es conservador.
     warn_prob: 0.3
-    bad_prob: 0.6
+    bad_prob: 0.9
     # Parte del ciclo en la que ocurre la floración.
     flowering_window: [0.55, 0.65]
   water:

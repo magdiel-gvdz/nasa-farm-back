@@ -129,7 +129,7 @@ def test_field_response_validates():
 
 def test_crop_validates():
     crop = load_catalog().get("maiz").model_dump(mode="json")
-    assert Crop.model_validate(crop).heat_critical_c == 35
+    assert Crop.model_validate(crop).heat_critical_c == 38
     with pytest.raises(ValidationError):
         Crop.model_validate({**crop, "roles": ["ornamental"]})
     with pytest.raises(ValidationError):
@@ -173,11 +173,11 @@ def test_profile_rejects_incomplete_monthly_series():
 
 def test_suitability_models_validate():
     detail = reference_suitability_detail()
-    assert SuitabilityDetail.model_validate(detail).harvest_window.from_ == "07-10"
+    assert SuitabilityDetail.model_validate(detail).harvest_window.from_ == "07-20"
     with pytest.raises(ValidationError):
         SuitabilityDetail.model_validate({**detail, "score": 140})
     matrix = reference_suitability_matrix()
-    assert len(SuitabilityMatrix.model_validate(matrix).crops) == 5
+    assert len(SuitabilityMatrix.model_validate(matrix).crops) == len(load_catalog())
     matrix["crops"][0]["scores"] = matrix["crops"][0]["scores"][:11]
     with pytest.raises(ValidationError):
         SuitabilityMatrix.model_validate(matrix)

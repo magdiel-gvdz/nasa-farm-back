@@ -1,6 +1,6 @@
 {
  "disclaimer": "Herramienta de apoyo: describe tu zona (celda de 9 km) con datos históricos y no sustituye el juicio de un agrónomo o productor local.",
- "recommended_id": "drought",
+ "recommended_id": "legume",
  "strategies": [
   {
    "benefits": [
@@ -9,11 +9,11 @@
    "confidence": "medium",
    "evidence": [
     {
-     "claim": "Demanda de agua de 722 mm al año y necesidad de riego de 673 mm, con la evapotranspiración y la lluvia mediana de tu zona.",
+     "claim": "Demanda de agua de 722 mm al año y necesidad de riego de 671 mm, con la evapotranspiración y la lluvia mediana de tu zona.",
      "source_id": "nasa_power"
     },
     {
-     "claim": "La secuencia deja 243 días de suelo descubierto al año; en esas decenas cae el 0 % del riesgo de lluvia intensa de tu zona.",
+     "claim": "La secuencia deja 233 días de suelo descubierto al año; en esas decenas cae el 0 % del riesgo de lluvia intensa de tu zona.",
      "source_id": "nasa_power"
     },
     {
@@ -24,16 +24,15 @@
    "gaps": [
     "Los cálculos usan datos de tu zona (celda de 9 km), no mediciones de tu parcela.",
     "No hay análisis de laboratorio del suelo: el nitrógeno y la materia orgánica son aproximaciones.",
-    "No hay datos de margen económico de los cultivos: la prioridad de ingreso no entra en el puntaje.",
-    "Los requisitos de algunos cultivos son valores iniciales sin revisar por un especialista."
+    "No hay datos de margen económico de los cultivos: la prioridad de ingreso no entra en el puntaje."
    ],
    "id": "current",
    "is_current": true,
    "metrics": {
-    "bare_soil_days_per_year": 243,
+    "bare_soil_days_per_year": 233,
     "erosion_exposure_index": 0.0,
     "gross_margin_index": null,
-    "irrigation_need_mm_per_year": 673,
+    "irrigation_need_mm_per_year": 671,
     "n_balance_kg_ha_per_year": -120,
     "om_trend": "stable",
     "pest_break_score": 0.0,
@@ -42,14 +41,14 @@
    "name": "Maíz – barbecho",
    "risks_local_review": [
     "Plagas, enfermedades, variedades y mercado local no se observan desde satélite: valida la rotación con un agrónomo o productor local.",
-    "Necesita 673 mm de riego al año y tu límite es de 400 mm: faltan 273 mm.",
-    "Maíz sembrado en mayo no es plenamente apto en tu zona (puntaje 42 de 100)."
+    "Necesita 671 mm de riego al año y tu límite es de 400 mm: faltan 271 mm.",
+    "Maíz sembrado en mayo no es plenamente apto en tu zona (puntaje 39 de 100)."
    ],
    "scores": {
-    "forage": 0.0,
+    "forage": 5.0,
     "income": null,
     "low_labor": 5.0,
-    "overall": 37,
+    "overall": 57,
     "pest_break": 0.0,
     "save_water": 1.6,
     "soil_health": 2.6
@@ -57,7 +56,7 @@
    "sequence": [
     {
      "crop_id": "maiz",
-     "harvest": "09-03",
+     "harvest": "09-08",
      "plant": "05-01",
      "role": "cash",
      "season": "spring_summer",
@@ -78,95 +77,18 @@
   },
   {
    "benefits": [
-    "Necesita 105 mm menos de riego al año que tu rotación actual.",
-    "Deja unos 30 kg N/ha más al año que tu rotación actual.",
-    "Añade producción de forraje."
-   ],
-   "confidence": "low",
-   "evidence": [
-    {
-     "claim": "Demanda de agua de 611 mm al año y necesidad de riego de 568 mm, con la evapotranspiración y la lluvia mediana de tu zona.",
-     "source_id": "nasa_power"
-    },
-    {
-     "claim": "La secuencia deja 253 días de suelo descubierto al año; en esas decenas cae el 0 % del riesgo de lluvia intensa de tu zona.",
-     "source_id": "nasa_power"
-    },
-    {
-     "claim": "El pH estimado del suelo de tu zona es 8.3.",
-     "source_id": "soilgrids"
-    }
-   ],
-   "gaps": [
-    "Los cálculos usan datos de tu zona (celda de 9 km), no mediciones de tu parcela.",
-    "No hay análisis de laboratorio del suelo: el nitrógeno y la materia orgánica son aproximaciones.",
-    "No hay datos de margen económico de los cultivos: la prioridad de ingreso no entra en el puntaje.",
-    "Los requisitos de algunos cultivos son valores iniciales sin revisar por un especialista."
-   ],
-   "id": "drought",
-   "is_current": false,
-   "metrics": {
-    "bare_soil_days_per_year": 253,
-    "erosion_exposure_index": 0.0,
-    "gross_margin_index": null,
-    "irrigation_need_mm_per_year": 568,
-    "n_balance_kg_ha_per_year": -90,
-    "om_trend": "stable",
-    "pest_break_score": 0.0,
-    "water_demand_mm_per_year": 611
-   },
-   "name": "Sorgo – barbecho",
-   "risks_local_review": [
-    "Plagas, enfermedades, variedades y mercado local no se observan desde satélite: valida la rotación con un agrónomo o productor local.",
-    "Necesita 568 mm de riego al año y tu límite es de 400 mm: faltan 168 mm.",
-    "Sorgo se admite con condiciones: su aptitud en tu zona es marginal.",
-    "Sorgo sembrado en mayo no es plenamente apto en tu zona (puntaje 59 de 100)."
-   ],
-   "scores": {
-    "forage": 5.0,
-    "income": null,
-    "low_labor": 5.0,
-    "overall": 60,
-    "pest_break": 0.0,
-    "save_water": 2.2,
-    "soil_health": 2.8
-   },
-   "sequence": [
-    {
-     "crop_id": "sorgo",
-     "harvest": "08-24",
-     "plant": "05-01",
-     "role": "drought_tolerant",
-     "season": "spring_summer",
-     "year": 1
-    },
-    {
-     "crop_id": null,
-     "harvest": null,
-     "plant": null,
-     "role": "bare",
-     "season": "fall_winter",
-     "year": 1
-    }
-   ],
-   "why": [
-    "Sorgo tolera la sequía y sustituye a Maíz: la necesidad de riego estimada pasa de 673 a 568 mm al año."
-   ]
-  },
-  {
-   "benefits": [
-    "Necesita 108 mm menos de riego al año que tu rotación actual.",
+    "Necesita 140 mm menos de riego al año que tu rotación actual.",
     "Deja unos 75 kg N/ha más al año que tu rotación actual.",
     "Mejora la ruptura de ciclos de plagas de 0 a 5 sobre 5."
    ],
    "confidence": "low",
    "evidence": [
     {
-     "claim": "Demanda de agua de 600 mm al año y necesidad de riego de 565 mm, con la evapotranspiración y la lluvia mediana de tu zona.",
+     "claim": "Demanda de agua de 590 mm al año y necesidad de riego de 531 mm, con la evapotranspiración y la lluvia mediana de tu zona.",
      "source_id": "nasa_power"
     },
     {
-     "claim": "La secuencia deja 259 días de suelo descubierto al año; en esas decenas cae el 50 % del riesgo de lluvia intensa de tu zona.",
+     "claim": "La secuencia deja 238 días de suelo descubierto al año; en esas decenas cae el 0 % del riesgo de lluvia intensa de tu zona.",
      "source_id": "nasa_power"
     },
     {
@@ -177,42 +99,40 @@
    "gaps": [
     "Los cálculos usan datos de tu zona (celda de 9 km), no mediciones de tu parcela.",
     "No hay análisis de laboratorio del suelo: el nitrógeno y la materia orgánica son aproximaciones.",
-    "No hay datos de margen económico de los cultivos: la prioridad de ingreso no entra en el puntaje.",
-    "Los requisitos de algunos cultivos son valores iniciales sin revisar por un especialista."
+    "No hay datos de margen económico de los cultivos: la prioridad de ingreso no entra en el puntaje."
    ],
    "id": "legume",
    "is_current": false,
    "metrics": {
-    "bare_soil_days_per_year": 259,
-    "erosion_exposure_index": 0.5,
+    "bare_soil_days_per_year": 238,
+    "erosion_exposure_index": 0.0,
     "gross_margin_index": null,
-    "irrigation_need_mm_per_year": 565,
+    "irrigation_need_mm_per_year": 531,
     "n_balance_kg_ha_per_year": -45,
     "om_trend": "declining",
     "pest_break_score": 5.0,
-    "water_demand_mm_per_year": 600
+    "water_demand_mm_per_year": 590
    },
-   "name": "Maíz – barbecho – Frijol – barbecho",
+   "name": "Maíz – barbecho – Garbanzo – barbecho",
    "risks_local_review": [
     "Plagas, enfermedades, variedades y mercado local no se observan desde satélite: valida la rotación con un agrónomo o productor local.",
-    "Necesita 565 mm de riego al año y tu límite es de 400 mm: faltan 165 mm.",
-    "Frijol se admite con condiciones: su aptitud en tu zona es marginal.",
-    "Maíz sembrado en mayo no es plenamente apto en tu zona (puntaje 42 de 100).",
-    "Frijol sembrado en mayo no es plenamente apto en tu zona (puntaje 54 de 100)."
+    "Necesita 531 mm de riego al año y tu límite es de 400 mm: faltan 131 mm.",
+    "Garbanzo se admite con condiciones: solo es viable moviendo la fecha de siembra dentro de la temporada.",
+    "Maíz sembrado en mayo no es plenamente apto en tu zona (puntaje 39 de 100)."
    ],
    "scores": {
-    "forage": 0.0,
+    "forage": 2.5,
     "income": null,
     "low_labor": 5.0,
-    "overall": 56,
+    "overall": 70,
     "pest_break": 5.0,
-    "save_water": 2.2,
-    "soil_health": 1.9
+    "save_water": 2.3,
+    "soil_health": 2.6
    },
    "sequence": [
     {
      "crop_id": "maiz",
-     "harvest": "09-03",
+     "harvest": "09-08",
      "plant": "05-01",
      "role": "cash",
      "season": "spring_summer",
@@ -227,9 +147,9 @@
      "year": 1
     },
     {
-     "crop_id": "frijol",
-     "harvest": "08-04",
-     "plant": "05-01",
+     "crop_id": "garbanzo",
+     "harvest": "10-29",
+     "plant": "07-01",
      "role": "legume",
      "season": "spring_summer",
      "year": 2
@@ -244,24 +164,23 @@
     }
    ],
    "why": [
-    "Frijol es una leguminosa que fija nitrógeno: el balance aproximado pasa de -120 a -45 kg N/ha al año.",
+    "Garbanzo es una leguminosa que fija nitrógeno: el balance aproximado pasa de -120 a -45 kg N/ha al año.",
     "Alternar familias botánicas rompe ciclos de plagas: el puntaje de ruptura pasa de 0 a 5 sobre 5."
    ]
   },
   {
    "benefits": [
-    "Reduce el suelo descubierto de 243 a 132 días al año.",
-    "Añade producción de forraje.",
-    "Más cobertura y rastrojo: la materia orgánica tiende a mejorar."
+    "Necesita 283 mm menos de riego al año que tu rotación actual.",
+    "Deja unos 30 kg N/ha más al año que tu rotación actual."
    ],
-   "confidence": "medium",
+   "confidence": "low",
    "evidence": [
     {
-     "claim": "Demanda de agua de 969 mm al año y necesidad de riego de 915 mm, con la evapotranspiración y la lluvia mediana de tu zona.",
+     "claim": "Demanda de agua de 455 mm al año y necesidad de riego de 388 mm, con la evapotranspiración y la lluvia mediana de tu zona.",
      "source_id": "nasa_power"
     },
     {
-     "claim": "La secuencia deja 132 días de suelo descubierto al año; en esas decenas cae el 0 % del riesgo de lluvia intensa de tu zona.",
+     "claim": "La secuencia deja 253 días de suelo descubierto al año; en esas decenas cae el 0 % del riesgo de lluvia intensa de tu zona.",
      "source_id": "nasa_power"
     },
     {
@@ -272,26 +191,99 @@
    "gaps": [
     "Los cálculos usan datos de tu zona (celda de 9 km), no mediciones de tu parcela.",
     "No hay análisis de laboratorio del suelo: el nitrógeno y la materia orgánica son aproximaciones.",
-    "No hay datos de margen económico de los cultivos: la prioridad de ingreso no entra en el puntaje.",
-    "Los requisitos de algunos cultivos son valores iniciales sin revisar por un especialista."
+    "No hay datos de margen económico de los cultivos: la prioridad de ingreso no entra en el puntaje."
+   ],
+   "id": "drought",
+   "is_current": false,
+   "metrics": {
+    "bare_soil_days_per_year": 253,
+    "erosion_exposure_index": 0.0,
+    "gross_margin_index": null,
+    "irrigation_need_mm_per_year": 388,
+    "n_balance_kg_ha_per_year": -90,
+    "om_trend": "stable",
+    "pest_break_score": 0.0,
+    "water_demand_mm_per_year": 455
+   },
+   "name": "Sorgo – barbecho",
+   "risks_local_review": [
+    "Plagas, enfermedades, variedades y mercado local no se observan desde satélite: valida la rotación con un agrónomo o productor local.",
+    "Sorgo se admite con condiciones: solo es viable moviendo la fecha de siembra dentro de la temporada."
+   ],
+   "scores": {
+    "forage": 5.0,
+    "income": null,
+    "low_labor": 5.0,
+    "overall": 63,
+    "pest_break": 0.0,
+    "save_water": 3.1,
+    "soil_health": 2.8
+   },
+   "sequence": [
+    {
+     "crop_id": "sorgo",
+     "harvest": "10-24",
+     "plant": "07-01",
+     "role": "drought_tolerant",
+     "season": "spring_summer",
+     "year": 1
+    },
+    {
+     "crop_id": null,
+     "harvest": null,
+     "plant": null,
+     "role": "bare",
+     "season": "fall_winter",
+     "year": 1
+    }
+   ],
+   "why": [
+    "Sorgo tolera la sequía y sustituye a Maíz: la necesidad de riego estimada pasa de 671 a 388 mm al año."
+   ]
+  },
+  {
+   "benefits": [
+    "Reduce el suelo descubierto de 233 a 101 días al año.",
+    "Añade producción de forraje.",
+    "Más cobertura y rastrojo: la materia orgánica tiende a mejorar."
+   ],
+   "confidence": "medium",
+   "evidence": [
+    {
+     "claim": "Demanda de agua de 981 mm al año y necesidad de riego de 925 mm, con la evapotranspiración y la lluvia mediana de tu zona.",
+     "source_id": "nasa_power"
+    },
+    {
+     "claim": "La secuencia deja 101 días de suelo descubierto al año; en esas decenas cae el 0 % del riesgo de lluvia intensa de tu zona.",
+     "source_id": "nasa_power"
+    },
+    {
+     "claim": "El pH estimado del suelo de tu zona es 8.3.",
+     "source_id": "soilgrids"
+    }
+   ],
+   "gaps": [
+    "Los cálculos usan datos de tu zona (celda de 9 km), no mediciones de tu parcela.",
+    "No hay análisis de laboratorio del suelo: el nitrógeno y la materia orgánica son aproximaciones.",
+    "No hay datos de margen económico de los cultivos: la prioridad de ingreso no entra en el puntaje."
    ],
    "id": "cover",
    "is_current": false,
    "metrics": {
-    "bare_soil_days_per_year": 132,
+    "bare_soil_days_per_year": 101,
     "erosion_exposure_index": 0.0,
     "gross_margin_index": null,
-    "irrigation_need_mm_per_year": 915,
+    "irrigation_need_mm_per_year": 925,
     "n_balance_kg_ha_per_year": -190,
     "om_trend": "improving",
     "pest_break_score": 0.0,
-    "water_demand_mm_per_year": 969
+    "water_demand_mm_per_year": 981
    },
-   "name": "Maíz – Avena forrajera",
+   "name": "Maíz – Triticale forrajero",
    "risks_local_review": [
     "Plagas, enfermedades, variedades y mercado local no se observan desde satélite: valida la rotación con un agrónomo o productor local.",
-    "Necesita 915 mm de riego al año y tu límite es de 400 mm: faltan 515 mm.",
-    "Maíz sembrado en mayo no es plenamente apto en tu zona (puntaje 42 de 100)."
+    "Necesita 925 mm de riego al año y tu límite es de 400 mm: faltan 525 mm.",
+    "Maíz sembrado en mayo no es plenamente apto en tu zona (puntaje 39 de 100)."
    ],
    "scores": {
     "forage": 5.0,
@@ -300,20 +292,20 @@
     "overall": 45,
     "pest_break": 0.0,
     "save_water": 0.4,
-    "soil_health": 3.3
+    "soil_health": 3.4
    },
    "sequence": [
     {
      "crop_id": "maiz",
-     "harvest": "09-03",
+     "harvest": "09-08",
      "plant": "05-01",
      "role": "cash",
      "season": "spring_summer",
      "year": 1
     },
     {
-     "crop_id": "avena_forrajera",
-     "harvest": "01-19",
+     "crop_id": "triticale",
+     "harvest": "02-08",
      "plant": "10-01",
      "role": "cover",
      "season": "fall_winter",
@@ -321,7 +313,7 @@
     }
    ],
    "why": [
-    "Avena forrajera cubre el suelo en la temporada que hoy queda en barbecho: los días de suelo descubierto bajan de 243 a 132 al año."
+    "Triticale forrajero cubre el suelo en la temporada que hoy queda en barbecho: los días de suelo descubierto bajan de 233 a 101 al año."
    ]
   }
  ]

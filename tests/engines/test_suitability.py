@@ -118,10 +118,10 @@ def test_cycle_crossing_december_wraps_to_january():
 
 
 def test_harvest_window_uses_the_shortest_and_longest_cycle(catalog):
-    maize = catalog.get("maiz")  # 100-150 días
-    assert cycle_days(maize) == 125
-    assert harvest_window(4, maize) == ("07-10", "08-29")
-    assert harvest_window(11, maize) == ("02-09", "03-31")
+    maize = catalog.get("maiz")  # 110-150 días
+    assert cycle_days(maize) == 130
+    assert harvest_window(4, maize) == ("07-20", "08-29")
+    assert harvest_window(11, maize) == ("02-19", "03-31")
 
 
 def test_flowering_window_is_the_55_to_65_percent_of_the_cycle():
@@ -257,15 +257,15 @@ def test_ph_outside_the_crop_range_is_reported_with_both_values(provider, catalo
     data = CellData(provider.climatology(SALTILLO), soil_with(provider, ph=8.4))
     soil = evaluate(catalog.get("maiz"), 4, data, IRRIGATED, config=config).reason("soil")
     assert soil.status in {"warn", "bad"} and soil.source_id == "soilgrids"
-    assert "8.4" in soil.detail and "5.5-7.5" in soil.detail
+    assert "8.4" in soil.detail and "5.5-8.0" in soil.detail
 
 
 @pytest.mark.parametrize(
     ("ph", "texture", "status"),
     [
         (6.5, "loam", "ok"),
-        (7.8, "loam", "warn"),
-        (8.4, "loam", "bad"),
+        (8.3, "loam", "warn"),
+        (8.6, "loam", "bad"),
         (6.5, "clay", "warn"),
         (5.1, "loam", "warn"),
     ],
@@ -349,7 +349,7 @@ def test_matrix_is_fast_with_fifteen_crops(provider, catalog, config):
     crops = [
         crop_with(catalog, crop.id, id=f"{crop.id}_{copy_n}")
         for copy_n in range(3)
-        for crop in catalog
+        for crop in list(catalog)[:5]
     ]
     assert len(crops) == 15
     started = time.perf_counter()
@@ -377,7 +377,7 @@ def test_detail_endpoint_explains_the_four_factors(client, headers, irrigated_fi
     assert 0 <= detail.score <= 100
     assert [reason.factor for reason in detail.reasons] == ["frost", "heat", "water", "soil"]
     assert all(reason.detail and reason.source_id for reason in detail.reasons)
-    assert response.json()["harvest_window"] == {"from": "07-10", "to": "08-29"}
+    assert response.json()["harvest_window"] == {"from": "07-20", "to": "08-29"}
     assert "400 mm de riego" in response.json()["reasons"][2]["detail"]
     sources = {source["id"] for source in client.get("/api/v1/sources").json()}
     assert {reason.source_id for reason in detail.reasons} <= sources

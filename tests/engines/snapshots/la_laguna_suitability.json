@@ -1,31 +1,43 @@
 {
- "avena_forrajera": [
-  [
-   72,
-   "suitable"
-  ],
-  [
-   64,
-   "marginal"
-  ],
-  [
-   51,
-   "marginal"
-  ],
-  [
-   51,
-   "marginal"
-  ],
-  [
-   51,
-   "marginal"
-  ],
+ "algodon": [
   [
    59,
    "marginal"
   ],
   [
-   72,
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   71,
+   "suitable"
+  ],
+  [
+   76,
+   "suitable"
+  ],
+  [
+   78,
+   "suitable"
+  ],
+  [
+   85,
+   "suitable"
+  ],
+  [
+   85,
    "suitable"
   ],
   [
@@ -33,7 +45,45 @@
    "suitable"
   ],
   [
-   86,
+   67,
+   "marginal"
+  ]
+ ],
+ "avena_forrajera": [
+  [
+   80,
+   "suitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   88,
+   "suitable"
+  ],
+  [
+   90,
    "suitable"
   ],
   [
@@ -45,113 +95,113 @@
    "suitable"
   ],
   [
-   81,
+   90,
    "suitable"
   ]
  ],
- "frijol": [
+ "cebada": [
   [
-   76,
+   98,
    "suitable"
   ],
   [
-   66,
-   "marginal"
+   80,
+   "suitable"
   ],
   [
-   63,
-   "marginal"
+   39,
+   "unsuitable"
   ],
   [
-   53,
-   "marginal"
+   39,
+   "unsuitable"
   ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   89,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ]
+ ],
+ "chile": [
   [
    54,
    "marginal"
   ],
   [
-   64,
-   "marginal"
+   39,
+   "unsuitable"
   ],
   [
-   64,
-   "marginal"
+   39,
+   "unsuitable"
   ],
   [
-   66,
-   "marginal"
+   39,
+   "unsuitable"
   ],
   [
-   84,
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   71,
    "suitable"
   ],
   [
-   80,
+   88,
    "suitable"
   ],
   [
-   80,
+   83,
    "suitable"
   ],
   [
-   80,
-   "suitable"
-  ]
- ],
- "maiz": [
-  [
-   66,
-   "marginal"
-  ],
-  [
-   47,
-   "marginal"
-  ],
-  [
-   41,
-   "marginal"
-  ],
-  [
-   41,
-   "marginal"
-  ],
-  [
-   42,
-   "marginal"
-  ],
-  [
-   43,
-   "marginal"
-  ],
-  [
-   57,
-   "marginal"
-  ],
-  [
-   84,
+   83,
    "suitable"
   ],
   [
-   80,
+   83,
    "suitable"
   ],
   [
-   80,
-   "suitable"
-  ],
-  [
-   80,
-   "suitable"
-  ],
-  [
-   80,
+   72,
    "suitable"
   ]
  ],
- "sorgo": [
+ "frijol": [
   [
-   96,
+   83,
    "suitable"
   ],
   [
@@ -159,20 +209,370 @@
    "suitable"
   ],
   [
-   60,
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   88,
+   "suitable"
+  ],
+  [
+   92,
+   "suitable"
+  ],
+  [
+   83,
+   "suitable"
+  ],
+  [
+   83,
+   "suitable"
+  ],
+  [
+   83,
+   "suitable"
+  ]
+ ],
+ "garbanzo": [
+  [
+   98,
+   "suitable"
+  ],
+  [
+   79,
+   "suitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   90,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ]
+ ],
+ "girasol": [
+  [
+   89,
+   "suitable"
+  ],
+  [
+   88,
+   "suitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   76,
+   "suitable"
+  ],
+  [
+   94,
+   "suitable"
+  ],
+  [
+   98,
+   "suitable"
+  ],
+  [
+   89,
+   "suitable"
+  ],
+  [
+   89,
+   "suitable"
+  ],
+  [
+   89,
+   "suitable"
+  ],
+  [
+   89,
+   "suitable"
+  ]
+ ],
+ "maiz": [
+  [
+   63,
    "marginal"
   ],
   [
-   58,
+   61,
    "marginal"
   ],
   [
-   59,
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   61,
    "marginal"
   ],
   [
-   68,
+   82,
+   "suitable"
+  ],
+  [
+   92,
+   "suitable"
+  ],
+  [
+   83,
+   "suitable"
+  ],
+  [
+   83,
+   "suitable"
+  ],
+  [
+   83,
+   "suitable"
+  ],
+  [
+   83,
+   "suitable"
+  ]
+ ],
+ "melon": [
+  [
+   83,
+   "suitable"
+  ],
+  [
+   90,
+   "suitable"
+  ],
+  [
+   84,
+   "suitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   82,
+   "suitable"
+  ],
+  [
+   92,
+   "suitable"
+  ],
+  [
+   92,
+   "suitable"
+  ],
+  [
+   83,
+   "suitable"
+  ],
+  [
+   83,
+   "suitable"
+  ],
+  [
+   83,
+   "suitable"
+  ]
+ ],
+ "papa": [
+  [
+   46,
    "marginal"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   77,
+   "suitable"
+  ],
+  [
+   73,
+   "suitable"
+  ],
+  [
+   75,
+   "suitable"
+  ],
+  [
+   75,
+   "suitable"
+  ],
+  [
+   73,
+   "suitable"
+  ]
+ ],
+ "sorgo": [
+  [
+   91,
+   "suitable"
+  ],
+  [
+   83,
+   "suitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   75,
+   "suitable"
+  ],
+  [
+   96,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ],
+  [
+   91,
+   "suitable"
+  ],
+  [
+   91,
+   "suitable"
+  ],
+  [
+   91,
+   "suitable"
+  ],
+  [
+   91,
+   "suitable"
+  ]
+ ],
+ "trigo": [
+  [
+   89,
+   "suitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
   ],
   [
    95,
@@ -183,15 +583,65 @@
    "suitable"
   ],
   [
-   96,
+   100,
    "suitable"
   ],
   [
-   96,
+   100,
    "suitable"
   ],
   [
-   96,
+   100,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ]
+ ],
+ "triticale": [
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   39,
+   "unsuitable"
+  ],
+  [
+   100,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ],
+  [
+   100,
+   "suitable"
+  ],
+  [
+   100,
    "suitable"
   ],
   [
@@ -201,39 +651,35 @@
  ],
  "veza": [
   [
-   72,
-   "suitable"
+   39,
+   "unsuitable"
   ],
   [
-   56,
-   "marginal"
+   39,
+   "unsuitable"
   ],
   [
-   51,
-   "marginal"
+   39,
+   "unsuitable"
   ],
   [
-   51,
-   "marginal"
+   39,
+   "unsuitable"
   ],
   [
-   51,
-   "marginal"
+   39,
+   "unsuitable"
   ],
   [
-   61,
-   "marginal"
+   39,
+   "unsuitable"
   ],
   [
-   72,
-   "suitable"
+   39,
+   "unsuitable"
   ],
   [
-   84,
-   "suitable"
-  ],
-  [
-   92,
+   90,
    "suitable"
   ],
   [
@@ -245,7 +691,11 @@
    "suitable"
   ],
   [
-   81,
+   92,
+   "suitable"
+  ],
+  [
+   88,
    "suitable"
   ]
  ]

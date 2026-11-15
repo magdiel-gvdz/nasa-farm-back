@@ -26,7 +26,7 @@ def changed(entries, crop_id, **values):
 def test_shipped_catalog_loads_and_covers_every_required_role():
     catalog = load_catalog()
     assert {"maiz", "frijol", "avena_forrajera", "sorgo", "veza"} <= {crop.id for crop in catalog}
-    assert len(catalog) >= 5
+    assert len(catalog) >= 12
     for role in REQUIRED_ROLES:
         assert catalog.with_role(role), role
     assert catalog.get("maiz").name.en == "Maize"
@@ -38,10 +38,10 @@ def test_legumes_fix_nitrogen_and_leave_a_positive_balance():
         assert crop.n_fixing and crop.n_balance_kg_ha > 0
 
 
-def test_example_crops_declare_their_source_and_are_not_reviewed():
+def test_crops_declare_their_source_and_are_reviewed():
     for crop in load_catalog():
         assert crop.source_id
-        assert crop.reviewed is False
+        assert crop.reviewed is True
 
 
 @pytest.mark.parametrize(
@@ -83,12 +83,13 @@ def test_required_fields_cannot_be_missing(entries, field):
 
 
 def test_repeated_identifier_is_rejected(entries):
+    bean = next(entry for entry in entries if entry["id"] == "frijol")
     with pytest.raises(CatalogError, match="'frijol'"):
-        parse_catalog([*entries, copy.deepcopy(entries[1])])
+        parse_catalog([*entries, copy.deepcopy(bean)])
 
 
 def test_catalog_without_a_required_role_is_rejected(entries):
-    without_drought = [entry for entry in entries if entry["id"] != "sorgo"]
+    without_drought = [entry for entry in entries if "drought_tolerant" not in entry["roles"]]
     with pytest.raises(CatalogError, match="drought_tolerant"):
         parse_catalog(without_drought)
 
