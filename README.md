@@ -265,6 +265,7 @@ app/data/                    Proveedor de datos de DATA y datos sintéticos
 scripts/export_openapi.py    Genera contracts/openapi.json
 scripts/build_fixtures.py    Regenera los datos sintéticos de app/data/fixtures
 scripts/smoke_e2e.py         Prueba de humo de extremo a extremo (docs/smoke.md)
+scripts/seed_demo.py         Siembra las geocercas de demo/fields.json (docs/demo-script.md)
 tests/                       Pruebas de la API, la malla y el repositorio
 Dockerfile                   Imagen Python 3.13 con uvicorn
 .github/workflows/           Checks, publicación, despliegue y limpieza
