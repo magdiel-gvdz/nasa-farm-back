@@ -4,7 +4,7 @@ Abrir los PR como borrador mientras se trabaja. Los borradores y forks ejecutan
 checks sin publicar imágenes ni crear recursos. Al pasar un PR interno a listo
 para revisión, el pipeline publica la imagen en ECR, aplica `pr-N` y consulta
 `/health`. La etiqueta es un hash del contenido de la imagen (`Dockerfile`,
-`.dockerignore`, `requirements.txt` y `app/`), no el SHA del commit: un commit
+`.dockerignore`, `requirements.txt`, `app/` y `data/`), no el SHA del commit: un commit
 que solo toca documentación, specs o CI reutiliza la imagen y no redespliega
 el servicio.
 

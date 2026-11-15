@@ -1,0 +1,116 @@
+# Catálogo de cultivos de Field Shift.
+#
+# Lo leen los motores de aptitud y rotaciones y lo sirve GET /api/v1/crops.
+# La definición y la unidad de cada campo están en docs/crop-catalog.md.
+# La API valida este archivo al arrancar: si un valor no es válido, no arranca
+# y el error nombra el cultivo y el campo.
+#
+# Estos cinco cultivos son valores iniciales de FAO EcoCrop (requisitos) y
+# FAO-56 (coeficientes Kc). No están revisados por el rol científico
+# (reviewed: false). Los balances de nitrógeno son aproximaciones de orden de
+# magnitud.
+
+- id: maiz
+  name: {es: Maíz, en: Maize}
+  family: poaceae
+  roles: [cash]
+  cycle_days: [100, 150]
+  temp_opt_c: [18, 33]
+  temp_abs_c: [10, 40]
+  frost_tolerant: false
+  heat_critical_c: 35
+  water_need_mm: [500, 800]
+  ph: [5.5, 7.5]
+  kc: {ini: 0.3, mid: 1.2, end: 0.6}
+  n_fixing: false
+  n_balance_kg_ha: -120
+  residue: high
+  root_depth: medium
+  equipment: [tractor, planter, combine]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: false
+
+- id: frijol
+  name: {es: Frijol, en: Common bean}
+  family: fabaceae
+  roles: [cash, legume]
+  cycle_days: [80, 110]
+  temp_opt_c: [16, 27]
+  temp_abs_c: [8, 35]
+  frost_tolerant: false
+  heat_critical_c: 32
+  water_need_mm: [300, 500]
+  ph: [5.5, 7.5]
+  kc: {ini: 0.4, mid: 1.15, end: 0.35}
+  n_fixing: true
+  n_balance_kg_ha: 30
+  residue: low
+  root_depth: shallow
+  equipment: [tractor, planter, combine]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: false
+
+- id: sorgo
+  name: {es: Sorgo, en: Sorghum}
+  family: poaceae
+  roles: [cash, forage, drought_tolerant]
+  cycle_days: [100, 130]
+  temp_opt_c: [22, 35]
+  temp_abs_c: [12, 42]
+  frost_tolerant: false
+  heat_critical_c: 38
+  water_need_mm: [400, 650]
+  ph: [5.5, 8.5]
+  kc: {ini: 0.3, mid: 1.05, end: 0.55}
+  n_fixing: false
+  n_balance_kg_ha: -90
+  residue: high
+  root_depth: deep
+  equipment: [tractor, planter, combine]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: false
+
+- id: avena_forrajera
+  name: {es: Avena forrajera, en: Forage oat}
+  family: poaceae
+  roles: [forage, cover]
+  cycle_days: [90, 130]
+  temp_opt_c: [12, 22]
+  temp_abs_c: [2, 32]
+  frost_tolerant: true
+  heat_critical_c: 30
+  water_need_mm: [350, 550]
+  ph: [5.5, 8.0]
+  kc: {ini: 0.3, mid: 1.15, end: 0.25}
+  n_fixing: false
+  n_balance_kg_ha: -70
+  residue: medium
+  root_depth: medium
+  equipment: [tractor, seed_drill, forage_harvester, baler]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: false
+
+- id: veza
+  name: {es: Veza, en: Vetch}
+  family: fabaceae
+  roles: [cover, legume, forage]
+  cycle_days: [110, 160]
+  temp_opt_c: [10, 22]
+  temp_abs_c: [0, 30]
+  frost_tolerant: true
+  heat_critical_c: 30
+  water_need_mm: [300, 450]
+  ph: [6.0, 8.0]
+  kc: {ini: 0.4, mid: 1.0, end: 0.35}
+  n_fixing: true
+  n_balance_kg_ha: 80
+  residue: medium
+  root_depth: medium
+  equipment: [tractor, seed_drill]
+  margin_index: null
+  source_id: fao_ecocrop
+  reviewed: false

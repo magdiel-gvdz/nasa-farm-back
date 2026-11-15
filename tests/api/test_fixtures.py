@@ -2,16 +2,12 @@ import pytest
 from pydantic import TypeAdapter
 
 from app.api.fixtures import FIXTURE_NAMES, load_fixture
-from app.api.schemas.common import Source
-from app.api.schemas.crops import Crop
 from app.api.schemas.profile import FieldProfile
 from app.api.schemas.rotations import RotationResponse
 from app.api.schemas.suitability import SuitabilityDetail, SuitabilityMatrix
 from tests.helpers import SNAKE_CASE, keys
 
 MODELS = {
-    "crops": list[Crop],
-    "sources": list[Source],
     "profile": FieldProfile,
     "suitability_detail": SuitabilityDetail,
     "suitability_matrix": SuitabilityMatrix,
@@ -56,5 +52,5 @@ def test_profile_fixture_declares_each_missing_section():
 
 
 def test_fixture_copies_are_independent():
-    load_fixture("crops").clear()
-    assert len(load_fixture("crops")) == 5
+    load_fixture("suitability_matrix").clear()
+    assert len(load_fixture("suitability_matrix")["crops"]) == 5

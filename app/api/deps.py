@@ -6,6 +6,8 @@ from typing import Annotated
 from fastapi import Depends, Header, Request
 
 from app.api.errors import ApiError
+from app.catalog.loader import Catalog
+from app.data import DataProvider
 from app.geo.locate import Locator
 from app.i18n import resolve_language
 from app.store.base import Repository
@@ -40,7 +42,17 @@ def locator(request: Request) -> Locator:
     return request.app.state.locator
 
 
+def data_provider(request: Request) -> DataProvider:
+    return request.app.state.data_provider
+
+
+def catalog(request: Request) -> Catalog:
+    return request.app.state.catalog
+
+
 ClientId = Annotated[str, Depends(client_id)]
 Language = Annotated[str, Depends(language)]
 Repo = Annotated[Repository, Depends(repository)]
 Locate = Annotated[Locator, Depends(locator)]
+Data = Annotated[DataProvider, Depends(data_provider)]
+Crops = Annotated[Catalog, Depends(catalog)]

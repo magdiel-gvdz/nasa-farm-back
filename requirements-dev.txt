@@ -14,7 +14,6 @@ py-partiql-parser==0.6.3
 pycparser==3.12
 pygments==2.21.0
 pytest==9.2.0
-PyYAML==6.0.3
 requests==2.34.2
 responses==0.26.3
 ruff==0.17.5

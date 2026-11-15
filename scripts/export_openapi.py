@@ -20,7 +20,7 @@ CONTRACT = ROOT / "contracts" / "openapi.json"
 
 def render() -> str:
     # Fixed settings: the document must not depend on the caller's environment variables.
-    settings = Settings(environment="local", data_lake_bucket="", app_table="", cors_origins=[])
+    settings = Settings(environment="local", data_provider="fixture", app_table="", cors_origins=[])
     document = create_app(settings).openapi()
     return json.dumps(document, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
 

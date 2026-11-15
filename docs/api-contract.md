@@ -13,7 +13,8 @@
 | Endpoint | Estado |
 |---|---|
 | `POST`, `GET`, `PATCH`, `DELETE /fields` | Real |
-| `GET /crops`, `GET /sources` | Respuesta fija |
+| `GET /sources` | Real: fuentes del proveedor de datos activo |
+| `GET /crops` | Real: catálogo de `data/crops.yaml` (ver [crop-catalog.md](crop-catalog.md)) |
 | `GET /fields/{id}/profile` | Respuesta fija |
 | `GET /fields/{id}/suitability` | Respuesta fija |
 | `POST /fields/{id}/rotations` | Respuesta fija |
@@ -26,7 +27,7 @@
 4. **`erosion_exposure_index` en lugar de `erosion_t_ha_per_year`.** Es un índice (decenas descubiertas × probabilidad de lluvia intensa), no toneladas por hectárea. `gross_margin_index` puede ser `null`.
 5. **Error `out_of_region`.** Solo hay datos para cuatro zonas de Coahuila. Fuera de ellas `POST /fields` y `PATCH /fields/{id}` responden `422`. La geocerca devuelve además `cell_id`, `zone_id` y `cell_assignment`.
 
-Otros ajustes menores: los umbrales de helada son 0 °C y −2 °C (`threshold_c`, `severe_threshold_c`), los días de calor se cuentan sobre 30, 35 y 38 °C, `Source` incluye `data_class` (`observation`, `model`, `derived` o `estimate`) y cada cultivo incluye `heat_critical_c`.
+Otros ajustes menores: los umbrales de helada son 0 °C y −2 °C (`threshold_c`, `severe_threshold_c`), los días de calor se cuentan sobre 30, 35 y 38 °C, `Source` trae `id`, `name`, `organization`, `product`, `url`, `resolution`, `period`, `license` y `data_class` (`observation`, `model`, `derived`, `estimate` o `synthetic`; esta última marca datos de prueba, que es lo que sirve la API mientras `DATA_PROVIDER` sea `fixture`) y cada cultivo incluye `heat_critical_c`. Cada cultivo trae además lo que usa el motor de rotaciones (`n_balance_kg_ha`, `residue`, `root_depth`, `equipment`, `margin_index`, que puede ser `null`) y su procedencia (`source_id`, `reviewed`); mientras `reviewed` sea `false` los valores son iniciales y no están revisados por el rol científico.
 
 ## Encabezados
 

@@ -29,14 +29,28 @@ def test_old_sources_route_is_gone(client):
     assert client.get("/v1/sources").status_code == 404
 
 
-@pytest.mark.parametrize(
-    ("path", "model"), [("/api/v1/sources", list[Source]), ("/api/v1/crops", list[Crop])]
-)
-def test_catalogs_return_reference_data(client, path, model):
-    response = client.get(path)
+def test_crops_come_from_the_catalog(client):
+    response = client.get("/api/v1/crops")
     assert response.status_code == 200
-    assert response.headers[MOCK] == "1"
-    assert len(TypeAdapter(model).validate_python(response.json())) >= 5
+    assert MOCK not in response.headers
+    crops = TypeAdapter(list[Crop]).validate_python(response.json())
+    assert len(crops) >= 5
+    for crop in response.json():
+        assert crop["name"]["es"] and crop["name"]["en"]
+        assert {"id", "family", "roles", "cycle_days", "kc", "source_id", "reviewed"} <= set(crop)
+    roles = {role for crop in crops for role in crop.roles}
+    assert {"cash", "legume", "cover", "forage", "drought_tolerant"} <= roles
+
+
+def test_sources_come_from_the_data_provider(client):
+    response = client.get("/api/v1/sources")
+    assert response.status_code == 200
+    assert MOCK not in response.headers
+    sources = TypeAdapter(list[Source]).validate_python(response.json())
+    assert {"nasa_power", "soilgrids"} <= {source.id for source in sources}
+    for source in response.json():
+        assert all(source.values()), source
+        assert source["data_class"] == "synthetic"
 
 
 def test_field_routes_are_real_and_follow_the_schema(client, headers):

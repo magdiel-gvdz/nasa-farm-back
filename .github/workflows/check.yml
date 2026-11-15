@@ -56,6 +56,9 @@ jobs:
           assert health['status'] == 'ok'
           assert health['environment'] == 'pr-7'
           PY
+          # The crop catalog ships in the image and is validated at startup.
+          curl --fail --silent --show-error --max-time 5 http://localhost:8080/api/v1/crops > /tmp/crops.json
+          python -c "import json; assert len(json.load(open('/tmp/crops.json'))) >= 5"
           test "$(docker exec "$container" id -u)" != 0
           docker exec "$container" python -c 'from pathlib import Path; assert not any(Path("/app", p).exists() for p in [".git", ".venv", ".tools", "infra", "tests", "docs", "openspec", "build"]); assert not list(Path("/app").glob(".env*"))'
           started=$(date +%s)

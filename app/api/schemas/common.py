@@ -6,8 +6,9 @@ from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
 Confidence = Literal["high", "medium", "low"]
 Severity = Literal["low", "medium", "high"]
-# Clase de dato de DATA: observación, modelo, derivado o estimación.
-DataClass = Literal["observation", "model", "derived", "estimate"]
+# Clase de dato de DATA: observación, modelo, derivado o estimación. `synthetic` marca los
+# datos de prueba que sirve la API cuando no lee los datos publicados.
+DataClass = Literal["observation", "model", "derived", "estimate", "synthetic"]
 Month = Annotated[int, Field(ge=1, le=12)]
 MonthDay = Annotated[str, StringConstraints(pattern=r"^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$")]
 Probability = Annotated[float, Field(ge=0, le=1)]
@@ -25,11 +26,13 @@ class ResponseModel(BaseModel):
 
 class Source(ResponseModel):
     id: str
-    dataset: str
-    provider: str
+    name: str
+    organization: str
+    product: str
+    url: str
     resolution: str
     period: str
-    url: str
+    license: str
     data_class: DataClass
 
 

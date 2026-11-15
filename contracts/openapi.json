@@ -151,8 +151,10 @@
         "type": "object"
       },
       "Crop": {
+        "additionalProperties": false,
         "properties": {
           "cycle_days": {
+            "description": "Días de siembra a cosecha: mínimo y máximo",
             "maxItems": 2,
             "minItems": 2,
             "prefixItems": [
@@ -166,7 +168,38 @@
             "title": "Cycle Days",
             "type": "array"
           },
+          "equipment": {
+            "items": {
+              "enum": [
+                "tractor",
+                "planter",
+                "seed_drill",
+                "combine",
+                "forage_harvester",
+                "baler",
+                "manual_harvest"
+              ],
+              "type": "string"
+            },
+            "title": "Equipment",
+            "type": "array"
+          },
           "family": {
+            "enum": [
+              "poaceae",
+              "fabaceae",
+              "solanaceae",
+              "cucurbitaceae",
+              "brassicaceae",
+              "amaranthaceae",
+              "asteraceae",
+              "malvaceae",
+              "amaryllidaceae",
+              "apiaceae",
+              "rosaceae",
+              "juglandaceae",
+              "vitaceae"
+            ],
             "title": "Family",
             "type": "string"
           },
@@ -180,11 +213,30 @@
             "type": "number"
           },
           "id": {
+            "pattern": "^[a-z][a-z0-9_]*$",
             "title": "Id",
             "type": "string"
           },
           "kc": {
             "$ref": "#/components/schemas/CropCoefficients"
+          },
+          "margin_index": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Margen relativo entre cultivos; sin unidad",
+            "title": "Margin Index"
+          },
+          "n_balance_kg_ha": {
+            "description": "Balance aproximado de nitrógeno por ciclo; positivo si el cultivo aporta",
+            "title": "N Balance Kg Ha",
+            "type": "number"
           },
           "n_fixing": {
             "title": "N Fixing",
@@ -207,6 +259,21 @@
             "title": "Ph",
             "type": "array"
           },
+          "residue": {
+            "description": "Rastrojo que deja en el suelo",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "title": "Residue",
+            "type": "string"
+          },
+          "reviewed": {
+            "description": "Si el rol científico revisó los valores",
+            "title": "Reviewed",
+            "type": "boolean"
+          },
           "roles": {
             "items": {
               "enum": [
@@ -223,7 +290,23 @@
             "title": "Roles",
             "type": "array"
           },
+          "root_depth": {
+            "enum": [
+              "shallow",
+              "medium",
+              "deep"
+            ],
+            "title": "Root Depth",
+            "type": "string"
+          },
+          "source_id": {
+            "description": "Fuente bibliográfica de los valores",
+            "minLength": 1,
+            "title": "Source Id",
+            "type": "string"
+          },
           "temp_abs_c": {
+            "description": "Temperaturas límite que el cultivo soporta",
             "maxItems": 2,
             "minItems": 2,
             "prefixItems": [
@@ -238,6 +321,7 @@
             "type": "array"
           },
           "temp_opt_c": {
+            "description": "Temperatura media óptima",
             "maxItems": 2,
             "minItems": 2,
             "prefixItems": [
@@ -252,6 +336,7 @@
             "type": "array"
           },
           "water_need_mm": {
+            "description": "Agua por ciclo",
             "maxItems": 2,
             "minItems": 2,
             "prefixItems": [
@@ -279,25 +364,36 @@
           "water_need_mm",
           "ph",
           "kc",
-          "n_fixing"
+          "n_fixing",
+          "n_balance_kg_ha",
+          "residue",
+          "root_depth",
+          "equipment",
+          "source_id",
+          "reviewed"
         ],
         "title": "Crop",
         "type": "object"
       },
       "CropCoefficients": {
+        "additionalProperties": false,
+        "description": "Coeficientes de cultivo de FAO-56 por etapa.",
         "properties": {
           "end": {
             "exclusiveMinimum": 0.0,
+            "maximum": 1.5,
             "title": "End",
             "type": "number"
           },
           "ini": {
             "exclusiveMinimum": 0.0,
+            "maximum": 1.5,
             "title": "Ini",
             "type": "number"
           },
           "mid": {
             "exclusiveMinimum": 0.0,
+            "maximum": 1.5,
             "title": "Mid",
             "type": "number"
           }
@@ -1666,12 +1762,15 @@
         "type": "object"
       },
       "LocalizedName": {
+        "additionalProperties": false,
         "properties": {
           "en": {
+            "minLength": 1,
             "title": "En",
             "type": "string"
           },
           "es": {
+            "minLength": 1,
             "title": "Es",
             "type": "string"
           }
@@ -2584,25 +2683,34 @@
               "observation",
               "model",
               "derived",
-              "estimate"
+              "estimate",
+              "synthetic"
             ],
             "title": "Data Class",
-            "type": "string"
-          },
-          "dataset": {
-            "title": "Dataset",
             "type": "string"
           },
           "id": {
             "title": "Id",
             "type": "string"
           },
+          "license": {
+            "title": "License",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "organization": {
+            "title": "Organization",
+            "type": "string"
+          },
           "period": {
             "title": "Period",
             "type": "string"
           },
-          "provider": {
-            "title": "Provider",
+          "product": {
+            "title": "Product",
             "type": "string"
           },
           "resolution": {
@@ -2616,11 +2724,13 @@
         },
         "required": [
           "id",
-          "dataset",
-          "provider",
+          "name",
+          "organization",
+          "product",
+          "url",
           "resolution",
           "period",
-          "url",
+          "license",
           "data_class"
         ],
         "title": "Source",

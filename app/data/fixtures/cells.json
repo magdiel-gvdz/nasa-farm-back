@@ -1,0 +1,4 @@
+[
+{"cell_id": "E9_r0463_c0846", "zone_id": "coah-sureste", "zone_name": "Sureste", "lat": 25.412697, "lon": -100.969917, "geometry_wkt": "POLYGON((-101.016598 25.451695, -100.923237 25.451695, -100.923237 25.373712, -101.016598 25.373712, -101.016598 25.451695))", "cell_elev_m": 1620.0, "cell_elev_source": "copernicus_dem_glo90", "power_cell_lat": 25.5, "power_cell_lon": -101.25, "power_elev_m": 1712.0, "climate_shared_by_n_cells": 20},
+{"cell_id": "E9_r0461_c0822", "zone_id": "coah-laguna", "zone_name": "La Laguna", "lat": 25.568761, "lon": -103.210581, "geometry_wkt": "POLYGON((-103.257261 25.607808, -103.163900 25.607808, -103.163900 25.529727, -103.257261 25.529727, -103.257261 25.607808))", "cell_elev_m": 1131.6, "cell_elev_source": "copernicus_dem_glo90", "power_cell_lat": 25.5, "power_cell_lon": -103.125, "power_elev_m": 1222.8, "climate_shared_by_n_cells": 24}
+]

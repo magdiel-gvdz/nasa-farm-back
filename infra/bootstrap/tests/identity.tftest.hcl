@@ -35,8 +35,8 @@ run "protect_state_and_limit_oidc_subjects" {
     error_message = "ECR debe conservar 30 imágenes, escanearlas y rechazar etiquetas repetidas."
   }
   assert {
-    condition     = length([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s if try(s.Sid, "") == "OwnFunctions" || try(s.Sid, "") == "HttpApiControlPlane"]) == 2
-    error_message = "Los permisos heredados deben mantenerse durante la migración."
+    condition     = length([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s if try(s.Sid, "") == "OwnFunctions" || try(s.Sid, "") == "HttpApiControlPlane"]) == 0 && !strcontains(lower(aws_iam_role_policy.deploy["preview"].policy), "lambda") && !strcontains(lower(aws_iam_role_policy.deploy["dev"].policy), "apigateway") && !strcontains(lower(aws_iam_policy.runtime_boundary.policy), "lambda")
+    error_message = "Los permisos heredados de Lambda y API Gateway deben estar retirados."
   }
   assert {
     condition     = one([for s in jsondecode(aws_iam_role_policy.deploy["preview"].policy).Statement : s.Resource if try(s.Sid, "") == "OwnAppTable"])[0] == "arn:aws:dynamodb:us-east-1:123456789012:table/nasa-farm-pr-*-app"

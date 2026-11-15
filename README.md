@@ -58,9 +58,10 @@ CI verifica salud, exclusión de archivos privados y apagado en menos de 10 s.
 | `/api/v1/...` | Endpoints de negocio: catálogos, geocercas, perfil, aptitud y rotaciones. Ver [docs/api-contract.md](docs/api-contract.md) |
 | `GET /docs` y `/openapi.json` | Documentación y contrato FastAPI; el contrato versionado está en `contracts/openapi.json` |
 
-Las geocercas (`/api/v1/fields`) son reales; el resto de endpoints de negocio
-devuelve por ahora una respuesta fija marcada con `X-Fieldshift-Mock: 1`, hasta
-que lleguen el proveedor de datos (`c1`, `c2`) y los motores. Tras cambiar una
+Las geocercas (`/api/v1/fields`) son reales, `/api/v1/sources` lee del proveedor
+de datos y `/api/v1/crops` del catálogo `data/crops.yaml`, que se valida al
+arrancar (campos en [docs/crop-catalog.md](docs/crop-catalog.md)); el resto de endpoints de negocio devuelve por ahora una respuesta fija
+marcada con `X-Fieldshift-Mock: 1`, hasta que lleguen el perfil y los motores. Tras cambiar una
 ruta o un esquema ejecuta `python scripts/export_openapi.py` y versiona
 `contracts/openapi.json`; CI falla si queda desactualizado.
 
@@ -68,6 +69,18 @@ Variables de la aplicación: `ENVIRONMENT`, `CORS_ORIGINS` (array JSON) y
 `APP_TABLE` (tabla DynamoDB de geocercas; vacía = memoria, los datos se pierden
 al reiniciar). Terraform las configura en el servicio junto con las de DATA.
 Localmente todo funciona sin credenciales AWS mientras `APP_TABLE` esté vacía.
+
+`DATA_PROVIDER` elige de dónde salen los datos agroclimáticos. El valor por
+defecto, `fixture`, sirve datos sintéticos de dos celdas (Saltillo
+`E9_r0463_c0846` y La Laguna `E9_r0461_c0822`, 2016-2025) con las columnas del
+contrato de DATA; `/ready` informa entonces `data_version: "fixture"` y cada
+fuente lleva `data_class: "synthetic"`. Un valor desconocido impide arrancar.
+Los archivos de `app/data/fixtures/` se generan con semilla fija; tras cambiar
+`app/data/synthetic.py` hay que regenerarlos y versionarlos:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/build_fixtures.py
+```
 
 ## Bootstrap y migración
 
@@ -205,7 +218,11 @@ contracts/                   Contrato OpenAPI versionado
 infra/bootstrap/             Estado remoto, OIDC, ECR y permisos de CI
 infra/environment/           ECS Express Mode, DynamoDB y bucket por entorno
 infra/*/tests/               Pruebas Terraform sin credenciales
+app/catalog/                 Modelo y carga del catálogo de cultivos
+data/crops.yaml              Catálogo de cultivos; lo edita el rol científico
+app/data/                    Proveedor de datos de DATA y datos sintéticos
 scripts/export_openapi.py    Genera contracts/openapi.json
+scripts/build_fixtures.py    Regenera los datos sintéticos de app/data/fixtures
 tests/                       Pruebas de la API, la malla y el repositorio
 Dockerfile                   Imagen Python 3.13 con uvicorn
 .github/workflows/           Checks, publicación, despliegue y limpieza

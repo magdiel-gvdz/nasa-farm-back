@@ -9,8 +9,9 @@ from app.api.errors import register_error_handlers
 from app.api.fixtures import MOCK_HEADER
 from app.api.routes import router as api_router
 from app.api.schemas.common import ErrorResponse
+from app.catalog.loader import Catalog, load_catalog
 from app.config import Settings
-from app.data import DataStatus, DataUnavailableError, StaticDataStatus
+from app.data import DataProvider, DataUnavailableError, create_provider
 from app.geo.locate import GridLocator, Locator
 from app.geo.zones import BBoxCellCatalog
 from app.store.base import MemoryRepository, Repository
@@ -38,7 +39,8 @@ def create_app(
     *,
     repository: Repository | None = None,
     locator: Locator | None = None,
-    data_status: DataStatus | None = None,
+    data_provider: DataProvider | None = None,
+    catalog: Catalog | None = None,
 ) -> FastAPI:
     config = settings or Settings()
     api = FastAPI(title="Field Shift API", version=API_VERSION)
@@ -46,7 +48,10 @@ def create_app(
         DynamoRepository(config.app_table) if config.app_table else MemoryRepository()
     )
     api.state.locator = locator or GridLocator(BBoxCellCatalog())
-    status = data_status or StaticDataStatus()
+    provider = data_provider or create_provider(config.data_provider)
+    api.state.data_provider = provider
+    # Un catálogo inválido impide arrancar: el error nombra el cultivo y el campo.
+    api.state.catalog = catalog or load_catalog()
 
     api.add_middleware(
         CORSMiddleware,
@@ -66,7 +71,7 @@ def create_app(
         "/ready", response_model=Ready, tags=["platform"], responses={503: {"model": ErrorResponse}}
     )
     def ready():
-        version = status.data_version() if status.is_ready() else None
+        version = provider.data_version() if provider.is_ready() else None
         if version is None:
             raise DataUnavailableError("Data provider is not ready")
         return {"status": "ready", "environment": config.environment, "data_version": version}

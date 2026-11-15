@@ -14,5 +14,6 @@
 
 ## 3. Limpieza
 
-- [ ] 3.1 Actualizar `destroy-preview` y `cleanup-preview.yml` con las variables obligatorias nuevas (valores de relleno válidos para `image_tag`); verificar cerrando un PR de prueba que su entorno desaparece (`aws ecs` y `aws dynamodb` no listan recursos `pr-N`)
+- [x] 3.1 Actualizar `destroy-preview` y `cleanup-preview.yml` con las variables obligatorias nuevas (valores de relleno válidos para `image_tag`); verificar cerrando un PR de prueba que su entorno desaparece (`aws ecs` y `aws dynamodb` no listan recursos `pr-N`)
+  - Verificado al fusionar el PR #7: `destroy-preview` destruyó los 15 recursos de `pr-7` (servicio ECS, tabla DynamoDB, bucket, roles y registros) y su URL dejó de responder. Comprobado en el registro de Terraform, no con `aws ecs` ni `aws dynamodb`
 - [x] 3.2 Actualizar `docs/preview-lifecycle.md` con el nuevo ciclo (imagen, servicio, tiempos observados) y la recomendación de abrir los PR como borrador; verificar que los comandos citados existen en los workflows
