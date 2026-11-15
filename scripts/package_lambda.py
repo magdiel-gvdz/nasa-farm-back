@@ -34,6 +34,10 @@ def main():
             "build/package",
             "--platform",
             "manylinux2014_x86_64",
+            # numpy, pyproj and shapely only publish manylinux_2_28 wheels; the
+            # python3.13 runtime (Amazon Linux 2023, glibc 2.34) supports them.
+            "--platform",
+            "manylinux_2_28_x86_64",
             "--python-version",
             "3.13",
             "--implementation",
